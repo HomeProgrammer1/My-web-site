@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="robots" content="noindex">
+<title>Історія · варіанти</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geologica:wght@400;500;600;700&family=Golos+Text:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Onest:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="assets/base.css">
+<script src="assets/base.js"></script>
+<style>
+/* A: sticky scrollytelling */
+.sticky-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(24px,5vw,72px)}
+.sticky-side{position:sticky;top:calc(env(safe-area-inset-top,0px) + 90px);align-self:start;display:grid;gap:14px;padding-block:20px}
+.big-yr{font-family:var(--f-display);font-weight:700;font-size:clamp(56px,9vw,120px);line-height:.95;letter-spacing:-.05em;background:var(--title-fill);-webkit-background-clip:text;background-clip:text;color:transparent;font-variant-numeric:tabular-nums}
+.big-stat{font-size:18px;color:var(--accent);font-weight:600;min-height:2.6em}
+.progress{display:flex;gap:6px}
+.progress i{height:4px;flex:1;border-radius:4px;background:var(--line);transition:background-color .3s}
+.progress i.on{background:var(--accent)}
+.chapters{display:grid;gap:clamp(80px,14vh,160px);padding-block:40px 120px}
+.chap{display:grid;gap:12px;opacity:.38;transition:opacity .4s}
+.chap.on{opacity:1}
+.chap .yr{font-family:var(--f-mono);font-size:13px;color:var(--muted)}
+.chap p{font-size:19px;line-height:1.5;color:var(--muted)}
+.chap p b{color:var(--ink);font-weight:600}
+.me-row{display:flex;gap:14px;align-items:center}
+.me-row img{width:72px;height:72px;border-radius:50%;object-fit:cover}
+@media (max-width:820px){.sticky-grid{grid-template-columns:1fr}.sticky-side{top:calc(env(safe-area-inset-top,0px) + 56px);z-index:2;background:var(--bar);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);padding:12px 0;gap:6px}.big-yr{font-size:44px}.big-stat{min-height:0;font-size:15px}.chap{opacity:1}}
+
+/* B: horizontal chapters */
+.hz-head{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:24px}
+.track{display:grid;grid-auto-flow:column;grid-auto-columns:min(78%,560px);gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:14px;scrollbar-width:thin;overscroll-behavior-x:contain}
+.slide{scroll-snap-align:start;padding:clamp(22px,3vw,34px);display:grid;gap:14px;align-content:start;min-height:340px}
+.slide .yr{font-family:var(--f-mono);font-size:13px;color:var(--accent)}
+.slide .stat{margin-top:auto;font-size:15px;font-weight:600;padding:12px 14px;border-radius:14px;background:var(--accent-soft);color:var(--ink)}
+.slide p{color:var(--muted)}
+.slide.final{background:var(--ink);color:var(--bg)}
+.slide.final p{color:var(--bg);opacity:.75}
+:root[data-design="c"] .slide.final{color:#FFFFFF}
+:root[data-design="c"] .slide.final p{color:#FFFFFF}
+.navs{display:flex;gap:8px}
+.navs button{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--surface);cursor:pointer;font-size:18px}
+.bar-prog{height:3px;border-radius:3px;background:var(--line);margin-top:10px;overflow:hidden}
+.bar-prog i{display:block;height:100%;width:20%;background:var(--accent);transition:width .2s}
+
+/* C: evolution diagram */
+.evo{display:grid;gap:22px}
+.evo-stage{position:relative;height:380px;border-radius:var(--r-lg);overflow:hidden}
+.evo-stage svg{position:absolute;inset:0;width:100%;height:100%}
+.evo-stage line{stroke:var(--line);stroke-width:2;vector-effect:non-scaling-stroke;transition:opacity .5s}
+.evo-stage line.ai{stroke:var(--accent);stroke-dasharray:6 6;animation:dash 1s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-12}}
+.en{position:absolute;transform:translate(-50%,-50%) rotate(var(--r,0deg));padding:9px 14px;border-radius:12px;font-size:13.5px;font-weight:500;white-space:nowrap;background:var(--surface);border:1px solid var(--line);transition:left .8s cubic-bezier(.2,.8,.2,1),top .8s cubic-bezier(.2,.8,.2,1),transform .8s,opacity .5s,background-color .5s,color .5s;box-shadow:0 6px 18px -12px rgba(0,0,0,.35)}
+.en.sheet{border-top:3px solid #1D7044;font-family:var(--f-mono);font-size:12px}
+.en.hub{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:700;font-size:15px;padding:12px 18px}
+.en.human{background:var(--good-soft);color:var(--good);border-color:var(--good)}
+.en.dash{background:var(--ink);color:var(--bg)}
+:root[data-design="c"] .en.dash{color:#FFFFFF}
+.en.off{opacity:0}
+.evo-ctrl{display:grid;gap:10px}
+.ticks{display:grid;grid-template-columns:repeat(4,1fr);font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+.ticks span:nth-child(2),.ticks span:nth-child(3){text-align:center}
+.ticks span:last-child{text-align:right}
+.evo-txt{display:grid;gap:8px;min-height:120px}
+.evo-txt .stat{color:var(--accent);font-weight:600}
+@media (max-width:640px){.evo-stage{height:420px}.en{font-size:12px;padding:7px 10px}.en.hub{font-size:13px;padding:10px 12px}}
+</style>
+</head>
+<body data-title="4 · Історія">
+<main class="wrap">
+
+<header class="page-head">
+  <p class="eyebrow">Акт II · Провідник</p>
+  <h1 class="display-m">Історія: хто я і чому мені можна довіряти</h1>
+  <p class="lead">Окремого блоку «Про мене» немає: твій шлях від таблиць до агентів і є тією трансформацією, яку ти продаєш. Три способи її розповісти.</p>
+</header>
+
+<section class="variant" data-key="story" data-variant="A">
+  <div class="v-head"><div class="v-meta"><span class="v-tag">Варіант A</span><h2 class="v-title">Скролітелінг з липким роком</h2><p class="v-why">Як на сторінках Apple: зліва великий рік і цифра, справа текст розділів. Під час скролу рік змінюється. Найсильніше відчуття «історії».</p></div><button class="btn btn-ghost btn-sm pick" type="button">Обрати цей</button></div>
+  <div class="stage">
+    <div class="sticky-grid">
+      <div class="sticky-side">
+        <div class="big-yr" id="stYr">2020</div>
+        <div class="big-stat" id="stStat">5 відділів, усе в Excel</div>
+        <div class="progress" id="stProg"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+      </div>
+      <div class="chapters" id="chapters">
+        <div class="chap on" data-yr="2020" data-stat="5 відділів, усе в Excel"><span class="yr">2020–2021</span><h3 class="display-m">Компанія в таблицях</h3><p>HR-компанія з п'ятьма відділами жила в Excel. Я <b>перевірив якість даних, прибрав дублікати</b> і домовився з відділами про спільні правила, а потім переніс усе в CRM. За місяць жоден відділ не повернувся до таблиць.</p></div>
+        <div class="chap" data-yr="2022" data-stat="600–800 тис. рядків · 0 критичних втрат"><span class="yr">2022–2024</span><h3 class="display-m">ERP на 10 000+ людей</h3><p>Міграція HR- і фінансових даних: 9–10 релізів, 5 департаментів, приймальне тестування на кожному кроці. Звіт для правління скоротився <b>з 4–5 годин до 5–10 хвилин</b>, а проєкт закрили на 1,5–2 місяці раніше плану.</p></div>
+        <div class="chap" data-yr="2024" data-stat="−87% вартості AI · 30–50 PM у пілоті"><span class="yr">2024 – зараз</span><h3 class="display-m">Перший AI-агент</h3><p>У фарма-SaaS я запустив агента для Jira: менеджери керують задачами звичайною мовою. Прості команди обробляє код, аналітику — LLM, тому <b>0% галюцинацій на записі</b> і в 8 разів менший рахунок за API.</p></div>
+        <div class="chap" data-yr="2026" data-stat="2-ге місце серед 70+ команд"><span class="yr">2025–2026</span><h3 class="display-m">Агентні флоу end-to-end</h3><p>n8n і Make, RAG над внутрішніми документами, плагіни для Claude, SaaS за spec-driven development, агентний процес розробки з <b>human gates</b>: AI робить роботу, людина ухвалює рішення.</p></div>
+        <div class="chap" data-yr="Ви" data-stat="Наступний розділ — ваша компанія"><div class="me-row"><img src="assets/me.jpg" alt="Михайло Логаза" width="72" height="72"><span class="yr">Михайло Логаза · Познань</span></div><h3 class="display-m">Тепер я роблю це для вас</h3><p>Той самий шлях від таблиць до агентів, але без двох років проб і помилок. <a href="#">Записатися на розмову</a></p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="variant" data-key="story" data-variant="B">
+  <div class="v-head"><div class="v-meta"><span class="v-tag">Варіант B</span><h2 class="v-title">Горизонтальні розділи</h2><p class="v-why">Картки гортаються вбік, як галерея продуктів. Компактно по висоті, на телефоні гортається пальцем.</p></div><button class="btn btn-ghost btn-sm pick" type="button">Обрати цей</button></div>
+  <div class="stage">
+    <div class="hz-head"><div class="stack"><p class="eyebrow">Мій шлях</p><h2 class="display-l">Від таблиць до агентів</h2></div><div class="navs"><button type="button" id="hzPrev" aria-label="Назад">‹</button><button type="button" id="hzNext" aria-label="Далі">›</button></div></div>
+    <div class="track" id="track">
+      <article class="card slide"><span class="yr">2020–2021</span><h3 class="display-m">Компанія в таблицях</h3><p>П'ять відділів, десятки Excel-файлів. Перевірив якість даних, домовився про правила полів і переніс усе в CRM.</p><div class="stat">За місяць ніхто не повернувся до таблиць</div></article>
+      <article class="card slide"><span class="yr">2022–2024</span><h3 class="display-m">ERP на 10 000+ людей</h3><p>9–10 релізів, 5 департаментів, звіти для правління замість ручних зведень.</p><div class="stat">600–800 тис. рядків · 0 критичних втрат</div></article>
+      <article class="card slide"><span class="yr">2024 – зараз</span><h3 class="display-m">Перший AI-агент</h3><p>Агент для Jira у фарма-SaaS: задачі, спринти й ризик-звіти звичайною мовою.</p><div class="stat">−87% вартості AI · 0% галюцинацій на записі</div></article>
+      <article class="card slide"><span class="yr">2025–2026</span><h3 class="display-m">Агентні флоу</h3><p>n8n, Make, RAG, плагіни для Claude, SaaS за spec-driven development, human gates.</p><div class="stat">2-ге місце серед 70+ команд</div></article>
+      <article class="card slide final"><span class="yr">Далі</span><h3 class="display-m" style="background:none;color:inherit">Ваша компанія</h3><p>Той самий шлях, без двох років проб і помилок.</p><a class="btn btn-primary" href="#" style="justify-self:start;margin-top:auto">Записатися на розмову</a></article>
+    </div>
+    <div class="bar-prog"><i id="hzBar"></i></div>
+  </div>
+</section>
+
+<section class="variant" data-key="story" data-variant="C">
+  <div class="v-head"><div class="v-meta"><span class="v-tag">Варіант C</span><h2 class="v-title">Еволюція компанії</h2><p class="v-why">Одна схема, яка перебудовується: розкидані таблиці → CRM → ERP → AI-агенти з людиною в контурі. Повзунок керує роком. Показує мислення системами, а не просто факти.</p></div><button class="btn btn-ghost btn-sm pick" type="button">Обрати цей</button></div>
+  <div class="stage">
+    <div class="evo">
+      <div class="stack"><p class="eyebrow">Мій шлях</p><h2 class="display-l">Як я бачив компанії зсередини</h2></div>
+      <div class="evo-stage tile" id="evo"><svg id="evoSvg" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"></svg></div>
+      <div class="evo-ctrl"><input type="range" id="evoR" min="0" max="3" step="1" value="0" aria-label="Рік"><div class="ticks"><span>2020</span><span>2022</span><span>2024</span><span>2026</span></div></div>
+      <div class="evo-txt" aria-live="polite"><h3 id="evoT"></h3><p class="muted" id="evoP"></p><p class="stat" id="evoS"></p></div>
+    </div>
+  </div>
+</section>
+
+<div class="alts">
+  <h3>Що ще можна додати в цю секцію</h3>
+  <ul>
+    <li>Три принципи роботи: людина в контурі, вимірюваний ROI, документація й доступи залишаються у вас.</li>
+    <li>60-секундне відео-привітання з фото-обкладинкою (сильно підвищує довіру до соло-експерта).</li>
+    <li>Рядок «Працював з»: HR-tech, фарма-SaaS, e-commerce. Галузі, без назв компаній.</li>
+    <li>Сертифікати дрібним шрифтом: PMI-ACP, MSc Business Intelligence & Big Data (в процесі).</li>
+  </ul>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+const {$,$$,wait,onView}=UI;
+/* A */
+const chaps=$$('#chapters .chap'),prog=$$('#stProg i');
+const setA=i=>{chaps.forEach((c,j)=>c.classList.toggle('on',j===i));prog.forEach((p,j)=>p.classList.toggle('on',j<=i));$('#stYr').textContent=chaps[i].dataset.yr;$('#stStat').textContent=chaps[i].dataset.stat;};
+if('IntersectionObserver' in window){const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)setA(chaps.indexOf(e.target));});},{rootMargin:'-45% 0px -45% 0px'});chaps.forEach(c=>io.observe(c));}
+/* B */
+const tr=$('#track'),bar=$('#hzBar');
+const step=()=>tr.querySelector('.slide').getBoundingClientRect().width+16;
+$('#hzPrev').onclick=()=>tr.scrollBy({left:-step(),behavior:UI.RM?'auto':'smooth'});
+$('#hzNext').onclick=()=>tr.scrollBy({left:step(),behavior:UI.RM?'auto':'smooth'});
+const upd=()=>{const max=tr.scrollWidth-tr.clientWidth;const k=max>0?tr.scrollLeft/max:1;bar.style.width=(20+80*k)+'%';};
+tr.addEventListener('scroll',upd,{passive:true});upd();
+/* C */
+const ST=[
+ {t:'2020 · Компанія в таблицях',p:'П\'ять відділів, кожен зі своїми файлами. Дані дублюються, ніхто не знає, яка версія правильна.',s:'Десятки Excel-файлів і чатів',
+  n:[['HR.xlsx',14,22,'sheet',-6],['Продажі.xlsx',38,70,'sheet',4],['Рекрутинг_v2.xlsx',62,18,'sheet',3],['Клієнти.xlsx',84,60,'sheet',-4],['Звіт_FINAL.xlsx',50,44,'sheet',-2],['Пошта',22,78,'',5],['Копія_копії.xlsx',78,30,'sheet',7],['Чат відділу',60,84,'',-5]],l:[]},
+ {t:'2021 · Одна CRM',p:'Перевірка якості даних, спільні правила полів, навчання. Відділи працюють з одним джерелом правди.',s:'За місяць ніхто не повернувся до таблиць',
+  n:[['HR',18,24,''],['Продажі',82,24,''],['Рекрутинг',14,72,''],['Delivery',86,72,''],['CRM',50,48,'hub'],['Координація',50,86,''],['',50,48,'off'],['',50,48,'off']],l:[[4,0],[4,1],[4,2],[4,3],[4,5]]},
+ {t:'2022–2024 · ERP на 10 000+ людей',p:'5 департаментів, 9–10 релізів. Правління бачить цифри в дашборді замість ручних зведень.',s:'600–800 тис. рядків · звіт з 4–5 год до 5–10 хв',
+  n:[['HR',16,30,''],['Продажі',84,30,''],['Бухгалтерія',16,74,''],['Фінанси',84,74,''],['ERP',50,52,'hub'],['Рекрутинг',50,88,''],['PowerBI',50,14,'dash'],['',50,52,'off']],l:[[4,0],[4,1],[4,2],[4,3],[4,5],[4,6]]},
+ {t:'2024–2026 · AI-агенти',p:'Агент працює між системами: читає, класифікує, оновлює. Рішення про гроші й людей підтверджує людина.',s:'−87% вартості AI · 0% галюцинацій на записі',
+  n:[['Jira',16,24,''],['HubSpot',84,24,''],['Пошта',12,70,''],['ERP',88,70,''],['AI-агент',50,48,'hub'],['Telegram',50,88,''],['Людина ✓',50,12,'human'],['n8n',30,88,'']],l:[[4,0,1],[4,1,1],[4,2,1],[4,3,1],[4,5,1],[4,6,1],[4,7,1]]}
+];
+const evo=$('#evo'),svg=$('#evoSvg'),els=[];
+for(let i=0;i<8;i++){const d=document.createElement('div');d.className='en';evo.appendChild(d);els.push(d);}
+function setC(i){
+  const s=ST[i];
+  s.n.forEach(([lab,x,y,k,r],j)=>{const d=els[j];if(lab)d.textContent=lab;d.className='en '+(k||'');d.style.left=x+'%';d.style.top=y+'%';d.style.setProperty('--r',(r||0)+'deg');});
+  svg.innerHTML=s.l.map(([a,b,ai])=>`<line class="${ai?'ai':''}" x1="${s.n[a][1]}" y1="${s.n[a][2]}" x2="${s.n[b][1]}" y2="${s.n[b][2]}"/>`).join('');
+  $('#evoT').textContent=s.t;$('#evoP').textContent=s.p;$('#evoS').textContent=s.s;$('#evoR').value=i;
+}
+setC(0);let touched=false;
+$('#evoR').addEventListener('input',e=>{touched=true;setC(+e.target.value);});
+onView(evo,async()=>{for(let i=1;i<4;i++){await wait(2400);if(touched)return;setC(i);}});
+});
+</script>
+
+</main>
+<footer class="wrap foot">Каталог варіантів · <a href="./">усі секції</a></footer>
+</body>
+</html>

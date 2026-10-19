@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="robots" content="noindex">
+<title>Кейси · варіанти</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geologica:wght@400;500;600;700&family=Golos+Text:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Onest:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="assets/base.css">
+<script src="assets/base.js"></script>
+<style>
+/* A */
+.nums{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.ncard{padding:clamp(22px,3.4vw,40px);display:grid;gap:10px;align-content:start}
+.ncard .tag{font-size:13px;color:var(--muted);font-weight:500}
+.ncard .m{font-family:var(--f-display);font-weight:700;font-size:clamp(44px,6.4vw,80px);line-height:1;letter-spacing:-.045em;color:var(--accent);font-variant-numeric:tabular-nums}
+.ncard .ml{font-size:17px;font-weight:600}
+.ncard p{color:var(--muted);font-size:15.5px}
+.tags{display:flex;gap:6px;flex-wrap:wrap}
+.tags span{font-family:var(--f-mono);font-size:11.5px;padding:3px 9px;border-radius:999px;background:var(--surface-2);color:var(--muted)}
+.quote-slot{grid-column:1/-1;padding:24px;border-radius:var(--r-lg);border:1.5px dashed var(--line);color:var(--muted);display:grid;gap:6px}
+@media (max-width:760px){.nums{grid-template-columns:1fr}}
+/* B */
+.car{display:grid;grid-auto-flow:column;grid-auto-columns:100%;overflow-x:auto;scroll-snap-type:x mandatory;gap:16px;scrollbar-width:none;overscroll-behavior-x:contain}
+.car::-webkit-scrollbar{display:none}
+.cslide{scroll-snap-align:center;display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(20px,4vw,56px);padding:clamp(24px,4vw,52px);align-items:center;min-height:380px}
+.cslide .m{font-family:var(--f-display);font-weight:700;font-size:clamp(48px,7vw,96px);line-height:.95;letter-spacing:-.05em;color:var(--accent)}
+.psr{display:grid;gap:14px}
+.psr div{display:grid;grid-template-columns:96px minmax(0,1fr);gap:12px}
+.psr span:first-child{font-size:12px;font-family:var(--f-mono);color:var(--muted);text-transform:uppercase;letter-spacing:.06em;padding-top:3px}
+.dots{display:flex;gap:8px;justify-content:center;margin-top:18px}
+.dots button{width:8px;height:8px;border-radius:50%;border:0;background:var(--line);cursor:pointer;padding:0;transition:width .25s,background-color .25s}
+.dots button[aria-current="true"]{width:26px;border-radius:8px;background:var(--accent)}
+@media (max-width:760px){.cslide{grid-template-columns:1fr;min-height:0}.psr div{grid-template-columns:1fr;gap:2px}}
+/* C */
+.flip-head{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:24px}
+.flips{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.flip{padding:24px;display:grid;gap:12px;align-content:start;text-align:left;cursor:pointer;transition:border-color .3s}
+.flip .tag{font-size:13px;color:var(--muted)}
+.fv{position:relative;min-height:96px}
+.fv>div{position:absolute;inset:0;display:grid;gap:4px;align-content:start;transition:opacity .35s,transform .35s}
+.fv .bf{opacity:1}
+.fv .af{opacity:0;transform:translateY(8px)}
+.flip.on .fv .bf{opacity:0;transform:translateY(-8px)}
+.flip.on .fv .af{opacity:1;transform:none}
+.fv b{font-family:var(--f-display);font-size:clamp(28px,3.6vw,40px);font-weight:700;letter-spacing:-.03em;line-height:1.05}
+.fv .bf b{color:var(--warn)}
+.fv .af b{color:var(--good)}
+.fv span{font-size:14px;color:var(--muted)}
+.flip .hint{font-size:13px;color:var(--accent);font-weight:500}
+.flip.on{border-color:var(--good)}
+@media (max-width:760px){.flips{grid-template-columns:1fr}}
+</style>
+</head>
+<body data-title="5 · Кейси">
+<main class="wrap">
+
+<header class="page-head">
+  <p class="eyebrow">Акт II · Докази</p>
+  <h1 class="display-m">Кейси</h1>
+  <p class="lead">Стоять одразу після «Історії»: провідник щойно розповів про себе, і тут же показує докази. Чотири кейси, три подачі.</p>
+</header>
+
+<section class="variant" data-key="cases" data-variant="A">
+  <div class="v-head"><div class="v-meta"><span class="v-tag">Варіант A</span><h2 class="v-title">Великі цифри</h2><p class="v-why">Як блок «у цифрах» на сторінках Apple: одна величезна цифра на картку, під нею два речення. Цифри «докручуються», коли картка з'являється на екрані.</p></div><button class="btn btn-ghost btn-sm pick" type="button">Обрати цей</button></div>
+  <div class="stage">
+    <div class="stack-lg">
+      <div class="stack"><p class="eyebrow">Результати</p><h2 class="display-l">Що вже працює</h2></div>
+      <div class="nums">
+        <article class="card ncard"><span class="tag">Фарма-SaaS · AI-агент для Jira</span><span class="m" data-count="87" data-pre="−" data-suf="%">−87%</span><span class="ml">витрат на AI-API</span><p>З ~$1 200 до ~$150 на місяць. Прості команди обробляє код, аналітику — Claude. На операціях запису 0% галюцинацій.</p><div class="tags"><span>Python</span><span>FastAPI</span><span>Claude API</span><span>Atlassian Forge</span></div></article>
+        <article class="card ncard"><span class="tag">HR-tech · ERP на 10 000+ людей</span><span class="m">600–800 тис.</span><span class="ml">рядків без критичних втрат</span><p>5 департаментів, 9–10 релізів. Звіт для правління з 4–5 годин до 5–10 хвилин, на 1,5–2 місяці раніше плану.</p><div class="tags"><span>ERP</span><span>Data mapping</span><span>PowerBI</span></div></article>
+        <article class="card ncard"><span class="tag">HR-агенція · з Excel у CRM</span><span class="m" data-count="1" data-suf=" міс">1 міс</span><span class="ml">до повної відмови від таблиць</span><p>Аудит якості даних, спільні правила полів для п'яти відділів, навчання команд.</p><div class="tags"><span>CRM</span><span>Data quality</span><span>Навчання</span></div></article>
+        <article class="card ncard"><span class="tag">Бренд детективних ігор · контент-фабрика</span><span class="m" data-count="30">30</span><span class="ml">Instagram Stories з одного брифу</span><p>Telegram-бот збирає бриф, AI пише план у голосі бренду, генерує фони й верстає. Вартість API: $0.</p><div class="tags"><span>Python</span><span>Gemini</span><span>Telegram</span></div></article>
+        <div class="quote-slot"><b>Тут 2–3 відгуки колег</b><span>Фото, ім'я, роль і одна конкретна ситуація: «Михайло за тиждень…»</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="variant" data-key="cases" data-variant="B">
+  <div class="v-head"><div class="v-meta"><span class="v-tag">Варіант B</span><h2 class="v-title">Каруселька історій</h2><p class="v-why">Один кейс на весь екран: цифра зліва, «проблема → рішення → результат» справа. Глибше, ніж просто цифра, але не забирає висоти сторінки.</p></div><button class="btn btn-ghost btn-sm pick" type="button">Обрати цей</button></div>
+  <div class="stage">
+    <div class="stack-lg">
+      <div class="stack"><p class="eyebrow">Кейси</p><h2 class="display-l">Проблема, рішення, результат</h2></div>
+      <div class="car" id="car"></div>
+      <div class="dots" id="dots"></div>
+    </div>
+  </div>
+</section>
+
+<section class="variant" data-key="cases" data-variant="C">
+  <div class="v-head"><div class="v-meta"><span class="v-tag">Варіант C</span><h2 class="v-title">Було / стало</h2><p class="v-why">Кожна картка показує «було» помаранчевим. Клік або загальний перемикач перевертає на «стало» зеленим. Трансформація відчувається руками.</p></div><button class="btn btn-ghost btn-sm pick" type="button">Обрати цей</button></div>
+  <div class="stage">
+    <div class="flip-head"><div class="stack"><p class="eyebrow">Кейси</p><h2 class="display-l">До і після</h2></div><div class="seg" id="flipSeg"><button type="button" aria-pressed="true" data-m="0">Було</button><button type="button" aria-pressed="false" data-m="1">Стало</button></div></div>
+    <div class="flips" id="flips"></div>
+  </div>
+</section>
+
+<div class="alts">
+  <h3>Що ще може бути в кейсах</h3>
+  <ul>
+    <li>Окрема сторінка на кейс (1 екран): контекст, схема флоу, цифри, стек. Для SEO і щоб надсилати в листах.</li>
+    <li>Скріншот або 20-секундне відео Jira-агента в роботі. Найсильніший доказ з усіх.</li>
+    <li>Блок «Пет-проєкти» окремо від кейсів: Second Brain-бот, CopyForge. Чесно позначені як власні продукти.</li>
+  </ul>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+const {$,$$,esc,tween,onView}=UI;
+/* A */
+$$('[data-count]').forEach(el=>onView(el,()=>tween(el,+el.dataset.count,{from:0,dur:1100,prefix:el.dataset.pre||'',suffix:el.dataset.suf||''})));
+const C=[
+ {tag:'Фарма-SaaS · AI-агент для Jira',m:'−87%',ml:'витрат на AI-API',p:'Менеджери проєктів витрачали години на рутину в Jira: задачі, статуси, звіти про ризики.',s:'Агент, з яким говорять звичайною мовою: Chrome-розширення, додаток у Jira і API. Прості команди обробляє код, аналітику — Claude.',r:'0% галюцинацій на записі, рахунок за API з ~$1 200 до ~$150, пілот на 30–50 PM.',b:['$1 200','на місяць за AI-API'],a:['$150','на місяць, та сама функціональність']},
+ {tag:'HR-tech · ERP на 10 000+ людей',m:'600–800 тис.',ml:'рядків без критичних втрат',p:'Дані HR, рекрутингу, продажів і фінансів жили в різних системах і таблицях.',s:'Мапінг полів для 5 департаментів, 9–10 релізів, приймальне тестування на кожному, дашборди для правління.',r:'Міграція без критичних втрат, на 1,5–2 місяці раніше плану, 90% працівників користуються системою.',b:['4–5 год','на звіт для правління'],a:['5–10 хв','дашборд оновлюється сам']},
+ {tag:'HR-агенція · з Excel у CRM',m:'1 міс',ml:'до відмови від таблиць',p:'П\'ять відділів вели свої таблиці, дані дублювались і суперечили одне одному.',s:'Аудит якості даних до міграції, спільні правила полів, навчання кожного відділу.',r:'Одне джерело правди. За місяць жоден відділ не повернувся до Excel.',b:['5 відділів','і десятки Excel-файлів'],a:['1 CRM','одне джерело правди']},
+ {tag:'Бренд детективних ігор · контент',m:'30',ml:'stories з одного брифу',p:'Під кожну гру потрібні десятки Instagram Stories в одному нуар-стилі.',s:'Telegram-бот збирає бриф, Gemini пише план і генерує фони, Python верстає готові stories.',r:'Серія з 30 stories за один запуск, вартість API $0.',b:['Вручну','кожна story окремо'],a:['30 stories','за один запуск, $0 на API']}
+];
+/* B */
+const car=$('#car'),dots=$('#dots');
+C.forEach((c,i)=>{const s=document.createElement('article');s.className='card cslide';
+  s.innerHTML=`<div class="stack"><span class="muted small">${esc(c.tag)}</span><span class="m">${esc(c.m)}</span><b>${esc(c.ml)}</b></div><div class="psr"><div><span>Проблема</span><span>${esc(c.p)}</span></div><div><span>Рішення</span><span>${esc(c.s)}</span></div><div><span>Результат</span><b>${esc(c.r)}</b></div></div>`;
+  car.appendChild(s);
+  const d=document.createElement('button');d.type='button';d.setAttribute('aria-label','Кейс '+(i+1));d.onclick=()=>car.scrollTo({left:i*(car.clientWidth+16),behavior:UI.RM?'auto':'smooth'});dots.appendChild(d);});
+const syncDots=()=>{const i=Math.round(car.scrollLeft/(car.clientWidth+16));[...dots.children].forEach((d,j)=>d.setAttribute('aria-current',String(i===j)));};
+car.addEventListener('scroll',syncDots,{passive:true});syncDots();
+/* C */
+const flips=$('#flips');
+C.forEach(c=>{const b=document.createElement('button');b.type='button';b.className='card flip';
+  b.innerHTML=`<span class="tag">${esc(c.tag)}</span><div class="fv"><div class="bf"><b>${esc(c.b[0])}</b><span>${esc(c.b[1])}</span></div><div class="af"><b>${esc(c.a[0])}</b><span>${esc(c.a[1])}</span></div></div><span class="hint">Натисніть, щоб побачити результат</span>`;
+  b.onclick=()=>{b.classList.toggle('on');b.querySelector('.hint').textContent=b.classList.contains('on')?'Результат':'Натисніть, щоб побачити результат';};flips.appendChild(b);});
+$$('#flipSeg button').forEach(btn=>btn.onclick=()=>{$$('#flipSeg button').forEach(x=>x.setAttribute('aria-pressed',String(x===btn)));const on=btn.dataset.m==='1';$$('.flip').forEach(f=>{f.classList.toggle('on',on);f.querySelector('.hint').textContent=on?'Результат':'Натисніть, щоб побачити результат';});});
+});
+</script>
+
+</main>
+<footer class="wrap foot">Каталог варіантів · <a href="./">усі секції</a></footer>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="robots" content="noindex">
+<title>Успіх · варіанти</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geologica:wght@400;500;600;700&family=Golos+Text:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Onest:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="assets/base.css">
+<script src="assets/base.js"></script>
+<style>
+.ph{display:grid;gap:12px;justify-items:center;text-align:center;margin-bottom:36px}
+/* A */
+.day{display:grid;grid-template-columns:72px minmax(0,1fr) minmax(0,1fr);max-width:980px;margin-inline:auto}
+.day>div{padding:16px 14px;border-bottom:1px solid var(--line);transition:background-color .2s}
+.day .hd{font-size:13px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;font-family:var(--f-mono)}
+.day .tm{font-family:var(--f-mono);font-size:14px;color:var(--muted)}
+.day .bf{color:var(--muted)}
+.day .af{font-weight:500}
+.day .af::before{content:"✓ ";color:var(--good);font-weight:700}
+.day .hd.af::before{content:""}
+.day .row-h{background:var(--surface-2)}
+@media (max-width:700px){.day{grid-template-columns:52px minmax(0,1fr) minmax(0,1fr)}.day>div{padding:12px 8px;font-size:14px}}
+/* B */
+.reveal{max-width:980px;margin-inline:auto;font-family:var(--f-display);font-size:clamp(28px,4.6vw,56px);line-height:1.18;letter-spacing:-.03em;font-weight:600;text-wrap:balance}
+.reveal span{color:var(--muted);opacity:.35;transition:opacity .25s,color .25s}
+.reveal span.on{opacity:1;color:var(--ink)}
+.outs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:48px}
+.out{padding:24px;display:grid;gap:6px}
+.out b{font-family:var(--f-display);font-size:28px;letter-spacing:-.02em}
+.out span{color:var(--muted);font-size:15px}
+@media (max-width:760px){.outs{grid-template-columns:1fr}}
+/* C */
+.tgw{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,5vw,64px);align-items:center}
+.phone{max-width:380px;width:100%;justify-self:center;border-radius:40px;padding:14px;background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur)}
+.tg-top{display:flex;align-items:center;gap:10px;padding:8px 10px 12px;border-bottom:1px solid var(--line)}
+.tg-av{width:36px;height:36px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-weight:700;font-size:13px}
+.tg-top b{display:block;font-size:15px}.tg-top span{font-size:12px;color:var(--muted)}
+.tg-body{padding:14px 6px;display:grid;gap:10px;min-height:420px;align-content:start}
+.bub{background:var(--surface-2);border-radius:18px 18px 18px 6px;padding:11px 14px;font-size:14.5px;line-height:1.45;max-width:92%;animation:rise .35s both}
+.bub .t{display:block;font-size:11px;color:var(--muted);text-align:right;margin-top:4px}
+.bub .acts{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+.bub .acts button{border:0;border-radius:10px;padding:7px 12px;font-size:13px;font-weight:600;cursor:pointer;background:var(--accent-soft);color:var(--accent)}
+.bub .acts button.done{background:var(--good-soft);color:var(--good)}
+.me{justify-self:end;background:var(--accent);color:var(--accent-ink);border-radius:18px 18px 6px 18px}
+.me .t{color:var(--accent-ink);opacity:.7}
+@media (max-width:820px){.tgw{grid-template-columns:1fr}}
+</style>
+</head>
+<body data-title="9 · Ваш понеділок після">
+<main class="wrap">
+
+<header class="page-head">
+  <p class="eyebrow">Акт III · Успіх</p>
+  <h1 class="display-m">Ваш понеділок після впровадження</h1>
+  <p class="lead">Нова секція, якої не було в прототипі. Сторітелінг потребує картини «як буде»: hero починається з понеділка, 9:14 у хаосі, а ця секція закриває історію тим самим понеділком, але спокійним. Стоїть перед FAQ і записом.</p>
+</header>
+
+<section class="variant" data-key="success" data-variant="A">
+  <div class="v-head"><div class="v-meta"><span class="v-tag">Варіант A</span><h2 class="v-title">Один день, дві версії</h2><p class="v-why">Таблиця дня: зліва сьогодні, справа після. Конкретно, раціонально, легко порівняти. Добре для COO й PMO.</p></div><button class="btn btn-ghost btn-sm pick" type="button">Обрати цей</button></div>
+  <div class="stage">
+    <div class="ph"><p class="eyebrow">Як буде</p><h2 class="display-l">Той самий понеділок</h2></div>
+    <div class="day" id="day"></div>
+  </div>
+</section>
+
+<section class="variant" data-key="success" data-variant="B">
+  <div class="v-head"><div class="v-meta"><span class="v-tag">Варіант B</span><h2 class="v-title">Текст, що проявляється</h2><p class="v-why">Прийом Apple: великий абзац, слова якого «засвічуються» під час скролу. Емоційно, без жодної картинки. Під ним три результати.</p></div><button class="btn btn-ghost btn-sm pick" type="button">Обрати цей</button></div>
+  <div class="stage">
+    <p class="reveal" id="reveal">Понеділок, 9:14. Кава ще гаряча, а звіт уже готовий. Заявки за вихідні в CRM, клієнти отримали відповіді. Вас чекають лише два рішення, які справді потребують людини.</p>
+    <div class="outs">
+      <div class="card out"><b>Час</b><span>Години рутини повертаються команді щотижня.</span></div>
+      <div class="card out"><b>Контроль</b><span>Цифри в дашборді, а не в голові менеджера.</span></div>
+      <div class="card out"><b>Спокій</b><span>Важливі рішення ухвалюють люди, решту робить агент.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="variant" data-key="success" data-variant="C">
+  <div class="v-head"><div class="v-meta"><span class="v-tag">Варіант C</span><h2 class="v-title">Ранок у Telegram</h2><p class="v-why">Телефон з повідомленнями від вашого агента о 8:00. Кнопки «Схвалити» працюють. Показує людину в контурі краще за будь-який текст.</p></div><button class="btn btn-ghost btn-sm pick" type="button">Обрати цей</button></div>
+  <div class="stage">
+    <div class="tgw">
+      <div class="stack"><p class="eyebrow">Як буде</p><h2 class="display-l">Ваш ранок починається з одного повідомлення</h2><p class="lead">Агент працює вночі й о 8:00 надсилає підсумок. Вам лишається натиснути дві кнопки.</p><a class="btn btn-primary" href="#" style="justify-self:start">Хочу такий ранок</a></div>
+      <div class="phone"><div class="tg-top"><span class="tg-av">AI</span><span><b>Ваш агент</b><span>онлайн</span></span></div><div class="tg-body" id="tg"></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="alts">
+  <h3>Що ще може бути в цій секції</h3>
+  <ul>
+    <li>Цитата клієнта про «до і після», коли з'являться перші клієнти.</li>
+    <li>Плавний перехід у CTA: «Почнімо з вашого понеділка» → кнопка запису.</li>
+  </ul>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+const {$,$$,esc,wait,onView}=UI;
+/* A */
+const D=[['8:00','Відкриваєте 47 непрочитаних заявок','Заявки вже в CRM, кваліфіковані'],['9:14','Шукаєте правильну версію Excel','Замовлення й залишки синхронізовані'],['10:00','Збираєте звіт для CEO з 4 систем','Звіт оновився о 8:00 сам'],['13:00','Відповідаєте «де моє замовлення?»','Типові питання закрив агент'],['16:00','Передзвонюєте клієнтам, про яких забули','Follow-up пішов автоматично'],['19:30','Доробляєте документи вдома','Ви вдома. Агент підготував документи на погодження']];
+$('#day').innerHTML='<div class="hd"></div><div class="hd">Сьогодні</div><div class="hd af">Після впровадження</div>'+D.map(([t,b,a])=>`<div class="tm">${t}</div><div class="bf">${esc(b)}</div><div class="af">${esc(a)}</div>`).join('');
+const cells=$$('#day>div');cells.forEach((c,i)=>{c.addEventListener('mouseenter',()=>{const r=Math.floor(i/3);cells.forEach((x,j)=>x.classList.toggle('row-h',Math.floor(j/3)===r&&r>0));});});
+$('#day').addEventListener('mouseleave',()=>cells.forEach(x=>x.classList.remove('row-h')));
+/* B */
+const rv=$('#reveal');rv.innerHTML=rv.textContent.split(' ').map(w=>`<span>${esc(w)}</span> `).join('');
+const ws=$$('span',rv);
+function rev(){const r=rv.getBoundingClientRect(),vh=innerHeight;const p=Math.max(0,Math.min(1,(vh*.85-r.top)/(r.height+vh*.35)));const n=Math.round(p*ws.length);ws.forEach((w,i)=>w.classList.toggle('on',i<n));}
+if(UI.RM)ws.forEach(w=>w.classList.add('on'));else{addEventListener('scroll',rev,{passive:true});rev();}
+/* C */
+const tg=$('#tg');
+const M=[
+ {h:'<b>Доброго ранку.</b> За ніч:<br>• 23 заявки в CRM, 2 гарячі<br>• звіт для правління оновлено<br>• 14 клієнтів отримали статус замовлення',t:'8:00'},
+ {h:'Рахунок від постачальника на <b>18 450 zł</b> більший за ліміт. Передати в бухгалтерію?',t:'8:00',a:['Схвалити','Відкласти']},
+ {h:'Шортлист на вакансію менеджера: <b>6 кандидатів</b>. Запросити на співбесіду?',t:'8:01',a:['Запросити','Переглянути']}
+];
+async function play(){tg.innerHTML='';for(const m of M){await wait(700);const b=document.createElement('div');b.className='bub';b.innerHTML=m.h+(m.a?`<div class="acts">${m.a.map(x=>`<button type="button">${esc(x)}</button>`).join('')}</div>`:'')+`<span class="t">${m.t}</span>`;tg.appendChild(b);
+  b.querySelectorAll('.acts button').forEach(btn=>btn.onclick=async()=>{b.querySelectorAll('.acts button').forEach(x=>x.disabled=true);btn.classList.add('done');btn.textContent='✓ '+btn.textContent;await wait(500);const r=document.createElement('div');r.className='bub';r.innerHTML=`Готово. ${btn.textContent.includes('Схвалити')?'Рахунок передано в бухгалтерію.':btn.textContent.includes('Запросити')?'Кандидати отримали запрошення обрати час.':'Добре, нагадаю пізніше.'}<span class="t">8:02</span>`;tg.appendChild(r);});}}
+M.forEach(m=>{const b=document.createElement('div');b.className='bub';b.innerHTML=m.h+`<span class="t">${m.t}</span>`;tg.appendChild(b);});
+onView(tg,play);
+});
+</script>
+
+</main>
+<footer class="wrap foot">Каталог варіантів · <a href="./">усі секції</a></footer>
+</body>
+</html>

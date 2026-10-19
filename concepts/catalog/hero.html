@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="robots" content="noindex">
+<title>Hero · варіанти</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geologica:wght@400;500;600;700&family=Golos+Text:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Onest:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="assets/base.css">
+<script src="assets/base.js"></script>
+<style>
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(28px,5vw,64px);align-items:center}
+.hero-copy{display:grid;gap:22px;align-content:center}
+.who{display:flex;align-items:center;gap:12px}
+.who img{width:48px;height:48px;border-radius:50%;object-fit:cover}
+.who span{font-size:14px;color:var(--muted)}
+.who b{display:block;font-size:15px;color:var(--ink)}
+/* A: lock screen */
+.lock{border-radius:40px;padding:26px 16px 18px;border:1px solid var(--line);background:var(--surface);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);box-shadow:var(--shadow);max-width:400px;width:100%;justify-self:center}
+.lock-date{text-align:center;font-size:15px;font-weight:500;color:var(--muted)}
+.lock-time{text-align:center;font-family:var(--f-display);font-weight:600;font-size:72px;line-height:1;letter-spacing:-.04em;margin:4px 0 6px}
+.lock-meter{display:flex;justify-content:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:16px}
+.lock-meter b{color:var(--good);font-variant-numeric:tabular-nums}
+.notifs{display:flex;flex-direction:column}
+.notif{display:grid;grid-template-columns:38px minmax(0,1fr);gap:10px;align-items:start;width:100%;text-align:left;padding:11px 12px;border-radius:20px;border:0;background:var(--surface-2);cursor:pointer;margin-top:8px;max-height:140px;overflow:hidden;transition:max-height .45s ease,margin .45s ease,padding .45s ease,opacity .35s,background-color .3s,transform .2s}
+.notif:first-child{margin-top:0}
+.notif:hover{transform:scale(1.01)}
+.notif .ic{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;color:#FFFFFF;font-weight:700;font-size:13px}
+.notif .hd{display:flex;justify-content:space-between;gap:8px;font-size:12px;color:var(--muted)}
+.notif .tt{display:block;font-weight:600;font-size:14.5px;line-height:1.3;margin-top:1px}
+.notif .tx{display:block;font-size:13.5px;color:var(--muted);line-height:1.35}
+.notif.work .tx::after{content:"";display:inline-block;width:10px;height:10px;margin-left:6px;border-radius:50%;border:2px solid var(--accent);border-right-color:transparent;animation:spin .7s linear infinite;vertical-align:-1px}
+.notif.ok{background:var(--good-soft)}
+.notif.ok .ic{background:var(--good)!important}
+.notif.gone{max-height:0;margin-top:0;padding-block:0;opacity:0}
+.lock-done{text-align:center;display:grid;gap:12px;padding:18px 6px 6px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ic-xls{background:#1D7044}.ic-mail{background:#2E7CF6}.ic-rem{background:#F08A24}.ic-chat{background:#2FB45A}.ic-pdf{background:#E0443A}.ic-cv{background:#8462E8}
+@media (max-width:900px){.hero-grid{grid-template-columns:1fr}}
+
+/* B: spotlight */
+.spot-wrap{display:grid;grid-template-columns:minmax(0,1fr);gap:26px;justify-items:center;text-align:center}
+.spot{width:min(720px,100%);display:flex;align-items:center;gap:12px;padding:10px 10px 10px 20px;border-radius:999px;background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur)}
+.spot svg{flex:0 0 auto;color:var(--muted)}
+.spot input{flex:1;min-width:0;border:0;background:transparent;font-size:18px;outline:none;color:var(--ink)}
+.spot input::placeholder{color:var(--muted)}
+.chips-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:760px}
+.pipe{width:min(980px,100%);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin-top:6px;text-align:left}
+.pn{position:relative;padding:18px 16px 0 0}
+.pn::before{content:"";position:absolute;left:0;right:0;top:9px;height:2px;background:var(--line)}
+.pn::after{content:"";position:absolute;left:0;top:9px;height:2px;width:0;background:var(--accent);transition:width .45s ease}
+.pn.on::after{width:100%}
+.pn .dotn{position:absolute;left:0;top:0;width:20px;height:20px;border-radius:50%;background:var(--surface);border:2px solid var(--line);display:grid;place-items:center;font-size:11px;color:var(--accent-ink);transition:background-color .3s,border-color .3s;z-index:1}
+.pn.on .dotn{background:var(--accent);border-color:var(--accent)}
+.pn .dotn::after{content:"✓";opacity:0;transition:opacity .2s}
+.pn.on .dotn::after{opacity:1}
+.pn b{display:block;font-size:15px;margin-top:14px;font-weight:600}
+.pn span{display:block;font-family:var(--f-mono);font-size:12px;color:var(--muted);margin-top:4px}
+.pipe-res{font-size:17px}
+.pipe-res b{color:var(--good)}
+@media (max-width:720px){.pipe{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:18px}}
+
+/* C: before / after */
+.ba-wrap{display:grid;grid-template-columns:minmax(0,1fr);gap:30px;justify-items:center;text-align:center}
+.ba{position:relative;width:min(1000px,100%);border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow);touch-action:pan-y;user-select:none;-webkit-user-select:none;text-align:left}
+.ba-layer{padding:clamp(18px,3vw,32px);display:grid;gap:12px;min-height:420px;align-content:start}
+.ba-after{background:var(--surface);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur)}
+.ba-before{position:absolute;inset:0;background:var(--surface-2);clip-path:inset(0 calc(100% - var(--split,50%)) 0 0)}
+:root[data-design="c"] .ba-before{background:#E9EDF2}
+.ba-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.ba-top b{font-family:var(--f-display);font-size:22px;letter-spacing:-.02em}
+.pill{font-size:12.5px;font-weight:600;padding:5px 11px;border-radius:999px}
+.pill.w{background:var(--warn-soft);color:var(--warn)}
+.pill.g{background:var(--good-soft);color:var(--good)}
+.li{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:13px 16px;border-radius:14px;background:var(--bg);border:1px solid var(--line);font-size:15px}
+:root[data-design="c"] .li{background:rgba(255,255,255,.7)}
+.li span:last-child{font-family:var(--f-mono);font-size:12.5px;white-space:nowrap}
+.ba-handle{position:absolute;top:0;bottom:0;left:var(--split,50%);width:2px;background:var(--accent);transform:translateX(-1px);pointer-events:none}
+.ba-handle::after{content:"‹ ›";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-weight:700;letter-spacing:2px;box-shadow:var(--shadow)}
+.ba-range{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0}
+.ba-label{font-size:12px;font-family:var(--f-mono);color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+@media (max-width:640px){.ba-layer{min-height:470px}.li{font-size:14px;padding:11px 12px}}
+</style>
+</head>
+<body data-title="1 · Hero">
+<main class="wrap">
+
+<header class="page-head">
+  <p class="eyebrow">Акт I · Ваш світ</p>
+  <h1 class="display-m">Hero: перший екран</h1>
+  <p class="lead">Заголовок залишаємо. Варіанти відрізняються інтерактивом і фоном. Будь-який фон зі сторінки «Фони» можна поставити під будь-який варіант.</p>
+</header>
+
+<section class="variant" data-key="hero" data-variant="A">
+  <div class="v-head"><div class="v-meta"><span class="v-tag">Варіант A · фон «Аврора»</span><h2 class="v-title">Стос сповіщень</h2><p class="v-why">Знайомий кожному екран блокування в понеділок. Торкаєтесь сповіщення, агент його закриває, лічильник годин росте. Читається за секунду, працює на телефоні.</p></div><button class="btn btn-ghost btn-sm pick" type="button">Обрати цей</button></div>
+  <div class="stage bg-host"><canvas data-bg="aurora" aria-hidden="true"></canvas>
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">AI-автоматизації та інтеграції для компаній від 5 до 500 людей</p>
+        <h1 class="display-xl">Ваша команда тоне в ручній роботі. <span class="hl">Я передаю її AI-агентам.</span></h1>
+        <p class="lead">Аналізую, де компанія втрачає години, і будую автоматизації на n8n, Make та Claude, якими люди справді користуються.</p>
+        <div class="row"><a class="btn btn-primary" href="#">Записатися на розмову</a><a class="link" href="#">Порахувати втрати</a></div>
+        <div class="who"><img src="assets/me.jpg" alt="Михайло Логаза" width="48" height="48"><span><b>Михайло Логаза</b>5+ років впроваджень CRM, ERP та AI · Познань</span></div>
+      </div>
+      <div class="lock" id="lock">
+        <div class="lock-date">Понеділок</div>
+        <div class="lock-time">9:14</div>
+        <div class="lock-meter"><span>Торкніться сповіщення</span><span>·</span><span>звільнено <b id="lockH">0</b> год/тижд.</span></div>
+        <div class="notifs" id="notifs"></div>
+        <div class="lock-done" id="lockDone" hidden><h3>Усе під контролем</h3><p class="muted small" id="lockDoneTxt"></p><div class="row c"><a class="btn btn-primary btn-sm" href="#">Хочу так само</a><button class="btn btn-ghost btn-sm" type="button" id="lockReset">Ще раз</button></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="variant" data-key="hero" data-variant="B">
+  <div class="v-head"><div class="v-meta"><span class="v-tag">Варіант B · фон «Магнітна сітка»</span><h2 class="v-title">Спитайте агента</h2><p class="v-why">Один рядок у стилі Spotlight. Людина обирає свою рутину, а під рядком малюється флоу з галочками й годинами. Мінімум елементів, максимум «продукту».</p></div><button class="btn btn-ghost btn-sm pick" type="button">Обрати цей</button></div>
+  <div class="stage bg-host"><canvas data-bg="dots" aria-hidden="true"></canvas>
+    <div class="spot-wrap">
+      <p class="eyebrow">AI-автоматизації та інтеграції</p>
+      <h1 class="display-xl">Ваша команда тоне в ручній роботі. <span class="hl">Я передаю її AI-агентам.</span></h1>
+      <p class="lead center">Напишіть, що забирає час, і подивіться, як це виглядало б автоматизованим.</p>
+      <form class="spot" id="spotForm"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="8.5" cy="8.5" r="6" stroke="currentColor" stroke-width="2"/><path d="M13 13l5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><input id="spotIn" aria-label="Опишіть рутину" autocomplete="off"><button class="btn btn-primary btn-sm" type="submit">Показати</button></form>
+      <div class="chips-row" id="spotChips"></div>
+      <div class="pipe" id="pipe"></div>
+      <p class="pipe-res" id="pipeRes" aria-live="polite"></p>
+    </div>
+  </div>
+</section>
+
+<section class="variant" data-key="hero" data-variant="C">
+  <div class="v-head"><div class="v-meta"><span class="v-tag">Варіант C · без фону</span><h2 class="v-title">До і після</h2><p class="v-why">Той самий понеділок, 9:14, у двох версіях. Тягнете повзунок і бачите різницю. Найспокійніший варіант, найближчий до Apple.</p></div><button class="btn btn-ghost btn-sm pick" type="button">Обрати цей</button></div>
+  <div class="stage">
+    <div class="ba-wrap">
+      <p class="eyebrow">AI-автоматизації та інтеграції</p>
+      <h1 class="display-xl">Ваша команда тоне в ручній роботі. <span class="hl">Я передаю її AI-агентам.</span></h1>
+      <div class="row c"><a class="btn btn-primary" href="#">Записатися на розмову</a><a class="link" href="#">Порахувати втрати</a></div>
+      <div class="ba" id="ba">
+        <div class="ba-layer ba-after">
+          <div class="ba-top"><b>Понеділок, 9:14</b><span class="pill g">2 рішення чекають на вас</span></div>
+          <div class="ba-label">З агентами</div>
+          <div class="li"><span>47 заявок оброблено вночі, усі в CRM</span><span class="good">✓ готово</span></div>
+          <div class="li"><span>Замовлення й залишки синхронізовані</span><span class="good">✓ готово</span></div>
+          <div class="li"><span>Звіт для CEO оновлено о 8:00</span><span class="good">✓ готово</span></div>
+          <div class="li"><span>Follow-up клієнтам надіслано</span><span class="good">✓ готово</span></div>
+          <div class="li"><span>Шортлист: 6 кандидатів</span><span class="warn">чекає на вас</span></div>
+        </div>
+        <div class="ba-layer ba-before" aria-hidden="true">
+          <div class="ba-top"><b>Понеділок, 9:14</b><span class="pill w">5 пожеж</span></div>
+          <div class="ba-label">Без автоматизації</div>
+          <div class="li"><span>Пошта: 47 непрочитаних заявок</span><span class="warn">не оброблено</span></div>
+          <div class="li"><span>zamowienia_FINAL_v3.xlsx</span><span class="warn">3 версії</span></div>
+          <div class="li"><span>Звіт для CEO до 10:00</span><span class="warn">не почато</span></div>
+          <div class="li"><span>Клієнт чекає відповіді</span><span class="warn">2 дні</span></div>
+          <div class="li"><span>CV у черзі</span><span class="warn">86</span></div>
+        </div>
+        <div class="ba-handle"></div>
+        <input class="ba-range" id="baRange" type="range" min="0" max="100" value="50" aria-label="Порівняти без автоматизації і з агентами">
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="alts">
+  <h3>Інші формулювання для hero</h3>
+  <ul>
+    <li><b>Підзаголовок 1:</b> Аналізую, де компанія втрачає години, і будую автоматизації на n8n, Make та Claude, якими люди справді користуються.</li>
+    <li><b>Підзаголовок 2:</b> 5+ років впроваджую CRM, ERP та AI-агентів. Від Excel-хаосу до процесів, які працюють, поки ви спите.</li>
+    <li><b>Підзаголовок 3:</b> Знаходжу рутину, яка з'їдає тиждень вашої команди, і передаю її агентам. Важливі рішення залишаються за людьми.</li>
+    <li><b>Головна кнопка:</b> «Записатися на розмову» · «Розібрати мій процес за 30 хвилин» · «Отримати безкоштовний аудит»</li>
+    <li><b>Додатково в hero:</b> рядок логотипів інструментів (n8n, Make, HubSpot, Claude) або три цифри-докази під кнопками.</li>
+  </ul>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+const {$,wait,tween,esc}=UI;
+/* A */
+const N=[
+ {ic:'mail',l:'M',app:'Пошта',t:'47 нових заявок',x:'«Потрібна оферта на 200 шт.…»',r:'Заявки кваліфіковано, ліди в HubSpot',h:5},
+ {ic:'xls',l:'X',app:'Excel',t:'zamowienia_FINAL_v3.xlsx',x:'Анна змінила файл. Знову.',r:'Замовлення й залишки синхронізовані',h:6},
+ {ic:'rem',l:'!',app:'Нагадування',t:'Передзвонити клієнту',x:'Прострочено на 2 дні',r:'Follow-up надіслано, задача в CRM',h:3},
+ {ic:'pdf',l:'P',app:'Бухгалтерія',t:'Faktura_09_2026.pdf',x:'Перенести в систему до п\'ятниці',r:'Рахунок розпізнано й передано на погодження',h:4},
+ {ic:'chat',l:'?',app:'Чат з клієнтами',t:'«А де моє замовлення?»',x:'14-те питання сьогодні',r:'Відповідь надіслано зі статусом доставки',h:4},
+ {ic:'cv',l:'CV',app:'Рекрутинг',t:'86 CV у черзі',x:'Вакансія: менеджер з продажу',r:'Шортлист із 6 кандидатів чекає на рекрутера',h:7}
+];
+const box=$('#notifs');let saved=0,left=N.length,busyA=0;
+function renderA(){
+  box.innerHTML='';saved=0;left=N.length;$('#lockH').textContent='0';$('#lockH').dataset.v=0;$('#lockDone').hidden=true;
+  N.forEach(n=>{const b=document.createElement('button');b.type='button';b.className='notif';
+    b.innerHTML=`<span class="ic ic-${n.ic}">${n.l}</span><span><span class="hd"><span>${esc(n.app)}</span><span>зараз</span></span><span class="tt">${esc(n.t)}</span><span class="tx">${esc(n.x)}</span></span>`;
+    b.onclick=async()=>{if(b.dataset.s)return;b.dataset.s=1;busyA++;b.classList.add('work');b.querySelector('.tx').textContent='Агент обробляє';
+      await wait(900);b.classList.remove('work');b.classList.add('ok');b.querySelector('.hd span').textContent='AI-агент';b.querySelector('.tt').textContent=n.r;b.querySelector('.tx').textContent='+'+n.h+' год/тиждень для команди';
+      tween($('#lockH'),saved+n.h,{from:saved});saved+=n.h;
+      await wait(1100);b.classList.add('gone');left--;busyA--;
+      if(left===0){await wait(400);$('#lockDoneTxt').textContent=`Шість задач закрито. Команда отримала назад ${saved} годин на тиждень, майже цілу ставку.`;$('#lockDone').hidden=false;}
+    };
+    box.appendChild(b);});
+}
+renderA();$('#lockReset').onclick=renderA;
+
+/* B */
+const P=[
+ {q:'Ми вручну переносимо замовлення в Excel',s:[['Нове замовлення','Allegro, Shopify'],['Перевірка залишків','n8n + Sheets'],['Рахунок','wFirma'],['Статус клієнту','Email']],h:'8–12'},
+ {q:'Рекрутери читають сотні CV',s:[['Нове CV','Пошта, ATS'],['Оцінка за вимогами','Claude'],['Шортлист','Рекрутер підтверджує'],['Запис на співбесіду','Cal.com']],h:'10–15'},
+ {q:'Звіти збираємо руками з 4 систем',s:[['Щодня о 7:30','Розклад'],['Збір даних','CRM, ERP, Sheets'],['Дашборд','PowerBI'],['Резюме керівнику','Telegram']],h:'5–8'},
+ {q:'Заявки з сайту губляться в пошті',s:[['Нова заявка','Сайт, пошта'],['Кваліфікація','Claude'],['Угода в CRM','HubSpot'],['Сповіщення менеджеру','Telegram']],h:'5–9'}
+];
+const GEN={s:[['Подія','Лист, форма, рядок'],['Розбір і класифікація','Claude'],['Дія в системі','API'],['Звіт відповідальному','Telegram']],h:'3–8'};
+const inp=$('#spotIn'),pipe=$('#pipe'),res=$('#pipeRes');
+let ph=0,pc=0,typing=true;
+(async function type(){while(typing){const s=P[ph%P.length].q+'…';for(pc=0;pc<=s.length&&typing;pc++){inp.placeholder=s.slice(0,pc);await wait(45);}await wait(1600);ph++;}})();
+inp.addEventListener('focus',()=>{typing=false;inp.placeholder='Що забирає час у вашій команді?';});
+P.forEach(p=>{const c=document.createElement('button');c.type='button';c.className='chip';c.textContent=p.q;c.onclick=()=>{typing=false;inp.value=p.q;show(p);};$('#spotChips').appendChild(c);});
+let runId=0;
+async function show(p){
+  const id=++runId;pipe.innerHTML=p.s.map(([a,b])=>`<div class="pn"><span class="dotn"></span><b>${esc(a)}</b><span>${esc(b)}</span></div>`).join('');res.textContent='';
+  const ns=[...pipe.children];for(const n of ns){await wait(420);if(id!==runId)return;n.classList.add('on');}
+  await wait(250);if(id!==runId)return;res.innerHTML=`≈ <b>${p.h} год на тиждень</b> повертається команді. <a href="#">Розібрати мій процес</a>`;
+}
+$('#spotForm').addEventListener('submit',e=>{e.preventDefault();const q=inp.value.trim().toLowerCase();if(!q)return;
+  const hit=P.find(p=>p.q.toLowerCase().split(' ').some(w=>w.length>4&&q.includes(w.slice(0,5))));show(hit||GEN);});
+show(P[0]);
+
+/* C */
+const ba=$('#ba'),rg=$('#baRange');
+const setSplit=v=>ba.style.setProperty('--split',v+'%');
+rg.addEventListener('input',()=>setSplit(rg.value));setSplit(50);
+UI.onView(ba,async()=>{for(const v of[50,72,30,50]){await wait(500);rg.value=v;setSplit(v);}});
+});
+</script>
+
+</main>
+<footer class="wrap foot">Каталог варіантів · <a href="./">усі секції</a></footer>
+</body>
+</html>

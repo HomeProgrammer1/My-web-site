@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="robots" content="noindex">
+<title>Фони · варіанти</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geologica:wght@400;500;600;700&family=Golos+Text:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Onest:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="assets/base.css">
+<script src="assets/base.js"></script>
+<style>
+.demo{border-radius:var(--r-lg);border:1px solid var(--line);min-height:420px;display:grid;place-items:center;text-align:center;padding:40px 20px;background:var(--bg-alt)}
+:root[data-design="c"] .demo{background:rgba(255,255,255,.25)}
+.demo .in{display:grid;gap:14px;justify-items:center;max-width:720px;pointer-events:none}
+.demo .in .btn{pointer-events:auto}
+.hint{font-size:13px;color:var(--muted);font-family:var(--f-mono)}
+.meta-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.meta-row span{font-size:12px;padding:3px 10px;border-radius:999px;background:var(--surface-2);color:var(--muted)}
+</style>
+</head>
+<body data-title="Фони · інтерактивні">
+<main class="wrap">
+
+<header class="page-head">
+  <p class="eyebrow">Для всього сайту</p>
+  <h1 class="display-m">Інтерактивні фони</h1>
+  <p class="lead">Шість фонів, які реагують на мишку. На телефоні, де мишки немає, вони рухаються самі по плавній траєкторії. Кожен вимикається, коли блок не на екрані, і стає статичним, якщо в системі ввімкнено «зменшити рух». Перемкніть дизайн угорі: кольори фонів підлаштовуються.</p>
+</header>
+
+<section class="variant" data-key="bg" data-variant="A">
+  <div class="v-head"><div class="v-meta"><span class="v-tag">Варіант A</span><h2 class="v-title">Магнітна сітка</h2><p class="v-why">Рівна сітка точок. Біля курсора точки притягуються, ростуть і підсвічуються. Найтихіший і найбільш «Apple».</p><div class="meta-row"><span>легкий</span><span>під будь-який hero</span></div></div><button class="btn btn-ghost btn-sm pick" type="button">Обрати цей</button></div>
+  <div class="stage"><div class="demo bg-host"><canvas data-bg="dots" aria-hidden="true"></canvas><div class="in"><p class="hint">поводьте мишкою</p><h2 class="display-l">Ваша команда тоне в ручній роботі.</h2><a class="btn btn-primary" href="#">Записатися на розмову</a></div></div></div>
+</section>
+
+<section class="variant" data-key="bg" data-variant="B">
+  <div class="v-head"><div class="v-meta"><span class="v-tag">Варіант B</span><h2 class="v-title">Мережа агентів</h2><p class="v-why">Вузли повільно дрейфують. Біля курсора вони підключаються до нього, і по лініях біжать пакети даних. Курсор стає «вашою компанією», до якої підключаються агенти.</p><div class="meta-row"><span>середній</span><span>найбільш «про AI»</span></div></div><button class="btn btn-ghost btn-sm pick" type="button">Обрати цей</button></div>
+  <div class="stage"><div class="demo bg-host"><canvas data-bg="network" aria-hidden="true"></canvas><div class="in"><p class="hint">поводьте мишкою</p><h2 class="display-l">Агенти підключаються до ваших систем.</h2><a class="btn btn-primary" href="#">Записатися на розмову</a></div></div></div>
+</section>
+
+<section class="variant" data-key="bg" data-variant="C">
+  <div class="v-head"><div class="v-meta"><span class="v-tag">Варіант C</span><h2 class="v-title">Потік даних</h2><p class="v-why">Тонкі лінії даних течуть зліва направо. Курсор працює як маршрутизатор: потік огинає його і підсвічується. Метафора інтеграцій.</p><div class="meta-row"><span>середній</span><span>динамічний</span></div></div><button class="btn btn-ghost btn-sm pick" type="button">Обрати цей</button></div>
+  <div class="stage"><div class="demo bg-host"><canvas data-bg="flow" aria-hidden="true"></canvas><div class="in"><p class="hint">поводьте мишкою</p><h2 class="display-l">Дані течуть туди, куди потрібно.</h2><a class="btn btn-primary" href="#">Записатися на розмову</a></div></div></div>
+</section>
+
+<section class="variant" data-key="bg" data-variant="D">
+  <div class="v-head"><div class="v-meta"><span class="v-tag">Варіант D</span><h2 class="v-title">Прожектор-креслення</h2><p class="v-why">Під сторінкою схована схема автоматизації: Тригер → AI-агент → CRM → Telegram. Курсор-прожектор її проявляє. Метафора аудиту: «я бачу процеси, яких ви не помічаєте».</p><div class="meta-row"><span>середній</span><span>найбільш «сторітелінговий»</span></div></div><button class="btn btn-ghost btn-sm pick" type="button">Обрати цей</button></div>
+  <div class="stage"><div class="demo bg-host"><canvas data-bg="spotlight" aria-hidden="true"></canvas><div class="in"><p class="hint">поводьте мишкою</p><h2 class="display-l">У вашій компанії вже є процеси. Їх просто не видно.</h2><a class="btn btn-primary" href="#">Записатися на розмову</a></div></div></div>
+</section>
+
+<section class="variant" data-key="bg" data-variant="E">
+  <div class="v-head"><div class="v-meta"><span class="v-tag">Варіант E</span><h2 class="v-title">Хаос → порядок</h2><p class="v-why">Розкидані частинки хаотично плавають. Там, де курсор, вони шикуються в рівну сітку квадратів. Пряма метафора того, що ти продаєш, і пара до hero «Хаос → флоу».</p><div class="meta-row"><span>середній</span><span>метафора продукту</span></div></div><button class="btn btn-ghost btn-sm pick" type="button">Обрати цей</button></div>
+  <div class="stage"><div class="demo bg-host"><canvas data-bg="order" aria-hidden="true"></canvas><div class="in"><p class="hint">поводьте мишкою</p><h2 class="display-l">Там, де з'являється система, зникає хаос.</h2><a class="btn btn-primary" href="#">Записатися на розмову</a></div></div></div>
+</section>
+
+<section class="variant" data-key="bg" data-variant="F">
+  <div class="v-head"><div class="v-meta"><span class="v-tag">Варіант F</span><h2 class="v-title">Аврора</h2><p class="v-why">Три м'які кольорові плями пливуть за курсором з різною затримкою. Найбільш «преміальний» і найменш буквальний. У дизайні Pro світиться на чорному.</p><div class="meta-row"><span>легкий</span><span>атмосферний</span></div></div><button class="btn btn-ghost btn-sm pick" type="button">Обрати цей</button></div>
+  <div class="stage"><div class="demo bg-host"><canvas data-bg="aurora" aria-hidden="true"></canvas><div class="in"><p class="hint">поводьте мишкою</p><h2 class="display-l">Спокій замість понеділкових пожеж.</h2><a class="btn btn-primary" href="#">Записатися на розмову</a></div></div></div>
+</section>
+
+<div class="alts">
+  <h3>Як поєднувати</h3>
+  <ul>
+    <li>Найкраще: один активний фон тільки в hero, а решта сайту статична. Так фон стає «моментом», а не шумом.</li>
+    <li>Друга схема: тихий фон (A або F) на всьому сайті, а активний (D або E) лише в hero.</li>
+    <li>Пари, що працюють: «Хаос → порядок» + hero «Стос сповіщень»; «Прожектор» + «Рентген процесу»; «Аврора» + дизайн «Скло».</li>
+  </ul>
+</div>
+
+</main>
+<footer class="wrap foot">Каталог варіантів · <a href="./">усі секції</a></footer>
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="robots" content="noindex">
+<title>Запис · варіанти</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geologica:wght@400;500;600;700&family=Golos+Text:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Onest:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="assets/base.css">
+<script src="assets/base.js"></script>
+<style>
+.ph{display:grid;gap:12px;justify-items:center;text-align:center;margin-bottom:36px}
+.cal{display:grid;gap:14px}
+.days{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px}
+.day{flex:0 0 auto;display:grid;justify-items:center;gap:2px;min-width:62px;padding:10px;border-radius:14px;border:1px solid var(--line);background:var(--surface);cursor:pointer}
+.day small{font-size:11px;color:var(--muted);text-transform:uppercase}
+.day b{font-size:16px;font-variant-numeric:tabular-nums}
+.day[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.day[aria-pressed="true"] small{color:var(--accent-ink)}
+.slots{display:flex;flex-wrap:wrap;gap:8px}
+.slot{padding:10px 16px;border-radius:12px;border:1px solid var(--line);background:var(--surface);cursor:pointer;font-variant-numeric:tabular-nums}
+.slot[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.slot:disabled{opacity:.3;cursor:not-allowed;text-decoration:line-through}
+.form{display:grid;gap:12px}
+.form label{display:grid;gap:6px;font-size:14px;color:var(--muted)}
+.form textarea{resize:vertical}
+.pv{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;margin-top:16px}
+.pvc{padding:18px;display:grid;gap:8px;align-content:start;min-width:0}
+.tgb{background:var(--surface-2);border-left:3px solid #2AABEE;border-radius:12px;padding:12px 14px;font-size:14px;white-space:pre-wrap;word-break:break-word;font-family:var(--f-mono);line-height:1.6}
+@media (max-width:760px){.pv{grid-template-columns:1fr}}
+/* A */
+.bk-a{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+.svc{display:grid;gap:8px}
+.svc label{display:flex;gap:12px;align-items:flex-start;padding:14px;border-radius:14px;border:1px solid var(--line);cursor:pointer;background:var(--surface)}
+.svc label:has(input:checked){border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.svc input{accent-color:var(--accent);margin-top:4px}
+@media (max-width:820px){.bk-a{grid-template-columns:1fr}}
+/* B sheet */
+.cta-big{display:grid;justify-items:center;gap:20px;text-align:center}
+.sheet-bg{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:50;display:grid;align-items:end;justify-items:center;animation:fade .25s both}
+@keyframes fade{from{opacity:0}}
+.sheet{width:min(560px,100%);max-height:88vh;overflow:auto;background:var(--bg);border-radius:28px 28px 0 0;padding:14px max(20px,env(safe-area-inset-left,0px)) calc(24px + env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-right,0px));display:grid;gap:16px;animation:up .35s cubic-bezier(.2,.8,.2,1) both}
+:root[data-design="c"] .sheet{background:#F4F7FA}
+@keyframes up{from{transform:translateY(40px);opacity:.4}}
+.grab{width:40px;height:5px;border-radius:5px;background:var(--line);justify-self:center}
+.sh-steps{display:flex;gap:6px}.sh-steps i{flex:1;height:4px;border-radius:4px;background:var(--line)}.sh-steps i.on{background:var(--accent)}
+.sh-nav{display:flex;justify-content:space-between;gap:10px}
+/* C qualify */
+.qual{max-width:720px;margin-inline:auto;display:grid;gap:22px}
+.qopts{display:flex;flex-wrap:wrap;gap:8px}
+.verdict{padding:22px;display:grid;gap:12px;animation:rise .35s both}
+</style>
+</head>
+<body data-title="11 · Запис">
+<main class="wrap">
+
+<header class="page-head">
+  <p class="eyebrow">Фінал · Дія</p>
+  <h1 class="display-m">Запис на розмову</h1>
+  <p class="lead">На живому сайті календар дає Cal.com: клієнт отримує лист з Google Meet, ти — повідомлення в Telegram. Тут імітація, щоб обрати подачу.</p>
+</header>
+
+<section class="variant" data-key="booking" data-variant="A">
+  <div class="v-head"><div class="v-meta"><span class="v-tag">Варіант A</span><h2 class="v-title">Календар на сторінці</h2><p class="v-why">Усе видно одразу: тип зустрічі, дата, час, форма. Найменше кліків до запису.</p></div><button class="btn btn-ghost btn-sm pick" type="button">Обрати цей</button></div>
+  <div class="stage">
+    <div class="ph"><p class="eyebrow">Запис</p><h2 class="display-l">Почнімо з вашого понеділка</h2></div>
+    <div class="bk-a">
+      <div class="card card-pad cal">
+        <div class="svc"><label><input type="radio" name="svcA" value="Знайомство, 30 хв" checked><span><b>Знайомство · 30 хв</b><br><span class="small muted">Безкоштовно. 1–2 процеси.</span></span></label><label><input type="radio" name="svcA" value="Розбір процесу, 60 хв"><span><b>Розбір процесу · 60 хв</b><br><span class="small muted">Схема одного процесу й оцінка ROI.</span></span></label></div>
+        <div class="days" id="daysA"></div><div class="slots" id="slotsA"></div><span class="small muted">Час: Варшава (CET)</span>
+      </div>
+      <form class="card card-pad form" id="formA" novalidate>
+        <label>Email *<input class="input" type="email" id="emA" placeholder="anna@firma.pl" autocomplete="email" required></label>
+        <label>Ім'я та компанія<input class="input" id="nmA" placeholder="Anna Kowalska, Firma Sp. z o.o." autocomplete="organization"></label>
+        <label>Що хочете автоматизувати?<textarea class="input" id="dsA" rows="3" placeholder="Обробка замовлень з Allegro, 3 людини, все в Excel"></textarea></label>
+        <button class="btn btn-primary" type="submit">Забронювати</button><p class="small" id="msgA" aria-live="polite"></p>
+      </form>
+    </div>
+    <div class="pv" id="pvA" hidden></div>
+  </div>
+</section>
+
+<section class="variant" data-key="booking" data-variant="B">
+  <div class="v-head"><div class="v-meta"><span class="v-tag">Варіант B</span><h2 class="v-title">Велика кнопка й шторка</h2><p class="v-why">На сторінці лише велике запрошення й одна кнопка. Запис відкривається шторкою знизу в три кроки, як у застосунках iOS. Найчистіший вигляд, кнопку можна повторити в кількох місцях.</p></div><button class="btn btn-ghost btn-sm pick" type="button">Обрати цей</button></div>
+  <div class="stage">
+    <div class="cta-big"><img src="assets/me.jpg" alt="Михайло Логаза" width="88" height="88" style="border-radius:50%"><h2 class="display-l">30 хвилин, щоб побачити, скільки часу можна повернути</h2><p class="lead center">Безкоштовно. Без презентацій. Говорите з тим, хто буде робити.</p><button class="btn btn-primary" type="button" id="openB" style="min-height:52px;padding-inline:30px;font-size:17px">Обрати час</button></div>
+  </div>
+</section>
+
+<section class="variant" data-key="booking" data-variant="C">
+  <div class="v-head"><div class="v-meta"><span class="v-tag">Варіант C</span><h2 class="v-title">Спершу два питання</h2><p class="v-why">Перед календарем два кліки: розмір компанії і що болить. Якщо підходить, відкривається календар. Якщо ні, пропонується безкоштовний чекліст на пошту. Береже твої 10 годин на тиждень.</p></div><button class="btn btn-ghost btn-sm pick" type="button">Обрати цей</button></div>
+  <div class="stage">
+    <div class="qual">
+      <div class="stack center" style="text-align:center"><p class="eyebrow">Запис</p><h2 class="display-l">Перевірмо, чи я вам підходжу</h2></div>
+      <div class="stack"><b>Скільки людей у компанії?</b><div class="qopts" id="q1"></div></div>
+      <div class="stack"><b>Що болить найбільше?</b><div class="qopts" id="q2"></div></div>
+      <div id="verdict"></div>
+    </div>
+  </div>
+</section>
+
+<div class="alts">
+  <h3>Що ще може бути біля запису</h3>
+  <ul>
+    <li>Липка кнопка «Записатися» в нижньому куті на мобільному після першого екрана.</li>
+    <li>Альтернатива для тих, хто не хоче дзвонити: «Напишіть у Telegram» або «Надішліть опис процесу на пошту».</li>
+    <li>Під кнопкою дрібно: «Зазвичай відповідаю протягом робочого дня».</li>
+  </ul>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+const {$,$$,esc}=UI;
+const WD=['нд','пн','вт','ср','чт','пт','сб'],SL=['09:00','10:30','13:00','15:30','17:00'];
+const days=[];{const d=new Date();d.setHours(12,0,0,0);while(days.length<8){d.setDate(d.getDate()+1);if(d.getDay()%6!==0)days.push(new Date(d));}}
+const dd=d=>String(d.getDate()).padStart(2,'0')+'.'+String(d.getMonth()+1).padStart(2,'0');
+function picker(dEl,sEl,state){
+  dEl.innerHTML='';days.forEach((d,i)=>{const b=document.createElement('button');b.type='button';b.className='day';b.innerHTML=`<small>${WD[d.getDay()]}</small><b>${dd(d)}</b>`;b.onclick=()=>{state.d=i;state.s=null;draw();};dEl.appendChild(b);});
+  function draw(){[...dEl.children].forEach((b,i)=>b.setAttribute('aria-pressed',String(i===state.d)));sEl.innerHTML='';SL.forEach((s,j)=>{const b=document.createElement('button');b.type='button';b.className='slot';b.textContent=s;b.disabled=(state.d*7+j*3)%5===0;b.setAttribute('aria-pressed',String(state.s===j));b.onclick=()=>{state.s=j;draw();};sEl.appendChild(b);});}
+  draw();
+}
+const when=st=>{const d=days[st.d];return `${WD[d.getDay()]}, ${dd(d)} о ${SL[st.s]} (CET)`;};
+function previews(el,svc,st,em,nm,ds){el.hidden=false;
+  let tg=`Нове бронювання\nПослуга: ${svc}\nКоли: ${when(st)}\nEmail: ${em}`;if(nm)tg+=`\nХто: ${nm}`;if(ds)tg+=`\nЗапит: ${ds}`;
+  el.innerHTML=`<div class="card pvc"><span class="small muted">Лист клієнту</span><b>Підтверджено: ${esc(svc)}, ${esc(when(st))}</b><p class="small muted">Посилання на Google Meet у календарному запрошенні. Підготуйте 1–2 процеси, які забирають найбільше часу.</p></div><div class="card pvc"><span class="small muted">Повідомлення тобі в Telegram</span><div class="tgb">${esc(tg)}</div></div>`;}
+/* A */
+const stA={d:0,s:null};picker($('#daysA'),$('#slotsA'),stA);
+$('#formA').addEventListener('submit',e=>{e.preventDefault();const em=$('#emA'),m=$('#msgA');
+  if(stA.s===null){m.className='small errmsg';m.textContent='Оберіть час ліворуч.';return;}
+  if(!em.value||!em.checkValidity()){m.className='small errmsg';m.textContent='Вкажіть email: на нього прийде підтвердження.';em.focus();return;}
+  m.className='small okmsg';m.textContent='Заброньовано.';previews($('#pvA'),document.querySelector('input[name=svcA]:checked').value,stA,em.value,$('#nmA').value.trim(),$('#dsA').value.trim());});
+/* B */
+$('#openB').onclick=()=>{
+  const st={d:0,s:null,step:0,svc:'Знайомство, 30 хв'};
+  const bg=document.createElement('div');bg.className='sheet-bg';bg.innerHTML=`<div class="sheet" role="dialog" aria-modal="true" aria-label="Запис на розмову"><span class="grab"></span><div class="sh-steps"><i></i><i></i><i></i></div><div id="shBody"></div><div class="sh-nav"><button class="btn btn-ghost btn-sm" type="button" id="shBack">Назад</button><button class="btn btn-primary btn-sm" type="button" id="shNext">Далі</button></div></div>`;
+  document.body.appendChild(bg);const sheet=$('.sheet',bg),body=$('#shBody',bg);
+  const close=()=>{bg.remove();document.removeEventListener('keydown',esck);$('#openB').focus();};const esck=e=>{if(e.key==='Escape')close();};document.addEventListener('keydown',esck);
+  bg.addEventListener('click',e=>{if(e.target===bg)close();});
+  function render(){$$('.sh-steps i',bg).forEach((x,i)=>x.classList.toggle('on',i<=st.step));$('#shBack',bg).textContent=st.step?'Назад':'Закрити';
+    if(st.step===0){body.innerHTML=`<h3>Тип зустрічі</h3><div class="svc" style="display:grid;gap:8px">${['Знайомство, 30 хв','Розбір процесу, 60 хв'].map(s=>`<button type="button" class="chip" style="justify-content:flex-start;padding:14px" aria-pressed="${st.svc===s}">${s}</button>`).join('')}</div>`;$$('.chip',body).forEach(c=>c.onclick=()=>{st.svc=c.textContent;render();});$('#shNext',bg).textContent='Далі';}
+    else if(st.step===1){body.innerHTML=`<h3>Дата й час</h3><div class="days" id="dB"></div><div class="slots" id="sB"></div>`;picker($('#dB',body),$('#sB',body),st);$('#shNext',bg).textContent='Далі';}
+    else if(st.step===2){body.innerHTML=`<h3>Куди надіслати підтвердження</h3><form class="form" id="fB" novalidate><label>Email *<input class="input" type="email" id="eB" required autocomplete="email" placeholder="anna@firma.pl"></label><label>Що хочете автоматизувати?<textarea class="input" id="tB" rows="3"></textarea></label><p class="small" id="mB"></p></form>`;$('#shNext',bg).textContent='Забронювати';setTimeout(()=>$('#eB',body).focus(),50);}
+    else{body.innerHTML=`<h3>Заброньовано</h3><p class="muted">${esc(st.svc)}, ${esc(when(st))}. Лист з посиланням уже в дорозі.</p>`;$('#shNext',bg).textContent='Готово';}
+  }
+  $('#shBack',bg).onclick=()=>{if(!st.step||st.step>2)close();else{st.step--;render();}};
+  $('#shNext',bg).onclick=()=>{
+    if(st.step===1&&st.s===null){body.insertAdjacentHTML('beforeend','<p class="small errmsg">Оберіть час.</p>');return;}
+    if(st.step===2){const e=$('#eB',body);if(!e.value||!e.checkValidity()){$('#mB',body).className='small errmsg';$('#mB',body).textContent='Вкажіть email.';e.focus();return;}}
+    if(st.step>2){close();return;}st.step++;render();};
+  render();$('#shNext',bg).focus();
+};
+/* C */
+const ans={};const v=$('#verdict');
+function opts(el,key,list){list.forEach(t=>{const b=document.createElement('button');b.type='button';b.className='chip';b.textContent=t;b.setAttribute('aria-pressed','false');b.onclick=()=>{ans[key]=t;[...el.children].forEach(x=>x.setAttribute('aria-pressed',String(x===b)));verdict();};el.appendChild(b);});}
+opts($('#q1'),'size',['1–4','5–50','50–100','100–500','500+']);
+opts($('#q2'),'pain',['Усе в Excel','Заявки губляться','Звіти забирають дні','Документи й рахунки','Не знаю, з чого почати']);
+function verdict(){if(!ans.size||!ans.pain)return;
+  if(ans.size==='1–4'){v.innerHTML=`<div class="card verdict"><h3>Для команди до 5 людей є простіший старт</h3><p class="muted">Великий аудит поки не окупиться. Залиште email, і я надішлю чекліст «10 автоматизацій, які можна зробити самостійно за вихідні».</p><form class="row" id="fC" novalidate><input class="input" type="email" required placeholder="ваш@email.com" style="flex:1 1 220px" aria-label="Email"><button class="btn btn-primary" type="submit">Надіслати чекліст</button></form></div>`;
+    $('#fC').addEventListener('submit',e=>{e.preventDefault();const i=e.target.querySelector('input');if(!i.value||!i.checkValidity()){i.focus();return;}e.target.innerHTML='<p class="okmsg">Чекліст у дорозі.</p>';});return;}
+  v.innerHTML=`<div class="card verdict"><h3>Схоже, я можу допомогти</h3><p class="muted">Компанія ${esc(ans.size)} людей, болить «${esc(ans.pain.toLowerCase())}». Це саме те, з чим я працюю. Оберіть час:</p><div class="days" id="dC"></div><div class="slots" id="sC"></div><a class="btn btn-primary" href="#" style="justify-self:start">Продовжити</a></div>`;picker($('#dC'),$('#sC'),{d:0,s:null});}
+});
+</script>
+
+</main>
+<footer class="wrap foot">Каталог варіантів · <a href="./">усі секції</a></footer>
+</body>
+</html>

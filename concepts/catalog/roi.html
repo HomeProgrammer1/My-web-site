@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="robots" content="noindex">
+<title>ROI-калькулятор · варіанти</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geologica:wght@400;500;600;700&family=Golos+Text:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Onest:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="assets/base.css">
+<script src="assets/base.js"></script>
+<style>
+.calc-head{display:grid;gap:14px;justify-items:center;text-align:center;margin-bottom:36px}
+/* A */
+.roi-a{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:16px;align-items:start}
+.ctrls{display:grid;gap:24px}
+.fld{display:grid;gap:8px}
+.fld-top{display:flex;justify-content:space-between;gap:10px;font-size:15px}
+.fld-top output{font-weight:600;color:var(--accent);font-variant-numeric:tabular-nums}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips .chip small{opacity:.6;font-family:var(--f-mono);font-size:11px}
+.res{display:grid;gap:22px}
+.bignum{display:grid;gap:4px}
+.bignum span{font-size:15px;color:var(--muted)}
+.bignum b{font-family:var(--f-display);font-size:clamp(40px,5.6vw,64px);font-weight:700;letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums}
+.wk{display:grid;gap:6px}
+.wk-bar{height:30px;border-radius:10px;background:var(--surface-2);position:relative;overflow:hidden}
+.wk-bar i{position:absolute;inset:0 auto 0 0;background:var(--warn);opacity:.85;border-radius:10px;transition:width .5s}
+.wk-bar span{position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:12px;font-family:var(--f-mono);color:var(--muted)}
+.kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.kpi{padding:14px;border-radius:var(--r-md);background:var(--surface-2);display:grid;gap:2px}
+.kpi b{font-size:22px;font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.kpi span{font-size:12.5px;color:var(--muted)}
+.chart svg{display:block;width:100%;height:auto}
+.ax{fill:var(--muted);font-family:var(--f-mono);font-size:11px}
+.gl{stroke:var(--line)}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+.legend i{display:inline-block;width:14px;height:3px;border-radius:2px;margin-right:6px;vertical-align:middle}
+.cap{display:flex;gap:8px;flex-wrap:wrap}
+.cap .input{flex:1 1 220px;border-radius:999px}
+@media (max-width:900px){.roi-a{grid-template-columns:1fr}}
+@media (max-width:480px){.kpis{grid-template-columns:1fr}}
+/* B: receipt */
+.rc-wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(20px,4vw,56px);align-items:start}
+.receipt{background:var(--surface);color:var(--ink);font-family:var(--f-mono);font-size:13.5px;padding:28px 24px 34px;border-radius:14px 14px 0 0;position:relative;box-shadow:var(--shadow);-webkit-mask:linear-gradient(#000 0 0) top/100% calc(100% - 12px) no-repeat,radial-gradient(circle 8px at 12px 0,transparent 98%,#000) bottom/24px 12px repeat-x;mask:linear-gradient(#000 0 0) top/100% calc(100% - 12px) no-repeat,radial-gradient(circle 8px at 12px 0,transparent 98%,#000) bottom/24px 12px repeat-x}
+:root[data-design="c"] .receipt{background:#FFFFFF}
+.rc-h{text-align:center;display:grid;gap:4px;padding-bottom:14px;border-bottom:1px dashed var(--line)}
+.rc-h b{font-size:15px;letter-spacing:.08em}
+.rc-line{display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:8px;align-items:center;padding:10px 0;border-bottom:1px dashed var(--line)}
+.rc-line input{accent-color:var(--accent);width:16px;height:16px;margin:0}
+.rc-line .nm{display:grid;gap:2px}
+.rc-line .nm small{color:var(--muted);font-size:11.5px}
+.rc-line .amt{font-variant-numeric:tabular-nums;text-align:right}
+.rc-line.off{opacity:.4}
+.rc-line.off .amt{text-decoration:line-through}
+.step{display:inline-flex;align-items:center;gap:2px}
+.step button{width:22px;height:22px;border-radius:6px;border:1px solid var(--line);background:var(--surface-2);cursor:pointer;font-size:13px;line-height:1;padding:0}
+.rc-tot{display:grid;gap:6px;padding-top:14px}
+.rc-tot div{display:flex;justify-content:space-between;gap:10px}
+.rc-tot .grand{font-size:18px;font-weight:500}
+.rc-tot .save{color:var(--good)}
+.rc-side{display:grid;gap:22px}
+/* C: sentence */
+.sent{font-family:var(--f-display);font-size:clamp(24px,3.4vw,40px);line-height:1.45;letter-spacing:-.02em;font-weight:500;max-width:960px;margin-inline:auto;text-align:center;text-wrap:balance}
+.sent .inl{display:inline-block;font:inherit;color:var(--accent);background:transparent;border:0;border-bottom:2px solid var(--accent);padding:0 2px;text-align:center;border-radius:0;width:3.2ch;-moz-appearance:textfield}
+.sent .inl::-webkit-outer-spin-button,.sent .inl::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.sent .inl.w4{width:4.2ch}
+.sent select.inl{width:auto;max-width:100%;appearance:none;-webkit-appearance:none;cursor:pointer;text-align:left;padding-right:4px}
+.sent-out{text-align:center;display:grid;gap:12px;justify-items:center;margin-top:40px}
+.sent-out .bignum b{font-size:clamp(48px,8vw,104px)}
+.sent-out .bignum{justify-items:center}
+.sent-sub{font-size:clamp(18px,2.2vw,24px);color:var(--muted);max-width:40ch}
+.sent-sub b{color:var(--good)}
+.range-row{width:min(520px,100%);display:grid;gap:6px}
+@media (max-width:820px){.rc-wrap{grid-template-columns:1fr}}
+</style>
+</head>
+<body data-title="3 · ROI-калькулятор">
+<main class="wrap">
+
+<header class="page-head">
+  <p class="eyebrow">Акт II · Ціна бездіяльності</p>
+  <h1 class="display-m">ROI-калькулятор</h1>
+  <p class="lead">Залишаємо обов'язково. Він стоїть одразу після «Галузей»: спершу людина впізнає свій хаос, потім бачить, скільки він коштує. Усі три варіанти закінчуються формою «надіслати розрахунок на пошту».</p>
+</header>
+
+<section class="variant" data-key="roi" data-variant="A">
+  <div class="v-head"><div class="v-meta"><span class="v-tag">Варіант A</span><h2 class="v-title">Панель з повзунками й графіком окупності</h2><p class="v-why">Розвиток прототипу: процеси, троє повзунків, велике число, частка тижня, графік окупності. Найбільш «аналітичний».</p></div><button class="btn btn-ghost btn-sm pick" type="button">Обрати цей</button></div>
+  <div class="stage">
+    <div class="calc-head"><p class="eyebrow">Калькулятор</p><h2 class="display-l">Скільки коштує ручна робота</h2></div>
+    <div class="roi-a">
+      <div class="card card-pad ctrls">
+        <div class="fld"><span class="fld-top"><span>Що робиться вручну</span><span class="muted small">год/тижд. на людину</span></span><div class="chips" id="aProcs"></div></div>
+        <div class="fld"><label class="fld-top" for="aPeople"><span>Скільки людей цим зайняті</span><output id="aPeopleO"></output></label><input type="range" id="aPeople" min="1" max="100" value="8"></div>
+        <div class="fld"><label class="fld-top" for="aRate"><span>Повна вартість години</span><output id="aRateO"></output></label><input type="range" id="aRate" min="40" max="250" step="5" value="70"></div>
+        <div class="fld"><label class="fld-top" for="aAuto"><span>Частка, яку реально автоматизувати</span><output id="aAutoO"></output></label><input type="range" id="aAuto" min="30" max="80" step="5" value="55"></div>
+      </div>
+      <div class="card card-pad res">
+        <div class="bignum"><span>Ручна робота коштує вам на рік</span><b class="warn" id="aYear">0 zł</b></div>
+        <div class="wk"><span class="small muted" id="aWkTxt"></span><div class="wk-bar"><i id="aWk"></i><span>40 год</span></div></div>
+        <div class="kpis"><div class="kpi"><b class="good" id="aSave">0</b><span>zł на місяць можна повернути</span></div><div class="kpi"><b id="aHours">0</b><span>годин на місяць звільняється</span></div><div class="kpi"><b id="aFte">0</b><span>штатних ставок</span></div></div>
+        <div class="chart" id="aChart" role="img" aria-label="Накопичена економія за 12 місяців проти інвестиції"></div>
+        <div class="legend"><span><i style="background:var(--good)"></i>накопичена економія</span><span><i style="background:var(--warn)"></i>орієнтовна інвестиція <span id="aInv" class="num"></span></span></div>
+        <form class="cap" data-cap><input class="input" type="email" placeholder="ваш@email.com" aria-label="Email" autocomplete="email"><button class="btn btn-primary" type="submit">Надіслати розрахунок</button><p class="small muted" style="flex-basis:100%">PDF з цифрами і 3 процеси, з яких я б почав. Відповідаю особисто.</p></form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="variant" data-key="roi" data-variant="B">
+  <div class="v-head"><div class="v-meta"><span class="v-tag">Варіант B</span><h2 class="v-title">Чек за ручну роботу</h2><p class="v-why">Калькулятор у вигляді касового чека: кожен процес — рядок з ціною, кількість людей міняється кнопками, внизу «разом» і знижка від агентів. Запам'ятовується і просить, щоб його переслали колезі.</p></div><button class="btn btn-ghost btn-sm pick" type="button">Обрати цей</button></div>
+  <div class="stage">
+    <div class="rc-wrap">
+      <div class="receipt" id="rc">
+        <div class="rc-h"><b>ЧЕК № 0914</b><span>Ручна робота · один місяць</span></div>
+        <div id="rcLines"></div>
+        <div class="rc-tot">
+          <div class="grand"><span>РАЗОМ / МІС</span><span id="rcM" class="num">0</span></div>
+          <div><span>Разом за рік</span><span id="rcY" class="num">0</span></div>
+          <div class="save"><span id="rcSaveL">Агенти забирають 55%</span><span id="rcS" class="num">0</span></div>
+        </div>
+      </div>
+      <div class="rc-side">
+        <div class="stack"><p class="eyebrow">Калькулятор</p><h2 class="display-l">Ваш чек за ручну роботу</h2><p class="lead">Позначте процеси, вкажіть, скільки людей ними зайняті. Ставка й частка автоматизації налаштовуються нижче.</p></div>
+        <div class="fld"><label class="fld-top" for="bRate"><span>Повна вартість години</span><output id="bRateO"></output></label><input type="range" id="bRate" min="40" max="250" step="5" value="70"></div>
+        <div class="fld"><label class="fld-top" for="bAuto"><span>Частка, яку забирають агенти</span><output id="bAutoO"></output></label><input type="range" id="bAuto" min="30" max="80" step="5" value="55"></div>
+        <form class="cap" data-cap><input class="input" type="email" placeholder="ваш@email.com" aria-label="Email" autocomplete="email"><button class="btn btn-primary" type="submit">Надіслати чек на пошту</button></form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="variant" data-key="roi" data-variant="C">
+  <div class="v-head"><div class="v-meta"><span class="v-tag">Варіант C</span><h2 class="v-title">Калькулятор-речення</h2><p class="v-why">Одне речення з редагованими словами й одне величезне число. Найбільш «Apple»: ніяких форм, читається як текст. Підходить, якщо головне — емоція від цифри.</p></div><button class="btn btn-ghost btn-sm pick" type="button">Обрати цей</button></div>
+  <div class="stage">
+    <p class="sent">У нас <input class="inl" id="cPeople" type="number" min="1" max="500" value="8" aria-label="Кількість людей"> людей, кожен витрачає <input class="inl" id="cHours" type="number" min="1" max="40" value="10" aria-label="Годин на тиждень"> год на тиждень на <select class="inl" id="cProc" aria-label="Процес"><option>ручне введення даних</option><option>звіти й зведення</option><option>обробку заявок</option><option>документи й рахунки</option><option>листування з клієнтами</option><option>розбір CV</option></select>. Година роботи коштує нам <input class="inl w4" id="cRate" type="number" min="20" max="500" value="70" aria-label="Вартість години"> zł.</p>
+    <div class="sent-out">
+      <div class="bignum"><span>Це коштує компанії на рік</span><b class="warn" id="cYear">0 zł</b></div>
+      <div class="range-row"><label class="fld-top" for="cAuto"><span>Агенти можуть забрати</span><output id="cAutoO"></output></label><input type="range" id="cAuto" min="30" max="80" step="5" value="55"></div>
+      <p class="sent-sub" id="cSub"></p>
+      <form class="cap" data-cap style="width:min(520px,100%)"><input class="input" type="email" placeholder="ваш@email.com" aria-label="Email" autocomplete="email"><button class="btn btn-primary" type="submit">Отримати план на пошту</button></form>
+    </div>
+  </div>
+</section>
+
+<div class="alts">
+  <h3>Що ще може бути в калькуляторі</h3>
+  <ul>
+    <li>Пресети за галуззю: обрали «Рекрутинг» у секції «Галузі», і калькулятор уже заповнений типовими процесами.</li>
+    <li>Кнопка «Скопіювати посилання з моїми цифрами» для власника, щоб переслати CFO.</li>
+    <li>Чесна примітка: «оцінка; точні цифри після аудиту». Вона є у всіх варіантах, бо підвищує довіру.</li>
+    <li>Ліди з калькулятора приходять тобі в Telegram разом із введеними цифрами: одразу видно розмір болю.</li>
+  </ul>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+const {$,fmt,esc,tween}=UI;
+const W=4.33,inv=n=>n?[2499+n*3500,2499+n*7500]:[0,0],r9=v=>Math.round(v/1000)*1000-1;
+const zl=v=>fmt(v)+' zł';
+document.querySelectorAll('form[data-cap]').forEach(f=>f.addEventListener('submit',e=>{e.preventDefault();const i=f.querySelector('input');let m=f.querySelector('.capmsg');if(!m){m=document.createElement('p');m.className='capmsg';m.style.flexBasis='100%';f.appendChild(m);}
+  if(!i.value||!i.checkValidity()){m.className='capmsg errmsg';m.textContent='Вкажіть email у форматі name@firma.pl.';i.focus();return;}
+  m.className='capmsg okmsg';m.textContent=`Надіслано на ${i.value}. На живому сайті лист піде через Resend, а тобі в Telegram прийде лід із цими цифрами.`;}));
+/* A */
+const PROC=[['Введення даних',4,1],['Звіти й зведення',3,1],['Заявки та ліди',3,0],['Документи й рахунки',3,0],['Типове листування',4,1],['Перенесення між системами',2,0]].map(([n,h,on])=>({n,h,on:!!on}));
+PROC.forEach(p=>{const b=document.createElement('button');b.type='button';b.className='chip';b.setAttribute('aria-pressed',p.on);b.innerHTML=`${esc(p.n)} <small>${p.h}</small>`;b.onclick=()=>{p.on=!p.on;b.setAttribute('aria-pressed',p.on);calcA();};$('#aProcs').appendChild(b);});
+['aPeople','aRate','aAuto'].forEach(id=>$('#'+id).addEventListener('input',calcA));
+function nice(v){const p=Math.pow(10,Math.floor(Math.log10(v)));const n=v/p;return(n<=1?1:n<=2?2:n<=5?5:10)*p;}
+function chart(el,saveM,invest){
+  const Wd=560,H=220,pl=58,pr=12,pt=12,pb=28,M=12,raw=Math.max(saveM*M,invest,1)*1.08,st=nice(raw/4),maxY=Math.ceil(raw/st)*st;
+  const x=m=>pl+(Wd-pl-pr)*m/M,y=v=>pt+(H-pt-pb)*(1-v/maxY),kf=v=>v>=1000?fmt(v/1000)+' тис.':fmt(v);
+  let g='';for(let v=0;v<=maxY+1e-6;v+=st)g+=`<line class="gl" x1="${pl}" x2="${Wd-pr}" y1="${y(v)}" y2="${y(v)}"/><text class="ax" x="${pl-8}" y="${y(v)+4}" text-anchor="end">${kf(v)}</text>`;
+  for(const m of[0,3,6,9,12])g+=`<text class="ax" x="${x(m)}" y="${H-8}" text-anchor="middle">${m} міс</text>`;
+  const pts=Array.from({length:M+1},(_,m)=>`${x(m)},${y(saveM*m)}`).join(' ');
+  let cross='';if(saveM>0&&invest>0){const mc=invest/saveM;if(mc<=M){const lab=mc<1?`окупність ≈ ${Math.max(1,Math.round(mc*W))} тиж.`:`окупність ≈ ${mc.toLocaleString('uk-UA',{maximumFractionDigits:1})} міс`;cross=`<circle cx="${x(mc)}" cy="${y(invest)}" r="5" fill="var(--surface)" stroke="var(--ink)" stroke-width="2"/><text class="ax" x="${Math.min(x(mc)+8,Wd-pr-130)}" y="${y(invest)-10}" style="fill:var(--ink)">${lab}</text>`;}else cross=`<text class="ax" x="${Wd-pr}" y="${pt+12}" text-anchor="end" style="fill:var(--ink)">окупність понад 12 міс</text>`;}
+  el.innerHTML=`<svg viewBox="0 0 ${Wd} ${H}">${g}<polygon points="${x(0)},${y(0)} ${pts} ${x(M)},${y(0)}" fill="var(--good)" fill-opacity=".12"/>${invest?`<line x1="${pl}" x2="${Wd-pr}" y1="${y(invest)}" y2="${y(invest)}" stroke="var(--warn)" stroke-width="2" stroke-dasharray="6 5"/>`:''}<polyline points="${pts}" fill="none" stroke="var(--good)" stroke-width="2.5" stroke-linejoin="round"/><circle cx="${x(M)}" cy="${y(saveM*M)}" r="4" fill="var(--good)"/>${cross}</svg>`;
+}
+function calcA(){
+  const ppl=+$('#aPeople').value,rate=+$('#aRate').value,au=+$('#aAuto').value;
+  $('#aPeopleO').textContent=ppl;$('#aRateO').textContent=rate+' zł';$('#aAutoO').textContent=au+'%';
+  const sel=PROC.filter(p=>p.on),h=sel.reduce((s,p)=>s+p.h,0),mh=ppl*h*W,cost=mh*rate,save=cost*au/100,sh=mh*au/100,[lo,hi]=inv(sel.length);
+  tween($('#aYear'),cost*12,{suffix:' zł'});tween($('#aSave'),save);tween($('#aHours'),sh);
+  $('#aFte').textContent=(sh/160).toLocaleString('uk-UA',{maximumFractionDigits:1});
+  $('#aWk').style.width=Math.min(100,h/40*100)+'%';
+  $('#aWkTxt').textContent=sel.length?`Кожна людина віддає рутині ${h} год із 40 (${Math.round(h/40*100)}% тижня)`:'Оберіть хоча б один процес';
+  $('#aInv').textContent=sel.length?`${fmt(r9(lo))}–${fmt(r9(hi))} zł`:'—';
+  chart($('#aChart'),save,(lo+hi)/2);
+}
+calcA();
+/* B */
+const RC=[['Введення даних',2,4,1],['Звіти й зведення',1,5,1],['Обробка заявок',3,3,1],['Документи й рахунки',2,3,0],['Листування з клієнтами',3,4,1],['Розбір CV',1,8,0]].map(([n,p,h,on])=>({n,p,h,on:!!on}));
+const lines=$('#rcLines');
+function drawB(){
+  const rate=+$('#bRate').value,au=+$('#bAuto').value;$('#bRateO').textContent=rate+' zł';$('#bAutoO').textContent=au+'%';
+  lines.innerHTML='';let tot=0;
+  RC.forEach((r,i)=>{const amt=r.p*r.h*W*rate;if(r.on)tot+=amt;const d=document.createElement('div');d.className='rc-line'+(r.on?'':' off');
+    d.innerHTML=`<input type="checkbox" ${r.on?'checked':''} aria-label="${esc(r.n)}"><span class="nm"><span>${esc(r.n)}</span><small><span class="step"><button type="button" data-d="-1" aria-label="Менше людей">−</button> ${r.p} люд. <button type="button" data-d="1" aria-label="Більше людей">+</button></span> × ${r.h} год/тижд.</small></span><span class="amt">${fmt(amt)}</span>`;
+    d.querySelector('input').onchange=e=>{r.on=e.target.checked;drawB();};
+    d.querySelectorAll('[data-d]').forEach(b=>b.onclick=()=>{r.p=Math.max(1,Math.min(99,r.p+ +b.dataset.d));drawB();});
+    lines.appendChild(d);});
+  tween($('#rcM'),tot,{suffix:' zł'});tween($('#rcY'),tot*12,{suffix:' zł'});tween($('#rcS'),-tot*au/100,{suffix:' zł/міс',format:v=>fmt(v).replace('-','−')});
+  $('#rcSaveL').textContent=`Агенти забирають ${au}%`;
+}
+['bRate','bAuto'].forEach(id=>$('#'+id).addEventListener('input',drawB));drawB();
+/* C */
+function calcC(){
+  const p=Math.max(1,+$('#cPeople').value||1),h=Math.max(1,+$('#cHours').value||1),r=Math.max(1,+$('#cRate').value||1),au=+$('#cAuto').value;
+  $('#cAutoO').textContent=au+'%';
+  const y=p*h*W*12*r,sm=y/12*au/100,[lo,hi]=inv(1),mc=((lo+hi)/2)/sm;
+  tween($('#cYear'),y,{suffix:' zł'});
+  $('#cSub').innerHTML=`Це ≈ <b>${zl(sm)} щомісяця</b> назад у компанію і ${fmt(p*h*W*au/100)} годин команди. Типове впровадження окупається за ${mc<1?Math.max(1,Math.round(mc*W))+' тиж.':mc.toLocaleString('uk-UA',{maximumFractionDigits:1})+' міс'}.`;
+}
+['cPeople','cHours','cRate','cProc','cAuto'].forEach(id=>$('#'+id).addEventListener('input',calcC));calcC();
+});
+</script>
+
+</main>
+<footer class="wrap foot">Каталог варіантів · <a href="./">усі секції</a></footer>
+</body>
+</html>

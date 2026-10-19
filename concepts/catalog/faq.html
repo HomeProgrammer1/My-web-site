@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="robots" content="noindex">
+<title>FAQ · варіанти</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geologica:wght@400;500;600;700&family=Golos+Text:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Onest:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="assets/base.css">
+<script src="assets/base.js"></script>
+<style>
+.ph{display:grid;gap:12px;justify-items:center;text-align:center;margin-bottom:36px}
+/* A */
+.acc{max-width:820px;margin-inline:auto;border-top:1px solid var(--line)}
+.acc details{border-bottom:1px solid var(--line)}
+.acc summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:22px 2px;font-size:19px;font-weight:600}
+.acc summary::-webkit-details-marker{display:none}
+.acc summary::after{content:"+";font-size:26px;font-weight:300;color:var(--accent);transition:transform .25s;flex:0 0 auto}
+.acc details[open] summary::after{transform:rotate(45deg)}
+.acc details p{padding:0 2px 22px;color:var(--muted);font-size:17px;max-width:66ch}
+/* B */
+.split{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:16px;align-items:start}
+.qlist{display:grid;gap:2px}
+.q{text-align:left;padding:14px 16px;border-radius:14px;border:0;background:transparent;cursor:pointer;font-size:16px;font-weight:500;color:var(--muted)}
+.q:hover{background:var(--surface-2)}
+.q[aria-selected="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.apanel{padding:clamp(22px,3vw,36px);display:grid;gap:14px;position:sticky;top:80px;animation:rise .3s both}
+.apanel p{color:var(--muted);font-size:17px}
+@media (max-width:760px){.split{grid-template-columns:1fr}.apanel{position:static}}
+/* C */
+.srch{max-width:760px;margin-inline:auto;display:grid;gap:16px}
+.srch .input{font-size:18px;padding:16px 20px;border-radius:18px}
+.qres{display:grid;gap:10px}
+.qitem{padding:18px 20px;display:grid;gap:6px}
+.qitem .t{font-size:11.5px;font-family:var(--f-mono);color:var(--accent);text-transform:uppercase;letter-spacing:.06em}
+.qitem b{font-size:17px}
+.qitem p{color:var(--muted);font-size:15.5px}
+mark{background:var(--accent-soft);color:inherit;border-radius:4px;padding:0 2px}
+.empty{padding:20px;text-align:center;color:var(--muted)}
+</style>
+</head>
+<body data-title="10 · FAQ">
+<main class="wrap">
+
+<header class="page-head">
+  <p class="eyebrow">Акт III · Заперечення</p>
+  <h1 class="display-m">FAQ</h1>
+  <p class="lead">Стоїть перед фінальним записом: знімає страхи («мої дані», «замінить людей», «що як зламається») саме тоді, коли людина вирішує.</p>
+</header>
+
+<section class="variant" data-key="faq" data-variant="A">
+  <div class="v-head"><div class="v-meta"><span class="v-tag">Варіант A</span><h2 class="v-title">Акордеон</h2><p class="v-why">Як на сторінках підтримки Apple: великі питання, плюс обертається в хрестик. Перше відкрите.</p></div><button class="btn btn-ghost btn-sm pick" type="button">Обрати цей</button></div>
+  <div class="stage"><div class="ph"><p class="eyebrow">Питання</p><h2 class="display-l">Перед першою розмовою зазвичай питають</h2></div><div class="acc" id="acc"></div></div>
+</section>
+
+<section class="variant" data-key="faq" data-variant="B">
+  <div class="v-head"><div class="v-meta"><span class="v-tag">Варіант B</span><h2 class="v-title">Список і панель відповіді</h2><p class="v-why">Питання зліва, відповідь справа. Видно всі питання одразу, сторінка не «стрибає» по висоті.</p></div><button class="btn btn-ghost btn-sm pick" type="button">Обрати цей</button></div>
+  <div class="stage"><div class="ph"><p class="eyebrow">Питання</p><h2 class="display-l">Відповіді без дрібного шрифту</h2></div><div class="split"><div class="qlist" id="qlist" role="tablist"></div><div class="card apanel" id="apanel" role="tabpanel" aria-live="polite"></div></div></div>
+</section>
+
+<section class="variant" data-key="faq" data-variant="C">
+  <div class="v-head"><div class="v-meta"><span class="v-tag">Варіант C</span><h2 class="v-title">Пошук і теми</h2><p class="v-why">Поле пошуку з підсвічуванням і чипи тем. Корисно, коли питань стане 15+. Пошукові запити можна логувати й бачити, що турбує клієнтів.</p></div><button class="btn btn-ghost btn-sm pick" type="button">Обрати цей</button></div>
+  <div class="stage"><div class="srch"><div class="ph" style="margin-bottom:8px"><p class="eyebrow">Питання</p><h2 class="display-l">Знайдіть відповідь</h2></div><input class="input" id="qs" placeholder="дані, ціна, розробник, AI Act…" aria-label="Пошук питання" autocomplete="off"><div class="row" id="topics"></div><div class="qres" id="qres" aria-live="polite"></div></div></div>
+</section>
+
+<div class="alts">
+  <h3>Що ще може бути в FAQ</h3>
+  <ul>
+    <li>Розмітка FAQPage (schema.org) для Google і AI-пошуку: питання з'являються прямо у видачі.</li>
+    <li>Внизу FAQ: «Не знайшли відповіді? Напишіть у Telegram» з прямим посиланням.</li>
+    <li>Питання про AI Act варто перевірити з юристом перед публікацією.</li>
+  </ul>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+const {$,$$,esc}=UI;
+const F=[
+ ['Безпека','Чи безпечно віддавати наші дані AI?','Працюю за GDPR: моделі в регіонах ЄС, без навчання на ваших даних. Критичні дії, наприклад гроші чи рішення щодо людей, AI лише пропонує, а підтверджує людина.'],
+ ['Безпека','Де зберігаються дані?','В ЄС. n8n можна розгорнути на вашому сервері. Доступи видаєте ви і можете відкликати будь-коли.'],
+ ['Безпека','А як щодо EU AI Act?','Більшість автоматизацій бізнес-процесів належать до мінімального ризику. Відбір кандидатів за допомогою AI — сфера високого ризику, тому в HR-сценаріях закладаю людський нагляд, логування й прозорість, а вимоги перевіряємо разом до запуску.'],
+ ['Процес','Чи замінить AI моїх працівників?','Він забирає рутину: копіювання, зведення, типові відповіді. Рішення ухвалюють люди, а в команди з\'являється час на роботу, яку цінують клієнти.'],
+ ['Процес','Нам потрібен свій розробник, щоб це підтримувати?','Ні. Ви отримуєте документацію й навчання. Прості зміни команда робить сама, складніші бере супровід.'],
+ ['Процес','Скільки триває впровадження?','Залежить від процесу й систем. Терміни етапу фіксуємо після аудиту, до початку роботи.'],
+ ['Технології','Що буде, коли зміниться API чи модель?','Флоу задокументовані й належать вам. На супроводі я стежу за змінами й оновлюю інтеграції, перш ніж щось зламається.'],
+ ['Технології','З якими системами працюєте?','HubSpot, Google Workspace, Jira і Confluence, PowerBI, n8n, Make, Claude, OpenAI, Gemini і будь-які системи з REST API. Нові оцінюю на аудиті.'],
+ ['Ціни','Чому немає погодинної ставки?','Ви платите за результат етапу з фіксованою ціною, а не за години. Так бюджет передбачуваний для вас.'],
+ ['Ціни','Чи можна почати з малого?','Так. Спершу безкоштовна розмова, потім аудит, потім один процес на пілоті. Далі вирішуєте, чи масштабувати.']
+];
+/* A */
+$('#acc').innerHTML=F.map(([t,q,a],i)=>`<details ${i===0?'open':''}><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('');
+/* B */
+const ql=$('#qlist'),ap=$('#apanel');
+F.forEach(([t,q],i)=>{const b=document.createElement('button');b.type='button';b.className='q';b.role='tab';b.textContent=q;b.onclick=()=>selB(i);ql.appendChild(b);});
+function selB(i){$$('.q',ql).forEach((b,j)=>b.setAttribute('aria-selected',String(j===i)));ap.style.animation='none';void ap.offsetWidth;ap.style.animation='';ap.innerHTML=`<span class="badge" style="justify-self:start">${esc(F[i][0])}</span><h3 class="display-m">${esc(F[i][1])}</h3><p>${esc(F[i][2])}</p>`;}
+selB(0);
+/* C */
+let topic='';const qs=$('#qs'),res=$('#qres'),tp=$('#topics');
+['Усі','Безпека','Процес','Технології','Ціни'].forEach((t,i)=>{const b=document.createElement('button');b.type='button';b.className='chip';b.textContent=t;b.setAttribute('aria-pressed',String(i===0));b.onclick=()=>{topic=i?t:'';$$('.chip',tp).forEach(x=>x.setAttribute('aria-pressed',String(x===b)));drawC();};tp.appendChild(b);});
+const hl=(s,q)=>{const e=esc(s);if(!q)return e;const i=e.toLowerCase().indexOf(esc(q).toLowerCase());return i<0?e:e.slice(0,i)+'<mark>'+e.slice(i,i+esc(q).length)+'</mark>'+e.slice(i+esc(q).length);};
+function drawC(){const q=qs.value.trim();const lq=q.toLowerCase();
+  const items=F.filter(([t,qq,a])=>(!topic||t===topic)&&(!lq||(qq+' '+a).toLowerCase().includes(lq)));
+  res.innerHTML=items.length?items.map(([t,qq,a])=>`<div class="card qitem"><span class="t">${esc(t)}</span><b>${hl(qq,q)}</b><p>${hl(a,q)}</p></div>`).join(''):'<div class="empty">Такого питання ще немає. Поставте його на дзвінку.</div>';}
+qs.addEventListener('input',drawC);drawC();
+});
+</script>
+
+</main>
+<footer class="wrap foot">Каталог варіантів · <a href="./">усі секції</a></footer>
+</body>
+</html>

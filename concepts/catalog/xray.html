@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="robots" content="noindex">
+<title>Рентген процесу · варіанти</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geologica:wght@400;500;600;700&family=Golos+Text:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Onest:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="assets/base.css">
+<script src="assets/base.js"></script>
+<style>
+.bp{display:grid;gap:14px;text-align:left}
+.bp-k{font-size:12px;font-family:var(--f-mono);text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.bp-steps{list-style:none;margin:0;padding:0;display:grid;gap:8px;counter-reset:s}
+.bp-steps li{counter-increment:s;display:grid;grid-template-columns:26px minmax(0,1fr) auto;gap:10px;align-items:center;font-size:15px;animation:rise .35s both}
+.bp-steps li:nth-child(2){animation-delay:.08s}.bp-steps li:nth-child(3){animation-delay:.16s}.bp-steps li:nth-child(4){animation-delay:.24s}
+.bp-steps li::before{content:counter(s);width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:600;background:var(--accent-soft);color:var(--accent)}
+.tool{font-family:var(--f-mono);font-size:11.5px;padding:3px 9px;border-radius:999px;background:var(--surface-2);white-space:nowrap}
+.gate{font-size:14.5px;padding:12px 14px;border-radius:14px;background:var(--warn-soft)}
+.gate b{color:var(--warn)}
+.bp-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.bp-stats div{padding:12px 14px;border-radius:14px;background:var(--surface-2);display:grid}
+.bp-stats b{font-size:20px;font-weight:600}
+.bp-stats span{font-size:12.5px;color:var(--muted)}
+/* A chat */
+.chat{max-width:760px;margin-inline:auto;display:flex;flex-direction:column;overflow:hidden}
+.msgs{padding:20px;display:flex;flex-direction:column;gap:14px;min-height:360px;max-height:560px;overflow:auto}
+.msg{max-width:88%;font-size:15.5px;line-height:1.5}
+.msg.u{align-self:flex-end;background:var(--accent);color:var(--accent-ink);padding:10px 16px;border-radius:20px 20px 6px 20px}
+.msg.b{align-self:flex-start;background:var(--surface-2);padding:16px;border-radius:20px 20px 20px 6px;width:min(560px,100%)}
+.typing{display:inline-flex;gap:4px}
+.typing i{width:7px;height:7px;border-radius:50%;background:var(--muted);animation:blink 1s infinite}
+.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+.cform{display:flex;gap:8px;padding:12px;border-top:1px solid var(--line)}
+.cform .input{border-radius:999px}
+.sugg{display:flex;gap:8px;flex-wrap:wrap;padding:0 20px 14px}
+/* B spotlight */
+.sp{max-width:720px;margin-inline:auto;display:grid;gap:18px}
+.sp-bar{display:flex;align-items:center;gap:12px;padding:14px 18px;border-radius:22px}
+.sp-bar input{flex:1;min-width:0;border:0;background:transparent;font-size:20px;outline:none;color:var(--ink)}
+.sp-list{display:grid;gap:2px;padding:8px;border-radius:22px}
+.sp-item{display:flex;justify-content:space-between;gap:12px;padding:12px 14px;border-radius:14px;background:transparent;border:0;text-align:left;cursor:pointer;font-size:15px}
+.sp-item:hover,.sp-item[aria-selected="true"]{background:var(--accent);color:var(--accent-ink)}
+.sp-item span:last-child{font-size:12px;opacity:.7;white-space:nowrap}
+.sp-res{padding:22px;border-radius:22px}
+/* C wizard */
+.wiz{max-width:720px;margin-inline:auto;display:grid;gap:20px}
+.wsteps{display:flex;gap:6px}
+.wsteps i{flex:1;height:4px;border-radius:4px;background:var(--line);transition:background-color .3s}
+.wsteps i.on{background:var(--accent)}
+.wq{display:grid;gap:14px;animation:rise .35s both}
+.opts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.opt{text-align:left;padding:16px;border-radius:var(--r-md);border:1px solid var(--line);background:var(--surface);cursor:pointer;font-size:15px;display:grid;gap:4px;-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur)}
+.opt:hover{border-color:var(--accent)}
+.opt small{color:var(--muted);font-size:13px}
+@media (max-width:560px){.opts{grid-template-columns:1fr}}
+</style>
+</head>
+<body data-title="6 · Рентген процесу">
+<main class="wrap">
+
+<header class="page-head">
+  <p class="eyebrow">Акт III · План</p>
+  <h1 class="display-m">Рентген процесу</h1>
+  <p class="lead">Перший крок плану, але персональний: відвідувач описує свою рутину й отримує схему автоматизації. На живому сайті відповідає Claude через сервер з лімітом запитів; тут відповіді заскриптовані.</p>
+</header>
+
+<section class="variant" data-key="xray" data-variant="A">
+  <div class="v-head"><div class="v-meta"><span class="v-tag">Варіант A</span><h2 class="v-title">Чат</h2><p class="v-why">Звичний формат розмови. Людина може уточнювати й питати далі. Найкраще показує «живий AI».</p></div><button class="btn btn-ghost btn-sm pick" type="button">Обрати цей</button></div>
+  <div class="stage">
+    <div class="calc-head center stack" style="text-align:center;margin-bottom:28px"><p class="eyebrow">Рентген процесу</p><h2 class="display-l">Опишіть рутину одним реченням</h2></div>
+    <div class="card chat lift">
+      <div class="msgs" id="msgs" aria-live="polite"></div>
+      <div class="sugg" id="sugg"></div>
+      <form class="cform" id="cform"><input class="input" id="cin" placeholder="Напр.: звіти збираємо руками з 4 систем" autocomplete="off" aria-label="Опис процесу"><button class="btn btn-primary" type="submit">Аналіз</button></form>
+    </div>
+  </div>
+</section>
+
+<section class="variant" data-key="xray" data-variant="B">
+  <div class="v-head"><div class="v-meta"><span class="v-tag">Варіант B</span><h2 class="v-title">Spotlight-пошук</h2><p class="v-why">Як пошук на Mac: друкуєте, і підказки фільтруються одразу. Обираєте процес, отримуєте картку-схему. Швидко й дуже «продуктово».</p></div><button class="btn btn-ghost btn-sm pick" type="button">Обрати цей</button></div>
+  <div class="stage">
+    <div class="sp">
+      <div class="stack center" style="text-align:center"><p class="eyebrow">Рентген процесу</p><h2 class="display-l">Що автоматизуємо?</h2></div>
+      <div class="card sp-bar lift"><svg width="22" height="22" viewBox="0 0 20 20" fill="none" aria-hidden="true" style="color:var(--muted)"><circle cx="8.5" cy="8.5" r="6" stroke="currentColor" stroke-width="2"/><path d="M13 13l5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><input id="spIn" placeholder="замовлення, CV, звіти, рахунки…" autocomplete="off" aria-label="Пошук процесу" role="combobox" aria-controls="spList" aria-expanded="true"></div>
+      <div class="card sp-list" id="spList" role="listbox"></div>
+      <div class="card sp-res" id="spRes" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<section class="variant" data-key="xray" data-variant="C">
+  <div class="v-head"><div class="v-meta"><span class="v-tag">Варіант C</span><h2 class="v-title">Три питання</h2><p class="v-why">Майстер з трьох кліків: що, як часто, в яких системах. На виході схема й оцінка. Заодно кваліфікує ліда: ти бачиш відповіді в Telegram ще до дзвінка.</p></div><button class="btn btn-ghost btn-sm pick" type="button">Обрати цей</button></div>
+  <div class="stage">
+    <div class="wiz">
+      <div class="stack center" style="text-align:center"><p class="eyebrow">Рентген процесу</p><h2 class="display-l">Три питання до схеми</h2></div>
+      <div class="wsteps" id="wsteps"><i class="on"></i><i></i><i></i></div>
+      <div id="wbody"></div>
+    </div>
+  </div>
+</section>
+
+<div class="alts">
+  <h3>Що ще може бути в «Рентгені»</h3>
+  <ul>
+    <li>Кнопка під результатом: «Надіслати цю схему мені на пошту» або «Обговорити на дзвінку» з переносом тексту в форму запису.</li>
+    <li>Лічильник «Сьогодні проаналізовано 12 процесів» (соціальний доказ, коли з'явиться трафік).</li>
+    <li>Ліміт 3 запити на відвідувача, щоб контролювати витрати на API.</li>
+  </ul>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+const {$,esc,wait}=UI;
+const BP=[
+ {k:'Замовлення з Allegro чи Shopify',re:/замовл|allegro|shopify|склад|залишк|zam/i,tr:'Нове замовлення в Shopify або Allegro',st:[['Забрати замовлення через API','n8n'],['Звірити залишки','Google Sheets'],['Виставити рахунок','wFirma'],['Надіслати статус клієнту','Email']],g:'Людина розбирає лише замовлення з розбіжностями.',h:'8–12 год',c:'Середня'},
+ {k:'Розбір CV кандидатів',re:/cv|резюме|кандидат|рекрут|ваканс/i,tr:'Нове CV на пошті або в ATS',st:[['Витягнути дані з CV','n8n'],['Оцінити за вимогами вакансії','Claude'],['Сформувати шортлист','Sheets'],['Запросити обрати час','Cal.com']],g:'Рекрутер підтверджує шортлист. AI не відмовляє кандидатам сам.',h:'10–15 год',c:'Середня'},
+ {k:'Звіти для керівництва',re:/звіт|report|raport|kpi|дашборд/i,tr:'Щодня о 7:30',st:[['Зібрати дані з CRM, ERP, таблиць','n8n'],['Звести показники','Python'],['Оновити дашборд','PowerBI'],['Резюме керівнику','Telegram']],g:'Людина один раз затверджує визначення KPI.',h:'5–8 год',c:'Низька'},
+ {k:'Рахунки й документи',re:/рахун|faktur|документ|договір|umow|шаблон|pdf/i,tr:'Новий запис у CRM або форма',st:[['Підтягнути дані клієнта','HubSpot'],['Заповнити шаблон','Google Docs'],['Перевірити поля й суми','Claude'],['На підпис і в архів','Drive']],g:'Відповідальна особа підтверджує документ перед відправкою.',h:'4–7 год',c:'Низька'},
+ {k:'Заявки й ліди з сайту',re:/лід|lead|заявк|crm|hubspot|клієнт|продаж/i,tr:'Нова заявка з сайту чи пошти',st:[['Розпізнати контакти й запит','Claude'],['Створити угоду','HubSpot'],['Сповістити менеджера','Telegram'],['Follow-up, якщо тиша','n8n']],g:'Менеджер вирішує, кому дзвонити першим.',h:'5–9 год',c:'Низька'}
+];
+const GEN={k:'Інший процес',tr:'Подія у вашій системі',st:[['Зібрати дані з джерела','n8n'],['Класифікувати й витягнути суть','Claude'],['Дія в цільовій системі','API'],['Повідомити відповідального','Telegram']],g:'На старті людина підтверджує кожну дію, поки флоу не доведе точність.',h:'3–8 год',c:'Залежить від систем'};
+const html=b=>`<div class="bp"><div><span class="bp-k">Тригер</span><div>${esc(b.tr)}</div></div><div><span class="bp-k">Кроки агента</span><ol class="bp-steps">${b.st.map(([s,t])=>`<li><span>${esc(s)}</span><em class="tool">${esc(t)}</em></li>`).join('')}</ol></div><div class="gate"><b>Людина в контурі.</b> ${esc(b.g)}</div><div class="bp-stats"><div><b>${esc(b.h)}</b><span>на тиждень повертається</span></div><div><b>${esc(b.c)}</b><span>складність</span></div></div></div>`;
+const find=q=>BP.find(b=>b.re.test(q))||GEN;
+/* A */
+const msgs=$('#msgs');let busy=false;
+async function ask(q,instant){if(!q.trim()||busy)return;busy=true;
+  const u=document.createElement('div');u.className='msg u';u.textContent=q;msgs.appendChild(u);
+  const b=document.createElement('div');b.className='msg b';msgs.appendChild(b);
+  if(!instant){b.innerHTML='<span class="typing"><i></i><i></i><i></i></span>';msgs.scrollTop=msgs.scrollHeight;await wait(900);}
+  b.innerHTML=html(find(q))+'<p style="margin-top:12px">Хочете, розберу це детально на дзвінку? <a href="#">Обрати час</a></p>';
+  while(msgs.children.length>6)msgs.removeChild(msgs.firstChild);msgs.scrollTop=msgs.scrollHeight;busy=false;}
+['Ми вручну переносимо замовлення в Excel','Рекрутери читають сотні CV','Звіти збираємо руками'].forEach(s=>{const c=document.createElement('button');c.type='button';c.className='chip';c.textContent=s;c.onclick=()=>ask(s);$('#sugg').appendChild(c);});
+$('#cform').addEventListener('submit',e=>{e.preventDefault();ask($('#cin').value);$('#cin').value='';});
+ask('Звіти для керівництва збираємо руками з 4 систем',true);
+/* B */
+const spIn=$('#spIn'),spList=$('#spList'),spRes=$('#spRes');let sel=0,items=[];
+function list(){const q=spIn.value.trim().toLowerCase();items=[...BP,GEN].filter(b=>!q||b.k.toLowerCase().includes(q)||(b.re&&b.re.test(q)));if(!items.length)items=[GEN];sel=Math.min(sel,items.length-1);
+  spList.innerHTML=items.map((b,i)=>`<button type="button" class="sp-item" role="option" aria-selected="${i===sel}" data-i="${i}"><span>${esc(b.k)}</span><span>${esc(b.h)}/тижд.</span></button>`).join('');
+  spList.querySelectorAll('.sp-item').forEach(x=>x.onclick=()=>{sel=+x.dataset.i;pick();});}
+function pick(){list();spRes.innerHTML=`<p class="eyebrow" style="margin-bottom:10px">${esc(items[sel].k)}</p>`+html(items[sel]);}
+spIn.addEventListener('input',()=>{sel=0;list();});
+spIn.addEventListener('keydown',e=>{if(e.key==='ArrowDown'){sel=Math.min(items.length-1,sel+1);list();e.preventDefault();}else if(e.key==='ArrowUp'){sel=Math.max(0,sel-1);list();e.preventDefault();}else if(e.key==='Enter'){pick();e.preventDefault();}});
+list();pick();
+/* C */
+const Q=[
+ {q:'Що забирає найбільше часу?',o:BP.map(b=>[b.k,'']).concat([['Інше','опишу на дзвінку']])},
+ {q:'Як часто це відбувається?',o:[['Щодня, багато разів','десятки повторень'],['Щодня','кілька разів'],['Щотижня','великі порції'],['Щомісяця','звіти, закриття']]},
+ {q:'Де живуть дані?',o:[['Excel і пошта','без системи'],['CRM (HubSpot тощо)','частково в системі'],['ERP або облікова система','є API'],['Не знаю точно','розберемось']]}
+];
+const ans=[];const wb=$('#wbody'),ws=[...document.querySelectorAll('#wsteps i')];
+function stepC(i){ws.forEach((w,j)=>w.classList.toggle('on',j<=i));
+  if(i>=Q.length){const b=BP.find(x=>x.k===ans[0])||GEN;const f=ans[1]&&ans[1].startsWith('Щодня')?'Часта задача: ефект відчуєте в перший же тиждень.':'Рідша, але об\'ємна задача: автоматизація прибирає «пекельні дні».';
+    wb.innerHTML=`<div class="card card-pad wq"><p class="eyebrow">Ваша схема</p>${html(b)}<p class="muted" style="margin-top:6px">${esc(f)} Дані: ${esc(ans[2]||'')}.</p><div class="row" style="margin-top:8px"><a class="btn btn-primary" href="#">Обговорити на дзвінку</a><button class="btn btn-ghost" type="button" id="wre">Почати знову</button></div></div>`;
+    $('#wre').onclick=()=>{ans.length=0;stepC(0);};return;}
+  const q=Q[i];wb.innerHTML=`<div class="wq"><h3>${esc(q.q)}</h3><div class="opts">${q.o.map(([a,s])=>`<button type="button" class="opt" data-a="${esc(a)}"><b>${esc(a)}</b>${s?`<small>${esc(s)}</small>`:''}</button>`).join('')}</div></div>`;
+  wb.querySelectorAll('.opt').forEach(o=>o.onclick=()=>{ans[i]=o.dataset.a;stepC(i+1);});}
+stepC(0);
+});
+</script>
+
+</main>
+<footer class="wrap foot">Каталог варіантів · <a href="./">усі секції</a></footer>
+</body>
+</html>

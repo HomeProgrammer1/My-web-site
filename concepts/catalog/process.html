@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="robots" content="noindex">
+<title>Процес · варіанти</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geologica:wght@400;500;600;700&family=Golos+Text:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Onest:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="assets/base.css">
+<script src="assets/base.js"></script>
+<style>
+.ph{display:grid;gap:12px;justify-items:center;text-align:center;margin-bottom:40px}
+/* A */
+.tabs5{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;position:relative}
+.tabs5::before{content:"";position:absolute;left:10%;right:10%;top:21px;height:2px;background:var(--line)}
+.tabs5 .fill{position:absolute;left:10%;top:21px;height:2px;background:var(--accent);transition:width .45s ease}
+.t5{position:relative;display:grid;justify-items:center;gap:10px;background:none;border:0;cursor:pointer;padding:0 4px;text-align:center}
+.t5 .n{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-weight:600;background:var(--bg);border:2px solid var(--line);transition:all .3s;z-index:1}
+:root[data-design="c"] .t5 .n{background:#FFFFFF}
+.t5[aria-selected="true"] .n,.t5.done .n{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.t5 b{font-size:15px;font-weight:600}
+.t5[aria-selected="false"] b{color:var(--muted)}
+.detail{margin-top:34px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.dcell{padding:20px;border-radius:var(--r-md);background:var(--surface-2);display:grid;gap:6px;align-content:start;animation:rise .35s both}
+.dcell span{font-size:12px;font-family:var(--f-mono);color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+@media (max-width:760px){.t5 b{font-size:12px}.detail{grid-template-columns:1fr}}
+/* B */
+.vt{position:relative;max-width:760px;margin-inline:auto;display:grid;gap:clamp(40px,7vh,72px);padding-left:64px}
+.vt::before{content:"";position:absolute;left:21px;top:8px;bottom:8px;width:2px;background:var(--line)}
+.vt .vfill{position:absolute;left:21px;top:8px;width:2px;background:var(--accent);height:0}
+.vs{position:relative;display:grid;gap:10px}
+.vs .n{position:absolute;left:-64px;top:0;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-weight:600;background:var(--bg);border:2px solid var(--line);transition:all .3s}
+:root[data-design="c"] .vs .n{background:#FFFFFF}
+.vs.on .n{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.vs p{color:var(--muted);font-size:17px}
+.vs .get{padding:14px 16px;border-radius:14px;background:var(--accent-soft);font-size:15px}
+.vs .get b{color:var(--accent)}
+/* C */
+.flowc{display:grid;gap:22px}
+.nodes{display:flex;align-items:center;gap:0;overflow-x:auto;padding:18px 4px 22px;scrollbar-width:thin}
+.nd{flex:0 0 auto;display:grid;gap:4px;padding:14px 18px;border-radius:16px;border:1px solid var(--line);background:var(--surface);cursor:pointer;text-align:left;min-width:150px;position:relative;transition:border-color .25s,transform .2s;-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur)}
+.nd:hover{transform:translateY(-2px)}
+.nd small{font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+.nd b{font-size:15px}
+.nd[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.wire{flex:0 0 46px;height:2px;background:var(--line);position:relative}
+.wire i{position:absolute;top:-4px;left:0;width:10px;height:10px;border-radius:50%;background:var(--accent);animation:trav 2.2s linear infinite}
+@keyframes trav{from{left:-2px}to{left:calc(100% - 8px)}}
+.drawer{padding:clamp(20px,3vw,32px);display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:24px;animation:rise .35s both}
+.drawer ul{margin:0;padding-left:18px;display:grid;gap:6px;color:var(--muted)}
+@media (max-width:760px){.drawer{grid-template-columns:1fr}}
+</style>
+</head>
+<body data-title="7 · Як ми працюємо">
+<main class="wrap">
+
+<header class="page-head">
+  <p class="eyebrow">Акт III · План</p>
+  <h1 class="display-m">Як ми працюємо</h1>
+  <p class="lead">П'ять кроків, без дедлайнів. Для кожного кроку три відповіді: що відбувається, що ви отримуєте, скільки часу це забирає у вас.</p>
+</header>
+
+<section class="variant" data-key="process" data-variant="A">
+  <div class="v-head"><div class="v-meta"><span class="v-tag">Варіант A</span><h2 class="v-title">Кроки-вкладки</h2><p class="v-why">Горизонтальний ланцюжок з лінією прогресу. Клік по кроку показує три картки деталей. Компактно і зрозуміло.</p></div><button class="btn btn-ghost btn-sm pick" type="button">Обрати цей</button></div>
+  <div class="stage">
+    <div class="ph"><p class="eyebrow">Процес</p><h2 class="display-l">Від розмови до системи, що працює без вас</h2></div>
+    <div class="tabs5" id="t5" role="tablist"><span class="fill" id="t5fill"></span></div>
+    <div class="detail" id="t5d" role="tabpanel"></div>
+  </div>
+</section>
+
+<section class="variant" data-key="process" data-variant="B">
+  <div class="v-head"><div class="v-meta"><span class="v-tag">Варіант B</span><h2 class="v-title">Вертикальна лінія, що заповнюється</h2><p class="v-why">Під час скролу синя лінія росте й «вмикає» кроки один за одним. Відчуття руху вперед без жодного кліку.</p></div><button class="btn btn-ghost btn-sm pick" type="button">Обрати цей</button></div>
+  <div class="stage">
+    <div class="ph"><p class="eyebrow">Процес</p><h2 class="display-l">П'ять кроків</h2></div>
+    <div class="vt" id="vt"><span class="vfill" id="vfill"></span></div>
+  </div>
+</section>
+
+<section class="variant" data-key="process" data-variant="C">
+  <div class="v-head"><div class="v-meta"><span class="v-tag">Варіант C</span><h2 class="v-title">Процес як флоу</h2><p class="v-why">Кроки намальовані як ноди автоматизації з даними, що біжать між ними. Клік по ноді відкриває деталі. Сам процес виглядає як твій продукт.</p></div><button class="btn btn-ghost btn-sm pick" type="button">Обрати цей</button></div>
+  <div class="stage">
+    <div class="flowc">
+      <div class="stack"><p class="eyebrow">Процес</p><h2 class="display-l">Ваш шлях до автоматизації</h2></div>
+      <div class="nodes" id="nodes"></div>
+      <div class="card drawer" id="drawer" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<div class="alts">
+  <h3>Що ще може бути в процесі</h3>
+  <ul>
+    <li>Під кроком «Аудит» маленький приклад документа, який отримує клієнт (розмита сторінка карти процесів).</li>
+    <li>Рядок гарантії процесу без грошових обіцянок: «Після аудиту ви вирішуєте, чи йти далі. Карта процесів залишається у вас».</li>
+    <li>Іконки інструментів біля кроків «Пілот» і «Впровадження» (n8n, Make, HubSpot, Claude).</li>
+  </ul>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+const {$,$$,esc}=UI;
+const S=[
+ {t:'Знайомство',w:'30 хвилин онлайн. Ви розповідаєте, де болить, я ставлю питання.',g:'Чесну відповідь, чи автоматизація окупиться, і з чого почати.',y:'30 хвилин',l:['Без презентацій і продажів','Безкоштовно']},
+ {t:'Аудит процесів',w:'Розбираю, як робота рухається насправді: хто, що, в яких системах і скільки годин.',g:'Карту процесів, пріоритети за ROI і план впровадження.',y:'2–3 розмови з командою',l:['Карта процесів залишається у вас','Вартість зараховується у впровадження']},
+ {t:'Пілот',w:'Автоматизуємо один процес з найшвидшим ефектом.',g:'Робочий флоу на ваших даних і виміряний результат.',y:'Тестуєте й даєте зворотний зв\'язок',l:['Рішення про масштаб ухвалюєте після результату','Людина в контурі там, де потрібно']},
+ {t:'Впровадження',w:'Масштабуємо на інші процеси, підключаємо системи, навчаю команду.',g:'Документацію, доступи й команду, яка вміє цим користуватись.',y:'Ключові люди на навчанні',l:['Код і флоу належать вам','Навчання для ключових користувачів']},
+ {t:'Супровід',w:'Стежу за роботою флоу, вношу зміни, додаю нові сценарії.',g:'Спокій: нічого не ламається, коли змінюються API чи процеси.',y:'Пишете, коли щось потрібно',l:['Моніторинг і сповіщення','Пакет годин щомісяця']}
+];
+/* A */
+const t5=$('#t5'),d=$('#t5d');
+S.forEach((s,i)=>{const b=document.createElement('button');b.type='button';b.className='t5';b.role='tab';b.innerHTML=`<span class="n">${i+1}</span><b>${esc(s.t)}</b>`;b.onclick=()=>selA(i);t5.appendChild(b);});
+function selA(i){$$('.t5',t5).forEach((b,j)=>{b.setAttribute('aria-selected',String(j===i));b.classList.toggle('done',j<i);});$('#t5fill').style.width=(80*i/4)+'%';
+  const s=S[i];d.innerHTML=`<div class="dcell"><span>Що відбувається</span><p>${esc(s.w)}</p></div><div class="dcell"><span>Ви отримуєте</span><p><b>${esc(s.g)}</b></p></div><div class="dcell"><span>Ваш час</span><p>${esc(s.y)}</p></div>`;}
+selA(0);
+/* B */
+const vt=$('#vt');
+S.forEach((s,i)=>{const el=document.createElement('div');el.className='vs';el.innerHTML=`<span class="n">${i+1}</span><h3 class="display-m">${esc(s.t)}</h3><p>${esc(s.w)}</p><div class="get"><b>Ви отримуєте:</b> ${esc(s.g)}</div><span class="small muted">Ваш час: ${esc(s.y)}</span>`;vt.appendChild(el);});
+const vs=$$('.vs',vt),vfill=$('#vfill');
+function onScroll(){const r=vt.getBoundingClientRect(),mid=innerHeight*.55;const h=Math.max(0,Math.min(r.height-16,mid-r.top));vfill.style.height=h+'px';vs.forEach(v=>{const vr=v.getBoundingClientRect();v.classList.toggle('on',vr.top<mid);});}
+addEventListener('scroll',onScroll,{passive:true});onScroll();
+/* C */
+const nodes=$('#nodes'),dr=$('#drawer');
+S.forEach((s,i)=>{if(i){const w=document.createElement('span');w.className='wire';w.innerHTML=UI.RM?'':'<i></i>';w.firstChild&&(w.firstChild.style.animationDelay=(i*.4)+'s');nodes.appendChild(w);}
+  const b=document.createElement('button');b.type='button';b.className='nd';b.innerHTML=`<small>крок ${i+1}</small><b>${esc(s.t)}</b>`;b.onclick=()=>selC(i);nodes.appendChild(b);});
+function selC(i){$$('.nd',nodes).forEach((b,j)=>b.setAttribute('aria-pressed',String(j===i)));const s=S[i];
+  dr.innerHTML=`<div class="stack"><span class="eyebrow">Крок ${i+1}</span><h3 class="display-m">${esc(s.t)}</h3><p class="muted">${esc(s.w)}</p><p><b>Ви отримуєте:</b> ${esc(s.g)}</p></div><div class="stack"><span class="small muted">Ваш час: ${esc(s.y)}</span><ul>${s.l.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>${i===0?'<a class="btn btn-primary" href="#" style="justify-self:start">Записатися</a>':''}</div>`;}
+selC(0);
+});
+</script>
+
+</main>
+<footer class="wrap foot">Каталог варіантів · <a href="./">усі секції</a></footer>
+</body>
+</html>
