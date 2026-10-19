@@ -1,0 +1,788 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<style>body{margin:0}[hidden]{display:none!important}img{max-width:100%}</style>
+</head>
+<body>
+<title>Lohaza Automation Lab</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Onest:wght@400;500;600;700&family=Unbounded:wght@500;700&display=swap">
+<style>
+/* Layout: the whole page is one node-editor canvas; each chapter is a node hung on a single flowing wire down the left edge */
+:root{
+  --canvas:#F1F2F7; --surface:#FFFFFF; --ink:#131730; --muted:#5A6079; --line:#D8DBE7; --dot:#C6CAD9;
+  --flow:#2C44DE; --flow-ink:#FFFFFF; --flow-soft:#E3E7FF;
+  --chaos:#B0600A; --chaos-soft:#FFF1DC; --ok:#13784A; --ok-soft:#DCF2E6;
+  --xls:#1D6F42; --pdf:#C23B2E; --note:#FFE27A; --note-ink:#3B3210; --tg:#2AABEE;
+  --machine:#131730; --machine-ink:#E9EBF6; --machine-dim:#9DA3BD;
+  --shadow:0 30px 60px -36px rgba(19,23,48,.35); --shadow-card:0 2px 0 rgba(19,23,48,.06), 0 8px 18px -10px rgba(19,23,48,.28);
+  --f-display:"Unbounded","Arial Black",system-ui,sans-serif;
+  --f-body:"Onest",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --canvas:#0C0F1E; --surface:#141A2E; --ink:#E7E9F4; --muted:#99A0BB; --line:#262D48; --dot:#232A44;
+  --flow:#8696FF; --flow-ink:#0C0F1E; --flow-soft:#1D2452;
+  --chaos:#F0A443; --chaos-soft:#2E220F; --ok:#4FC48C; --ok-soft:#10291E;
+  --xls:#3FAE71; --pdf:#F06A5B; --note:#E6C85A; --note-ink:#251F07; --tg:#4CB8F0;
+  --machine:#05070F; --machine-ink:#E7E9F4; --machine-dim:#8C93AE;
+  --shadow:0 30px 60px -30px rgba(0,0,0,.7); --shadow-card:0 2px 0 rgba(0,0,0,.25), 0 10px 22px -10px rgba(0,0,0,.6);
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --canvas:#0C0F1E; --surface:#141A2E; --ink:#E7E9F4; --muted:#99A0BB; --line:#262D48; --dot:#232A44;
+  --flow:#8696FF; --flow-ink:#0C0F1E; --flow-soft:#1D2452;
+  --chaos:#F0A443; --chaos-soft:#2E220F; --ok:#4FC48C; --ok-soft:#10291E;
+  --xls:#3FAE71; --pdf:#F06A5B; --note:#E6C85A; --note-ink:#251F07; --tg:#4CB8F0;
+  --machine:#05070F; --machine-ink:#E7E9F4; --machine-dim:#8C93AE;
+  --shadow:0 30px 60px -30px rgba(0,0,0,.7); --shadow-card:0 2px 0 rgba(0,0,0,.25), 0 10px 22px -10px rgba(0,0,0,.6);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background-color:var(--canvas);background-image:radial-gradient(var(--dot) 1px,transparent 1.4px);background-size:24px 24px;color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1160px;margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;letter-spacing:-.015em}
+h1{font-size:clamp(30px,4.6vw,56px);line-height:1.08;font-weight:700}
+h2{font-size:clamp(24px,3vw,36px);line-height:1.15;font-weight:700}
+h3{font-size:17px;font-weight:500;line-height:1.3}
+p{margin:0}
+a{color:var(--flow)}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.lead{font-size:18px;color:var(--muted);max-width:62ch}
+.mono{font-family:var(--f-mono)}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--flow);outline-offset:3px}
+
+/* top */
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px 20px;padding-block:18px;flex-wrap:wrap}
+.brand{font-family:var(--f-display);font-weight:700;font-size:15px;letter-spacing:-.01em;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.brand small{font-family:var(--f-mono);font-weight:400;font-size:11px;color:var(--muted);letter-spacing:.04em}
+.nav{display:flex;gap:18px;font-size:14px;flex-wrap:wrap;align-items:center}
+.nav a{color:var(--ink);text-decoration:none;opacity:.78}
+.nav a:hover{opacity:1}
+.langs{font-family:var(--f-mono);font-size:12px;color:var(--muted);display:flex;gap:6px}
+.langs b{color:var(--ink)}
+.proto{font-family:var(--f-mono);font-size:11px;padding:4px 9px;border:1px dashed var(--chaos);color:var(--chaos);border-radius:999px;white-space:nowrap}
+@media (max-width:860px){.nav a{display:none}}
+
+/* hero */
+.hero{padding-block:28px 0;display:grid;gap:20px}
+.hero h1 em{font-style:normal;color:var(--flow)}
+.who{display:flex;align-items:center;gap:14px 18px;flex-wrap:wrap}
+.who img{width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid var(--surface);box-shadow:0 0 0 1px var(--line)}
+.who-txt{display:grid;gap:2px;min-width:0}
+.who-txt b{font-weight:600}
+.who-txt span{font-size:14px;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-family:var(--f-mono);font-size:12px;padding:6px 10px;border:1px solid var(--line);border-radius:999px;background:var(--surface);white-space:nowrap}
+.chip b{color:var(--flow);font-weight:500}
+.ctas{display:flex;gap:10px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:600 15px/1.1 var(--f-body);padding:13px 18px;border-radius:999px;border:1px solid transparent;cursor:pointer;text-decoration:none;transition:transform .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn-primary{background:var(--flow);color:var(--flow-ink)}
+.btn-ghost{background:var(--surface);border-color:var(--line);color:var(--ink)}
+.btn-sm{padding:9px 14px;font-size:14px}
+
+/* chaos board */
+.board{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);border:1px solid var(--line);border-radius:18px;background:var(--surface);box-shadow:var(--shadow);margin-top:8px}
+.chaos{--cw:204px;position:relative;min-height:470px;border-right:1px solid var(--line);border-radius:18px 0 0 18px;background:repeating-linear-gradient(-45deg,transparent 0 14px,var(--chaos-soft) 14px 15px)}
+.zone-label{position:absolute;left:16px;bottom:14px;right:16px;font-family:var(--f-mono);font-size:12px;color:var(--chaos);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;pointer-events:none}
+.card{position:absolute;width:var(--cw);text-align:left;padding:10px 12px 11px;border-radius:9px;border:1px solid var(--line);background:var(--surface);cursor:grab;box-shadow:var(--shadow-card);transform:translate(var(--dx,0px),var(--dy,0px)) rotate(var(--rot,0deg));transition:transform .3s cubic-bezier(.2,.8,.2,1),opacity .35s,box-shadow .2s;touch-action:none;user-select:none;-webkit-user-select:none}
+.card:hover{z-index:30!important;box-shadow:var(--shadow-card),0 0 0 2px var(--flow-soft)}
+.card .kind{font-family:var(--f-mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;display:flex;align-items:center;gap:6px;color:var(--muted);margin-bottom:5px}
+.card .kind i,.kind-inline i{width:9px;height:9px;border-radius:2px;background:var(--muted);display:inline-block}
+.card .t{display:block;font-weight:600;font-size:14px;line-height:1.25}
+.card .m{display:block;font-family:var(--f-mono);font-size:11px;color:var(--muted);margin-top:4px}
+.k-xls{border-top:4px solid var(--xls)}
+.k-xls .kind i,.kind-inline.k-xls i{background:var(--xls)}
+.k-pdf .kind i,.kind-inline.k-pdf i{background:var(--pdf)}
+.k-mail .kind i,.kind-inline.k-mail i{background:var(--flow)}
+.k-chat .kind i,.kind-inline.k-chat i{background:var(--tg);border-radius:50%}
+.k-doc .kind i,.kind-inline.k-doc i{background:var(--chaos)}
+.k-note{background:var(--note);color:var(--note-ink);border-color:transparent}
+.k-note .kind,.k-note .m{color:var(--note-ink);opacity:.75}
+.k-note .kind i{background:var(--note-ink)}
+.kind-inline.k-note i{background:var(--chaos)}
+.card.dragging{cursor:grabbing;z-index:60!important;transition:opacity .2s;transform:translate(var(--dx,0px),var(--dy,0px)) rotate(0deg) scale(1.04)}
+.card.gone{opacity:0;pointer-events:none;transform:translate(var(--dx,0px),var(--dy,0px)) scale(.55)}
+.busy .card{cursor:wait}
+.flow{padding:20px;display:flex;flex-direction:column;min-width:0}
+.flow-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px}
+.node{border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:var(--surface);transition:border-color .25s,background-color .25s}
+.node .tag{font-family:var(--f-mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);display:flex;align-items:center;gap:8px}
+.node .tag::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor;opacity:.6}
+.slot{margin-top:8px;font-size:14px;line-height:1.4;min-height:48px}
+.node-in .slot{border:1.5px dashed var(--line);border-radius:8px;padding:12px;color:var(--muted)}
+.node-in.over .slot{border-color:var(--flow);background:var(--flow-soft);color:var(--ink)}
+.node-in.filled .slot{border-style:solid;border-color:var(--flow);color:var(--ink)}
+.kind-inline{font-family:var(--f-mono);font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);display:inline-flex;align-items:center;gap:5px;margin-right:6px}
+.node-ai{background:var(--machine);color:var(--machine-ink);border-color:var(--machine)}
+.node-ai .tag{color:var(--machine-dim)}
+.node-ai.on .tag::before{background:var(--ok);opacity:1;animation:pulse 1s infinite}
+.log{margin-top:8px;font-family:var(--f-mono);font-size:12px;line-height:1.6;min-height:58px;color:var(--machine-dim)}
+.log div{animation:fadein .25s}
+.log .ok{color:var(--ok)}
+.gate{margin-top:10px;padding:10px;border:1px dashed var(--chaos);border-radius:8px;font-size:13px;display:grid;gap:8px}
+.gate .eyebrow{color:var(--chaos)}
+.gate button{justify-self:start;background:var(--chaos);color:var(--machine);border:0;border-radius:999px;padding:8px 14px;font-weight:600;cursor:pointer}
+.wire{height:28px;width:2px;margin-left:24px;background:var(--line);position:relative}
+.packet{position:absolute;left:-4px;top:-5px;width:10px;height:10px;border-radius:50%;background:var(--flow);opacity:0}
+.packet.run{animation:travel .55s ease-in forwards}
+.node-out.hit{border-color:var(--ok);background:var(--ok-soft)}
+.gain{display:block;font-family:var(--f-mono);font-size:12px;color:var(--ok);margin-top:4px}
+.meters{margin-top:16px;display:grid;gap:7px;font-size:13px}
+.meters .row{display:flex;justify-content:space-between;gap:10px}
+.meters b{font-family:var(--f-mono);font-weight:500}
+.bar{height:8px;border-radius:99px;background:var(--line);overflow:hidden}
+.bar i{display:block;height:100%;width:100%;background:var(--chaos);transition:width .6s}
+.hint{font-size:13px;color:var(--muted);margin-top:10px}
+.hint.shake{animation:shake .35s;color:var(--chaos)}
+.done{margin-top:14px;padding:14px;border-radius:12px;background:var(--flow-soft);display:grid;gap:10px;font-size:14px}
+.done h3{font-size:16px}
+@media (max-width:860px){
+  .board{grid-template-columns:1fr}
+  .chaos{--cw:156px;min-height:400px;border-right:0;border-bottom:1px solid var(--line);border-radius:18px 18px 0 0}
+  .card{padding:8px 10px 9px}.card .t{font-size:13px}
+}
+@media (pointer:coarse){.card{touch-action:manipulation}}
+
+/* chapters on the wire */
+.chapter{position:relative;padding-left:52px;padding-block:84px 8px}
+.chapter::before{content:"";position:absolute;left:11px;top:0;bottom:-84px;width:2px;background:repeating-linear-gradient(to bottom,var(--flow) 0 6px,transparent 6px 14px);opacity:.35;animation:wire 1.6s linear infinite}
+.chapter:last-of-type::before{bottom:0}
+.chapter>.dot{position:absolute;left:3px;top:88px;width:18px;height:18px;border-radius:50%;background:var(--canvas);border:2px solid var(--flow)}
+.chapter>.dot::after{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--flow)}
+.ch-head{display:grid;gap:10px;margin-bottom:28px}
+@media (max-width:640px){.chapter{padding-left:30px;padding-block:64px 8px}.chapter::before{left:6px;bottom:-64px}.chapter>.dot{left:-2px;top:66px}}
+
+/* story */
+.timeline{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;counter-reset:none}
+.timeline li{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px;display:grid;gap:10px;align-content:start}
+.timeline .yr{font-family:var(--f-mono);font-size:12px;color:var(--flow)}
+.timeline p{font-size:14.5px;color:var(--muted)}
+.stat{font-family:var(--f-mono);font-size:12px;padding:8px 10px;border-radius:8px;background:var(--flow-soft);color:var(--ink)}
+.timeline li:last-child{background:var(--machine);color:var(--machine-ink);border-color:var(--machine)}
+.timeline li:last-child p{color:var(--machine-dim)}
+.timeline li:last-child .stat{background:transparent;border:1px solid var(--machine-dim);color:var(--machine-ink)}
+@media (max-width:1000px){.timeline{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.timeline{grid-template-columns:1fr}}
+
+/* industries */
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.tab{font-size:14px;font-weight:500;padding:9px 15px;border-radius:999px;border:1px solid var(--line);background:var(--surface);cursor:pointer}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--canvas);border-color:var(--ink)}
+.scen{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.sc{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px 12px;align-items:baseline}
+.sc .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase}
+.sc .lbl.b{color:var(--chaos)}.sc .lbl.a{color:var(--ok)}
+.sc .bf{color:var(--muted);font-size:14.5px}
+.sc .af{font-weight:500}
+@media (max-width:720px){.scen{grid-template-columns:1fr}}
+
+/* x-ray */
+.xray{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:18px;align-items:start}
+.xray-side{display:grid;gap:14px}
+.presets{display:flex;flex-direction:column;gap:8px}
+.preset{text-align:left;font-size:14px;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--surface);cursor:pointer}
+.preset:hover{border-color:var(--flow)}
+.chat{background:var(--surface);border:1px solid var(--line);border-radius:16px;display:flex;flex-direction:column;min-width:0;box-shadow:var(--shadow)}
+.chat-head{padding:12px 16px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:10px;align-items:center}
+.chat-head b{font-family:var(--f-display);font-weight:500;font-size:14px}
+.msgs{padding:16px;display:flex;flex-direction:column;gap:12px;min-height:320px;max-height:560px;overflow:auto}
+.msg{max-width:92%;font-size:14.5px;line-height:1.5}
+.msg.u{align-self:flex-end;background:var(--flow);color:var(--flow-ink);padding:10px 14px;border-radius:14px 14px 4px 14px}
+.msg.b{align-self:flex-start;display:grid;gap:10px;min-width:0}
+.typing{display:inline-flex;gap:4px;padding:12px 14px;border-radius:14px;background:var(--canvas)}
+.typing i{width:6px;height:6px;border-radius:50%;background:var(--muted);animation:blink 1s infinite}
+.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+.bp{border:1px solid var(--line);border-radius:12px;padding:14px;display:grid;gap:12px;background:var(--canvas)}
+.bp-k{font-family:var(--f-mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.bp-steps{margin:0;padding:0;list-style:none;display:grid;gap:6px;counter-reset:s}
+.bp-steps li{counter-increment:s;display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:8px;align-items:baseline;font-size:14px}
+.bp-steps li::before{content:counter(s);font-family:var(--f-mono);font-size:11px;color:var(--flow);border:1px solid var(--flow);border-radius:50%;width:20px;height:20px;display:grid;place-items:center}
+.tool{font-family:var(--f-mono);font-size:11px;padding:2px 7px;border-radius:999px;background:var(--flow-soft);white-space:nowrap}
+.bp-gate{font-size:13.5px;padding:9px 11px;border-left:3px solid var(--chaos);background:var(--chaos-soft);border-radius:0 8px 8px 0}
+.bp-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.bp-stats div{display:grid}
+.bp-stats b{font-family:var(--f-display);font-weight:500;font-size:18px}
+.bp-stats span{font-size:12.5px;color:var(--muted)}
+.chat-form{display:flex;gap:8px;padding:12px;border-top:1px solid var(--line)}
+.chat-form input{flex:1;min-width:0;font:inherit;font-size:15px;padding:11px 14px;border-radius:999px;border:1px solid var(--line);background:var(--canvas);color:var(--ink)}
+.note{font-size:12.5px;color:var(--muted)}
+@media (max-width:860px){.xray{grid-template-columns:1fr}}
+
+/* roi */
+.roi{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:18px;align-items:start}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px;display:grid;gap:18px;min-width:0}
+.procs{display:flex;flex-wrap:wrap;gap:8px}
+.proc{font-size:13.5px;padding:8px 12px;border-radius:999px;border:1px solid var(--line);background:var(--canvas);cursor:pointer}
+.proc[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--canvas)}
+.proc small{font-family:var(--f-mono);opacity:.7;margin-left:4px}
+.field{display:grid;gap:8px}
+.field-top{display:flex;justify-content:space-between;gap:10px;font-size:14px}
+.field-top output{font-family:var(--f-mono);font-weight:500;color:var(--flow)}
+input[type=range]{width:100%;accent-color:var(--flow)}
+.big{display:grid;gap:4px}
+.big b{font-family:var(--f-display);font-weight:700;font-size:clamp(32px,4.4vw,50px);line-height:1;color:var(--chaos);font-variant-numeric:tabular-nums}
+.big span{font-size:14px;color:var(--muted)}
+.week{display:grid;gap:6px}
+.week-bar{height:28px;border-radius:8px;background:var(--canvas);border:1px solid var(--line);position:relative;overflow:hidden}
+.week-bar i{position:absolute;inset:0 auto 0 0;background:repeating-linear-gradient(-45deg,var(--chaos) 0 6px,var(--chaos-soft) 6px 10px);transition:width .5s}
+.week-bar span{position:absolute;right:10px;top:50%;transform:translateY(-50%);font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+.kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.kpi{border:1px solid var(--line);border-radius:10px;padding:10px 12px;display:grid;gap:2px}
+.kpi b{font-family:var(--f-mono);font-weight:500;font-size:17px;font-variant-numeric:tabular-nums}
+.kpi b.ok{color:var(--ok)}
+.kpi span{font-size:12px;color:var(--muted)}
+.chart-wrap{overflow-x:auto}
+.chart-wrap svg{display:block;width:100%;height:auto;min-width:320px}
+.ax{fill:var(--muted);font-family:var(--f-mono);font-size:11px}
+.grid-l{stroke:var(--line);stroke-width:1}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12.5px;color:var(--muted)}
+.legend i{display:inline-block;width:14px;height:3px;border-radius:2px;margin-right:6px;vertical-align:middle}
+.capture{display:flex;gap:8px;flex-wrap:wrap}
+.capture input{flex:1 1 200px;min-width:0;font:inherit;padding:11px 14px;border-radius:999px;border:1px solid var(--line);background:var(--canvas);color:var(--ink)}
+.okmsg{font-size:13.5px;color:var(--ok)}
+.errmsg{font-size:13.5px;color:var(--pdf)}
+@media (max-width:900px){.roi{grid-template-columns:1fr}}
+@media (max-width:480px){.kpis{grid-template-columns:1fr}}
+
+/* cases */
+.cases{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.case{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;display:grid;gap:12px;align-content:start}
+.case .metric{font-family:var(--f-display);font-weight:700;font-size:clamp(30px,3.6vw,42px);line-height:1;color:var(--flow)}
+.case .mlabel{font-size:14px;color:var(--muted);margin-top:-4px}
+.case p{font-size:14.5px}
+.tags{display:flex;gap:6px;flex-wrap:wrap}
+.tags span{font-family:var(--f-mono);font-size:11px;padding:3px 8px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.quote{grid-column:1/-1;border:1.5px dashed var(--line);border-radius:14px;padding:18px;color:var(--muted);font-size:14.5px}
+@media (max-width:760px){.cases{grid-template-columns:1fr}}
+
+/* process */
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;counter-reset:st}
+.steps li{counter-increment:st;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;gap:8px;align-content:start;position:relative}
+.steps li::before{content:counter(st);font-family:var(--f-mono);font-size:12px;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:var(--flow);color:var(--flow-ink)}
+.steps p{font-size:14px;color:var(--muted)}
+@media (max-width:1000px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.steps{grid-template-columns:1fr}}
+
+/* pricing */
+.tiers{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.tier{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;display:grid;gap:10px;align-content:start}
+.tier .price{font-family:var(--f-display);font-weight:500;font-size:22px}
+.tier .price small{font-family:var(--f-body);font-size:13px;color:var(--muted);font-weight:400}
+.tier p{font-size:14px;color:var(--muted)}
+.tier.main{border:2px solid var(--flow)}
+.tier .badge{justify-self:start;font-family:var(--f-mono);font-size:11px;padding:3px 8px;border-radius:999px;background:var(--flow-soft);color:var(--flow)}
+@media (max-width:1000px){.tiers{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.tiers{grid-template-columns:1fr}}
+
+/* booking */
+.book{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;align-items:start}
+.svc{display:grid;gap:8px}
+.svc label{display:flex;gap:10px;align-items:flex-start;padding:11px 12px;border:1px solid var(--line);border-radius:10px;cursor:pointer;font-size:14px;background:var(--canvas)}
+.svc label:has(input:checked){border-color:var(--flow);background:var(--flow-soft)}
+.svc input{accent-color:var(--flow);margin-top:3px}
+.days{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px}
+.day{flex:0 0 auto;display:grid;gap:2px;justify-items:center;padding:8px 10px;border-radius:10px;border:1px solid var(--line);background:var(--canvas);cursor:pointer;min-width:58px}
+.day small{font-family:var(--f-mono);font-size:10.5px;color:var(--muted);text-transform:uppercase}
+.day b{font-family:var(--f-mono);font-weight:500;font-size:14px}
+.day[aria-pressed="true"]{border-color:var(--flow);background:var(--flow);color:var(--flow-ink)}
+.day[aria-pressed="true"] small{color:var(--flow-ink)}
+.slots{display:flex;flex-wrap:wrap;gap:8px}
+.slotb{font-family:var(--f-mono);font-size:13px;padding:8px 12px;border-radius:8px;border:1px solid var(--line);background:var(--canvas);cursor:pointer}
+.slotb[aria-pressed="true"]{border-color:var(--flow);background:var(--flow);color:var(--flow-ink)}
+.slotb:disabled{opacity:.35;text-decoration:line-through;cursor:not-allowed}
+.form{display:grid;gap:12px}
+.form label{display:grid;gap:6px;font-size:13.5px;color:var(--muted)}
+.form input,.form textarea{font:inherit;font-size:15px;padding:11px 13px;border-radius:10px;border:1px solid var(--line);background:var(--canvas);color:var(--ink);resize:vertical}
+.previews{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;margin-top:16px}
+.pv{border-radius:14px;padding:16px;display:grid;gap:10px;align-content:start;min-width:0}
+.pv-mail{background:var(--surface);border:1px solid var(--line)}
+.pv-mail .subj{font-weight:600}
+.pv-mail p{font-size:14px;color:var(--muted)}
+.pv-tg{background:var(--canvas);border:1px solid var(--line)}
+.tg-bubble{background:var(--surface);border-radius:14px 14px 14px 4px;padding:12px 14px;font-size:14px;line-height:1.55;white-space:pre-wrap;word-break:break-word;border-left:3px solid var(--tg)}
+@media (max-width:860px){.book,.previews{grid-template-columns:1fr}}
+
+/* faq + footer */
+.faq{display:grid;gap:10px;max-width:820px}
+.faq details{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.faq summary{cursor:pointer;font-weight:600}
+.faq details p{margin-top:10px;color:var(--muted);font-size:14.5px}
+.foot{padding-block:56px 40px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+
+@keyframes travel{0%{top:-5px;opacity:1}90%{opacity:1}100%{top:23px;opacity:0}}
+@keyframes pulse{50%{opacity:.3}}
+@keyframes fadein{from{opacity:0;transform:translateY(3px)}}
+@keyframes blink{50%{opacity:.25}}
+@keyframes shake{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+@keyframes wire{to{background-position:0 14px}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}}
+</style>
+
+<header class="top wrap">
+  <div class="brand">Михайло Логаза <small>AI-автоматизації · інтеграції</small></div>
+  <nav class="nav" aria-label="Розділи">
+    <a href="#story">Історія</a><a href="#xray">Рентген процесу</a><a href="#roi">Калькулятор</a><a href="#cases">Кейси</a><a href="#book">Запис</a>
+    <span class="langs" title="У фінальній версії: PL за замовчуванням, EN, UA"><span>PL</span><span>EN</span><b>UA</b></span>
+    <span class="proto">прототип концепції</span>
+  </nav>
+</header>
+
+<main>
+<section class="hero wrap" id="top">
+  <p class="eyebrow">Понеділок, 9:14 · ваша компанія</p>
+  <h1>Ваша команда тоне в ручній роботі. <em>Я передаю її AI-агентам.</em></h1>
+  <p class="lead">Аналізую, де компанія втрачає години, і будую автоматизації на n8n, Make та Claude, якими люди справді користуються. Від Excel-хаосу до агентних флоу з людиною в контурі.</p>
+  <div class="who">
+    <img src="data:image/jpeg;base64,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" alt="Михайло Логаза" width="64" height="64">
+    <div class="who-txt"><b>Михайло Логаза</b><span>PM і AI automation engineer · Познань · PL / EU</span></div>
+    <div class="chips">
+      <span class="chip"><b>5+ років</b> впроваджень CRM, ERP, AI</span>
+      <span class="chip"><b>600–800 тис.</b> рядків мігровано</span>
+      <span class="chip"><b>−87%</b> витрат на AI</span>
+      <span class="chip"><b>2-ге місце</b> · хакатон 70+ команд</span>
+    </div>
+  </div>
+
+  <div class="board" id="board">
+    <div class="chaos" id="chaos" aria-label="Вхідні задачі">
+      <div class="zone-label"><span>Вхідні: <b id="chaosLeft">7</b> задач чекають на людину</span><span id="zoneHow">перетягніть будь-яку праворуч</span></div>
+    </div>
+    <div class="flow" id="flow">
+      <div class="flow-head"><span class="eyebrow">Ваша перша автоматизація</span></div>
+      <div class="node node-in" id="sockIn"><span class="tag">Подія</span><div class="slot" id="slotIn">Перетягніть сюди задачу зліва</div></div>
+      <div class="wire"><i class="packet" id="p1"></i></div>
+      <div class="node node-ai" id="nodeAi"><span class="tag">AI-агент</span>
+        <div class="log" id="aiLog" aria-live="polite"><div>Чекаю на задачу</div></div>
+        <div class="gate" id="gate" hidden><span class="eyebrow">Тут рішення за людиною</span><span id="gateText"></span><button type="button" id="approve">Схвалити</button></div>
+      </div>
+      <div class="wire"><i class="packet" id="p2"></i></div>
+      <div class="node node-out" id="nodeOut"><span class="tag">Результат</span><div class="slot" id="slotOut" aria-live="polite">—</div></div>
+      <div class="meters">
+        <div class="row"><span>Хаос</span><b id="chaosPct">100%</b></div>
+        <div class="bar"><i id="chaosBar"></i></div>
+        <div class="row"><span>Звільнено часу команди</span><b><span id="hoursSaved">0</span> год/тиждень</b></div>
+      </div>
+      <p class="hint" id="hint">Візьміть задачу з лівої панелі й киньте в «Подію».</p>
+      <div class="done" id="done" hidden>
+        <h3>Хаос: 0%.</h3>
+        <p id="doneText"></p>
+        <div class="ctas"><a class="btn btn-primary btn-sm" href="#roi">Порахувати для моєї компанії</a><button class="btn btn-ghost btn-sm" type="button" id="replay">Ще раз</button></div>
+      </div>
+    </div>
+  </div>
+  <div class="ctas"><a class="btn btn-primary" href="#book">Записатися на безкоштовну розмову</a><a class="btn btn-ghost" href="#roi">Скільки втрачає моя компанія?</a></div>
+</section>
+
+<div class="wrap">
+<section class="chapter" id="story"><span class="dot"></span>
+  <div class="ch-head"><p class="eyebrow">Історія</p><h2>Я бачив цей хаос у кожній компанії, де працював</h2>
+  <p class="lead">Мій шлях і є тією трансформацією, яку я пропоную: від таблиць до систем, від систем до агентів.</p></div>
+  <ol class="timeline">
+    <li><span class="yr">2020–2021</span><h3>Excel → CRM</h3><p>HR-компанія з п'ятьма відділами жила в таблицях. Перевірив якість даних, прибрав дублікати, спроєктував мапінг полів і переніс усе в CRM.</p><span class="stat">За місяць жоден відділ не повернувся до таблиць</span></li>
+    <li><span class="yr">2022–2024</span><h3>ERP на 10 000+ користувачів</h3><p>Міграція HR- і фінансових даних: 5 департаментів, 9–10 релізів, UAT на кожному кроці. Звіти для правління замість ручних зведень.</p><span class="stat">600–800 тис. рядків · 0 критичних втрат · на 1,5–2 міс раніше плану</span></li>
+    <li><span class="yr">2024 – зараз</span><h3>AI-агент у фарма-SaaS</h3><p>Як PM і Product Owner запустив AI-агента для Jira: менеджери керують задачами звичайною мовою. Гібридна архітектура зрізала витрати на AI.</p><span class="stat">30–50 PM у пілоті · −87% вартості API</span></li>
+    <li><span class="yr">2025–2026</span><h3>Агентні флоу end-to-end</h3><p>n8n і Make, RAG над внутрішніми документами, плагіни для Claude, SaaS, побудований за spec-driven development, агентний процес розробки з human gates.</p><span class="stat">2-ге місце серед 70+ команд · Complete.dev</span></li>
+  </ol>
+</section>
+
+<section class="chapter" id="industries"><span class="dot"></span>
+  <div class="ch-head"><p class="eyebrow">Галузі</p><h2>Що можна автоматизувати у вас</h2></div>
+  <div class="tabs" role="tablist" id="tabs"></div>
+  <div class="scen" id="scen" role="tabpanel"></div>
+</section>
+
+<section class="chapter" id="xray"><span class="dot"></span>
+  <div class="ch-head"><p class="eyebrow">Рентген процесу</p><h2>Опишіть рутину одним реченням. Агент покаже, як її автоматизувати</h2></div>
+  <div class="xray">
+    <div class="xray-side">
+      <p class="lead" style="font-size:16px">Це міні-версія мого аудиту. Агент розкладає процес на тригер, кроки та інструменти, показує, де потрібна людина, і оцінює, скільки годин можна повернути.</p>
+      <div class="presets" id="presets"></div>
+      <p class="note">У прототипі відповіді заскриптовані за ключовими словами. На живому сайті відповідатиме Claude в реальному часі, з лімітом запитів на відвідувача.</p>
+    </div>
+    <div class="chat">
+      <div class="chat-head"><b>Process X-Ray</b><span class="eyebrow">демо</span></div>
+      <div class="msgs" id="msgs" aria-live="polite"></div>
+      <form class="chat-form" id="xform"><label class="sr" for="xinput" hidden>Опис процесу</label><input id="xinput" placeholder="Напр.: ми вручну переносимо замовлення в Excel" autocomplete="off"><button class="btn btn-primary btn-sm" type="submit">Аналіз</button></form>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="roi"><span class="dot"></span>
+  <div class="ch-head"><p class="eyebrow">Калькулятор втрат</p><h2>Скільки коштує ручна робота у вашій компанії</h2>
+  <p class="lead">Оберіть процеси, які у вас робляться вручну, і налаштуйте повзунки. Цифри орієнтовні, точні дає аудит.</p></div>
+  <div class="roi">
+    <div class="panel">
+      <div class="field"><span class="field-top"><span>Що у вас робиться вручну</span><span class="mono" style="font-size:12px;color:var(--muted)">год/тиждень на людину</span></span><div class="procs" id="procs"></div></div>
+      <div class="field"><label class="field-top" for="rPeople"><span>Скільки людей цим займаються</span><output id="oPeople"></output></label><input type="range" id="rPeople" min="1" max="100" value="8"></div>
+      <div class="field"><label class="field-top" for="rRate"><span>Повна вартість години працівника</span><output id="oRate"></output></label><input type="range" id="rRate" min="40" max="250" step="5" value="70"></div>
+      <div class="field"><label class="field-top" for="rAuto"><span>Яку частку реально автоматизувати</span><output id="oAuto"></output></label><input type="range" id="rAuto" min="30" max="80" step="5" value="55"></div>
+    </div>
+    <div class="panel" id="roiOut">
+      <div class="big"><span>Ручна робота коштує вам щороку</span><b id="lostYear">0 zł</b></div>
+      <div class="week"><span class="note" id="weekTxt"></span><div class="week-bar"><i id="weekBar"></i><span>40 год</span></div></div>
+      <div class="kpis">
+        <div class="kpi"><b class="ok" id="kSave">0</b><span>можна повернути, zł/міс</span></div>
+        <div class="kpi"><b id="kHours">0</b><span>годин на місяць звільняється</span></div>
+        <div class="kpi"><b id="kFte">0</b><span>штатних ставок</span></div>
+      </div>
+      <div class="chart-wrap" id="chart" role="img" aria-label="Накопичена економія за 12 місяців порівняно з інвестицією"></div>
+      <div class="legend"><span><i style="background:var(--ok)"></i>накопичена економія</span><span><i style="background:var(--chaos)"></i>орієнтовна інвестиція <span id="invest" class="mono"></span></span></div>
+      <form class="capture" id="capture" novalidate>
+        <input type="email" id="cEmail" placeholder="ваш@email.com" autocomplete="email" aria-label="Email для розрахунку">
+        <button class="btn btn-primary btn-sm" type="submit">Надіслати розрахунок на пошту</button>
+      </form>
+      <p class="note" id="capMsg">Отримаєте PDF з розрахунком і 3 процеси, з яких я б почав. Я зв'яжуся особисто.</p>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="cases"><span class="dot"></span>
+  <div class="ch-head"><p class="eyebrow">Кейси</p><h2>Що вже працює</h2></div>
+  <div class="cases">
+    <article class="case"><span class="eyebrow">Фарма-SaaS · AI-агент для Jira</span><div class="metric">−87%</div><p class="mlabel">витрат на AI-API: з ~$1 200 до ~$150 на місяць</p><p>Менеджери створюють задачі, епіки й ризик-звіти звичайною мовою. Прості команди обробляє детермінований парсер, аналітику — LLM. Тому на операціях запису 0% галюцинацій. Пілот на 30–50 PM.</p><div class="tags"><span>Python</span><span>FastAPI</span><span>Claude API</span><span>Atlassian Forge</span></div></article>
+    <article class="case"><span class="eyebrow">HR-tech · ERP на 10 000+ користувачів</span><div class="metric">600–800 тис.</div><p class="mlabel">рядків HR- і фінансових даних без критичних втрат</p><p>Мапінг полів для 5 департаментів, 9–10 релізів, UAT на кожному. Звіт для правління скоротився з 4–5 годин до 5–10 хвилин. Здали на 1,5–2 місяці раніше плану.</p><div class="tags"><span>ERP</span><span>Data mapping</span><span>PowerBI</span></div></article>
+    <article class="case"><span class="eyebrow">HR-агенція · з Excel у CRM</span><div class="metric">1 місяць</div><p class="mlabel">і жоден з 5 відділів не повернувся до таблиць</p><p>Аудит якості даних до міграції: дублікати, формати, пропуски. Спільні правила полів для відділів з різними пріоритетами, навчання команд.</p><div class="tags"><span>CRM</span><span>Data quality</span><span>Change management</span></div></article>
+    <article class="case"><span class="eyebrow">Бренд детективних ігор · контент-фабрика</span><div class="metric">30 stories</div><p class="mlabel">з одного брифу в Telegram-боті</p><p>Бот збирає бриф, AI пише контент-план у голосі бренду, генерує нуар-фони й верстає готові Instagram Stories. Вартість API: $0 на безкоштовному тарифі.</p><div class="tags"><span>Python</span><span>Gemini</span><span>Telegram Bot</span></div></article>
+    <div class="quote">Місце для 2–3 відгуків колег: ім'я, роль, фото, одна конкретна цифра або ситуація.</div>
+  </div>
+</section>
+
+<section class="chapter" id="process"><span class="dot"></span>
+  <div class="ch-head"><p class="eyebrow">Як ми працюємо</p><h2>Від першої розмови до системи, яка працює без вас</h2></div>
+  <ol class="steps">
+    <li><h3>Знайомство</h3><p>30 хвилин. Розповідаєте, де болить. Я чесно кажу, чи автоматизація тут окупиться.</p></li>
+    <li><h3>Аудит процесів</h3><p>Розбираю, як робота рухається насправді: хто, що, в яких системах і скільки годин. Отримуєте карту процесів, пріоритети за ROI і план.</p></li>
+    <li><h3>Пілот</h3><p>Автоматизуємо один процес з найшвидшим ефектом. Ви бачите результат на своїх даних до великих рішень.</p></li>
+    <li><h3>Впровадження</h3><p>Масштабуємо на інші процеси, підключаємо системи, навчаю команду. Документація й доступи залишаються у вас.</p></li>
+    <li><h3>Супровід</h3><p>Стежу, щоб нічого не зламалося, коли змінюються API чи процеси, і додаю нові сценарії.</p></li>
+  </ol>
+</section>
+
+<section class="chapter" id="pricing"><span class="dot"></span>
+  <div class="ch-head"><p class="eyebrow">Ціни · чернетка для обговорення</p><h2>Прозоро з першого кроку</h2></div>
+  <div class="tiers">
+    <div class="tier"><h3>Знайомство</h3><div class="price">0 zł <small>30 хв</small></div><p>Розбираємо 1–2 процеси. Без зобов'язань і презентацій.</p></div>
+    <div class="tier main"><span class="badge">з цього починають</span><h3>Аудит процесів</h3><div class="price">від 2 499 zł <small>netto</small></div><p>Карта процесів, де губляться години, пріоритети за ROI, план впровадження. Вартість зараховується у впровадження.</p></div>
+    <div class="tier"><h3>Впровадження</h3><div class="price">за кошторисом</div><p>Після аудиту, з фіксованою ціною етапу й передоплатою. Типовий проєкт: 5 999–24 999 zł.</p></div>
+    <div class="tier"><h3>Супровід</h3><div class="price">від 1 499 zł <small>/ міс</small></div><p>Моніторинг, зміни, нові сценарії, пакет годин щомісяця.</p></div>
+  </div>
+</section>
+
+<section class="chapter" id="book"><span class="dot"></span>
+  <div class="ch-head"><p class="eyebrow">Запис</p><h2>Оберіть час для розмови</h2>
+  <p class="lead">У фінальній версії тут вбудований Cal.com: підтвердження з посиланням на Google Meet прийде вам на пошту, а заявка — мені в Telegram.</p></div>
+  <div class="book">
+    <div class="panel">
+      <div class="svc" role="radiogroup" aria-label="Тип зустрічі">
+        <label><input type="radio" name="svc" value="Знайомство, 30 хв (безкоштовно)" checked><span><b>Знайомство · 30 хв</b><br><span class="note">Безкоштовно. Розберемо 1–2 процеси.</span></span></label>
+        <label><input type="radio" name="svc" value="Розбір процесу, 60 хв"><span><b>Розбір процесу · 60 хв</b><br><span class="note">Глибше: схема одного процесу й оцінка ROI.</span></span></label>
+      </div>
+      <div class="days" id="days" aria-label="Дата"></div>
+      <div class="slots" id="slots" aria-label="Час"></div>
+      <p class="note">Час: Варшава (CET)</p>
+    </div>
+    <form class="panel form" id="bform" novalidate>
+      <label>Email *<input type="email" id="bEmail" required placeholder="anna@firma.pl" autocomplete="email"></label>
+      <label>Ім'я та компанія<input id="bName" placeholder="Anna Kowalska, Firma Sp. z o.o." autocomplete="organization"></label>
+      <label>Що хочете автоматизувати?<textarea id="bDesc" rows="3" placeholder="Напр.: обробка замовлень з Allegro, 3 людини, все в Excel"></textarea></label>
+      <button class="btn btn-primary" type="submit">Забронювати</button>
+      <p class="note" id="bMsg"></p>
+    </form>
+  </div>
+  <div class="previews" id="previews" hidden>
+    <div class="pv pv-mail"><span class="eyebrow">Лист, який отримує клієнт</span><div class="subj" id="pvSubj"></div><p id="pvBody"></p></div>
+    <div class="pv pv-tg"><span class="eyebrow">Повідомлення, яке отримуєте ви в Telegram</span><div class="tg-bubble" id="pvTg"></div></div>
+  </div>
+</section>
+
+<section class="chapter" id="faq"><span class="dot"></span>
+  <div class="ch-head"><p class="eyebrow">Питання</p><h2>Перед першою розмовою зазвичай питають</h2></div>
+  <div class="faq">
+    <details open><summary>Чи безпечно віддавати наші дані AI?</summary><p>Працюю за GDPR: моделі в регіонах ЄС, без навчання на ваших даних, n8n можна розгорнути на вашому сервері. Критичні дії, наприклад гроші чи рішення щодо людей, AI лише пропонує, а підтверджує людина.</p></details>
+    <details><summary>Що буде, коли зміниться API чи модель?</summary><p>Флоу задокументовані й належать вам. На супроводі я стежу за змінами й оновлюю інтеграції, перш ніж щось зламається.</p></details>
+    <details><summary>Нам потрібен свій розробник, щоб це підтримувати?</summary><p>Ні. Ви отримуєте документацію й навчання команди. Прості зміни можна робити самостійно, складніші бере супровід.</p></details>
+    <details><summary>З якими системами працюєте?</summary><p>HubSpot, Google Workspace, Jira і Confluence, PowerBI, n8n, Make, Claude, OpenAI, Gemini і будь-які системи з REST API. Нові системи оцінюю на аудиті.</p></details>
+  </div>
+</section>
+</div>
+</main>
+
+<footer class="foot wrap"><span>© 2026 Михайло Логаза · Познань</span><span class="mono">linkedin.com/in/mykhailo-lohaza</span></footer>
+
+<script>
+(function(){
+const $=(s,r=document)=>r.querySelector(s);
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const wait=ms=>new Promise(r=>setTimeout(r,RM?Math.min(ms,80):ms));
+const fmt=n=>Math.round(n).toLocaleString('uk-UA');
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const COARSE=matchMedia('(pointer: coarse)').matches;
+
+/* ---------- chaos board ---------- */
+const KIND={mail:'Пошта',xls:'Excel',pdf:'PDF',note:'Стікер',doc:'Звіт',chat:'Чат'};
+const TASKS=[
+ {id:'mail',kind:'mail',title:'Нова заявка з сайту',meta:'47 непрочитаних',log:['читаю лист, витягую контакти','кваліфікую ліда за 5 критеріями','створюю угоду в HubSpot'],result:'Лід у CRM і сповіщення менеджеру в Telegram за 20 секунд',hours:5},
+ {id:'xls',kind:'xls',title:'zamowienia_FINAL_v3.xlsx',meta:'3 версії, хто правив останнім?',log:['забираю замовлення з Allegro і Shopify','звіряю із залишками','оновлюю склад'],result:'Замовлення й залишки синхронізуються самі',hours:6},
+ {id:'pdf',kind:'pdf',title:'Faktura_09_2026.pdf',meta:'перенести в бухгалтерію',log:['розпізнаю PDF','перевіряю NIP і суми','готую запис для wFirma'],gate:'Сума 18 450 zł більша за ліміт 10 000 zł. Передати рахунок у бухгалтерію?',result:'Рахунки потрапляють у бухгалтерію без ручного введення',hours:4},
+ {id:'note',kind:'note',title:'Передзвонити клієнту!!',meta:'стікер на моніторі',log:['шукаю угоди без відповіді понад 48 год','пишу чернетку follow-up','ставлю задачу менеджеру'],result:'Жоден клієнт не губиться: follow-up іде сам',hours:3},
+ {id:'rep',kind:'doc',title:'Звіт для CEO до 10:00',meta:'зводиться з 4 систем',log:['збираю дані з CRM, ERP і таблиць','рахую KPI','оновлюю дашборд'],result:'Звіт оновлюється щодня о 8:00',hours:5},
+ {id:'cv',kind:'pdf',title:'CV_kandydat_112.pdf',meta:'ще 86 у черзі',log:['читаю CV','порівнюю з вимогами вакансії','формую шортлист'],gate:'AI пропонує 6 кандидатів. Рішення про співбесіду ухвалює рекрутер. Підтвердити шортлист?',result:'Шортлист готовий, рекрутер лише підтверджує',hours:7},
+ {id:'chat',kind:'chat',title:'«А де моє замовлення?»',meta:'14-те питання сьогодні',log:['знаходжу замовлення','перевіряю статус доставки','відповідаю клієнту'],result:'Типові питання закриває AI, складні передає людині',hours:4}
+];
+const POS=[{l:5,t:7,r:-5},{l:45,t:4,r:3},{l:22,t:28,r:-2},{l:60,t:30,r:6},{l:3,t:53,r:4},{l:37,t:56,r:-6},{l:64,t:62,r:2}];
+const board=$('#board'),chaos=$('#chaos'),sock=$('#sockIn'),hint=$('#hint');
+let busy=false,done=0,saved=0;
+if(COARSE){$('#zoneHow').textContent='торкніться будь-якої задачі';hint.textContent='Торкніться задачі в зоні «Вхідні», і агент її забере.';}
+const cards=[];
+TASKS.forEach((t,i)=>{
+  const b=document.createElement('button');b.type='button';b.className='card k-'+t.kind;
+  b.style.left=`min(${POS[i].l}%, calc(100% - var(--cw) - 10px))`;b.style.top=POS[i].t+'%';b.style.zIndex=i+1;
+  b.style.setProperty('--rot',POS[i].r+'deg');
+  b.setAttribute('aria-label',t.title+'. Передати AI-агенту');
+  b.innerHTML=`<span class="kind"><i></i>${KIND[t.kind]}</span><span class="t">${esc(t.title)}</span><span class="m">${esc(t.meta)}</span>`;
+  chaos.appendChild(b);cards.push(b);attach(b,t);
+});
+function over(x,y){const r=sock.getBoundingClientRect();return x>=r.left-14&&x<=r.right+14&&y>=r.top-14&&y<=r.bottom+14;}
+function nudge(){hint.textContent='Агент ще працює з попередньою задачею.';hint.classList.remove('shake');void hint.offsetWidth;hint.classList.add('shake');}
+function attach(el,t){
+  let sx=0,sy=0,moved=false,active=false,pid=null;
+  el.addEventListener('pointerdown',e=>{
+    if(e.pointerType==='touch'||el.classList.contains('gone'))return;
+    if(e.pointerType==='mouse'&&e.button!==0)return;
+    sx=e.clientX;sy=e.clientY;moved=false;active=true;pid=e.pointerId;
+    try{el.setPointerCapture(pid)}catch(_){}
+  });
+  el.addEventListener('pointermove',e=>{
+    if(!active)return;
+    const dx=e.clientX-sx,dy=e.clientY-sy;
+    if(!moved&&Math.hypot(dx,dy)<6)return;
+    if(!moved){moved=true;el.classList.add('dragging');}
+    el.style.setProperty('--dx',dx+'px');el.style.setProperty('--dy',dy+'px');
+    sock.classList.toggle('over',over(e.clientX,e.clientY));
+  });
+  const end=e=>{
+    if(!active)return;active=false;
+    try{el.releasePointerCapture(pid)}catch(_){}
+    sock.classList.remove('over');
+    if(!moved)return;
+    el.dataset.dragged='1';el.classList.remove('dragging');
+    const hit=e.type==='pointerup'&&over(e.clientX,e.clientY);
+    if(hit&&!busy){run(el,t);}
+    else{el.style.setProperty('--dx','0px');el.style.setProperty('--dy','0px');if(hit)nudge();}
+    setTimeout(()=>{el.dataset.dragged='';},0);
+  };
+  el.addEventListener('pointerup',end);el.addEventListener('pointercancel',end);
+  el.addEventListener('click',()=>{
+    if(el.dataset.dragged==='1')return;
+    if(el.classList.contains('gone'))return;
+    if(busy){nudge();return;}
+    run(el,t);
+  });
+}
+async function packet(id){const p=$(id);p.classList.remove('run');void p.offsetWidth;p.classList.add('run');await wait(560);}
+function countTo(el,from,to){
+  const t0=performance.now(),d=RM?1:500;
+  const step=now=>{const k=Math.min(1,(now-t0)/d);el.textContent=Math.round(from+(to-from)*k);if(k<1)requestAnimationFrame(step);};
+  requestAnimationFrame(step);
+}
+async function run(el,t){
+  busy=true;board.classList.add('busy');
+  el.classList.add('gone');el.setAttribute('aria-hidden','true');el.tabIndex=-1;
+  hint.classList.remove('shake');hint.textContent='Агент працює…';
+  const slotIn=$('#slotIn');slotIn.innerHTML=`<span class="kind-inline k-${t.kind}"><i></i>${KIND[t.kind]}</span>${esc(t.title)}`;sock.classList.add('filled');
+  await packet('#p1');
+  const ai=$('#nodeAi'),log=$('#aiLog');ai.classList.add('on');log.innerHTML='';
+  for(const line of t.log){const d=document.createElement('div');d.textContent='› '+line;log.appendChild(d);await wait(520);}
+  if(t.gate){
+    const g=$('#gate');$('#gateText').textContent=t.gate;g.hidden=false;
+    await new Promise(res=>{const b=$('#approve');b.onclick=()=>{g.hidden=true;b.onclick=null;res();};try{b.focus({preventScroll:true})}catch(_){}});
+    const d=document.createElement('div');d.className='ok';d.textContent='› схвалено людиною';log.appendChild(d);
+  }
+  await packet('#p2');
+  const out=$('#nodeOut');out.classList.add('hit');
+  $('#slotOut').innerHTML=`${esc(t.result)}<span class="gain">+${t.hours} год/тиждень для команди</span>`;
+  countTo($('#hoursSaved'),saved,saved+t.hours);saved+=t.hours;done++;
+  const left=TASKS.length-done,pct=Math.round(left/TASKS.length*100);
+  $('#chaosLeft').textContent=left;$('#chaosPct').textContent=pct+'%';$('#chaosBar').style.width=pct+'%';
+  await wait(1200);
+  ai.classList.remove('on');out.classList.remove('hit');sock.classList.remove('filled');
+  if(left===0){finish();return;}
+  slotIn.textContent='Наступна задача?';log.innerHTML='<div>Готовий до наступної задачі</div>';
+  hint.textContent=`Залишилось ${left}. Спробуйте рахунок або CV: там агент попросить людину підтвердити.`;
+  busy=false;board.classList.remove('busy');
+}
+function finish(){
+  hint.textContent='';
+  $('#slotIn').textContent='Вхідні порожні';$('#aiLog').innerHTML='<div class="ok">› 7 флоу активні</div>';
+  $('#doneText').textContent=`Ви щойно зібрали ${TASKS.length} автоматизацій і повернули команді ${saved} годин на тиждень, майже повну ставку. У реальній компанії я починаю так само: знаходжу задачі, які з'їдають час, і передаю їх агентам.`;
+  $('#done').hidden=false;
+}
+$('#replay').addEventListener('click',()=>{
+  cards.forEach(c=>{c.classList.remove('gone');c.removeAttribute('aria-hidden');c.tabIndex=0;c.style.setProperty('--dx','0px');c.style.setProperty('--dy','0px');});
+  busy=false;done=0;saved=0;board.classList.remove('busy');
+  $('#hoursSaved').textContent='0';$('#chaosLeft').textContent=TASKS.length;$('#chaosPct').textContent='100%';$('#chaosBar').style.width='100%';
+  $('#slotIn').textContent='Перетягніть сюди задачу зліва';$('#slotOut').textContent='—';$('#aiLog').innerHTML='<div>Чекаю на задачу</div>';
+  $('#done').hidden=true;hint.textContent=COARSE?'Торкніться задачі в зоні «Вхідні».':'Візьміть задачу з лівої панелі й киньте в «Подію».';
+});
+
+/* ---------- industries ---------- */
+const IND=[
+ {k:'ecom',name:'E-commerce',items:[
+  ['Замовлення з Allegro і Shopify вручну переносять у таблицю й на склад','Замовлення, залишки й статуси синхронізуються самі, розбіжності ловить агент'],
+  ['Рахунки виставляють руками після кожного замовлення','Рахунок генерується й іде клієнту та в бухгалтерію автоматично'],
+  ['Менеджер 30 разів на день відповідає «де моє замовлення?»','AI відповідає на типові питання за даними замовлення, складні передає людині'],
+  ['Власник раз на тиждень сам зводить продажі','Щоранку в Telegram: продажі, маржа й топ-товари']]},
+ {k:'hr',name:'HR і рекрутинг',items:[
+  ['Рекрутери вручну читають сотні CV','AI оцінює CV за вимогами вакансії, рекрутер підтверджує шортлист'],
+  ['Листи кандидатам і запис на співбесіди вручну','Кандидат сам обирає час, нагадування й follow-up ідуть автоматично'],
+  ['Договори для працевлаштування збирають у Word','Документи генеруються із шаблонів за даними кандидата за хвилину'],
+  ['Дані кандидатів у трьох таблицях і пошті','Одна база в CRM або ATS, синхронізована з таблицями й поштою']]},
+ {k:'pharma',name:'Фарма й регульовані галузі',items:[
+  ['Контент між платформами мігрують вручну, сотні одиниць','Пайплайн міграції з автоматичними перевірками якості й звітом'],
+  ['Працівники шукають відповіді в десятках SOP і PDF','RAG-асистент відповідає з посиланням на конкретний документ'],
+  ['Документи оформлюють вручну за шаблонами','Генерація документів з audit trail: хто, що й коли змінив'],
+  ['Звіти для керівництва збирають годинами','Дашборди оновлюються самі: з 4–5 годин до 5–10 хвилин']]},
+ {k:'ops',name:'Операції в будь-якій компанії',items:[
+  ['Задачі в Jira створюють і оновлюють вручну','AI-агент для Jira: задачі, спринти й ризик-звіти звичайною мовою'],
+  ['Заявки з сайту губляться в пошті','Кожна заявка в HubSpot, з кваліфікацією й сповіщенням менеджеру'],
+  ['Онбординг нового працівника: 20 ручних кроків','Акаунти, документи, доступи й welcome-лист запускаються одним тригером'],
+  ['Розсилки клієнтам роблять вручну й нерегулярно','Сегментовані розсилки з персоналізацією через AI, за розкладом']]}
+];
+const tabs=$('#tabs'),scen=$('#scen');
+function showInd(k){
+  [...tabs.children].forEach(b=>b.setAttribute('aria-selected',b.dataset.k===k));
+  const ind=IND.find(x=>x.k===k);
+  scen.innerHTML=ind.items.map(([b,a])=>`<div class="sc"><span class="lbl b">Було</span><span class="bf">${esc(b)}</span><span class="lbl a">Стало</span><span class="af">${esc(a)}</span></div>`).join('');
+}
+IND.forEach(x=>{const b=document.createElement('button');b.type='button';b.className='tab';b.role='tab';b.dataset.k=x.k;b.textContent=x.name;b.onclick=()=>showInd(x.k);tabs.appendChild(b);});
+showInd('ecom');
+
+/* ---------- process x-ray ---------- */
+const BP=[
+ {re:/cv|резюме|кандидат|рекрут|rekrut|ваканс|найм|співбесід/i,trigger:'Нове CV на пошті або в ATS',steps:[['Витягнути дані з CV і листа','n8n'],['Оцінити відповідність вимогам вакансії','Claude'],['Сформувати шортлист з поясненням','Google Sheets'],['Запросити кандидата обрати час','Cal.com']],gate:'Рекрутер підтверджує шортлист. AI не відмовляє кандидатам сам.',hours:'10–15 год',cx:'Середня',first:'скринінгу CV: найбільший обсяг рутини й швидкий видимий ефект.'},
+ {re:/замовл|allegro|shopify|склад|залишк|zam[oó]w|магазин|доставк/i,trigger:'Нове замовлення в Shopify або Allegro',steps:[['Забрати замовлення через API','n8n'],['Звірити залишки й оновити склад','Google Sheets'],['Виставити рахунок','wFirma'],['Надіслати клієнту статус і трекінг','Email']],gate:'Людина розбирає лише замовлення з розбіжностями в залишках.',hours:'8–12 год',cx:'Середня',first:'синхронізації замовлень і залишків: це головне джерело помилок і дзвінків від клієнтів.'},
+ {re:/звіт|звіти|report|raport|kpi|дашборд|dashboard|зведен/i,trigger:'Щодня о 7:30 за розкладом',steps:[['Зібрати дані з CRM, ERP і таблиць','n8n'],['Почистити й звести показники','Python'],['Оновити дашборд','PowerBI'],['Надіслати коротке резюме керівнику','Telegram']],gate:'Людина затверджує визначення KPI один раз, на старті.',hours:'5–8 год',cx:'Низька',first:'одного щотижневого звіту, який зараз забирає найбільше часу.'},
+ {re:/документ|договір|договор|umow|шаблон|word|рахун|faktur|акт|pdf/i,trigger:'Новий запис у CRM або заповнена форма',steps:[['Підтягнути дані клієнта чи працівника','HubSpot'],['Заповнити шаблон документа','Google Docs'],['Перевірити обов\'язкові поля й суми','Claude'],['Надіслати на підпис і зберегти в архів','Google Drive']],gate:'Відповідальна особа підтверджує документ перед відправкою.',hours:'4–7 год',cx:'Низька',first:'найчастішого типу документа: шаблон окупається вже за перший місяць.'},
+ {re:/лід|ліди|lead|заявк|crm|hubspot|клієнт|продаж|follow/i,trigger:'Нова заявка з сайту, пошти чи форми',steps:[['Розпізнати контакти й запит','Claude'],['Кваліфікувати й створити угоду','HubSpot'],['Сповістити менеджера','Telegram'],['Запланувати follow-up, якщо немає відповіді','n8n']],gate:'Менеджер вирішує, кому дзвонити першим. AI лише сортує й нагадує.',hours:'5–9 год',cx:'Низька',first:'обробки вхідних заявок: це прямо впливає на продажі.'}
+];
+const GEN={trigger:'Подія у вашій системі: лист, форма, новий рядок',steps:[['Зібрати дані з джерела','n8n'],['Класифікувати й витягнути суть','Claude'],['Виконати дію в цільовій системі','API'],['Залогувати й повідомити відповідального','Telegram']],gate:'На старті людина підтверджує кожну дію, поки флоу не доведе точність.',hours:'3–8 год',cx:'Залежить від систем',first:'аудиту: спершу треба побачити, де саме губиться час.'};
+const PRESETS=['Ми вручну переносимо замовлення з Allegro в Excel','Рекрутери щотижня читають сотні CV','Звіти для керівництва збираємо руками з 4 систем','Договори для нових працівників робимо з шаблонів у Word'];
+const msgs=$('#msgs');
+function bpHTML(b){
+  return `<div class="bp"><div><span class="bp-k">Тригер</span><div>${esc(b.trigger)}</div></div>
+  <div><span class="bp-k">Кроки агента</span><ol class="bp-steps">${b.steps.map(([s,tl])=>`<li><span>${esc(s)}</span><em class="tool">${esc(tl)}</em></li>`).join('')}</ol></div>
+  <div class="bp-gate"><b>Людина в контурі.</b> ${esc(b.gate)}</div>
+  <div class="bp-stats"><div><b>${esc(b.hours)}</b><span>на тиждень можна повернути</span></div><div><b>${esc(b.cx)}</b><span>складність впровадження</span></div></div></div>
+  <div>Я б почав з ${esc(b.first)}</div>`;
+}
+function analyse(q){return BP.find(b=>b.re.test(q))||GEN;}
+let xbusy=false;
+async function ask(q,instant){
+  if(!q.trim()||xbusy)return;xbusy=true;
+  const u=document.createElement('div');u.className='msg u';u.textContent=q;msgs.appendChild(u);
+  const b=document.createElement('div');b.className='msg b';
+  if(!instant){b.innerHTML='<span class="typing"><i></i><i></i><i></i></span>';msgs.appendChild(b);msgs.scrollTop=msgs.scrollHeight;await wait(900);}
+  else msgs.appendChild(b);
+  b.innerHTML=bpHTML(analyse(q));
+  while(msgs.children.length>6)msgs.removeChild(msgs.firstChild);
+  msgs.scrollTop=msgs.scrollHeight;xbusy=false;
+}
+PRESETS.forEach(p=>{const b=document.createElement('button');b.type='button';b.className='preset';b.textContent=p;b.onclick=()=>ask(p);$('#presets').appendChild(b);});
+$('#xform').addEventListener('submit',e=>{e.preventDefault();const i=$('#xinput');ask(i.value);i.value='';});
+ask(PRESETS[0],true);
+
+/* ---------- ROI ---------- */
+const PROC=[{id:'data',n:'Введення даних',h:4,on:true},{id:'rep',n:'Звіти й зведення',h:3,on:true},{id:'lead',n:'Заявки та ліди',h:3},{id:'docs',n:'Документи й рахунки',h:3},{id:'mail',n:'Типове листування',h:4,on:true},{id:'sync',n:'Перенесення між системами',h:2}];
+let roiTouched=false;
+const procs=$('#procs');
+PROC.forEach(p=>{const b=document.createElement('button');b.type='button';b.className='proc';b.setAttribute('aria-pressed',!!p.on);b.innerHTML=`${esc(p.n)}<small>${p.h}</small>`;b.onclick=()=>{p.on=!p.on;b.setAttribute('aria-pressed',p.on);roiTouched=true;calc();};procs.appendChild(b);});
+['rPeople','rRate','rAuto'].forEach(id=>$('#'+id).addEventListener('input',()=>{roiTouched=true;calc();}));
+const anim=new WeakMap();
+function tween(el,to,suffix=''){
+  const from=anim.get(el)??0;anim.set(el,to);const t0=performance.now(),d=RM?1:420;
+  const step=now=>{const k=Math.min(1,(now-t0)/d),e=1-Math.pow(1-k,3);el.textContent=fmt(from+(to-from)*e)+suffix;if(k<1)requestAnimationFrame(step);};
+  requestAnimationFrame(step);
+}
+function nice(v){const p=Math.pow(10,Math.floor(Math.log10(v)));const n=v/p;return(n<=1?1:n<=2?2:n<=5?5:10)*p;}
+const kfmt=v=>v>=1000?fmt(v/1000)+' тис.':fmt(v);
+let roiState={};
+function calc(){
+  const people=+$('#rPeople').value,rate=+$('#rRate').value,auto=+$('#rAuto').value;
+  $('#oPeople').textContent=people;$('#oRate').textContent=rate+' zł';$('#oAuto').textContent=auto+'%';
+  const sel=PROC.filter(p=>p.on),hPer=sel.reduce((s,p)=>s+p.h,0);
+  const mHours=people*hPer*4.33,costM=mHours*rate,saveM=costM*auto/100,saveH=mHours*auto/100;
+  const n=sel.length,invLow=n?2499+n*3500:0,invHigh=n?2499+n*7500:0,inv=(invLow+invHigh)/2;
+  roiState={saveM,costM,people,hPer};
+  tween($('#lostYear'),costM*12,' zł');tween($('#kSave'),saveM);tween($('#kHours'),saveH);
+  $('#kFte').textContent=(saveH/160).toLocaleString('uk-UA',{maximumFractionDigits:1});
+  $('#weekBar').style.width=Math.min(100,hPer/40*100)+'%';
+  $('#weekTxt').textContent=n?`Кожна з ${people} людей витрачає ${hPer} год із 40-годинного тижня на ручну роботу (${Math.round(hPer/40*100)}%).`:'Оберіть хоча б один процес.';
+  $('#invest').textContent=n?`${fmt(Math.round(invLow/1000)*1000-1)}–${fmt(Math.round(invHigh/1000)*1000-1)} zł`:'—';
+  drawChart(saveM,inv);
+}
+function drawChart(saveM,inv){
+  const W=560,H=230,pl=58,pr=14,pt=14,pb=30,M=12;
+  const maxRaw=Math.max(saveM*M,inv,1)*1.08,step=nice(maxRaw/4),maxY=Math.ceil(maxRaw/step)*step;
+  const x=m=>pl+(W-pl-pr)*m/M,y=v=>pt+(H-pt-pb)*(1-v/maxY);
+  let g='';
+  for(let v=0;v<=maxY+1e-6;v+=step){g+=`<line class="grid-l" x1="${pl}" x2="${W-pr}" y1="${y(v)}" y2="${y(v)}"/><text class="ax" x="${pl-8}" y="${y(v)+4}" text-anchor="end">${kfmt(v)}</text>`;}
+  for(const m of[0,3,6,9,12]){g+=`<text class="ax" x="${x(m)}" y="${H-10}" text-anchor="middle">${m} міс</text>`;}
+  const pts=Array.from({length:M+1},(_,m)=>`${x(m)},${y(saveM*m)}`).join(' ');
+  const area=`${x(0)},${y(0)} ${pts} ${x(M)},${y(0)}`;
+  let cross='';
+  if(saveM>0&&inv>0){const mc=inv/saveM;if(mc<=M){const cx=x(mc),cy=y(inv),lab=mc<1?`окупність ≈ ${Math.max(1,Math.round(mc*4.33))} тиж.`:`окупність ≈ ${mc.toLocaleString('uk-UA',{maximumFractionDigits:1})} міс`;cross=`<circle cx="${cx}" cy="${cy}" r="5" fill="var(--surface)" stroke="var(--ink)" stroke-width="2"/><text class="ax" x="${Math.min(cx+8,W-pr-120)}" y="${cy-10}" style="fill:var(--ink)">${lab}</text>`;}
+    else cross=`<text class="ax" x="${W-pr}" y="${pt+12}" text-anchor="end" style="fill:var(--ink)">окупність понад 12 міс</text>`;}
+  $('#chart').innerHTML=`<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">${g}
+  <polygon points="${area}" fill="var(--ok)" fill-opacity=".12"/>
+  ${inv>0?`<line x1="${pl}" x2="${W-pr}" y1="${y(inv)}" y2="${y(inv)}" stroke="var(--chaos)" stroke-width="2" stroke-dasharray="6 5"/>`:''}
+  <polyline points="${pts}" fill="none" stroke="var(--ok)" stroke-width="2.5" stroke-linejoin="round"/>
+  <circle cx="${x(M)}" cy="${y(saveM*M)}" r="4" fill="var(--ok)"/>${cross}</svg>`;
+}
+calc();
+$('#capture').addEventListener('submit',e=>{
+  e.preventDefault();const i=$('#cEmail'),m=$('#capMsg');
+  if(!i.value||!i.checkValidity()){m.className='errmsg';m.textContent='Вкажіть email у форматі name@firma.pl, щоб я міг надіслати розрахунок.';i.focus();return;}
+  m.className='okmsg';m.textContent=`Готово. Розрахунок надіслано на ${i.value}. (Прототип: на живому сайті лист піде через Resend, а мені в Telegram прийде новий лід із цими цифрами.)`;
+});
+
+/* ---------- booking ---------- */
+const WD=['нд','пн','вт','ср','чт','пт','сб'],SL=['09:00','10:30','13:00','15:30','17:00'];
+const days=[];{const d=new Date();d.setHours(12,0,0,0);while(days.length<8){d.setDate(d.getDate()+1);if(d.getDay()%6!==0)days.push(new Date(d));}}
+let selDay=0,selSlot=null;
+const daysEl=$('#days'),slotsEl=$('#slots');
+const dd=d=>String(d.getDate()).padStart(2,'0')+'.'+String(d.getMonth()+1).padStart(2,'0');
+days.forEach((d,i)=>{const b=document.createElement('button');b.type='button';b.className='day';b.innerHTML=`<small>${WD[d.getDay()]}</small><b>${dd(d)}</b>`;b.onclick=()=>{selDay=i;selSlot=null;renderDays();};daysEl.appendChild(b);});
+function renderDays(){
+  [...daysEl.children].forEach((b,i)=>b.setAttribute('aria-pressed',i===selDay));
+  slotsEl.innerHTML='';
+  SL.forEach((s,j)=>{const b=document.createElement('button');b.type='button';b.className='slotb';b.textContent=s;b.disabled=(selDay*7+j*3)%5===0;b.setAttribute('aria-pressed',selSlot===j);b.onclick=()=>{selSlot=j;renderDays();};slotsEl.appendChild(b);});
+}
+renderDays();
+$('#bform').addEventListener('submit',e=>{
+  e.preventDefault();const em=$('#bEmail'),msg=$('#bMsg');
+  if(selSlot===null){msg.className='errmsg';msg.textContent='Оберіть час ліворуч.';return;}
+  if(!em.value||!em.checkValidity()){msg.className='errmsg';msg.textContent='Вкажіть email: на нього прийде підтвердження й посилання на дзвінок.';em.focus();return;}
+  const d=days[selDay],when=`${WD[d.getDay()]}, ${dd(d)} о ${SL[selSlot]} (CET)`,svc=document.querySelector('input[name=svc]:checked').value;
+  const name=$('#bName').value.trim(),desc=$('#bDesc').value.trim();
+  msg.className='okmsg';msg.textContent='Заброньовано. Нижче видно, що отримаєте ви і що отримую я.';
+  $('#pvSubj').textContent=`Підтверджено: ${svc.split(',')[0]} з Михайлом Логазою, ${when}`;
+  $('#pvBody').textContent=`Дякую за запис${name?', '+name.split(',')[0]:''}! Посилання на Google Meet додано в календарне запрошення. Щоб розмова була корисною, підготуйте 1–2 процеси, які забирають найбільше часу. Змінити час можна за посиланням у листі.`;
+  let tg=`Нове бронювання\nПослуга: ${svc}\nКоли: ${when}\nEmail: ${em.value}`;
+  if(name)tg+=`\nХто: ${name}`;
+  if(desc)tg+=`\nЗапит: ${desc}`;
+  if(roiTouched&&roiState.saveM)tg+=`\nЗ калькулятора: ${roiState.people} люд. × ${roiState.hPer} год/тижд., потенціал ≈ ${fmt(roiState.saveM)} zł/міс`;
+  $('#pvTg').textContent=tg;$('#previews').hidden=false;
+});
+})();
+</script>
+
+</body>
+</html>
