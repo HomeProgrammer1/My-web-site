@@ -1,0 +1,5 @@
+# Impeccable engine binaries: downloaded per-OS by the launcher, never committed
+.claude/skills/impeccable/scripts/bin/
+# Impeccable / taste-skill runtime state
+.impeccable/
+.taste-skill/
