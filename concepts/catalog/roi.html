@@ -100,7 +100,7 @@
       <div class="card card-pad res">
         <div class="bignum"><span>Ручна робота коштує вам на рік</span><b class="warn" id="aYear">0 zł</b></div>
         <div class="wk"><span class="small muted" id="aWkTxt"></span><div class="wk-bar"><i id="aWk"></i><span>40 год</span></div></div>
-        <div class="kpis"><div class="kpi"><b class="good" id="aSave">0</b><span>zł на місяць можна повернути</span></div><div class="kpi"><b id="aHours">0</b><span>годин на місяць звільняється</span></div><div class="kpi"><b id="aFte">0</b><span>штатних ставок</span></div></div>
+        <div class="kpis"><div class="kpi"><b class="good" id="aSave">0</b><span>zł на місяць можна повернути</span></div><div class="kpi"><b id="aHours">0</b><span>годин на місяць звільняється</span></div><div class="kpi"><b id="aFte">0</b><span>год/тиждень повертається кожному</span></div></div>
         <div class="chart" id="aChart" role="img" aria-label="Накопичена економія за 12 місяців проти інвестиції"></div>
         <div class="legend"><span><i style="background:var(--good)"></i>накопичена економія</span><span><i style="background:var(--warn)"></i>орієнтовна інвестиція <span id="aInv" class="num"></span></span></div>
         <form class="cap" data-cap><input class="input" type="email" placeholder="ваш@email.com" aria-label="Email" autocomplete="email"><button class="btn btn-primary" type="submit">Надіслати розрахунок</button><p class="small muted" style="flex-basis:100%">PDF з цифрами і 3 процеси, з яких я б почав. Відповідаю особисто.</p></form>
@@ -182,7 +182,7 @@ function calcA(){
   $('#aPeopleO').textContent=ppl;$('#aRateO').textContent=rate+' zł';$('#aAutoO').textContent=au+'%';
   const sel=PROC.filter(p=>p.on),h=sel.reduce((s,p)=>s+p.h,0),mh=ppl*h*W,cost=mh*rate,save=cost*au/100,sh=mh*au/100,[lo,hi]=inv(sel.length);
   tween($('#aYear'),cost*12,{suffix:' zł'});tween($('#aSave'),save);tween($('#aHours'),sh);
-  $('#aFte').textContent=(sh/160).toLocaleString('uk-UA',{maximumFractionDigits:1});
+  $('#aFte').textContent=(h*au/100).toLocaleString('uk-UA',{maximumFractionDigits:1});
   $('#aWk').style.width=Math.min(100,h/40*100)+'%';
   $('#aWkTxt').textContent=sel.length?`Кожна людина віддає рутині ${h} год із 40 (${Math.round(h/40*100)}% тижня)`:'Оберіть хоча б один процес';
   $('#aInv').textContent=sel.length?`${fmt(r9(lo))}–${fmt(r9(hi))} zł`:'—';

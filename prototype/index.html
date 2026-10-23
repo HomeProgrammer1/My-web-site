@@ -388,7 +388,7 @@ input[type=range]{width:100%;accent-color:var(--flow)}
   <ol class="timeline">
     <li><span class="yr">2020–2021</span><h3>Excel → CRM</h3><p>HR-компанія з п'ятьма відділами жила в таблицях. Перевірив якість даних, прибрав дублікати, спроєктував мапінг полів і переніс усе в CRM.</p><span class="stat">За місяць жоден відділ не повернувся до таблиць</span></li>
     <li><span class="yr">2022–2024</span><h3>ERP на 10 000+ користувачів</h3><p>Міграція HR- і фінансових даних: 5 департаментів, 9–10 релізів, UAT на кожному кроці. Звіти для правління замість ручних зведень.</p><span class="stat">600–800 тис. рядків · 0 критичних втрат · на 1,5–2 міс раніше плану</span></li>
-    <li><span class="yr">2024 – зараз</span><h3>AI-агент у фарма-SaaS</h3><p>Як PM і Product Owner запустив AI-агента для Jira: менеджери керують задачами звичайною мовою. Гібридна архітектура зрізала витрати на AI.</p><span class="stat">30–50 PM у пілоті · −87% вартості API</span></li>
+    <li><span class="yr">2024 – зараз</span><h3>AI-агент у фарма-SaaS</h3><p>Як PM і Product Owner запустив AI-агента для Jira: менеджери керують задачами звичайною мовою. Гібридна архітектура зрізала витрати на AI.</p><span class="stat">10–15 людей у пілоті · −87% вартості API</span></li>
     <li><span class="yr">2025–2026</span><h3>Агентні флоу end-to-end</h3><p>n8n і Make, RAG над внутрішніми документами, плагіни для Claude, SaaS, побудований за spec-driven development, агентний процес розробки з human gates.</p><span class="stat">2-ге місце серед 70+ команд · Complete.dev</span></li>
   </ol>
 </section>
@@ -431,7 +431,7 @@ input[type=range]{width:100%;accent-color:var(--flow)}
       <div class="kpis">
         <div class="kpi"><b class="ok" id="kSave">0</b><span>можна повернути, zł/міс</span></div>
         <div class="kpi"><b id="kHours">0</b><span>годин на місяць звільняється</span></div>
-        <div class="kpi"><b id="kFte">0</b><span>штатних ставок</span></div>
+        <div class="kpi"><b id="kFte">0</b><span>год/тиждень повертається кожному</span></div>
       </div>
       <div class="chart-wrap" id="chart" role="img" aria-label="Накопичена економія за 12 місяців порівняно з інвестицією"></div>
       <div class="legend"><span><i style="background:var(--ok)"></i>накопичена економія</span><span><i style="background:var(--chaos)"></i>орієнтовна інвестиція <span id="invest" class="mono"></span></span></div>
@@ -447,7 +447,7 @@ input[type=range]{width:100%;accent-color:var(--flow)}
 <section class="chapter" id="cases"><span class="dot"></span>
   <div class="ch-head"><p class="eyebrow">Кейси</p><h2>Що вже працює</h2></div>
   <div class="cases">
-    <article class="case"><span class="eyebrow">Фарма-SaaS · AI-агент для Jira</span><div class="metric">−87%</div><p class="mlabel">витрат на AI-API: з ~$1 200 до ~$150 на місяць</p><p>Менеджери створюють задачі, епіки й ризик-звіти звичайною мовою. Прості команди обробляє детермінований парсер, аналітику — LLM. Тому на операціях запису 0% галюцинацій. Пілот на 30–50 PM.</p><div class="tags"><span>Python</span><span>FastAPI</span><span>Claude API</span><span>Atlassian Forge</span></div></article>
+    <article class="case"><span class="eyebrow">Фарма-SaaS · AI-агент для Jira</span><div class="metric">−87%</div><p class="mlabel">витрат на AI-API: з ~$1 200 до ~$150 на місяць</p><p>Менеджери створюють задачі, епіки й ризик-звіти звичайною мовою. Прості команди обробляє детермінований парсер, аналітику — LLM. Тому на операціях запису 0% галюцинацій. Пілот на 10–15 людей.</p><div class="tags"><span>Python</span><span>FastAPI</span><span>Claude API</span><span>Atlassian Forge</span></div></article>
     <article class="case"><span class="eyebrow">HR-tech · ERP на 10 000+ користувачів</span><div class="metric">600–800 тис.</div><p class="mlabel">рядків HR- і фінансових даних без критичних втрат</p><p>Мапінг полів для 5 департаментів, 9–10 релізів, UAT на кожному. Звіт для правління скоротився з 4–5 годин до 5–10 хвилин. Здали на 1,5–2 місяці раніше плану.</p><div class="tags"><span>ERP</span><span>Data mapping</span><span>PowerBI</span></div></article>
     <article class="case"><span class="eyebrow">HR-агенція · з Excel у CRM</span><div class="metric">1 місяць</div><p class="mlabel">і жоден з 5 відділів не повернувся до таблиць</p><p>Аудит якості даних до міграції: дублікати, формати, пропуски. Спільні правила полів для відділів з різними пріоритетами, навчання команд.</p><div class="tags"><span>CRM</span><span>Data quality</span><span>Change management</span></div></article>
     <article class="case"><span class="eyebrow">Бренд детективних ігор · контент-фабрика</span><div class="metric">30 stories</div><p class="mlabel">з одного брифу в Telegram-боті</p><p>Бот збирає бриф, AI пише контент-план у голосі бренду, генерує нуар-фони й верстає готові Instagram Stories. Вартість API: $0 на безкоштовному тарифі.</p><div class="tags"><span>Python</span><span>Gemini</span><span>Telegram Bot</span></div></article>
@@ -722,7 +722,7 @@ function calc(){
   const n=sel.length,invLow=n?2499+n*3500:0,invHigh=n?2499+n*7500:0,inv=(invLow+invHigh)/2;
   roiState={saveM,costM,people,hPer};
   tween($('#lostYear'),costM*12,' zł');tween($('#kSave'),saveM);tween($('#kHours'),saveH);
-  $('#kFte').textContent=(saveH/160).toLocaleString('uk-UA',{maximumFractionDigits:1});
+  $('#kFte').textContent=(hPer*auto/100).toLocaleString('uk-UA',{maximumFractionDigits:1});
   $('#weekBar').style.width=Math.min(100,hPer/40*100)+'%';
   $('#weekTxt').textContent=n?`Кожна з ${people} людей витрачає ${hPer} год із 40-годинного тижня на ручну роботу (${Math.round(hPer/40*100)}%).`:'Оберіть хоча б один процес.';
   $('#invest').textContent=n?`${fmt(Math.round(invLow/1000)*1000-1)}–${fmt(Math.round(invHigh/1000)*1000-1)} zł`:'—';
