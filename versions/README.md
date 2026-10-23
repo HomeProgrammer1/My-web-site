@@ -1,0 +1,7 @@
+# Версії сайту
+
+| Версія | Папка | Опис | Перегляд |
+|---|---|---|---|
+| v1 · «Понеділок у планері» | `versions/v1-planner/` | Перша зібрана версія (23.10.2026): вісь 42%, годинник понеділка й фото-нотатки Михайла в кожній секції, кобальт + жовтий маркер, Geologica. Пройшла taste (0 FAIL) і детектор impeccable. Фінальне ревю impeccable: вердикт «fix», правки внесено; повторну оцінку не завершено через ліміт сесії. | https://claude.ai/artifact/SQWCZJ1dGJXJ8ahsGgiNbJ · git tag `site-v1-planner` |
+
+Відкрити локально: `python3 -m http.server -d versions/v1-planner` і перейти на http://localhost:8000.
