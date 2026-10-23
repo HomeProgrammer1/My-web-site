@@ -26,20 +26,7 @@
     M.animate(from, to, { duration: 0.45, ease: [0.16, 1, 0.3, 1], onUpdate: (v) => { node.textContent = format(v); } });
   };
 
-  /* ---------- sticky action after the hero ---------- */
   const hero = $('#hero');
-  const dock = $('#dock');
-  if (hero && dock && 'IntersectionObserver' in window) {
-    // The button waits out of the way while the visitor reads down, and comes back on a pause or a scroll up.
-    let past = false, lastY = window.scrollY, idle;
-    const show = (on) => dock.classList.toggle('is-on', past && on);
-    new IntersectionObserver(([e]) => { past = !e.isIntersecting; show(past); }, { threshold: 0.05 }).observe(hero);
-    window.addEventListener('scroll', () => {
-      const y = window.scrollY;
-      if (Math.abs(y - lastY) > 6) { show(y < lastY); lastY = y; }
-      clearTimeout(idle); idle = setTimeout(() => show(true), 900);
-    }, { passive: true });
-  }
 
   /* ---------- hero: hand the notifications to the agent ---------- */
   const notifs = $$('#notifs .notif');
@@ -197,7 +184,7 @@
   const drawChart = (monthBack) => {
     const box = $('#chart'); if (!box) return;
     const NS = 'http://www.w3.org/2000/svg';
-    const W = Math.max(280, Math.min(720, box.clientWidth || 640)), H = 220, top = 30, base = 186;
+    const W = Math.max(280, Math.min(720, box.clientWidth || 640)), H = 236, top = W > 460 ? 40 : 56, base = 202;
     const bw = Math.min(38, (W - 11 * 6) / 12), gap = (W - 12 * bw) / 11;
     const max = monthBack * 12 || 1;
     const y = (v) => base - (v / max) * (base - top);
@@ -209,10 +196,13 @@
       mk('rect', { x, y: y(v), width: bw, height: Math.max(2, base - y(v)), rx: 6, fill: m <= 3 ? 'var(--lilac)' : 'var(--accent)', 'fill-opacity': m <= 3 ? 0.55 : 1 });
       mk('text', { x: x + bw / 2, y: base + 20, 'text-anchor': 'middle' }, m === 1 && W > 420 ? '1 міс.' : String(m));
     }
-    const q = monthBack * 3, qx = 3 * (bw + gap) - gap / 2;
+    const q = monthBack * 3;
     mk('line', { x1: 0, x2: W, y1: y(q), y2: y(q), stroke: 'var(--lilac)', 'stroke-width': 2, 'stroke-dasharray': '5 6' });
-    mk('text', { class: 'lab', x: 0, y: y(q) - 10 }, `3 місяці: ${zl(q)}`);
-    mk('text', { class: 'lab', x: W, y: 16, 'text-anchor': 'end' }, `12 місяців: ${zl(max)}`);
+    // Labels sit in a legend row above the bars, never on them.
+    mk('line', { x1: 0, x2: 18, y1: 11, y2: 11, stroke: 'var(--lilac)', 'stroke-width': 2, 'stroke-dasharray': '5 4' });
+    mk('text', { class: 'lab', x: 24, y: 16 }, `3 місяці: ${zl(q)}`);
+    if (W > 460) mk('text', { class: 'lab', x: W, y: 16, 'text-anchor': 'end' }, `12 місяців: ${zl(max)}`);
+    else mk('text', { class: 'lab', x: 24, y: 34 }, `12 місяців: ${zl(max)}`);
     box.replaceChildren(svg);
     box.setAttribute('aria-label', `Накопичена економія: ${zl(q)} за 3 місяці, ${zl(max)} за 12 місяців`);
   };
@@ -365,6 +355,7 @@
       $('#fWhat').value = `Мої цифри з калькулятора: ${last.p} людей, ${last.hours} год/тиждень рутини, ${zl(last.year)} на рік.`;
     }
     sheet.showModal();
+    $('.sheet__in', sheet).scrollTop = 0;
     if (canMove) {
       const phone = window.matchMedia('(max-width: 760px)').matches;
       M.animate(sheet, phone ? { y: ['100%', '0%'] } : { x: ['100%', '0%'] }, { duration: 0.45, ease: [0.16, 1, 0.3, 1] });
@@ -398,7 +389,7 @@
     const text = lines.join('\n');
     $('#confirmText').textContent = text;
     $('#mailLink').href = `mailto:kontakt@mlohaza.com?subject=${encodeURIComponent('Консультація 30 хв')}&body=${encodeURIComponent(text)}`;
-    form.hidden = true; confirmBox.hidden = false; confirmBox.focus();
+    form.hidden = true; confirmBox.hidden = false; $('.sheet__in', sheet).scrollTop = 0; confirmBox.focus({ preventScroll: true });
   });
   const copyBtn = $('#copyBtn');
   if (copyBtn) copyBtn.addEventListener('click', () => {
