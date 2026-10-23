@@ -5,652 +5,454 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>mlohaza.com</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="Михайло Логаза автоматизує рутину в HR- і рекрутингових агенціях, малому бізнесі та у ФОП на n8n, Make та AI-агентах. Рішення лишаються за людьми. Консультація 30 хв, 190 zł.">
+<meta name="description" content="AI-автоматизації для HR-агенцій, малого бізнесу та ФОП. Михайло Логаза налаштовує агентів на n8n, Make та Claude: рутину роблять агенти, рішення лишаються за людьми. Консультація 30 хв, 190 zł.">
 <link rel="preload" href="fonts/geologica-cyrillic-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="styles.css">
 <script>try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('motion');setTimeout(function(){document.documentElement.classList.remove('motion')},2500)}}catch(e){}</script>
 </head>
 <body>
 
-<header class="bar" id="bar" aria-label="Швидка навігація">
-  <div class="bar__in wrap">
-    <a class="bar__name" href="#top">Михайло Логаза</a>
-    <span class="bar__clock" id="clock" aria-live="off">Понеділок, 9:14</span>
-    <nav class="bar__links" aria-label="Розділи">
-      <a href="#shcho">Що автоматизую</a>
+<header class="nav">
+  <div class="nav__in wrap">
+    <a class="brand" href="#top"><b>Михайло Логаза</b><span>AI-автоматизації процесів</span></a>
+    <nav class="nav__links" aria-label="Розділи">
+      <a href="#komandy">Що автоматизую</a>
+      <a href="#kalkulyator">Калькулятор</a>
       <a href="#keisy">Кейси</a>
-      <a href="#calm-ops">Як я працюю</a>
-      <a href="#istoriya">Про мене</a>
+      <a href="#yak">Як я працюю</a>
     </nav>
-    <a class="btn" href="#konsultatsiya" data-press>Консультація 30&nbsp;хв</a>
+    <a class="btn" href="#pochaty" data-book>Консультація 30&nbsp;хв</a>
   </div>
 </header>
 
 <main id="top">
 
-<!-- HERO -->
-<section class="hero wrap" data-time="Понеділок, 9:14" aria-labelledby="h1">
-  <div class="split">
-    <div class="hero__left">
-      <header class="hero__top">
-        <a class="wordmark" href="#top">Михайло Логаза<span>AI-автоматизації процесів · Познань</span></a>
-        <details class="menu">
-          <summary>Меню</summary>
-          <ul>
-            <li><a href="#shcho">Що автоматизую</a></li>
-            <li><a href="#keisy">Кейси</a></li>
-            <li><a href="#calm-ops">Як я працюю</a></li>
-            <li><a href="#istoriya">Про мене</a></li>
-            <li><a href="#konsultatsiya">Консультація 30&nbsp;хв</a></li>
-          </ul>
-        </details>
-      </header>
-      <div class="hero__talk" data-hero-talk>
-        <p class="lead">Я автоматизую ручну роботу в HR- і рекрутингових агенціях, малому бізнесі та у ФОП. Агенти на n8n і Make роблять рутину, а рішення лишаються за вашими людьми.</p>
-        <div class="actions">
-          <a class="btn" href="#konsultatsiya" data-press>Записатися на консультацію</a>
-          <span class="btn-note">30&nbsp;хв · 190&nbsp;zł · зараховується у впровадження</span>
-        </div>
-        <a class="alt" href="#kalkulyator">Порахувати, скільки коштує рутина</a>
+<!-- HERO: 1959 in greyscale, today's phone in colour -->
+<section class="hero" id="hero" aria-labelledby="h1">
+  <figure class="hero__photo" aria-hidden="true"><img class="bw" src="assets/head-office-typists-room-new-zealand-railways.jpg" width="1520" height="1159" alt="" fetchpriority="high"></figure>
+  <div class="hero__veil"></div>
+  <div class="hero__colour"></div>
+  <div class="hero__grid wrap">
+    <div class="hero__copy">
+      <h1 id="h1"><span class="line"><span>Знайомо?</span></span><span class="line"><span>Цим займеться AI.</span></span></h1>
+      <p class="lead">Я налаштовую AI-автоматизації для HR- і рекрутингових агенцій, малого бізнесу та ФОП. Агенти беруть на себе рутину, а рішення лишаються за вашими людьми.</p>
+      <div class="cta-row">
+        <div><a class="btn" href="#pochaty" data-book data-press>Записатися на консультацію</a><span class="btn-note">30&nbsp;хв · 190&nbsp;zł · зараховується у впровадження</span></div>
+        <a class="textlink" href="#kalkulyator">Порахувати, скільки коштує рутина</a>
       </div>
     </div>
-    <div class="hero__right">
-      <nav class="hero__nav" aria-label="Розділи">
-        <a href="#shcho">Що автоматизую</a>
-        <a href="#keisy">Кейси</a>
-        <a href="#calm-ops">Як я працюю</a>
-        <a href="#istoriya">Про мене</a>
-      </nav>
-      <h1 id="h1"><span class="line"><span>Рутину — агентам.</span></span><span class="line"><span>Рішення — людям.</span></span></h1>
-      <div class="hero__media">
-        <img class="hero__photo" id="heroPhoto" src="img/me-hero.jpg" width="853" height="828" alt="Михайло Логаза в світло-блакитній сорочці, руки схрещені, усміхається" fetchpriority="high">
-        <p class="hero__figure"><b class="tnum">90%</b><span>працівників почали користуватися ERP на 10&nbsp;000+ людей, яку я впроваджував</span></p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 9:14 -->
-<section class="section wrap" id="ponedilok" data-time="Понеділок, 9:14" aria-labelledby="h-914">
-  <div class="split">
-    <aside class="zone" data-rise>
-      <div class="guide">
-        <p class="guide__time">9:14</p>
-        <img class="guide__photo" src="img/me-face.jpg" width="260" height="300" alt="Михайло Логаза" loading="lazy">
-        <p class="guide__note"><span class="guide__name">Михайло</span>Знайомий ранок? Торкніться сповіщення, і я покажу, що з ним зробить агент.</p>
-      </div>
-    </aside>
-    <div>
-      <h2 id="h-914" data-rise>Ваш понеділок, 9:14</h2>
-      <p class="lead muted" style="margin-top:24px" data-rise>Шість сповіщень, і кожне забирає години щотижня. Торкніться кожного.</p>
-      <div class="lock" data-ui data-rise style="margin-top:40px" id="lock">
-        <div class="lock__head">
-          <div><p class="lock__time">9:14</p><p class="lock__day">Понеділок</p></div>
-          <p class="lock__counter"><b id="lockHours">0</b><span>год/тиждень повернено</span></p>
-        </div>
-        <ul class="notes" id="notes">
-          <li><button class="note" type="button" data-h="6" data-after="Відгуки розкладено в базі кандидатів, рекрутер бачить список"><span class="note__app">Пошта</span><span class="note__title">34 нові відгуки на вакансію</span><span class="note__text">«Менеджер з продажу, Познань»</span><span class="note__hours">6 год</span></button></li>
-          <li><button class="note" type="button" data-h="4" data-after="Кандидати й статуси в одній базі"><span class="note__app">Excel</span><span class="note__title">kandydaci_FINAL_v3.xlsx</span><span class="note__text">«Хтось знову змінив файл»</span><span class="note__hours">4 год</span></button></li>
-          <li><button class="note" type="button" data-h="3" data-after="Follow-up надіслано, задачу додано в CRM"><span class="note__app">Нагадування</span><span class="note__title">Передзвонити клієнту</span><span class="note__text note__text--late">«Прострочено на 2 дні»</span><span class="note__hours">3 год</span></button></li>
-          <li><button class="note is-gate" type="button" data-h="3" data-after="Рахунок розпізнано й передано вам на погодження"><span class="note__app">Бухгалтерія</span><span class="note__title">Faktura_10_2026.pdf</span><span class="note__text">«Внести до п'ятниці»</span><span class="note__hours">3 год</span></button></li>
-          <li><button class="note" type="button" data-h="4" data-after="Звіт для клієнта зібрано й надіслано"><span class="note__app">Чат з клієнтом</span><span class="note__title">«Коли буде звіт по кандидатах?»</span><span class="note__text">«Клієнт питає вже вдруге»</span><span class="note__hours">4 год</span></button></li>
-          <li><button class="note is-gate" type="button" data-h="3" data-after="Договір сформовано, чекає на ваш підпис"><span class="note__app">Документи</span><span class="note__title">Договір для нового працівника</span><span class="note__text">«Зібрати з 3 шаблонів»</span><span class="note__hours">3 год</span></button></li>
-        </ul>
-        <div class="lock__foot" id="lockFoot">
-          <button class="link" type="button" id="lockAll">Передати все агенту</button>
-          <span class="small" style="color:#c9cfe0">Жовтим позначено рішення, які лишаються за вами.</span>
-        </div>
-        <div class="lock__final" id="lockFinal" hidden>
-          <p>Усе під контролем. Ви повернули 23&nbsp;години на тиждень. Два рішення чекають на вас.</p>
-          <div class="row">
-            <a class="btn" href="#konsultatsiya" data-press>Хочу так само</a>
-            <button class="link" type="button" id="lockReset">Ще раз</button>
+    <div class="hero__stage">
+      <span class="try"><i></i>Спробуйте: торкніться сповіщень</span>
+      <div class="phone" data-ui>
+        <div class="phone__screen">
+          <span class="phone__island" aria-hidden="true"></span>
+          <p class="lock__date">Понеділок</p>
+          <p class="lock__time">9:14</p>
+          <p class="lock__meter">звільнено <b id="lockH">0</b> год/тиждень</p>
+          <div class="notifs" id="notifs">
+            <button class="notif" type="button" data-h="6" data-after="Відгуки розкладено в базі кандидатів"><span class="ic ic-mail">M</span><span><span class="hd"><span>Пошта</span><span>зараз</span></span><span class="tt">34 нові відгуки на вакансію</span><span class="tx">«Менеджер з продажу, Познань»</span></span></button>
+            <button class="notif" type="button" data-h="4" data-after="Кандидати й статуси в одній базі"><span class="ic ic-xls">X</span><span><span class="hd"><span>Excel</span><span>9:02</span></span><span class="tt">kandydaci_FINAL_v3.xlsx</span><span class="tx">Хтось знову змінив файл</span></span></button>
+            <button class="notif" type="button" data-h="3" data-after="Follow-up надіслано, задача в CRM"><span class="ic ic-rem">!</span><span><span class="hd"><span>Нагадування</span><span>вчора</span></span><span class="tt">Передзвонити клієнту</span><span class="tx late">Прострочено на 2 дні</span></span></button>
+            <button class="notif is-gate" type="button" data-h="3" data-after="Рахунок розпізнано, чекає вашого погодження"><span class="ic ic-pdf">PDF</span><span><span class="hd"><span>Бухгалтерія</span><span>8:47</span></span><span class="tt">Faktura_10_2026.pdf</span><span class="tx">Внести до п'ятниці</span></span></button>
+            <button class="notif" type="button" data-h="4" data-after="Звіт для клієнта зібрано й надіслано"><span class="ic ic-chat">C</span><span><span class="hd"><span>Чат з клієнтом</span><span>8:31</span></span><span class="tt">«Коли буде звіт по кандидатах?»</span><span class="tx">Клієнт питає вже вдруге</span></span></button>
+            <button class="notif is-gate" type="button" data-h="3" data-after="Договір готовий, чекає вашого підпису"><span class="ic ic-doc">D</span><span><span class="hd"><span>Документи</span><span>8:15</span></span><span class="tt">Договір для нового працівника</span><span class="tx">Зібрати з 3 шаблонів</span></span></button>
+          </div>
+          <button class="textlink lock__all" type="button" id="lockAll">Передати все агенту</button>
+          <div class="lock__done" id="lockDone" hidden>
+            <p><b>Усе під контролем.</b> Ви повернули <span id="lockSum">23</span> години на тиждень. Два рішення чекають на вас.</p>
+            <a class="btn" href="#pochaty" data-book data-press>Хочу так само</a>
+            <button class="textlink" type="button" id="lockReset">Ще раз</button>
           </div>
         </div>
       </div>
     </div>
   </div>
+  <p class="hero__cap">Машбюро, 1959. Ручна робота нікуди не зникла, вона переїхала у ваш телефон.</p>
 </section>
 
-<!-- SEGMENTS -->
-<section class="section" id="shcho" data-time="Понеділок, 10:00" aria-labelledby="h-seg" style="padding-top:0">
-  <div class="wrap band-head">
-    <div class="split">
-      <div class="zone"><p class="guide__time" data-rise>10:00</p></div>
-      <div>
-        <h2 id="h-seg" data-rise>Схоже на вашу роботу?</h2>
-        <p class="lead muted" style="margin-top:20px" data-rise>Оберіть, хто ви, і подивіться, що зміниться.</p>
-      </div>
-    </div>
-  </div>
-  <div class="band" id="band">
-    <figure class="panel panel--photo">
-      <img src="img/me-band.jpg" width="490" height="828" alt="Михайло Логаза зі схрещеними руками" loading="lazy">
-      <figcaption class="scrim"><h3>Три типи команд</h3></figcaption>
+<!-- INTRO -->
+<section class="section light" id="pro-mene" aria-labelledby="h-intro">
+  <div class="wrap intro__grid">
+    <figure class="intro__photo" data-rise>
+      <img src="img/me-hero.jpg" width="853" height="828" alt="Михайло Логаза в світло-блакитній сорочці, руки схрещені, усміхається" loading="lazy">
+      <figcaption><b>Михайло Логаза</b>Познань · працюю з командами в Польщі та ЄС</figcaption>
     </figure>
-    <div class="panel seg seg--a" role="button" tabindex="0" aria-expanded="true" data-seg="0">
-      <p class="seg__name">HR і рекрутинг</p>
-      <p class="seg__hint">Кандидати, листи, договори</p>
-      <div class="seg__pairs">
-        <p class="pair"><s>Кандидати живуть у трьох таблицях і пошті</s><span>Одна база кандидатів, синхронізована з поштою й ATS</span></p>
-        <p class="pair"><s>Рекрутери вручну пишуть кожному кандидату</s><span>Підтвердження й нагадування йдуть за шаблонами, рекрутер лише перевіряє</span></p>
-        <p class="pair"><s>Запис на співбесіду забирає п'ять листів туди й назад</s><span>Кандидат сам обирає час, нагадування приходять автоматично</span></p>
-        <p class="pair"><s>Договори й документи збирають у Word</s><span>Документ формується з даних кандидата за хвилину, людина перевіряє й підписує</span></p>
-      </div>
-    </div>
-    <div class="panel seg seg--b" role="button" tabindex="0" aria-expanded="false" data-seg="1">
-      <p class="seg__name">Малий і середній бізнес</p>
-      <p class="seg__hint">Заявки, рахунки, звіти</p>
-      <div class="seg__pairs">
-        <p class="pair"><s>Заявки з сайту й пошти губляться</s><span>Кожна заявка в CRM, менеджер одразу отримує сповіщення</span></p>
-        <p class="pair"><s>Рахунки виставляють вручну після кожного замовлення</s><span>Рахунок формується й надсилається сам, бухгалтерія отримує копію</span></p>
-        <p class="pair"><s>Звіт для власника збирають з кількох систем</s><span>Звіт оновлюється сам щоранку</span></p>
-        <p class="pair"><s>Однакові відповіді клієнтам по 20 разів на день</s><span>AI готує відповіді на типові питання, складні передає людині</span></p>
-      </div>
-    </div>
-    <div class="panel seg seg--c" role="button" tabindex="0" aria-expanded="false" data-seg="2">
-      <p class="seg__name">ФОП / JDG</p>
-      <p class="seg__hint">Месенджери, запис, бухгалтер</p>
-      <div class="seg__pairs">
-        <p class="pair"><s>Клієнти пишуть у трьох месенджерах</s><span>Усі звернення в одному місці з нагадуваннями</span></p>
-        <p class="pair"><s>Рахунки й нагадування про оплату щомісяця вручну</s><span>Рахунки й нагадування йдуть самі</span></p>
-        <p class="pair"><s>Запис клієнтів через переписку</s><span>Клієнт сам бронює час, нагадування автоматичні</span></p>
-        <p class="pair"><s>Документи для бухгалтера збираєте в останній день</s><span>Документи щомісяця самі складаються в папку для бухгалтера</span></p>
+    <div>
+      <h2 id="h-intro" data-rise>Привіт, я Михайло</h2>
+      <blockquote class="belief" data-rise>Я вірю, що в еру AI люди стають важливішими, ніж до цього.</blockquote>
+      <p class="body" data-rise>Тому автоматизую рутину, а людей лишаю там, де вони найсильніші: у рішеннях, стосунках і роботі з клієнтами. 5+&nbsp;років я впроваджую CRM і ERP, а з 2024 року будую AI-агентів і автоматизації на n8n, Make та Claude. Допомагаю командам налаштувати Claude під свою роботу: проєкти, інтеграції й підхід second brain.</p>
+      <ul class="proofs" data-rise>
+        <li><b class="tnum">90%</b>працівників почали користуватися ERP на 10&nbsp;000+ людей, яку я впроваджував</li>
+        <li><b class="tnum">−87%</b>витрат на AI в агенті для Jira, який я запустив як Product Owner</li>
+        <li><b class="tnum">2-ге</b>місце серед 70+ команд на міжнародному AI-хакатоні</li>
+      </ul>
+      <div class="cta-row" data-rise>
+        <a class="btn" href="#pochaty" data-book data-press>Записатися на консультацію</a>
+        <a class="textlink" href="#yak">Як я працюю</a>
       </div>
     </div>
   </div>
-  <p class="wrap band-caption">Наведіть або торкніться свого типу команди. Зліва як зараз, справа після автоматизації.</p>
+</section>
+
+<!-- TEAMS -->
+<section class="section paper" id="komandy" aria-labelledby="h-teams">
+  <div class="wrap">
+    <div class="head" data-rise>
+      <h2 id="h-teams">Схоже на вашу роботу?</h2>
+      <p class="lead">Оберіть свій тип команди й подивіться, що зміниться після автоматизації.</p>
+    </div>
+    <div class="band" id="band">
+      <figure class="panel panel--photo">
+        <img src="img/me-band.jpg" width="490" height="828" alt="Михайло Логаза зі схрещеними руками" loading="lazy">
+        <figcaption><b>Три типи команд</b><span>Логіка одна: рутину агентам, рішення людям.</span></figcaption>
+      </figure>
+      <div class="panel seg" role="button" tabindex="0" aria-expanded="true">
+        <p class="seg__name">HR і рекрутинг</p>
+        <p class="seg__hint">Кандидати, листи, договори</p>
+        <p class="seg__open">Відкрити</p>
+        <div class="seg__pairs">
+          <p class="pair"><s>Кандидати живуть у трьох таблицях і пошті</s><span>Одна база кандидатів, синхронізована з поштою й ATS</span></p>
+          <p class="pair"><s>Рекрутери вручну пишуть кожному кандидату</s><span>Листи йдуть за шаблонами, рекрутер лише перевіряє</span></p>
+          <p class="pair"><s>Запис на співбесіду забирає п'ять листів</s><span>Кандидат сам обирає час, нагадування автоматичні</span></p>
+          <p class="pair"><s>Договори збирають у Word</s><span>Договір формується з даних кандидата, людина підписує</span></p>
+        </div>
+      </div>
+      <div class="panel seg" role="button" tabindex="0" aria-expanded="false">
+        <p class="seg__name">Малий і середній бізнес</p>
+        <p class="seg__hint">Заявки, рахунки, звіти</p>
+        <p class="seg__open">Відкрити</p>
+        <div class="seg__pairs">
+          <p class="pair"><s>Заявки з сайту й пошти губляться</s><span>Кожна заявка в CRM, менеджер одразу отримує сповіщення</span></p>
+          <p class="pair"><s>Рахунки виставляють вручну</s><span>Рахунок формується й надсилається сам</span></p>
+          <p class="pair"><s>Звіт для власника збирають з кількох систем</s><span>Звіт оновлюється сам щоранку</span></p>
+          <p class="pair"><s>Однакові відповіді клієнтам по 20 разів на день</s><span>AI готує відповіді, складні передає людині</span></p>
+        </div>
+      </div>
+      <div class="panel seg" role="button" tabindex="0" aria-expanded="false">
+        <p class="seg__name">ФОП / JDG</p>
+        <p class="seg__hint">Месенджери, запис, бухгалтер</p>
+        <p class="seg__open">Відкрити</p>
+        <div class="seg__pairs">
+          <p class="pair"><s>Клієнти пишуть у трьох месенджерах</s><span>Усі звернення в одному місці з нагадуваннями</span></p>
+          <p class="pair"><s>Рахунки й нагадування про оплату щомісяця вручну</s><span>Рахунки й нагадування йдуть самі</span></p>
+          <p class="pair"><s>Запис клієнтів через переписку</s><span>Клієнт сам бронює час</span></p>
+          <p class="pair"><s>Документи для бухгалтера в останній день</s><span>Документи самі складаються в папку для бухгалтера</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- BUILDER -->
-<section class="section wrap" id="zberit" data-time="Понеділок, 11:30" aria-labelledby="h-build" style="padding-top:0">
-  <div class="split">
-    <aside class="zone" data-rise>
-      <div class="guide">
-        <p class="guide__time">11:30</p>
-        <img class="guide__photo" src="img/me-smile.jpg" width="220" height="180" alt="Михайло Логаза усміхається" loading="lazy">
-        <p class="guide__note"><span class="guide__name">Михайло</span>Позначте, що у вас робиться вручну. Де йдеться про гроші чи людей, агент зупиниться й спитає вас.</p>
-      </div>
-    </aside>
+<section class="section light" id="zberit" aria-labelledby="h-build">
+  <div class="wrap">
+    <div class="head" data-rise>
+      <h2 id="h-build">Зберіть свою першу автоматизацію</h2>
+      <p class="lead">Позначте, що у вас робиться вручну. Праворуч одразу з'явиться схема, зекономлені години й повідомлення, яке ви отримували б щоранку.</p>
+    </div>
     <div class="builder">
-      <div class="stack-m">
-        <h2 id="h-build" data-rise>Зберіть свою першу автоматизацію</h2>
-        <p class="lead muted" data-rise>Три кроки, хвилина часу. На виході схема, години й повідомлення, яке ви отримували б щоранку.</p>
-      </div>
-      <div class="stack-s" data-rise>
-        <p class="legend" id="lb-who">Хто ви?</p>
-        <div class="chips" role="radiogroup" aria-labelledby="lb-who" id="bWho">
-          <button class="chip" type="button" role="radio" aria-checked="true" data-seg="hr">HR і рекрутинг</button>
-          <button class="chip" type="button" role="radio" aria-checked="false" data-seg="smb">Малий і середній бізнес</button>
-          <button class="chip" type="button" role="radio" aria-checked="false" data-seg="jdg">ФОП / JDG</button>
+      <div class="builder__pick glass" data-rise>
+        <span class="try"><i></i>Інтерактив · 1 хв</span>
+        <div class="tip">
+          <img class="tip__ava" src="img/me-smile.jpg" width="220" height="180" alt="">
+          <p><b>Михайло</b>Торкніться кроків. Де йдеться про гроші чи людей, агент зупиниться й спитає вас.</p>
+        </div>
+        <div class="field">
+          <p class="legend" id="lb-who">Хто ви?</p>
+          <div class="chips" role="radiogroup" aria-labelledby="lb-who" id="bWho">
+            <button class="chip" type="button" role="radio" aria-checked="true" data-seg="hr">HR і рекрутинг</button>
+            <button class="chip" type="button" role="radio" aria-checked="false" data-seg="smb">Малий бізнес</button>
+            <button class="chip" type="button" role="radio" aria-checked="false" data-seg="jdg">ФОП / JDG</button>
+          </div>
+        </div>
+        <div class="field">
+          <p class="legend">Що робиться вручну?</p>
+          <div class="tasks" id="bTasks" data-ui></div>
         </div>
       </div>
-      <div class="stack-s" data-rise>
-        <p class="legend">Що у вас робиться вручну? Торкніться кроків.</p>
-        <div class="planner" id="bTasks" data-ui></div>
-      </div>
-      <div class="flow" data-ui data-rise aria-live="polite" id="bFlow">
+      <div class="flow" data-ui data-rise aria-live="polite">
+        <p class="flow__result"><b id="bBack">0</b><span>год/тиждень зекономите <span id="bOf"></span></span></p>
         <div class="flow__nodes" id="bNodes"></div>
-        <div class="flow__out">
-        <div class="flow__sum">
-          <p><b id="bManual">0</b><span>год/тиждень ручної роботи</span></p>
-          <p><b id="bBack">0</b><span>год/тиждень повертається</span></p>
-          <p><b id="bGates">0</b><span>рішень лишаються за людьми</span></p>
-        </div>
         <div class="flow__msg" id="bMsg"></div>
+        <div class="cta-row" style="margin-top:22px">
+          <a class="btn" href="#pochaty" data-book data-prefill="builder" data-press>Обговорити цю схему</a>
         </div>
-      </div>
-      <div data-rise>
-        <a class="btn" href="#konsultatsiya" id="bCta" data-press>Обговорити цю схему на консультації</a>
-        <span class="btn-note">Ваші відповіді підставляться у форму запису.</span>
       </div>
     </div>
   </div>
 </section>
 
 <!-- CALCULATOR -->
-<section class="section" id="kalkulyator" data-time="Понеділок, 13:00" aria-labelledby="h-calc" style="padding-top:0">
+<section class="section paper" id="kalkulyator" aria-labelledby="h-calc">
   <div class="wrap">
-    <div class="split">
-      <aside class="zone" data-rise>
-        <div class="guide">
-          <p class="guide__time">13:00</p>
-          <img class="guide__photo" src="img/me-eyes.jpg" width="320" height="180" alt="Михайло Логаза, крупний план" loading="lazy">
-          <p class="guide__note"><span class="guide__name">Михайло</span>З цієї цифри я починаю кожен аудит. Порахуйте свою, займе хвилину.</p>
-        </div>
-      </aside>
-      <div class="calc">
-        <div class="stack-m">
-          <h2 id="h-calc" data-rise>Скільки коштує ручна робота</h2>
-          <p class="lead muted" data-rise>Оберіть процеси й налаштуйте повзунки. Цифри орієнтовні, точні покаже аудит.</p>
-        </div>
-        <div class="stack-s" data-rise>
+    <div class="head" data-rise>
+      <h2 id="h-calc">Скільки коштує ручна робота</h2>
+      <p class="lead">Оберіть процеси й налаштуйте повзунки. Усі цифри нижче рахуються з цих самих даних і змінюються разом.</p>
+    </div>
+    <div class="calc">
+      <div class="calc__controls glass" data-rise>
+        <span class="try"><i></i>Інтерактив · 1 хв</span>
+        <div class="field">
           <p class="legend">Що у вас робиться вручну (год/тиждень на людину)</p>
           <div class="chips" id="cProc"></div>
         </div>
-        <div class="calc__sliders" data-rise>
-          <div class="field">
-            <div class="range-row"><label for="cPeople">Скільки людей цим займаються</label><output id="oPeople" for="cPeople">10</output></div>
-            <input type="range" id="cPeople" min="1" max="100" value="10">
-          </div>
-          <div class="field">
-            <div class="range-row"><label for="cRate">Повна вартість години роботи</label><output id="oRate" for="cRate">60 zł</output></div>
-            <input type="range" id="cRate" min="40" max="250" step="5" value="60">
-          </div>
-          <div class="field">
-            <div class="range-row"><label for="cShare">Яку частку реально автоматизувати</label><output id="oShare" for="cShare">55%</output></div>
-            <input type="range" id="cShare" min="30" max="80" step="5" value="55">
-          </div>
+        <div class="field">
+          <div class="range-row"><label for="cPeople">Скільки людей цим займаються</label><output id="oPeople" for="cPeople">10</output></div>
+          <input type="range" id="cPeople" min="1" max="100" value="10">
+        </div>
+        <div class="field">
+          <div class="range-row"><label for="cRate">Повна вартість години роботи</label><output id="oRate" for="cRate">60 zł</output></div>
+          <input type="range" id="cRate" min="40" max="250" step="5" value="60">
+        </div>
+        <div class="field">
+          <div class="range-row"><label for="cShare">Яку частку реально автоматизувати</label><output id="oShare" for="cShare">55%</output></div>
+          <input type="range" id="cShare" min="30" max="80" step="5" value="55">
+        </div>
+      </div>
+      <div class="calc__out" data-rise>
+        <figure class="calc__photo">
+          <img class="bw" src="assets/baltimore-md-for-every-social-security-account.jpg" width="1524" height="1216" alt="Архівне фото 1937 року: працівниця друкує картки працівників, поруч ящики з картотекою" loading="lazy">
+          <figcaption>Картотека працівників, Балтимор, 1937</figcaption>
+        </figure>
+        <div class="calc__tiles" aria-live="polite">
+          <p class="tile tile--dark"><b id="rYear">0 zł</b><span>коштує ручна робота на рік</span></p>
+          <p class="tile tile--accent"><b id="rMonth">0 zł</b><span>можна повертати щомісяця</span></p>
         </div>
       </div>
     </div>
-  </div>
-  <div class="mosaic">
-    <figure class="mosaic__photo">
-      <img src="assets/head-office-typists-room-new-zealand-railways.jpg" width="1600" height="1232" alt="Велике машбюро 1959 року: десяток жінок друкують і передають папери за дерев'яними столами" loading="lazy">
-      <figcaption>Машбюро головного офісу New Zealand Railways, 1959</figcaption>
-    </figure>
-    <div class="mosaic__tiles" aria-live="polite">
-      <p class="tile tile--cobalt"><b id="rYear">0 zł</b><span>ручна робота коштує вам на рік</span></p>
-      <p class="tile tile--pale"><b id="rMonth">0 zł</b><span>можна повернути щомісяця</span></p>
+    <div class="calc__facts" aria-live="polite">
+      <p><b id="rWeek">0 год із 40</b><span id="rWeekP">рутини на людину щотижня</span></p>
+      <p><b id="rHours">0 год</b><span id="rHoursP">звільняється щомісяця на команду</span></p>
+      <p><b id="rPerson">0 год</b><span>повертається кожній людині щотижня</span></p>
     </div>
-  </div>
-  <div class="wrap calc-after">
-    <div class="split">
-      <div class="zone">
-        <div class="facts" aria-live="polite">
-          <p><b id="rShareWeek">0 год із 40</b><span id="rShareWeekP">рутина на людину щотижня</span></p>
-          <p><b id="rHoursMonth">0 год</b><span>звільняється щомісяця</span></p>
-          <p><b id="rPerPerson">0 год</b><span>повертається кожному щотижня</span></p>
-        </div>
-      </div>
-      <div>
-        <div class="chart" id="chart" role="img" aria-label="Накопичена економія за 12 місяців" style="margin-top:0"></div>
-        <p class="small muted" style="margin-top:16px;max-width:60ch">Формула: люди × години × 4,33 тижня × вартість години. Оцінка без аудиту, тож реальні цифри можуть відрізнятися.</p>
-        <form class="mail" id="mailForm" novalidate>
-          <label class="visually-hidden" for="mailEmail">Email</label>
-          <input class="input" id="mailEmail" type="email" inputmode="email" autocomplete="email" placeholder="ваш@email.com">
-          <button class="btn" type="submit" data-press>Надіслати розрахунок на пошту</button>
-        </form>
-        <p class="mail-note">Отримаєте розрахунок і 3 процеси, з яких я б почав. Відповідаю особисто.</p>
-        <p class="mail-msg" id="mailMsg" role="status"></p>
-      </div>
+    <div class="payback glass">
+      <p id="payText">За 3 місяці ви заощадите <b>0 zł</b>. Впровадження, яке коштує менше, окупиться за квартал.</p>
+      <div class="chart" id="chart" role="img" aria-label="Накопичена економія за 12 місяців"></div>
     </div>
-  </div>
-</section>
-
-<!-- POSITION -->
-<section class="section wrap pos" id="pozytsiya" data-time="Понеділок, 14:00" aria-labelledby="h-pos">
-  <div class="split">
-    <div class="zone">
-      <p class="guide__time" data-rise>14:00</p>
-      <p class="pos__belief" id="belief">Я вірю, що в еру AI люди стають важливішими, ніж до цього. Тому я автоматизую рутину, а людей лишаю там, де вони найсильніші: у рішеннях, стосунках і роботі з клієнтами.</p>
-      <ul class="principles">
-        <li data-rise><h3>Рутину — агентам, рішення — людям.</h3><p>Агенти переносять дані, пишуть чернетки й нагадують. Усе, що стосується грошей і людей, затверджує людина. Цей крок я називаю Human Gate.</p></li>
-        <li data-rise><h3>Спершу слухаю команду.</h3><p>Автоматизую те, що люди самі називають рутиною. Тому автоматизаціями потім користуються.</p></li>
-        <li data-rise><h3>Міряю в повернених годинах.</h3><p>Після пілоту ви бачите цифри: скільки годин повернулося і скільки людей справді користуються.</p></li>
-      </ul>
-      <p class="redline" data-rise>Я не беру проєкти, мета яких скоротити людей.</p>
-      <figure class="pos__arch" data-rise>
-        <img src="assets/baltimore-md-for-every-social-security-account.jpg" width="1600" height="1284" alt="Архівне фото 1937 року: працівниця друкує картки працівників, поруч ящики з написом Master name cards" loading="lazy">
-        <figcaption>Картотека працівників, Social Security Board, Балтимор, 1937. Ручну роботу з даними про людей роблять дуже давно.</figcaption>
-      </figure>
-    </div>
-    <div>
-      <h2 id="h-pos" data-rise>Чому я роблю<br>це інакше</h2>
-      <figure class="pos__photo" data-rise>
-        <img src="img/me-tall.jpg" width="570" height="828" alt="Михайло Логаза на світлому тлі, портрет до пояса" loading="lazy" id="posPhoto">
-      </figure>
-    </div>
-  </div>
-</section>
-
-<!-- STORY -->
-<section class="section wrap story" id="istoriya" data-time="Понеділок, 15:00" aria-labelledby="h-story">
-  <div class="split">
-    <aside class="zone" data-rise>
-      <div class="guide">
-        <p class="guide__time">15:00</p>
-        <img class="guide__photo" src="img/me-head.jpg" width="360" height="360" alt="Михайло Логаза" loading="lazy">
-        <p class="guide__note"><span class="guide__name">Михайло</span>П'ять років я дивлюся, як нові системи обходять і повертаються в Excel. Ось що я з цього виніс.</p>
-      </div>
-      <dl class="kv">
-        <div><dt>Досвід</dt><dd>5+ років впроваджень CRM, ERP і AI</dd></div>
-        <div><dt>База</dt><dd>Познань, Польща. Дистанційно по ЄС</dd></div>
-        <div><dt>Мови</dt><dd>польська, українська, англійська</dd></div>
-      </dl>
-    </aside>
-    <div>
-      <h2 id="h-story" data-rise>Я бачив цей хаос зсередини</h2>
-      <div style="margin-top:40px" data-rise>
-        <p class="lead">П'ять років я впроваджую CRM, ERP і AI-інструменти в компаніях і бачу одну картину: технологія працює, а люди її обходять і повертаються в Excel. Найчастіше людей просто не спитали.</p>
-        <p class="body" style="margin-top:20px">На впровадженні ERP для 10&nbsp;000+ користувачів ми перенесли 600–800&nbsp;тис. рядків даних без критичних втрат. Але вирішили 9–10 сесій навчання і ключові люди в кожному відділі: системою почали користуватися 90% працівників.</p>
-        <p class="body">Так само я працюю з AI. Агент для Jira, який я запустив як Product Owner, зменшив витрати на AI на 87%, а в пілоті ним користуються 10–15&nbsp;людей. Сьогодні я будую автоматизації на n8n і Make, AI-агентів і RAG-асистентів.</p>
-      </div>
-      <details class="more" data-rise>
-        <summary>Читати історію повністю</summary>
-        <p>Я вірю, що в еру AI люди стають важливішими, ніж до цього.</p>
-        <p>П'ять років я впроваджую CRM, ERP і AI-інструменти в компаніях і бачу одну й ту саму картину: технологія працює, а люди її обходять і повертаються в Excel. Проблема рідко в інструменті. Найчастіше людей просто не спитали.</p>
-        <p>На впровадженні ERP для 10&nbsp;000+ користувачів ми перенесли 600–800&nbsp;тис. рядків HR- і фінансових даних без критичних втрат і закрили проєкт на 1,5–2 місяці раніше плану. Але вирішило інше: 9–10 сесій навчання і ключові люди в кожному відділі. Системою почали користуватися 90% працівників.</p>
-        <p>Так само я працюю з AI. Як Product Owner запустив AI-агента для Jira: менеджери керують задачами звичайною мовою, у пілоті 10–15&nbsp;людей. Гібридна архітектура зменшила витрати на AI на 87% і дала 0% галюцинацій на операціях запису. Будую автоматизації на n8n і Make, AI-агентів і RAG-асистентів. На міжнародному AI-хакатоні наша команда посіла 2-ге місце серед 70+ команд.</p>
-        <p>Мій принцип: рутину — агентам, рішення — людям. Прямо про інструменти, дбайливо з людьми.</p>
-        <p>Зараз допомагаю агенціям, компаніям і підприємцям автоматизувати рутину без звільнень: спершу слухаю команду, потім автоматизую те, що вона сама назвала рутиною, навчаю й міряю результат у повернених годинах.</p>
-      </details>
-    </div>
-  </div>
-  <div class="split record">
-    <div class="zone"><p class="record__word" data-rise>Проєкти, нагороди й навчання</p></div>
-    <div class="record__lists" data-rise>
-      <ul>
-        <li>CRM для HR-агенції <span>2020–2021</span></li>
-        <li>ERP для HR-tech, 10&nbsp;000+ користувачів <span>2022–2024</span></li>
-        <li>AI-агент для Jira <span>2024 – зараз</span></li>
-        <li>Контент-фабрика для бренду детективних ігор <span>n8n · AI</span></li>
-      </ul>
-      <ul>
-        <li>AI-хакатон Complete.dev <span>2-ге з 70+</span></li>
-        <li>Хакатон Software Mansion × Gemini <span>учасник</span></li>
-        <li>PMI-ACP <span>сертифікат</span></li>
-        <li>MSc Business Intelligence &amp; Big Data <span>у процесі</span></li>
-        <li>MSc Management, UAM <span>магістр</span></li>
-      </ul>
-    </div>
+    <p class="small muted" style="margin-top:14px;max-width:70ch">Формула: люди × години × 4,33 тижня × вартість години. Оцінка без аудиту, тож реальні цифри можуть відрізнятися.</p>
+    <form class="mail" id="mailForm" novalidate>
+      <label class="visually-hidden" for="mailEmail">Email</label>
+      <input class="input" id="mailEmail" type="email" inputmode="email" autocomplete="email" placeholder="ваш@email.com">
+      <button class="btn" type="submit" data-press>Надіслати розрахунок</button>
+    </form>
+    <p class="mail-note">Отримаєте розрахунок і 3 процеси, з яких я б почав. Відповідаю особисто.</p>
+    <p class="mail-msg" id="mailMsg" role="status"></p>
+    <div class="cta-row"><a class="btn btn--ghost" href="#pochaty" data-book data-prefill="calc" data-press>Розібрати мої цифри на консультації</a></div>
   </div>
 </section>
 
 <!-- CASES -->
-<section class="section wrap" id="keisy" data-time="Понеділок, 16:00" aria-labelledby="h-cases" style="padding-top:0">
-  <div class="split">
-    <aside class="zone">
-      <p class="guide__time" data-rise>16:00</p>
-      <h2 id="h-cases" style="margin-top:48px" data-rise>Що вже працює</h2>
-      <div class="guide" style="margin-top:32px" data-rise>
-        <img class="guide__photo" src="img/me-face.jpg" width="260" height="300" alt="Михайло Логаза" loading="lazy">
-        <p class="guide__note"><span class="guide__name">Михайло</span>Цифри з реальних проєктів. Назви компаній не розкриваю, деталі розповім на консультації.</p>
-      </div>
-    </aside>
-    <div>
-      <div class="cases">
-        <article class="case" data-rise>
-          <p class="case__fig">−87%</p>
-          <h3 class="case__name">AI-агент для Jira</h3>
-          <p class="case__ctx">фарма-SaaS</p>
-          <p>Менеджери створюють задачі й звіти про ризики звичайною мовою. Прості команди виконує код, аналітику робить AI, тому на операціях запису 0% галюцинацій. У пілоті 10–15&nbsp;людей.</p>
-        </article>
-        <article class="case" data-rise>
-          <p class="case__fig">90%</p>
-          <h3 class="case__name">ERP на 10&nbsp;000+ користувачів</h3>
-          <p class="case__ctx">HR-tech</p>
-          <p>600–800&nbsp;тис. рядків HR- і фінансових даних без критичних втрат. Звіт для правління замість 4–5&nbsp;годин готується за 5–10&nbsp;хвилин. Проєкт закрили на 1,5–2 місяці раніше плану.</p>
-        </article>
-        <article class="case" data-rise>
-          <p class="case__fig">1 місяць</p>
-          <h3 class="case__name">З Excel у CRM</h3>
-          <p class="case__ctx">HR-агенція</p>
-          <p>П'ять відділів перейшли з таблиць в одну систему. Через місяць жоден відділ не повернувся до Excel.</p>
-        </article>
-        <article class="case" data-rise>
-          <p class="case__fig">30 stories</p>
-          <h3 class="case__name">Контент-фабрика</h3>
-          <p class="case__ctx">бренд детективних ігор</p>
-          <p>Telegram-бот збирає бриф, AI пише контент-план і генерує фони. З одного брифу виходить 30 готових Instagram Stories, витрати на API нульові.</p>
-        </article>
-      </div>
-      <div class="quotes">
-        <figure class="quote" data-rise>
-          <span class="quote__tag">Приклад відгуку</span>
-          <blockquote>«Михайло переклав нашу роботу з кандидатами з трьох таблиць в одну систему. Рекрутери перестали переносити дані вручну і щотижня мають на кілька годин більше на розмови з кандидатами.»</blockquote>
-          <p>Ім'я, власниця рекрутингової агенції, Познань</p>
-        </figure>
-        <figure class="quote" data-rise>
-          <span class="quote__tag">Приклад відгуку</span>
-          <blockquote>«Заявки з сайту тепер одразу потрапляють у CRM, а менеджер отримує сповіщення. Ми перестали губити клієнтів у пошті.»</blockquote>
-          <p>Ім'я, директор сервісної компанії на 25 людей</p>
-        </figure>
-        <figure class="quote" data-rise>
-          <span class="quote__tag">Приклад відгуку</span>
-          <blockquote>«Рахунки й нагадування клієнтам тепер ідуть самі. Я нарешті займаюся роботою, а не паперами.»</blockquote>
-          <p>Ім'я, ФОП, Варшава</p>
-        </figure>
-      </div>
-      <p class="cases-cta" data-rise><a class="btn" href="#konsultatsiya" data-press>Обговорити схожий процес</a></p>
+<section class="section light" id="keisy" aria-labelledby="h-cases">
+  <div class="wrap">
+    <div class="head" data-rise>
+      <h2 id="h-cases">Що вже працює</h2>
+      <p class="lead">Цифри з реальних проєктів. Назви компаній не розкриваю, деталі розповім на консультації.</p>
     </div>
+    <div class="cases">
+      <details class="case" open data-rise>
+        <summary><span class="case__fig">−87%</span><span class="case__name"><b>AI-агент для Jira</b><span>фарма-SaaS · витрати на AI</span></span><span class="case__more">Деталі</span></summary>
+        <p class="case__body">Менеджери створюють задачі й звіти про ризики звичайною мовою. Прості команди виконує код, аналітику робить AI, тому на операціях запису 0% галюцинацій. У пілоті 10–15&nbsp;людей.</p>
+      </details>
+      <details class="case" data-rise>
+        <summary><span class="case__fig">90%</span><span class="case__name"><b>ERP на 10&nbsp;000+ користувачів</b><span>HR-tech · користуються системою</span></span><span class="case__more">Деталі</span></summary>
+        <p class="case__body">600–800&nbsp;тис. рядків HR- і фінансових даних без критичних втрат. Звіт для правління замість 4–5&nbsp;годин готується за 5–10&nbsp;хвилин. Проєкт закрили на 1,5–2 місяці раніше плану.</p>
+      </details>
+      <details class="case" data-rise>
+        <summary><span class="case__fig">5 відділів</span><span class="case__name"><b>З Excel у CRM</b><span>HR-агенція · одна система замість таблиць</span></span><span class="case__more">Деталі</span></summary>
+        <p class="case__body">П'ять відділів перейшли з таблиць в одну систему. Перший місяць пішов на те, щоб послухати команду й розібрати, як насправді рухаються дані.</p>
+      </details>
+      <details class="case" data-rise>
+        <summary><span class="case__fig">30 stories</span><span class="case__name"><b>Контент-фабрика</b><span>бренд детективних ігор · з одного брифу</span></span><span class="case__more">Деталі</span></summary>
+        <p class="case__body">Telegram-бот збирає бриф, AI пише контент-план і генерує фони за заданими параметрами. Контент не потрібно створювати вручну: генерація йде циклічно.</p>
+      </details>
+    </div>
+    <div class="quotes">
+      <figure class="quote" data-rise><span class="quote__tag">Приклад відгуку</span><blockquote>«Михайло переклав нашу роботу з кандидатами з трьох таблиць в одну систему. Рекрутери перестали переносити дані вручну.»</blockquote><p>Ім'я, власниця рекрутингової агенції, Познань</p></figure>
+      <figure class="quote" data-rise><span class="quote__tag">Приклад відгуку</span><blockquote>«Заявки з сайту тепер одразу потрапляють у CRM, а менеджер отримує сповіщення. Ми перестали губити клієнтів у пошті.»</blockquote><p>Ім'я, директор сервісної компанії на 25 людей</p></figure>
+      <figure class="quote" data-rise><span class="quote__tag">Приклад відгуку</span><blockquote>«Рахунки й нагадування клієнтам тепер ідуть самі. Я нарешті займаюся роботою, а не паперами.»</blockquote><p>Ім'я, ФОП, Варшава</p></figure>
+    </div>
+    <div class="cta-row"><a class="btn" href="#pochaty" data-book data-press>Обговорити схожий процес</a></div>
   </div>
 </section>
 
 <!-- CALM OPS -->
-<section class="section wrap" id="calm-ops" data-time="Понеділок, 17:00" aria-labelledby="h-ops" style="padding-top:0">
-  <div class="split">
-    <div class="zone">
-      <p class="guide__time" data-rise>17:00</p>
-      <div class="guide" data-rise style="margin-top:32px">
-        <img class="guide__photo" src="img/me-head.jpg" width="360" height="360" alt="Михайло Логаза" loading="lazy">
-        <p class="guide__note"><span class="guide__name">Михайло</span>Хаос зліва, порядок справа. Жовтий квадрат на схемі означає Human Gate: там агент зупиняється й чекає на людину.</p>
+<section class="section paper" id="yak" aria-labelledby="h-ops">
+  <div class="wrap">
+    <div class="head" data-rise>
+      <h2 id="h-ops">Як я працюю: Calm Ops</h2>
+      <p class="lead">Чотири кроки. Терміни фіксуємо після консультації, коли зрозуміло, які процеси й системи у вас.</p>
+    </div>
+    <div class="ops glass" data-rise>
+      <span class="try"><i></i>Перемикайте кроки</span>
+      <div class="tabs" role="tablist" aria-label="Кроки Calm Ops" id="opsTabs">
+        <button class="tab" type="button" role="tab" aria-selected="true" aria-controls="opsPanel" data-step="0">Слухаю</button>
+        <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="opsPanel" data-step="1">Автоматизую</button>
+        <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="opsPanel" data-step="2">Навчаю</button>
+        <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="opsPanel" data-step="3">Міряю</button>
+      </div>
+      <div class="ops__body">
+        <div class="ops__panel" id="opsPanel" role="tabpanel" aria-live="polite">
+          <h3>Слухаю</h3>
+          <p>Розмовляю з людьми, які роблять роботу, і з'ясовую, що вони самі називають рутиною.</p>
+          <dl><dt>Ви отримуєте</dt><dd>Карту процесів і де губляться години.</dd><dt>Ваш час</dt><dd>2–3 розмови.</dd></dl>
+        </div>
+        <div>
+          <div class="ops-diagram" id="opsDiagram" aria-hidden="true"></div>
+          <p class="ops__step" id="opsStep">Крок 1 з 4: хаос, з якого починаємо</p>
+        </div>
       </div>
     </div>
-    <div class="stack-m">
-      <h2 id="h-ops" data-rise>Calm Ops</h2>
-      <p class="lead" data-rise>Так я впроваджую автоматизації. Чотири кроки, а терміни фіксуємо після консультації, коли зрозуміло, які процеси й системи у вас.</p>
-    </div>
-  </div>
-  <div class="ops-diagram" data-ui id="opsDiagram" aria-hidden="true"></div>
-  <div class="ops-steps" id="opsSteps">
-    <button class="ops-step" type="button" aria-pressed="false" data-step="0" data-rise>
-      <h3>Слухаю</h3>
-      <p>Розмовляю з людьми, які роблять роботу, і з'ясовую, що вони самі називають рутиною.</p>
-      <dl><dt>Ви отримуєте</dt><dd>Карту процесів і де губляться години.</dd><dt>Ваш час</dt><dd>2–3 розмови.</dd></dl>
-    </button>
-    <button class="ops-step" type="button" aria-pressed="false" data-step="1" data-rise>
-      <h3>Автоматизую</h3>
-      <p>Будую флоу на n8n, Make, AI-агентах і підключаю ваші системи. У кожному флоу є Human Gate.</p>
-      <dl><dt>Ви отримуєте</dt><dd>Робочу автоматизацію на ваших даних, спершу на одному процесі.</dd><dt>Ваш час</dt><dd>Тестуєте й даєте зворотний зв'язок.</dd></dl>
-    </button>
-    <button class="ops-step" type="button" aria-pressed="false" data-step="2" data-rise>
-      <h3>Навчаю</h3>
-      <p>Показую команді, як цим користуватися, і лишаю документацію.</p>
-      <dl><dt>Ви отримуєте</dt><dd>Команду, яка вміє і не боїться. Документація й доступи лишаються у вас.</dd><dt>Ваш час</dt><dd>Одна-дві сесії.</dd></dl>
-    </button>
-    <button class="ops-step" type="button" aria-pressed="false" data-step="3" data-rise>
-      <h3>Міряю</h3>
-      <p>Рахую повернені години й те, скільки людей справді користуються, потім беремо наступний процес.</p>
-      <dl><dt>Ви отримуєте</dt><dd>Цифри результату й план наступного кроку.</dd><dt>Ваш час</dt><dd>15 хвилин на звіт.</dd></dl>
-    </button>
-  </div>
-  <div class="split gate">
-    <figure class="zone gate__photo" data-rise>
-      <img src="assets/an-automatic-sorting-machine-in-use-in.jpg" width="1200" height="1495" alt="Чоловік біля великої машини 1909 року, що сортує картки по пронумерованих лотках" loading="lazy">
-      <figcaption>Автоматична сортувальна машина в Бюро перепису США, 1909</figcaption>
-    </figure>
-    <div class="stack-m" data-rise>
-      <h3 style="font-size:var(--t-h2);font-weight:760;letter-spacing:-.035em;line-height:1"><span class="gate__mark">Human Gate</span></h3>
-      <p class="lead" style="max-width:36ch">Точка у флоу, де агент зупиняється й чекає на людину. Агент готує, людина вирішує.</p>
-      <ul>
-        <li>Рахунок понад ліміт</li>
-        <li>Відповідь кандидату з відмовою</li>
-        <li>Договір перед підписом</li>
-      </ul>
+    <div class="gate">
+      <figure class="gate__photo" data-rise>
+        <img class="bw" src="assets/an-automatic-sorting-machine-in-use-in.jpg" width="1140" height="1426" alt="Чоловік біля великої машини 1909 року, що сортує картки по пронумерованих лотках" loading="lazy">
+        <figcaption>Автоматична сортувальна машина в Бюро перепису США, 1909</figcaption>
+      </figure>
+      <div data-rise>
+        <h3 style="font-size:var(--t-h2);line-height:1.05;letter-spacing:-.03em"><span class="gate__mark">Human Gate</span></h3>
+        <p class="lead" style="margin-top:16px">Точка у флоу, де агент зупиняється й чекає на людину. Агент готує, людина вирішує.</p>
+        <ul>
+          <li>Рахунок понад ліміт</li>
+          <li>Відповідь кандидату з відмовою</li>
+          <li>Договір перед підписом</li>
+        </ul>
+        <div class="cta-row"><a class="btn" href="#pochaty" data-book data-press>Записатися на консультацію</a></div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- 8:00 -->
-<section class="section on-cobalt wrap" id="rankom" data-time="Наступний понеділок, 8:00" aria-labelledby="h-tg">
-  <div>
-    <div class="split">
-      <aside class="zone" data-rise>
-        <div class="guide">
-          <p class="guide__time">8:00</p>
-          <img class="guide__photo" src="img/me-eyes.jpg" width="320" height="180" alt="Михайло Логаза, крупний план" loading="lazy">
-          <p class="guide__note"><span class="guide__name">Михайло</span>Тиждень потому. Тут Human Gate — це ви: натисніть кнопку в повідомленні.</p>
-        </div>
-      </aside>
-      <div>
-        <h2 id="h-tg" data-rise>Ваш понеділок після впровадження</h2>
-        <p class="lead" style="margin-top:24px;color:var(--on-cobalt-soft)" data-rise>Агенти працюють уночі, а о 8:00 ви отримуєте одне повідомлення.</p>
-        <div class="tg" data-ui data-rise>
+<section class="section light" id="rankom" aria-labelledby="h-tg">
+  <div class="wrap morning">
+    <div data-rise>
+      <h2 id="h-tg">Ваш понеділок після впровадження</h2>
+      <p class="lead" style="margin-top:18px">Агенти працюють уночі, а о 8:00 ви отримуєте одне повідомлення. Рішення приймаєте ви, однією кнопкою.</p>
+      <div class="tip">
+        <img class="tip__ava" src="img/me-head.jpg" width="360" height="360" alt="">
+        <p><b>Михайло</b>Тут Human Gate це ви. Натисніть кнопку в повідомленні.</p>
+      </div>
+      <p class="tg__count" id="tgCount" aria-live="polite">Два рішення чекають на вас.</p>
+      <div class="cta-row"><a class="btn" href="#pochaty" data-book data-press>Хочу такий ранок</a></div>
+    </div>
+    <div class="hero__stage" data-rise>
+      <span class="try"><i></i>Спробуйте: схваліть рішення</span>
+      <div class="phone" data-ui>
+        <div class="phone__screen tg" id="tgList">
+          <span class="phone__island" aria-hidden="true"></span>
           <div class="tg__head"><span class="tg__ava" aria-hidden="true">А</span><p><b>Ранковий агент</b><span>Telegram · приклад повідомлення</span></p></div>
-          <div class="tg__list" id="tgList">
-            <p class="msg">Доброго ранку. За вихідні: 34 нові кандидати в базі, 12 підтвердили співбесіди, звіт для клієнта надіслано.<time>8:00</time></p>
-            <div class="msg" data-q="contract">Договір для нового працівника готовий. Затвердити?<time>8:00</time>
-              <div class="msg__btns"><button type="button" data-kind="yes" data-reply="Готово. Договір надіслано на підпис.">Затвердити</button><button type="button" data-kind="no" data-reply="Відкрив договір у Google Docs. Позначте, що змінити, і я підготую нову версію.">Переглянути</button></div>
-            </div>
-            <div class="msg" data-q="invoice">Рахунок від постачальника на 18&nbsp;450&nbsp;zł більший за ліміт. Передати в бухгалтерію?<time>8:01</time>
-              <div class="msg__btns"><button type="button" data-kind="yes" data-reply="Рахунок передано в бухгалтерію.">Схвалити</button><button type="button" data-kind="no" data-reply="Добре, нагадаю о 14:00.">Відкласти</button></div>
-            </div>
+          <p class="msg">Доброго ранку. За вихідні: 34 нові кандидати в базі, 12 підтвердили співбесіди, звіт для клієнта надіслано.<time>8:00</time></p>
+          <div class="msg" data-q="contract">Договір для нового працівника готовий. Затвердити?<time>8:00</time>
+            <div class="msg__btns"><button type="button" data-kind="yes" data-reply="Готово. Договір надіслано на підпис.">Затвердити</button><button type="button" data-kind="no" data-reply="Відкрив договір. Позначте, що змінити, і я підготую нову версію.">Переглянути</button></div>
+          </div>
+          <div class="msg" data-q="invoice">Рахунок від постачальника на 18&nbsp;450&nbsp;zł більший за ліміт. Передати в бухгалтерію?<time>8:01</time>
+            <div class="msg__btns"><button type="button" data-kind="yes" data-reply="Рахунок передано в бухгалтерію.">Схвалити</button><button type="button" data-kind="no" data-reply="Добре, нагадаю о 14:00.">Відкласти</button></div>
           </div>
         </div>
-        <p class="tg__count" id="tgCount" aria-live="polite">Два рішення чекають на вас.</p>
-        <p class="tg-cta" data-rise><a class="btn" href="#konsultatsiya" data-press>Хочу такий ранок</a></p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- LADDER -->
-<section class="section wrap" id="pochaty" data-time="Наступний понеділок, 8:15" aria-labelledby="h-start">
-  <div class="split">
-    <aside class="zone" data-rise>
-      <div class="guide">
-        <p class="guide__time">8:15</p>
-        <img class="guide__photo" src="img/me-smile.jpg" width="220" height="180" alt="Михайло Логаза усміхається" loading="lazy">
-        <p class="guide__note"><span class="guide__name">Михайло</span>Почніть з малого. За 30&nbsp;хвилин я чесно скажу, чи окупиться автоматизація.</p>
-      </div>
-    </aside>
-    <div>
-      <h2 id="h-start" data-rise>Почніть з однієї розмови</h2>
-      <p class="lead muted" style="margin-top:24px" data-rise>Ціна на сайті одна: консультація. Решту називаю після неї й фіксую до початку робіт.</p>
+<!-- START -->
+<section class="section paper" id="pochaty" aria-labelledby="h-start">
+  <div class="wrap">
+    <div class="head" data-rise>
+      <h2 id="h-start">Почніть з однієї розмови</h2>
+      <p class="lead">Ціна на сайті одна: консультація. Решту називаю після неї й фіксую до початку робіт.</p>
     </div>
-  </div>
-  <ol class="ladder">
-    <li class="rung" data-rise><span class="price">190&nbsp;zł</span><h3>Консультація · 30&nbsp;хв</h3><p>Розбираємо ваш процес, і я чесно кажу, чи окупиться автоматизація. Сума зараховується у впровадження.</p></li>
-    <li class="rung" data-rise><h3>Аудит процесів</h3><p>Для компаній: карта процесів, години по кожному, пріоритети й план.</p><span class="later">Вартість після консультації</span></li>
-    <li class="rung" data-rise><h3>Впровадження</h3><p>Починаємо з пілоту на одному процесі. Ціну етапу фіксуємо до початку робіт.</p><span class="later">Фіксована ціна етапу</span></li>
-    <li class="rung" data-rise><h3>Супровід</h3><p>Слідкую, щоб нічого не зламалося, і додаю нові сценарії.</p><span class="later">Формат обираємо разом</span></li>
-  </ol>
-  <p class="ladder-cta" data-rise><a class="btn" href="#konsultatsiya" data-press>Записатися на консультацію</a><span class="btn-note">30&nbsp;хв · 190&nbsp;zł · зараховується у впровадження</span></p>
-</section>
+    <ol class="ladder">
+      <li class="rung" data-rise><span class="price">190&nbsp;zł</span><h3>Консультація · 30&nbsp;хв</h3><p>Розбираємо ваш процес, і я чесно кажу, чи окупиться автоматизація. Сума зараховується у впровадження.</p></li>
+      <li class="rung" data-rise><h3>Аудит процесів</h3><p>Карта процесів, години по кожному, пріоритети й план.</p><span class="later">Вартість після консультації</span></li>
+      <li class="rung" data-rise><h3>Впровадження</h3><p>Починаємо з пілоту на одному процесі.</p><span class="later">Фіксована ціна етапу</span></li>
+      <li class="rung" data-rise><h3>Супровід</h3><p>Слідкую, щоб нічого не зламалося, і додаю нові сценарії.</p><span class="later">Формат обираємо разом</span></li>
+    </ol>
+    <div class="cta-row"><div><a class="btn" href="#pochaty" data-book data-press>Записатися на консультацію</a><span class="btn-note">30&nbsp;хв · 190&nbsp;zł (≈&nbsp;45&nbsp;€) · або напишіть на <span class="addr">kontakt@mlohaza.com</span></span></div></div>
 
-<!-- FAQ -->
-<section id="faq" data-time="Наступний понеділок, 8:30" aria-labelledby="h-faq">
-  <div class="faq-head wrap"><div class="split" style="width:100%"><p class="guide__time">8:30</p><h2 id="h-faq">Питання перед розмовою</h2></div></div>
-  <div class="faqs">
-    <div class="qa wrap"><div class="split"><h3>Чи замінить AI моїх людей?</h3><p>Ні. Я автоматизую рутину: перенесення даних, нагадування, чернетки, звіти. Рішення про гроші й людей ухвалюють люди, а в команди з'являється час на роботу, яку цінують клієнти. Проєкти, мета яких скоротити людей, я не беру.</p></div></div>
-    <div class="qa wrap"><div class="split"><h3>Скільки це коштує?</h3><p>Консультація коштує 190&nbsp;zł за 30&nbsp;хвилин і зараховується у впровадження. Вартість аудиту й впровадження залежить від процесів і систем, тож я називаю її після консультації, і вона фіксована до початку робіт.</p></div></div>
-    <div class="qa wrap"><div class="split"><h3>Чи має це сенс для ФОП або JDG?</h3><p>Так, якщо рутина забирає у вас хоча б кілька годин на тиждень: рахунки, переписка, запис клієнтів, документи. На консультації скажу, що можна автоматизувати швидко й недорого.</p></div></div>
-    <div class="qa wrap"><div class="split"><h3>Чи безпечно віддавати дані?</h3><p>Працюю відповідно до GDPR. Використовую моделі з обробкою даних в ЄС, які не навчаються на ваших даних. n8n можна розгорнути на вашому сервері. Доступи видаєте ви й можете відкликати будь-коли.</p></div></div>
-    <div class="qa wrap"><div class="split"><h3>AI в рекрутингу і EU AI Act?</h3><p>Автоматизую операційну частину: листи кандидатам, запис, документи, синхронізацію систем. Якщо AI допомагає оцінювати кандидатів, рішення завжди ухвалює рекрутер, а вимоги закону перевіряємо разом до запуску.</p></div></div>
-    <div class="qa wrap"><div class="split"><h3>Що буде, якщо щось зламається або зміниться?</h3><p>Флоу задокументовані й належать вам. На супроводі я стежу за змінами в системах і оновлюю інтеграції заздалегідь.</p></div></div>
-    <div class="qa wrap"><div class="split"><h3>Чи потрібен нам свій програміст?</h3><p>Ні. Ви отримуєте документацію й навчання. Прості зміни команда зможе робити сама.</p></div></div>
-    <div class="qa wrap"><div class="split"><h3>Скільки триває впровадження?</h3><p>Залежить від процесу й систем. Терміни етапу фіксуємо після консультації.</p></div></div>
-    <div class="qa wrap"><div class="split"><h3>Якими мовами ви працюєте?</h3><p>Польською, українською та англійською. Працюю дистанційно по Польщі та ЄС.</p></div></div>
-    <div class="qa wrap"><div class="split"><h3>З якими системами працюєте?</h3><p>HubSpot, Google Workspace, Jira і Confluence, PowerBI, n8n, Make, Claude, OpenAI, Gemini та будь-які системи з API. Нові оцінюю на консультації.</p></div></div>
-  </div>
-</section>
-
-<!-- CLOSE -->
-<section class="on-ink wrap" id="close" data-time="Наступний понеділок, 8:45" aria-labelledby="h-close">
-  <div class="close">
-    <div class="split"><p class="guide__time" data-rise>8:45</p><h2 id="h-close" data-rise>Почнімо з вашого<br>понеділка</h2></div>
-    <div class="close__row">
-      <p data-rise>30&nbsp;хвилин, щоб зрозуміти, скільки часу можна повернути.</p>
-      <a class="btn" href="#konsultatsiya" data-press data-rise>Записатися на консультацію</a>
-    </div>
-  </div>
-</section>
-
-<!-- BOOKING -->
-<section class="section wrap booking" id="konsultatsiya" data-time="Наступний понеділок, 9:00" aria-labelledby="h-book">
-  <div class="split">
-    <aside class="zone booking-zone" data-rise>
-      <p class="guide__time">9:00</p>
-      <img class="portrait" src="img/me-head.jpg" width="360" height="360" alt="Михайло Логаза" loading="lazy">
-      <ol class="agenda">
-        <li>Розберемо ваш процес.</li>
-        <li>Покажу, де губляться години.</li>
-        <li>Чесно скажу, чи окупиться автоматизація.</li>
-        <li>Домовимось про наступний крок або скажу, що поки не варто.</li>
-      </ol>
-      <p class="price-line tnum">190&nbsp;zł (≈ 45&nbsp;€) · 30&nbsp;хв</p>
-      <p class="small muted" style="margin-top:8px">Сума зараховується у впровадження.</p>
-    </aside>
-    <div>
-      <h2 id="h-book" data-rise>Запис на консультацію</h2>
-      <p class="lead muted" style="margin-top:20px" data-rise>30&nbsp;хвилин, щоб зрозуміти, скільки часу можна повернути.</p>
-      <form class="form" id="bookForm" novalidate data-rise>
-        <fieldset>
-          <legend class="legend">Хто ви?</legend>
-          <div class="chips" role="radiogroup" id="fWho">
-            <button class="chip" type="button" role="radio" aria-checked="false" data-v="HR- або рекрутингова агенція">HR- або рекрутингова агенція</button>
-            <button class="chip" type="button" role="radio" aria-checked="false" data-v="Компанія 5–200 людей">Компанія 5–200 людей</button>
-            <button class="chip" type="button" role="radio" aria-checked="false" data-v="ФОП / JDG / самозайнятий">ФОП / JDG / самозайнятий</button>
-            <button class="chip" type="button" role="radio" aria-checked="false" data-v="Інше">Інше</button>
-          </div>
-        </fieldset>
-        <fieldset>
-          <legend class="legend">Що болить найбільше?</legend>
-          <div class="chips" role="radiogroup" id="fPain">
-            <button class="chip" type="button" role="radio" aria-checked="false" data-v="Робота з кандидатами">Робота з кандидатами</button>
-            <button class="chip" type="button" role="radio" aria-checked="false" data-v="Заявки й клієнти">Заявки й клієнти</button>
-            <button class="chip" type="button" role="radio" aria-checked="false" data-v="Рахунки й документи">Рахунки й документи</button>
-            <button class="chip" type="button" role="radio" aria-checked="false" data-v="Звіти">Звіти</button>
-            <button class="chip" type="button" role="radio" aria-checked="false" data-v="Не знаю, з чого почати">Не знаю, з чого почати</button>
-          </div>
-        </fieldset>
-        <fieldset>
-          <legend class="legend">Коли зручно? Час варшавський</legend>
-          <div class="slots">
-            <div class="days" id="fDays" role="radiogroup" aria-label="День"></div>
-            <div class="times" id="fTimes" role="radiogroup" aria-label="Час"></div>
-          </div>
-          <noscript><p class="small muted">Напишіть зручний день і час у полі нижче.</p></noscript>
-        </fieldset>
-        <div class="two">
-          <div class="field"><label for="fEmail">Email*</label><input class="input" id="fEmail" type="email" autocomplete="email" inputmode="email" required placeholder="name@firma.pl"></div>
-          <div class="field"><label for="fName">Ім'я</label><input class="input" id="fName" type="text" autocomplete="name"></div>
-        </div>
-        <div class="field"><label for="fCompany">Компанія</label><input class="input" id="fCompany" type="text" autocomplete="organization"></div>
-        <div class="field"><label for="fWhat">Що хочете автоматизувати?</label><textarea class="input" id="fWhat" rows="3"></textarea></div>
-        <p class="error" id="fError" role="alert" hidden></p>
-        <div>
-          <button class="btn" type="submit" data-press>Забронювати консультацію · 190&nbsp;zł</button>
-          <span class="btn-note">Підтвердження часу й посилання на оплату та Google Meet надішлю протягом робочого дня.</span>
-        </div>
-      </form>
-      <div class="confirm" id="confirm" hidden tabindex="-1">
-        <h3>Заявку зібрано</h3>
-        <p style="margin-top:10px">Надішліть цей текст на <span class="addr">kontakt@mlohaza.com</span> або скопіюйте його. Я підтверджу час і надішлю посилання на оплату та Google Meet. Підготуйте один процес, який забирає найбільше часу.</p>
-        <pre id="confirmText"></pre>
-        <div class="row">
-          <button class="btn" type="button" id="copyBtn" data-press>Скопіювати заявку</button>
-          <a class="link" id="mailLink" href="mailto:kontakt@mlohaza.com">Відкрити в пошті</a>
-          <button class="link" type="button" id="editBtn">Змінити відповіді</button>
-        </div>
-        <p class="small muted" id="copyMsg" role="status" style="margin-top:12px"></p>
-      </div>
+    <h2 id="h-faq" style="margin-top:120px" data-rise>Питання перед розмовою</h2>
+    <div class="faq">
+      <details class="qa" data-rise><summary>Чи замінить AI моїх людей?</summary><p>Ні. Я автоматизую рутину: перенесення даних, нагадування, чернетки, звіти. Рішення про гроші й людей ухвалюють люди, а в команди з'являється час на роботу, яку цінують клієнти. Проєкти, мета яких скоротити людей, я не беру.</p></details>
+      <details class="qa" data-rise><summary>Скільки це коштує?</summary><p>Консультація коштує 190&nbsp;zł за 30 хвилин і зараховується у впровадження. Вартість аудиту й впровадження залежить від процесів і систем, тож я називаю її після консультації і фіксую до початку робіт.</p></details>
+      <details class="qa" data-rise><summary>Чи має це сенс для ФОП або JDG?</summary><p>Так, якщо рутина забирає у вас хоча б кілька годин на тиждень: рахунки, переписка, запис клієнтів, документи. На консультації скажу, що можна автоматизувати швидко й недорого.</p></details>
+      <details class="qa" data-rise><summary>Чи безпечно віддавати дані?</summary><p>Працюю відповідно до GDPR. Використовую моделі з обробкою даних в ЄС, які не навчаються на ваших даних. n8n можна розгорнути на вашому сервері. Доступи видаєте ви й можете відкликати будь-коли.</p></details>
+      <details class="qa" data-rise><summary>AI в рекрутингу і EU AI Act?</summary><p>Автоматизую операційну частину: листи кандидатам, запис, документи, синхронізацію систем. Якщо AI допомагає оцінювати кандидатів, рішення завжди ухвалює рекрутер, а вимоги закону перевіряємо разом до запуску.</p></details>
+      <details class="qa" data-rise><summary>З якими системами працюєте?</summary><p>HubSpot, Google Workspace, Jira і Confluence, PowerBI, n8n, Make, Claude, OpenAI, Gemini та будь-які системи з API. Нові оцінюю на консультації.</p></details>
     </div>
   </div>
 </section>
 
 </main>
 
-<footer class="on-cobalt wrap" data-time="Понеділок, 9:14" aria-label="Контакти">
-  <div class="foot">
-    <div class="foot__top">
-      <div class="foot__notes">
-        <p><b>Михайло Логаза</b><br>AI-автоматизації процесів</p>
-        <p>Познань, Польща<br>Працюю дистанційно по Польщі та ЄС</p>
-        <p>Рутину — агентам, рішення — людям.</p>
-      </div>
-      <a href="#top">Нагору</a>
-    </div>
-    <a class="foot__mail" href="mailto:kontakt@mlohaza.com"><span>kontakt@</span><span>mlohaza.com</span></a>
-    <div class="foot__meta">
-      <p><a href="#konsultatsiya">Консультація</a> · <a href="#kalkulyator">Калькулятор</a> · <a href="#keisy">Кейси</a></p>
-      <p>Архівні фото: «Head Office typists room, New Zealand Railways, 1959», Archives New Zealand, CC BY-SA 2.0; картотека Social Security Board, Балтимор, 1937, Harris &amp; Ewing, суспільне надбання; сортувальна машина Бюро перепису, 1909, National Photo Company, суспільне надбання. Усе через Wikimedia Commons.</p>
-      <p>Понеділок, 9:14 · © 2026</p>
+<footer class="foot" aria-label="Контакти">
+  <div class="wrap">
+    <p class="lead" style="color:#C9D3DB">Михайло Логаза · AI-автоматизації процесів · Познань, Польща</p>
+    <a class="foot__mail" href="mailto:kontakt@mlohaza.com">kontakt@mlohaza.com</a>
+    <div class="cta-row"><a class="btn" href="#pochaty" data-book data-press>Записатися на консультацію</a></div>
+    <div class="foot__row">
+      <p>Рутину — агентам, рішення — людям.</p>
+      <p>Архівні фото через Wikimedia Commons: «Head Office typists room, New Zealand Railways, 1959», Archives New Zealand, CC BY-SA 2.0; картотека Social Security Board, Балтимор, 1937, Harris &amp; Ewing, суспільне надбання; сортувальна машина Бюро перепису, 1909, National Photo Company, суспільне надбання.</p>
+      <p>© 2026 Mykhailo Lohaza</p>
     </div>
   </div>
 </footer>
+
+<div class="dock" id="dock"><a class="btn" href="#pochaty" data-book data-press>Консультація 30&nbsp;хв · 190&nbsp;zł</a></div>
+
+<dialog class="sheet" id="sheet" aria-labelledby="h-book">
+  <div class="sheet__in">
+    <div class="sheet__head">
+      <img src="img/me-head.jpg" width="360" height="360" alt="Михайло Логаза">
+      <div><h2 id="h-book">Консультація 30&nbsp;хв</h2><p>190&nbsp;zł (≈&nbsp;45&nbsp;€) · зараховується у впровадження</p></div>
+      <button class="sheet__x" type="button" id="sheetClose" aria-label="Закрити">×</button>
+    </div>
+    <ol class="agenda">
+      <li>Розберемо ваш процес.</li>
+      <li>Покажу, де губляться години.</li>
+      <li>Чесно скажу, чи окупиться автоматизація.</li>
+      <li>Домовимось про наступний крок або скажу, що поки не варто.</li>
+    </ol>
+    <form class="form" id="bookForm" novalidate>
+      <fieldset><legend class="legend">Хто ви?</legend>
+        <div class="chips" role="radiogroup" id="fWho">
+          <button class="chip" type="button" role="radio" aria-checked="false" data-v="HR- або рекрутингова агенція">HR- або рекрутингова агенція</button>
+          <button class="chip" type="button" role="radio" aria-checked="false" data-v="Компанія 5–200 людей">Компанія 5–200 людей</button>
+          <button class="chip" type="button" role="radio" aria-checked="false" data-v="ФОП / JDG / самозайнятий">ФОП / JDG</button>
+          <button class="chip" type="button" role="radio" aria-checked="false" data-v="Інше">Інше</button>
+        </div>
+      </fieldset>
+      <fieldset><legend class="legend">Що болить найбільше?</legend>
+        <div class="chips" role="radiogroup" id="fPain">
+          <button class="chip" type="button" role="radio" aria-checked="false" data-v="Робота з кандидатами">Робота з кандидатами</button>
+          <button class="chip" type="button" role="radio" aria-checked="false" data-v="Заявки й клієнти">Заявки й клієнти</button>
+          <button class="chip" type="button" role="radio" aria-checked="false" data-v="Рахунки й документи">Рахунки й документи</button>
+          <button class="chip" type="button" role="radio" aria-checked="false" data-v="Звіти">Звіти</button>
+          <button class="chip" type="button" role="radio" aria-checked="false" data-v="Не знаю, з чого почати">Не знаю, з чого почати</button>
+        </div>
+      </fieldset>
+      <fieldset><legend class="legend">Коли зручно? Час варшавський</legend>
+        <div class="days" id="fDays" role="radiogroup" aria-label="День"></div>
+        <div class="times" id="fTimes" role="radiogroup" aria-label="Час" style="margin-top:8px"></div>
+      </fieldset>
+      <div class="two">
+        <div class="field"><label for="fEmail">Email*</label><input class="input" id="fEmail" type="email" autocomplete="email" inputmode="email" required placeholder="name@firma.pl"></div>
+        <div class="field"><label for="fName">Ім'я</label><input class="input" id="fName" type="text" autocomplete="name"></div>
+      </div>
+      <div class="field"><label for="fWhat">Що хочете автоматизувати?</label><textarea class="input" id="fWhat" rows="3"></textarea></div>
+      <p class="error" id="fError" role="alert" hidden></p>
+      <div><button class="btn" type="submit" data-press>Забронювати · 190&nbsp;zł</button><span class="btn-note">Підтвердження часу й посилання на оплату та Google Meet надішлю протягом робочого дня.</span></div>
+    </form>
+    <div class="confirm" id="confirm" hidden tabindex="-1">
+      <h3>Заявку зібрано</h3>
+      <p>Надішліть цей текст на <span class="addr">kontakt@mlohaza.com</span> або скопіюйте його. Я підтверджу час і надішлю посилання на оплату та Google Meet.</p>
+      <pre id="confirmText"></pre>
+      <div class="cta-row" style="margin-top:0">
+        <button class="btn" type="button" id="copyBtn" data-press>Скопіювати заявку</button>
+        <a class="textlink" id="mailLink" href="mailto:kontakt@mlohaza.com">Відкрити в пошті</a>
+        <button class="textlink" type="button" id="editBtn">Змінити відповіді</button>
+      </div>
+      <p class="small muted" id="copyMsg" role="status"></p>
+    </div>
+  </div>
+</dialog>
 
 <script src="vendor/motion-12.23.12.js"></script>
 <script src="main.js"></script>
