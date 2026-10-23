@@ -258,7 +258,7 @@
     const spans = $$('.w', belief);
     M.scroll((p) => {
       const k = p * (spans.length + 6);
-      spans.forEach((s, i) => s.style.setProperty('--o', String(Math.min(1, Math.max(0.28, k - i)))));
+      spans.forEach((s, i) => s.style.setProperty('--o', String(Math.min(1, Math.max(0.62, k - i)))));
     }, { target: belief, offset: ['start 92%', 'end 45%'] });
   }
 
