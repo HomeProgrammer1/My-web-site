@@ -167,17 +167,19 @@
     const bw = Math.min(44, (W - 11 * 6) / 12), gap = (W - 12 * bw) / 11;
     const max = monthBack * 12 || 1;
     const y = (v) => base - (v / max) * (base - top);
+    const tok = getComputedStyle(root);
+    const ink = tok.getPropertyValue('--ink').trim(), early = tok.getPropertyValue('--cornflower').trim(), later = tok.getPropertyValue('--cobalt').trim();
     const svg = document.createElementNS(NS, 'svg');
     svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
     const mk = (tag, attrs, text) => { const n = document.createElementNS(NS, tag); Object.entries(attrs).forEach(([k, v]) => n.setAttribute(k, v)); if (text != null) n.textContent = text; svg.append(n); return n; };
     for (let m = 1; m <= 12; m++) {
       const v = monthBack * m, x = (m - 1) * (bw + gap);
-      mk('rect', { x, y: y(v), width: bw, height: Math.max(2, base - y(v)), fill: m <= 3 ? '#9DB0E6' : '#1C3FAE' });
+      mk('rect', { x, y: y(v), width: bw, height: Math.max(2, base - y(v)), fill: m <= 3 ? early : later });
       mk('text', { x: x + bw / 2, y: base + 22, 'text-anchor': 'middle' }, m === 1 && W > 420 ? '1 міс.' : String(m));
     }
     const q = monthBack * 3;
-    mk('rect', { x: 0, y: y(q) - 1.5, width: W, height: 3, fill: '#0F1629' });
-    mk('rect', { x: 0, y: 9, width: 18, height: 4, fill: '#0F1629' });
+    mk('rect', { x: 0, y: y(q) - 1.5, width: W, height: 3, fill: ink });
+    mk('rect', { x: 0, y: 9, width: 18, height: 4, fill: ink });
     mk('text', { class: 'lab', x: 26, y: 16 }, `3 місяці: ${zl(q)}`);
     if (W > 460) mk('text', { class: 'lab', x: W, y: 16, 'text-anchor': 'end' }, `12 місяців: ${zl(max)}`);
     else mk('text', { class: 'lab', x: 26, y: 36 }, `12 місяців: ${zl(max)}`);
