@@ -1,6 +1,6 @@
 # Сайт mlohaza.com · нотатки збірки
 
-Поточна версія: **v3.2** у `site/` (копія в `versions/v3-2-process/`, фідбек у `docs/feedback-v3.md`). Попередні: v3.1 у `versions/v3-1-calm/`, v3 у `versions/v3-desk/`. Попередні: v1 у `versions/v1-planner/`, v2 у `versions/v2-glass/`; список версій із посиланнями в `versions/README.md`.
+Поточна версія: **v3.3** у `site/` (копія в `versions/v3-3-ops/`, фідбек у `docs/feedback-v3.md`). Попередні: v3.2 у `versions/v3-2-process/`, v3.1 у `versions/v3-1-calm/`, v3 у `versions/v3-desk/`. Попередні: v1 у `versions/v1-planner/`, v2 у `versions/v2-glass/`; список версій із посиланнями в `versions/README.md`.
 Відкрити локально: `python3 -m http.server -d site`. Мова: українська (мова ревю). PL і EN робимо після погодження текстів.
 
 ## v3: як зібрано
@@ -35,7 +35,7 @@
 - **Відгуки:** у v3 блоку відгуків немає, щоб не показувати вигаданих. Додамо, коли будуть справжні.
 - **Форми не надсилають дані.** Калькулятор має йти в Resend, запис у Cal.com зі Stripe (190 zł), ліди в Telegram.
 - **Фото.** Одне справжнє фото Михайла, нарізане на кадри. Бажана фотосесія.
-- **Інше:** політика приватності, cookies, реквізити JDG/NIP, LinkedIn і Telegram.
+- **Інше:** реквізити JDG/NIP у політиці приватності й умовах, перевірка юристом, підтвердити посилання на Instagram.
 
 ## Архівні фото (Wikimedia Commons)
 - "Head Office typists room, New Zealand Railways, 1959", Archives New Zealand, CC BY-SA 2.0 (хіро, конструктор, досвід)

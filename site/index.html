@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Михайло Логаза · AI-автоматизації</title>
-<meta name="description" content="Хто в ліс, хто по дрова? Михайло Логаза знаходить процеси, які живуть у головах людей, переносить їх на одну схему й автоматизує з AI за методом Calm Ops. Консультація 30 хв, 190 zł.">
+<meta name="description" content="Хто у вас за що відповідає? Михайло Логаза переносить операційні процеси (заявки, CRM, рахунки, звіти) на одну схему й автоматизує їх з AI за методом Calm Ops. Консультація 30 хв, 190 zł.">
 <link rel="icon" href="data:,">
 <link rel="preload" href="fonts/geologica-cyrillic-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="styles.css">
@@ -35,8 +35,8 @@
   <div class="hero__stage">
     <canvas id="blueprint" aria-hidden="true"></canvas>
     <div class="hero__copy">
-      <h1 id="h1">Хто в ліс, хто по дрова?</h1>
-      <p class="hero__sub">Процеси у вашій компанії вже є, просто вони досі живуть у головах людей. Я переношу їх на одну схему, налаштовую й автоматизую з AI за методом Calm Ops.</p>
+      <h1 id="h1">Хто у вас за що відповідає?</h1>
+      <p class="hero__sub">Заявки, рахунки, звіти: операційні процеси у вас уже є, але тримаються на пам'яті людей. Я переношу їх на одну схему й автоматизую з AI за методом Calm Ops.</p>
       <div class="hero__acts">
         <a class="btn btn--big" href="#zapys" data-book>Записатися на консультацію</a>
         <a class="textlink" href="#proces">Скласти свій процес</a>
@@ -48,7 +48,7 @@
 
 <!-- COMPOSE: find the process, draw it, automate it -->
 <section class="sec board compose" id="proces" aria-labelledby="h-proces">
-  <div class="sec-head"><h2 id="h-proces">Ваш процес зараз виглядає так?</h2><p>Задачі є, але хто за що відповідає і що за чим іде, знає тільки той, хто це робить. Натискайте на картки по черзі, і процес складеться.</p></div>
+  <div class="sec-head"><h2 id="h-proces">Одна заявка, п'ять ручних кроків</h2><p>Заявку копіюють з пошти в CRM, потім у рахунок, звіт і чат. Складіть цей процес по картках і подивіться, як його проводять агенти.</p></div>
   <div class="tile cp" id="cp" data-ui>
     <ol class="cp-phases" id="cpPhases" aria-label="Етапи методу">
       <li class="is-on"><span class="hl is-on">Знаходжу</span></li>
@@ -56,23 +56,25 @@
       <li><span class="hl">Автоматизую</span></li>
     </ol>
     <div class="cp-pile" id="cpPile">
-      <button class="cp-card askew" type="button" data-i="2" style="--r:-2deg;--dy:6px"><b>Погодити знижку</b><span class="cp-who">хто?</span></button>
-      <button class="cp-card askew" type="button" data-i="0" style="--r:1.4deg;--dy:-4px"><b>Нова заявка</b><span class="cp-who">хто?</span></button>
-      <button class="cp-card askew" type="button" data-i="4" style="--r:-1deg;--dy:10px"><b>Звіт власнику</b><span class="cp-who">хто?</span></button>
-      <button class="cp-card askew" type="button" data-i="1" style="--r:2.2deg"><b>Внести в CRM</b><span class="cp-who">хто?</span></button>
-      <button class="cp-card askew" type="button" data-i="3" style="--r:-1.6deg;--dy:-6px"><b>Виставити рахунок</b><span class="cp-who">хто?</span></button>
+      <button class="cp-card askew" type="button" data-i="2" style="--r:-2deg;--dy:6px"><b>Виставити рахунок</b><span class="cp-sys"></span><span class="cp-who">15 хв вручну</span></button>
+      <button class="cp-card askew" type="button" data-i="0" style="--r:1.4deg;--dy:-4px"><b>Прийняти заявку</b><span class="cp-sys"></span><span class="cp-who">10 хв вручну</span></button>
+      <button class="cp-card askew" type="button" data-i="4" style="--r:-1deg;--dy:10px"><b>Повідомити команду</b><span class="cp-sys"></span><span class="cp-who">2 хв вручну</span></button>
+      <button class="cp-card askew" type="button" data-i="1" style="--r:2.2deg"><b>Завести клієнта в CRM</b><span class="cp-sys"></span><span class="cp-who">10 хв вручну</span></button>
+      <button class="cp-card askew" type="button" data-i="3" style="--r:-1.6deg;--dy:-6px"><b>Оновити звіт</b><span class="cp-sys"></span><span class="cp-who">3 хв вручну</span></button>
     </div>
     <ol class="cp-flow" id="cpFlow" aria-label="Ваш процес по порядку">
       <li class="cp-slot"></li><li class="cp-slot"></li><li class="cp-slot"></li><li class="cp-slot"></li><li class="cp-slot"></li>
     </ol>
     <div class="cp-foot">
-      <p class="cp-msg" id="cpMsg" aria-live="polite">Почніть з картки «Нова заявка».</p>
+      <p class="cp-msg" id="cpMsg" aria-live="polite">Почніть з картки «Прийняти заявку».</p>
       <div class="cta-row">
         <button class="btn" type="button" id="cpAuto" hidden>Автоматизувати</button>
         <a class="btn" id="cpBook" href="#zapys" data-book data-prefill="process" hidden>Хочу так у себе</a>
+        <button class="btn btn--ink" type="button" id="cpAgain" hidden>Запустити ще одну заявку</button>
         <button class="textlink" type="button" id="cpReset" hidden>Почати знову</button>
       </div>
     </div>
+    <span class="cp-token" id="cpToken" aria-hidden="true">Заявка</span>
     <span class="cp-hand" id="cpHand" aria-hidden="true"><svg viewBox="0 0 24 24" width="30" height="30"><path d="M5 2.5l13.5 11.2-6.1.6 3.6 6.9-2.6 1.3-3.6-6.9L5 19.6z" fill="currentColor" stroke="#FFFFFF" stroke-width="1.4" stroke-linejoin="round"/></svg></span>
   </div>
 </section>
@@ -92,7 +94,7 @@
       <p><b>−87%</b><span>витрат на AI в агенті для Jira, який я запустив як Product Owner</span></p>
       <p><b>2-ге</b><span>місце серед 70+ команд на міжнародному AI-хакатоні</span></p>
     </div>
-    <div class="cta-row"><a class="btn" href="#zapys" data-book>Записатися на консультацію</a><a class="textlink" href="yak-pracyuyu.html">Мій метод Calm Ops</a></div>
+    <div class="cta-row"><a class="btn" href="#zapys" data-book>Записатися на консультацію</a><a class="textlink" href="yak-pracyuyu.html">Мій метод Calm Ops</a><a class="textlink" href="https://linkedin.com/in/mykhailo-lohaza" target="_blank" rel="noopener">Я в LinkedIn</a></div>
   </div>
 </section>
 
@@ -131,20 +133,20 @@
   <div class="c-head"><h2 id="h-calc">Порахуйте самі, скільки коштує рутина</h2><p>Вкажіть свої години, вартість години й бюджет. Графік покаже, коли автоматизація окупиться.</p></div>
   <div class="tile c-in">
     <div class="range">
-      <label for="cHours">Скільки годин на тиждень команда робить це вручну</label>
-      <div class="range__row"><input id="cHours" type="range" min="2" max="200" step="1" value="20"><span class="num"><input id="nHours" type="number" min="2" max="200" step="1" value="20" inputmode="numeric" aria-label="Скільки годин на тиждень команда робить це вручну"><span>год</span></span></div>
+      <label for="cHours">Годин ручної роботи на тиждень</label><small class="range__note">Разом на всю команду.</small>
+      <div class="range__row"><input id="cHours" type="range" min="2" max="200" step="1" value="20"><span class="num"><input id="nHours" type="number" min="2" max="200" step="1" value="20" inputmode="numeric" aria-label="Годин ручної роботи на тиждень"><span>год</span></span></div>
     </div>
     <div class="range">
-      <label for="cRate">Скільки коштує година роботи</label>
-      <div class="range__row"><input id="cRate" type="range" min="40" max="250" step="5" value="80"><span class="num"><input id="nRate" type="number" min="40" max="250" step="5" value="80" inputmode="numeric" aria-label="Скільки коштує година роботи"><span>zł</span></span></div>
+      <label for="cRate">Вартість години роботи</label>
+      <div class="range__row"><input id="cRate" type="range" min="40" max="250" step="5" value="80"><span class="num"><input id="nRate" type="number" min="40" max="250" step="5" value="80" inputmode="numeric" aria-label="Вартість години роботи"><span>zł</span></span></div>
     </div>
     <div class="range">
-      <label for="cShare">Яку частку можна віддати агентам</label>
-      <div class="range__row"><input id="cShare" type="range" min="20" max="80" step="5" value="50"><span class="num"><input id="nShare" type="number" min="20" max="80" step="5" value="50" inputmode="numeric" aria-label="Яку частку можна віддати агентам"><span>%</span></span></div>
+      <label for="cShare">Частка, яку віддамо агентам</label>
+      <div class="range__row"><input id="cShare" type="range" min="20" max="80" step="5" value="50"><span class="num"><input id="nShare" type="number" min="20" max="80" step="5" value="50" inputmode="numeric" aria-label="Частка, яку віддамо агентам"><span>%</span></span></div>
     </div>
     <div class="range">
-      <label for="cInvest">Скільки готові вкласти у впровадження</label><small class="range__note">Ваша оцінка. Точну ціну назву після консультації.</small>
-      <div class="range__row"><input id="cInvest" type="range" min="2000" max="60000" step="500" value="9000"><span class="num"><input id="nInvest" type="number" min="2000" max="60000" step="500" value="9000" inputmode="numeric" aria-label="Скільки готові вкласти у впровадження"><span>zł</span></span></div>
+      <label for="cInvest">Бюджет на впровадження</label><small class="range__note">Ваша оцінка. Точну ціну назву після консультації.</small>
+      <div class="range__row"><input id="cInvest" type="range" min="2000" max="60000" step="500" value="9000"><span class="num"><input id="nInvest" type="number" min="2000" max="60000" step="500" value="9000" inputmode="numeric" aria-label="Бюджет на впровадження"><span>zł</span></span></div>
     </div>
     <p class="small muted">Формула: години × 4,33 тижня × вартість години.</p>
   </div>
@@ -185,10 +187,10 @@
 <footer class="foot" aria-labelledby="f-name">
   <div class="foot__cols">
     <nav aria-label="Сторінки"><h2 id="f-name">Михайло Логаза</h2><a href="index.html">Головна</a><a href="yak-pracyuyu.html">Метод Calm Ops</a><a href="yak-pracyuyu.html#faq">FAQ</a><a href="pro-mene.html">Про мене і кейси</a><a href="#kalkulyator">Калькулятор</a></nav>
-    <div><h2>Контакт</h2><p>kontakt@mlohaza.com</p><p>Познань, Польща. Працюю дистанційно по Польщі та ЄС польською, українською та англійською.</p></div>
+    <div><h2>Контакт</h2><p>kontakt@mlohaza.com</p><p class="socials"><a href="https://linkedin.com/in/mykhailo-lohaza" target="_blank" rel="noopener">LinkedIn</a><a href="https://instagram.com/mlohaza" target="_blank" rel="noopener">Instagram</a><a href="https://t.me/mlohaza" target="_blank" rel="noopener">Telegram</a></p><p>Познань, Польща. Працюю дистанційно по Польщі та ЄС польською, українською та англійською.</p></div>
     <div><h2>Метод Calm Ops</h2><p>Знаходжу процеси, які живуть у головах людей, переношу їх на одну схему й автоматизую з AI. Рішення про гроші й людей лишаються за вами.</p></div>
   </div>
-  <div class="foot__last"><p>© 2026 Mykhailo Lohaza</p><p>AI-автоматизації за методом Calm Ops</p></div>
+  <div class="foot__last"><p>© 2026 Mykhailo Lohaza</p><p class="legal"><a href="polityka-pryvatnosti.html">Політика приватності</a><a href="umovy.html">Умови співпраці</a></p></div>
 </footer>
 
 <dialog class="sheet" id="sheet" aria-labelledby="h-book">

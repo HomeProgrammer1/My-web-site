@@ -31,36 +31,39 @@
   /* ---------- compose: find the process, draw it, automate it ---------- */
   const cp = $('#cp');
   const STEPS = [
-    { n: 'Нова заявка', who: 'менеджер', agent: 'агент читає заявку й заводить картку' },
-    { n: 'Внести в CRM', who: 'менеджер', agent: 'агент вносить дані в CRM' },
-    { n: 'Погодити знижку', who: 'власник', gate: true, agent: 'Human Gate: вирішує власник' },
-    { n: 'Виставити рахунок', who: 'бухгалтерія', agent: 'агент виставляє рахунок' },
-    { n: 'Звіт власнику', who: 'менеджер', agent: 'агент збирає звіт щопонеділка' },
+    { n: 'Прийняти заявку', sys: 'Gmail', min: 10, agent: 'агент забирає дані з листа' },
+    { n: 'Завести клієнта в CRM', sys: 'HubSpot', min: 10, agent: 'агент створює картку клієнта' },
+    { n: 'Виставити рахунок', sys: 'Fakturownia', min: 15, gate: true, agent: 'рахунок понад ліміт чекає на вас', ok: 'затверджено, рахунок надіслано' },
+    { n: 'Оновити звіт', sys: 'Google Sheets', min: 3, agent: 'агент дописує рядок у звіт' },
+    { n: 'Повідомити команду', sys: 'Telegram', min: 2, agent: 'агент пише підсумок у чат' },
   ];
-  let cpNext = 0, cpDone = false;
+  let cpNext = 0, cpDone = false, cpRunning = false;
   if (cp) {
-    const pile = $('#cpPile'), slots = $$('.cp-slot', cp), msg = $('#cpMsg'), hand = $('#cpHand');
-    const auto = $('#cpAuto'), book = $('#cpBook'), resetBtn = $('#cpReset');
+    const pile = $('#cpPile'), slots = $$('.cp-slot', cp), msg = $('#cpMsg'), hand = $('#cpHand'), token = $('#cpToken');
+    const auto = $('#cpAuto'), book = $('#cpBook'), again = $('#cpAgain'), resetBtn = $('#cpReset');
     const phases = $$('#cpPhases li');
     const cards = $$('.cp-card', pile);
+    const total = STEPS.reduce((s, x) => s + x.min, 0);
     const phase = (k) => phases.forEach((li, i) => { li.classList.toggle('is-on', i === k); $('.hl', li).classList.toggle('is-on', i === k); });
+    const rel = (node) => { const s = cp.getBoundingClientRect(), r = node.getBoundingClientRect(); return { x: r.left - s.left, y: r.top - s.top, w: r.width, h: r.height }; };
     const pointAt = (card) => {
       if (!hand || !card) return;
-      const s = cp.getBoundingClientRect(), r = card.getBoundingClientRect();
-      hand.style.setProperty('--hx', `${r.left - s.left + r.width * 0.62}px`);
-      hand.style.setProperty('--hy', `${r.top - s.top + r.height * 0.55}px`);
+      const r = rel(card);
+      hand.style.setProperty('--hx', `${r.x + r.w * 0.62}px`);
+      hand.style.setProperty('--hy', `${r.y + r.h * 0.55}px`);
     };
     const markNext = () => {
       cards.forEach((c) => c.classList.remove('is-next'));
       const next = cards.find((c) => Number(c.dataset.i) === cpNext);
       if (next) { next.classList.add('is-next'); pointAt(next); }
     };
+    const setLine = (card, sys, who) => { $('.cp-sys', card).textContent = sys; $('.cp-who', card).textContent = who; };
     const place = (card) => {
       const i = Number(card.dataset.i), slot = slots[i];
       const from = card.getBoundingClientRect();
       slot.append(card); slot.classList.add('is-filled');
       card.classList.add('is-square'); card.classList.remove('is-next');
-      $('.cp-who', card).textContent = STEPS[i].who;
+      setLine(card, STEPS[i].sys, `${STEPS[i].min} хв вручну`);
       card.disabled = true;
       if (canMove) { const to = card.getBoundingClientRect(); M.animate(card, { x: [from.left - to.left, 0], y: [from.top - to.top, 0] }, { duration: 0.55, ease: [0.16, 1, 0.3, 1] }); }
     };
@@ -76,30 +79,61 @@
       cpNext += 1;
       if (cpNext < STEPS.length) { msg.textContent = `Далі: «${STEPS[cpNext].n}».`; markNext(); return; }
       cpDone = true; phase(1); pile.hidden = true;
-      msg.textContent = 'Тепер процес на схемі: видно, що за чим іде і хто відповідає. Чотири кроки з п\'яти повторюються щодня.';
+      msg.textContent = `Тепер видно весь шлях заявки: п'ять систем і ${total} хвилин ручної роботи на кожну.`;
       auto.hidden = false; resetBtn.hidden = false;
     }));
-    auto.addEventListener('click', () => {
-      phase(2);
-      slots.forEach((slot, i) => {
-        const card = $('.cp-card', slot); if (!card) return;
-        card.classList.add(STEPS[i].gate ? 'is-gate' : 'is-agent');
-        $('.cp-who', card).textContent = STEPS[i].agent;
-        if (canMove) M.animate(card, { scale: [0.96, 1] }, { duration: 0.35, delay: i * 0.12 });
-      });
-      msg.textContent = 'Агенти роблять 4 кроки з 5, а рішення про знижку лишається за власником. Так працює Calm Ops на одному процесі.';
-      auto.hidden = true; book.hidden = false;
-    });
+
+    // The agents pass one request along the line: a token travels card to card, each step lights up as its agent works.
+    const wait = (ms) => new Promise((res) => setTimeout(res, ms));
+    const run = async () => {
+      if (cpRunning) return;
+      cpRunning = true; phase(2);
+      auto.hidden = true; again.hidden = true; book.hidden = true; resetBtn.hidden = true;
+      const placed = slots.map((s) => $('.cp-card', s));
+      placed.forEach((card, i) => { card.classList.remove('is-agent', 'is-gate', 'is-run', 'is-ok'); setLine(card, STEPS[i].sys, 'чекає на заявку'); });
+      slots.forEach((s) => s.classList.remove('is-live'));
+      const moveTo = async (card) => {
+        const r = rel(card);
+        const to = { x: r.x + r.w / 2 - token.offsetWidth / 2, y: r.y - token.offsetHeight / 2 };
+        if (canMove) { await M.animate(token, { x: to.x, y: to.y, opacity: 1 }, { duration: 0.6, ease: [0.65, 0, 0.35, 1] }); }
+        else { token.style.transform = `translate(${to.x}px, ${to.y}px)`; token.style.opacity = '1'; }
+      };
+      if (canMove) { const r0 = rel(placed[0]); M.animate(token, { x: r0.x - 40, y: r0.y - 20, opacity: 0 }, { duration: 0 }); }
+      msg.textContent = 'Нова заявка прийшла на пошту. Далі все роблять агенти.';
+      for (let i = 0; i < placed.length; i++) {
+        const card = placed[i], s = STEPS[i];
+        await moveTo(card);
+        card.classList.add('is-run');
+        if (i > 0) slots[i].classList.add('is-live');
+        if (s.gate) {
+          card.classList.add('is-gate'); setLine(card, s.sys, s.agent);
+          msg.textContent = 'Рахунок понад ліміт. Агент зупинився й чекає на ваше рішення.';
+          await wait(canMove ? 1600 : 0);
+          card.classList.add('is-ok'); setLine(card, s.sys, s.ok);
+        } else {
+          card.classList.add('is-agent'); setLine(card, s.sys, s.agent);
+          await wait(canMove ? 650 : 0);
+        }
+        card.classList.remove('is-run');
+      }
+      if (canMove) await M.animate(token, { opacity: 0, y: '-=12' }, { duration: 0.3 });
+      msg.textContent = `Заявка пройшла п'ять систем приблизно за хвилину замість ${total} хвилин вручну. Рахунок понад ліміт затвердила людина.`;
+      again.hidden = false; book.hidden = false; resetBtn.hidden = false;
+      cpRunning = false;
+    };
+    auto.addEventListener('click', run);
+    again.addEventListener('click', run);
     resetBtn.addEventListener('click', () => {
+      if (cpRunning) return;
       cards.forEach((card) => {
-        card.classList.remove('is-square', 'is-agent', 'is-gate'); card.disabled = false;
-        $('.cp-who', card).textContent = 'хто?';
+        card.classList.remove('is-square', 'is-agent', 'is-gate', 'is-run', 'is-ok'); card.disabled = false;
+        setLine(card, '', `${STEPS[Number(card.dataset.i)].min} хв вручну`);
         pile.append(card);
       });
-      slots.forEach((s) => s.classList.remove('is-filled'));
+      slots.forEach((s) => s.classList.remove('is-filled', 'is-live'));
       cpNext = 0; cpDone = false; phase(0); pile.hidden = false;
-      msg.textContent = 'Почніть з картки «Нова заявка».';
-      auto.hidden = true; book.hidden = true; resetBtn.hidden = true;
+      msg.textContent = 'Почніть з картки «Прийняти заявку».';
+      auto.hidden = true; book.hidden = true; again.hidden = true; resetBtn.hidden = true;
       markNext();
     });
     markNext();
@@ -215,7 +249,7 @@
     if (!sheet || typeof sheet.showModal !== 'function') return false;
     opener = from;
     const kind = from && from.dataset.prefill;
-    if (kind === 'process') fWhat.value = 'Склав процес на сайті: заявка, CRM, знижка, рахунок, звіт. Хочу так само у себе.';
+    if (kind === 'process') fWhat.value = 'Склав процес на сайті: заявка з пошти, CRM, рахунок, звіт, повідомлення команді. Хочу так само у себе.';
     if (kind === 'data') fWhat.value = 'Хочу прибрати ручне перенесення даних з таблиць у CRM.';
     if (kind === 'calc' && last.year != null) fWhat.value = `Мої цифри з калькулятора: ${last.h} год на тиждень, ${last.r} zł за годину, ${zl(last.year)} на рік, бюджет ${zl(last.inv)}.`;
     if (PREFILL[kind]) fWhat.value = PREFILL[kind];
@@ -266,6 +300,14 @@
   const editBtn = $('#editBtn');
   if (editBtn) editBtn.addEventListener('click', () => { confirmBox.hidden = true; form.hidden = false; $('#fEmail').focus(); });
 
+
+  /* ---------- a new page opens at its top unless a section was asked for ---------- */
+  if (!window.location.hash) {
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    const first = $('.skip') || document.body;
+    try { first.scrollIntoView({ block: 'start', behavior: 'instant' }); } catch (e) { first.scrollIntoView(true); }
+  }
 
   /* ---------- the bar steps aside while you read and comes back when you scroll up ---------- */
   const nav = $('#nav');

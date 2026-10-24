@@ -281,3 +281,10 @@ Motion 12 (vanilla build) is vendored; everything is skipped under `prefers-redu
 - **Method panels.** The open panel puts its text right under the name and a small picture of the deliverable on the right (process map, flow with a yellow gate, checklist, before/after bars).
 - **Cases.** Each case is a row: a coloured chart tile (`data-ui`) and a story tile with «Було, Зробили, Результат» under short cobalt bars (yellow for the result).
 - **Footer.** The block wordmark is gone.
+
+## v3.3 additions (24.10.2026)
+- **Process demo.** Cards carry the manual minutes, then a system chip (`.cp-sys`: Gmail, HubSpot, Fakturownia, Google Sheets, Telegram). «Автоматизувати» sends an ink token («Заявка») card to card; the running card gets a 3px ink outline, connectors behind the token turn marker yellow, and the invoice card stops as a yellow Human Gate before it is approved. «Запустити ще одну заявку» replays it.
+- **Method.** Six tinted panels from ink to sky (ink, cobalt-deep, cobalt, `--periwinkle` #6F88D6, cornflower, sky): Слухаю, Візуалізую, Налагоджую, Автоматизую, Навчаю, Звітую.
+- **LinkedIn card** (`.li-card`): a cobalt tile linking to the profile; its three topic slips lie askew and square up on hover or focus.
+- **Legal pages** (`.doc`): one white column on the board, a yellow draft note, headings at `--t3`, text capped at 60ch.
+- **Page top.** Without a hash every page scrolls itself to the top on load, so a link never lands mid-page.
