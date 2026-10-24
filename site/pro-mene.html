@@ -17,7 +17,7 @@
     <a class="brand" href="index.html"><b>Михайло Логаза</b><span>AI-автоматизації за методом Calm Ops</span></a>
     <button class="nav__menu" type="button" aria-expanded="false" aria-controls="navLinks">Меню</button>
     <nav class="nav__links" id="navLinks" aria-label="Розділи">
-      <a href="index.html#komu">Що автоматизую</a>
+      <a href="index.html#proces">Процеси</a>
       <a href="index.html#kalkulyator">Калькулятор</a>
       <a href="yak-pracyuyu.html">Метод Calm Ops</a>
       <a href="pro-mene.html" aria-current="page">Про мене</a>
@@ -55,17 +55,77 @@
 </section>
 
 <section class="sec board cases" id="keisy" aria-labelledby="h-cases">
-  <div class="sec-head"><h2 id="h-cases">Що вже працює</h2><p>Чотири проєкти, де я відповідав за впровадження. Назви клієнтів не публікую.</p></div>
-  <article class="tile tile--cobalt case case-1"><p class="figure">−87%</p><h3>витрат на AI</h3><p class="who">AI-агент для Jira, фарма-SaaS</p><p>Менеджери створюють задачі й звіти про ризики звичайною мовою. Прості команди виконує код, аналітику робить AI, тому на операціях запису 0% галюцинацій. У пілоті 10–15 людей.</p></article>
-  <article class="tile case case-2"><p class="figure">90%</p><h3>працівників користуються системою</h3><p class="who">ERP на 10&nbsp;000+ користувачів, HR-tech</p><p>600–800 тис. рядків HR- і фінансових даних перенесено без критичних втрат. Звіт для правління готується за 5–10 хвилин замість 4–5 годин. Проєкт закрили на 1,5–2 місяці раніше плану.</p></article>
-  <article class="tile tile--sky case case-3 askew" style="--r:-.5deg;--dy:3px"><p class="figure">5</p><h3>відділів в одній CRM</h3><p class="who">З Excel у CRM, HR-агенція</p><p>Перший місяць я слухав команди й записував, що вони самі називають рутиною. Потім п'ять відділів перейшли з таблиць в одну систему, і жоден не повернувся до Excel.</p></article>
-  <article class="tile tile--ink case case-4"><p class="figure">30</p><h3>stories з одного брифу</h3><p class="who">Контент-фабрика, бренд детективних ігор</p><p>Telegram-бот збирає бриф, AI пише контент-план і генерує фони. Stories не треба робити вручну: система випускає нові партії за заданими параметрами.</p></article>
-  <figure class="tile tile--photo case-ph"><img src="assets/baltimore-md-for-every-social-security-account.jpg" width="1524" height="1216" alt="Картотека 1937 року: скриня з картками працівників і друкарська машинка" loading="lazy" style="object-position:80% 70%"></figure>
+  <div class="sec-head"><h2 id="h-cases">Що вже працює</h2><p>Чотири проєкти, де я відповідав за впровадження. Назви клієнтів не публікую, тому показую, як було, що ми зробили і що змінилось.</p></div>
+
+  <article class="case-row" aria-labelledby="c1">
+    <div class="tile tile--cobalt cr-pic on-dark" aria-hidden="true" data-ui>
+      <p class="cr-cap">Витрати на AI</p>
+      <div class="cbars"><p><span>Якби все робив AI</span><i style="--w:100%"></i></p><p><span>Гібрид: код і AI</span><i class="is-hi" style="--w:13%"></i><b>−87%</b></p></div>
+    </div>
+    <div class="tile cr-story">
+      <p class="who">AI-агент для Jira, фарма-SaaS. Моя роль: Product Owner.</p>
+      <h3 id="c1">Задачі в Jira звичайною мовою</h3>
+      <dl class="cr-steps">
+        <div><dt>Було</dt><dd>Задачі й звіти про ризики менеджери вели в Jira вручну.</dd></div>
+        <div><dt>Зробили</dt><dd>AI-агента, якому пишуть звичайною мовою. Прості команди виконує код, аналітику робить AI.</dd></div>
+        <div><dt>Результат</dt><dd>Витрати на AI менші на 87%, на операціях запису 0% галюцинацій. У пілоті 10–15 людей.</dd></div>
+      </dl>
+    </div>
+  </article>
+
+  <article class="case-row" aria-labelledby="c2">
+    <div class="tile tile--sky cr-pic" aria-hidden="true" data-ui>
+      <p class="cr-cap">Звіт для правління</p>
+      <div class="cbars"><p><span>До</span><i style="--w:100%"></i><b>4–5 год</b></p><p><span>Після</span><i class="is-hi" style="--w:4%"></i><b>5–10 хв</b></p></div>
+      <p class="cr-big">90%<small>працівників користуються системою</small></p>
+    </div>
+    <div class="tile cr-story">
+      <p class="who">ERP на 10&nbsp;000+ користувачів, HR-tech. Моя роль: впровадження й навчання.</p>
+      <h3 id="c2">Нова система, якою справді користуються</h3>
+      <dl class="cr-steps">
+        <div><dt>Було</dt><dd>Звіт для правління збирали 4–5 годин, HR- і фінансові дані жили в старих системах.</dd></div>
+        <div><dt>Зробили</dt><dd>Перенесли 600–800 тис. рядків даних без критичних втрат, провели 9–10 сесій навчання й знайшли ключових людей у кожному відділі.</dd></div>
+        <div><dt>Результат</dt><dd>Звіт готується за 5–10 хвилин, системою користуються 90% працівників, проєкт закрили на 1,5–2 місяці раніше плану.</dd></div>
+      </dl>
+    </div>
+  </article>
+
+  <article class="case-row" aria-labelledby="c3">
+    <div class="tile tile--tone cr-pic" aria-hidden="true" data-ui>
+      <p class="cr-cap">5 відділів, одна система</p>
+      <div class="cmerge"><span></span><span></span><span></span><span></span><span></span><i></i><b>CRM</b></div>
+    </div>
+    <div class="tile cr-story">
+      <p class="who">HR-агенція, 5 відділів. Моя роль: впровадження CRM.</p>
+      <h3 id="c3">З таблиць в одну CRM</h3>
+      <dl class="cr-steps">
+        <div><dt>Було</dt><dd>Кожен відділ вів своїх кандидатів і клієнтів в окремих таблицях Excel.</dd></div>
+        <div><dt>Зробили</dt><dd>Перший місяць я слухав команди й записував, що вони самі називають рутиною. Потім перевели всі відділи в одну CRM.</dd></div>
+        <div><dt>Результат</dt><dd>Жоден із п'яти відділів не повернувся до Excel.</dd></div>
+      </dl>
+    </div>
+  </article>
+
+  <article class="case-row" aria-labelledby="c4">
+    <div class="tile tile--ink cr-pic on-dark" aria-hidden="true" data-ui>
+      <p class="cr-cap">1 бриф, 30 stories</p>
+      <div class="cgrid"><b></b><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    </div>
+    <div class="tile cr-story">
+      <p class="who">Контент-фабрика для бренду детективних ігор.</p>
+      <h3 id="c4">Stories, які не треба робити вручну</h3>
+      <dl class="cr-steps">
+        <div><dt>Було</dt><dd>Кожну Instagram Story готували вручну.</dd></div>
+        <div><dt>Зробили</dt><dd>Telegram-бот збирає бриф, AI пише контент-план і генерує фони за заданими параметрами.</dd></div>
+        <div><dt>Результат</dt><dd>З одного брифу виходить 30 готових Stories, а система циклічно випускає нові партії.</dd></div>
+      </dl>
+    </div>
+  </article>
 </section>
 
 <section class="sec board years" id="dosvid" aria-labelledby="h-years">
   <div class="sec-head"><h2 id="h-years">Досвід</h2><p>CRM і ERP від 2020 року, AI-агенти від 2024.</p></div>
-  <figure class="tile tile--photo yr-ph"><img src="assets/head-office-typists-room-new-zealand-railways.jpg" width="1520" height="1159" alt="Друкарки 1959 року за роботою, на столах стоси паперів" loading="lazy" style="object-position:92% 60%"></figure>
+  <figure class="tile tile--photo yr-ph"><img src="img/me-hero.jpg" width="853" height="828" alt="Михайло Логаза, руки схрещені, усміхається" loading="lazy" style="object-position:62% 20%"></figure>
   <div class="tile tile--tone yr"><b>2020–2021</b><p>CRM для HR-агенції: п'ять відділів перейшли з Excel в одну систему.</p></div>
   <div class="tile tile--sky yr"><b>2022–2024</b><p>ERP для HR-tech на 10&nbsp;000+ користувачів, міграція даних і навчання команд.</p></div>
   <div class="tile tile--cornflower yr askew" style="--r:.5deg;--dx:3px"><b>З 2024</b><p>Product Owner AI-агента для Jira у фарма-SaaS.</p></div>
@@ -113,11 +173,10 @@
 </main>
 
 <footer class="foot" aria-labelledby="f-name">
-  <p class="mark" role="img" aria-label="mlohaza"><span>m</span><span>l</span><span>o</span><span>h</span><span>a</span><span>z</span><span>a</span></p>
   <div class="foot__cols">
     <nav aria-label="Сторінки"><h2 id="f-name">Михайло Логаза</h2><a href="index.html">Головна</a><a href="yak-pracyuyu.html">Метод Calm Ops</a><a href="yak-pracyuyu.html#faq">FAQ</a><a href="pro-mene.html">Про мене і кейси</a><a href="index.html#kalkulyator">Калькулятор</a></nav>
     <div><h2>Контакт</h2><p>kontakt@mlohaza.com</p><p>Познань, Польща. Працюю дистанційно по Польщі та ЄС польською, українською та англійською.</p></div>
-    <div><h2>Фото</h2><p class="small">Архівні фото через Wikimedia Commons: «Head Office typists room, New Zealand Railways, 1959», Archives New Zealand, CC BY-SA 2.0; картотека Social Security Board, Балтимор, 1937, Harris &amp; Ewing, суспільне надбання.</p></div>
+    <div><h2>Метод Calm Ops</h2><p>Знаходжу процеси, які живуть у головах людей, переношу їх на одну схему й автоматизую з AI. Рішення про гроші й людей лишаються за вами.</p></div>
   </div>
   <div class="foot__last"><p>© 2026 Mykhailo Lohaza</p><p>AI-автоматизації за методом Calm Ops</p></div>
 </footer>

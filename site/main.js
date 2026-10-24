@@ -28,162 +28,130 @@
   };
   const people = (n) => (n % 10 === 1 && n % 100 !== 11 ? 'людини' : 'людей');
 
-  /* ---------- the desk: the visitor marks what is true for them ---------- */
-  const slips = $$('#slips .slip');
-  const sumH = $('#sumH'), sumText = $('#sumText');
-  const marked = () => slips.filter((s) => s.getAttribute('aria-pressed') === 'true');
-  const updateDesk = () => {
-    const on = marked();
-    const h = Math.round(on.reduce((a, s) => a + Number(s.dataset.h), 0) * 0.7);
-    countTo(sumH, h, (v) => nf.format(Math.round(v)));
-    if (!on.length) sumText.textContent = 'на тиждень можна віддати агентам. Поки нічого не позначено.';
-    else sumText.textContent = `на тиждень можна віддати агентам. Позначено ${on.length} з ${slips.length}, рахую 70% від цих годин.`;
-  };
-  slips.forEach((s) => s.addEventListener('click', () => {
-    s.setAttribute('aria-pressed', String(s.getAttribute('aria-pressed') !== 'true'));
-    updateDesk();
-  }));
-
-  /* ---------- your kind of work: the builder ---------- */
-  const SEGS = {
-    hr: {
-      who: 'HR- або рекрутингова агенція', pain: 'Робота з кандидатами',
-      trigger: ['Новий відгук на вакансію', 'пошта, Pracuj.pl, OLX Praca'],
-      result: ['Одна база кандидатів', 'і одне повідомлення о 8:00'],
-      steps: [
-        { n: 'Розібрати відгуки', h: 6, gate: true, tool: 'AI читає CV і розкладає їх у базу', msg: '34 відгуки розкладено, 8 найсильніших чекають вашого рішення.' },
-        { n: 'Листи кандидатам', h: 4, tool: 'листи за шаблонами, ви бачите чернетки', msg: 'Кандидатам надіслано 26 відповідей.' },
-        { n: 'Запис на співбесіди', h: 3, tool: 'кандидат сам обирає час', msg: '12 кандидатів записалися на співбесіди.' },
-        { n: 'Договори з шаблонів', h: 3, tool: 'договір з даних кандидата за хвилину', msg: '2 договори готові до підпису.' },
-        { n: 'Звіт клієнту', h: 4, tool: 'звіт збирається з бази', msg: 'Звіт для клієнта надіслано.' },
-      ],
-    },
-    smb: {
-      who: 'Компанія 5–200 людей', pain: 'Заявки й клієнти',
-      trigger: ['Нова заявка', 'з сайту або пошти'],
-      result: ['Нічого не губиться', 'звіт щоранку в Telegram'],
-      steps: [
-        { n: 'Внести заявку в CRM', h: 4, tool: 'заявка сама потрапляє в CRM', msg: '9 нових заявок у CRM, менеджерів сповіщено.' },
-        { n: 'Виставити рахунок', h: 3, tool: 'рахунок формується після замовлення', msg: '5 рахунків виставлено, копії в бухгалтерії.' },
-        { n: 'Відповісти на типові питання', h: 5, tool: 'AI готує відповідь, складне передає людині', msg: 'AI відповів на 31 типове питання, 4 складні чекають на менеджера.' },
-        { n: 'Зібрати звіт', h: 4, tool: 'звіт оновлюється сам', msg: 'Звіт для власника оновлено.' },
-        { n: 'Погодити витрати', h: 2, gate: true, tool: 'агент готує, власник погоджує', msg: '3 витрати чекають вашого погодження.' },
-      ],
-    },
-    jdg: {
-      who: 'ФОП / JDG / самозайнятий', pain: 'Рахунки й документи',
-      trigger: ['Повідомлення від клієнта', 'Telegram, WhatsApp, пошта'],
-      result: ['Усе в одному місці', 'документи готові для бухгалтера'],
-      steps: [
-        { n: 'Відповісти в месенджерах', h: 4, tool: 'усі звернення в одному місці', msg: '14 звернень зібрано, на 10 відповіді вже надіслано.' },
-        { n: 'Записати клієнта', h: 2, tool: 'клієнт сам бронює час', msg: '4 клієнти записалися на цей тиждень.' },
-        { n: 'Виставити рахунок', h: 2, tool: 'рахунок іде сам після послуги', msg: '3 рахунки виставлено.' },
-        { n: 'Нагадати про оплату', h: 1, tool: 'нагадування йдуть самі', msg: '2 нагадування про оплату надіслано.' },
-        { n: 'Документи для бухгалтера', h: 2, gate: true, tool: 'документи складаються в папку, ви перевіряєте', msg: 'Папка для бухгалтера готова, перегляньте перед відправкою.' },
-      ],
-    },
-  };
-  // How each loose sheet lies on the desk until it is handed to the agent.
-  const LIE = [[-1.4, -3], [1.1, 6], [-0.7, -2], [1.6, 4], [-1.1, -5]];
-  const b = { seg: 'hr', on: new Set([0, 1]) };
-  const bTasks = $('#bTasks');
-  const stateText = (s, on) => (on ? (s.gate ? 'агент готує, вирішуєте ви' : 'робить агент') : 'вручну');
-  const renderFlow = (animateIt) => {
-    const S = SEGS[b.seg];
-    const chosen = S.steps.filter((_, i) => b.on.has(i));
-    const manual = S.steps.reduce((a, s) => a + s.h, 0);
-    const back = chosen.reduce((a, s) => a + s.h * (s.gate ? 0.5 : 0.8), 0);
-    countTo($('#bBack'), Math.round(back * 2) / 2, half);
-    const gates = chosen.filter((s) => s.gate).length;
-    $('#bOf').textContent = `на тиждень зекономлено з ${manual} год ручної роботи${gates ? `, ${gates === 1 ? 'одне рішення лишається' : `${gates} рішення лишаються`} за вами` : ''}`;
-    const msg = $('#bMsg');
-    msg.replaceChildren(el('b', '', 'Повідомлення агента о 8:00, приклад'));
-    msg.append(document.createTextNode(chosen.length ? `Доброго ранку. ${chosen.map((s) => s.msg).join(' ')}` : 'Позначте хоча б один крок, і тут з\'явиться ваше ранкове повідомлення.'));
-  };
-  const renderTasks = () => {
-    const S = SEGS[b.seg];
-    bTasks.replaceChildren(...S.steps.map((s, i) => {
-      const on = b.on.has(i);
-      const t = el('button', `task askew${s.gate ? ' is-gate' : ''}`);
-      t.type = 'button';
-      t.style.setProperty('--r', `${LIE[i][0]}deg`);
-      t.style.setProperty('--dx', `${LIE[i][1]}px`);
-      t.setAttribute('aria-pressed', String(on));
-      const st = el('span', 'task__state', stateText(s, on));
-      t.append(el('span', 'task__name', s.n), el('span', 'task__h', `${s.h} год`), st);
-      t.addEventListener('click', () => {
-        const now = !b.on.has(i);
-        if (now) b.on.add(i); else b.on.delete(i);
-        t.setAttribute('aria-pressed', String(now));
-        st.textContent = stateText(s, now);
-        renderFlow(true);
-      });
-      return t;
+  /* ---------- compose: find the process, draw it, automate it ---------- */
+  const cp = $('#cp');
+  const STEPS = [
+    { n: 'Нова заявка', who: 'менеджер', agent: 'агент читає заявку й заводить картку' },
+    { n: 'Внести в CRM', who: 'менеджер', agent: 'агент вносить дані в CRM' },
+    { n: 'Погодити знижку', who: 'власник', gate: true, agent: 'Human Gate: вирішує власник' },
+    { n: 'Виставити рахунок', who: 'бухгалтерія', agent: 'агент виставляє рахунок' },
+    { n: 'Звіт власнику', who: 'менеджер', agent: 'агент збирає звіт щопонеділка' },
+  ];
+  let cpNext = 0, cpDone = false;
+  if (cp) {
+    const pile = $('#cpPile'), slots = $$('.cp-slot', cp), msg = $('#cpMsg'), hand = $('#cpHand');
+    const auto = $('#cpAuto'), book = $('#cpBook'), resetBtn = $('#cpReset');
+    const phases = $$('#cpPhases li');
+    const cards = $$('.cp-card', pile);
+    const phase = (k) => phases.forEach((li, i) => { li.classList.toggle('is-on', i === k); $('.hl', li).classList.toggle('is-on', i === k); });
+    const pointAt = (card) => {
+      if (!hand || !card) return;
+      const s = cp.getBoundingClientRect(), r = card.getBoundingClientRect();
+      hand.style.setProperty('--hx', `${r.left - s.left + r.width * 0.62}px`);
+      hand.style.setProperty('--hy', `${r.top - s.top + r.height * 0.55}px`);
+    };
+    const markNext = () => {
+      cards.forEach((c) => c.classList.remove('is-next'));
+      const next = cards.find((c) => Number(c.dataset.i) === cpNext);
+      if (next) { next.classList.add('is-next'); pointAt(next); }
+    };
+    const place = (card) => {
+      const i = Number(card.dataset.i), slot = slots[i];
+      const from = card.getBoundingClientRect();
+      slot.append(card); slot.classList.add('is-filled');
+      card.classList.add('is-square'); card.classList.remove('is-next');
+      $('.cp-who', card).textContent = STEPS[i].who;
+      card.disabled = true;
+      if (canMove) { const to = card.getBoundingClientRect(); M.animate(card, { x: [from.left - to.left, 0], y: [from.top - to.top, 0] }, { duration: 0.55, ease: [0.16, 1, 0.3, 1] }); }
+    };
+    cards.forEach((card) => card.addEventListener('click', () => {
+      if (cpDone || card.disabled) return;
+      if (Number(card.dataset.i) !== cpNext) {
+        card.classList.remove('is-wrong'); void card.offsetWidth; card.classList.add('is-wrong');
+        msg.textContent = `Спершу «${STEPS[cpNext].n}».`;
+        return;
+      }
+      place(card);
+      if (hand) hand.classList.add('is-gone');
+      cpNext += 1;
+      if (cpNext < STEPS.length) { msg.textContent = `Далі: «${STEPS[cpNext].n}».`; markNext(); return; }
+      cpDone = true; phase(1); pile.hidden = true;
+      msg.textContent = 'Тепер процес на схемі: видно, що за чим іде і хто відповідає. Чотири кроки з п\'яти повторюються щодня.';
+      auto.hidden = false; resetBtn.hidden = false;
     }));
-  };
-  const segs = $$('#bWho [role="radio"]');
-  segs.forEach((c) => c.addEventListener('click', () => {
-    if (c.getAttribute('aria-checked') === 'true') return;
-    segs.forEach((x) => { x.setAttribute('aria-checked', String(x === c)); x.tabIndex = x === c ? 0 : -1; });
-    b.seg = c.dataset.seg; b.on = new Set([0, 1]);
-    renderTasks(); renderFlow(true);
-    if (canMove) M.animate($$('.task', bTasks), { opacity: [0, 1], y: [-16, 0] }, { duration: 0.4, delay: M.stagger(0.05) });
-  }));
-  segs.forEach((c, i) => {
-    c.tabIndex = c.getAttribute('aria-checked') === 'true' ? 0 : -1;
-    c.addEventListener('keydown', (e) => {
-      if (!['ArrowRight', 'ArrowDown', 'ArrowLeft', 'ArrowUp'].includes(e.key)) return;
-      e.preventDefault();
-      const next = segs[(i + (e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : segs.length - 1)) % segs.length];
-      next.focus(); next.click();
+    auto.addEventListener('click', () => {
+      phase(2);
+      slots.forEach((slot, i) => {
+        const card = $('.cp-card', slot); if (!card) return;
+        card.classList.add(STEPS[i].gate ? 'is-gate' : 'is-agent');
+        $('.cp-who', card).textContent = STEPS[i].agent;
+        if (canMove) M.animate(card, { scale: [0.96, 1] }, { duration: 0.35, delay: i * 0.12 });
+      });
+      msg.textContent = 'Агенти роблять 4 кроки з 5, а рішення про знижку лишається за власником. Так працює Calm Ops на одному процесі.';
+      auto.hidden = true; book.hidden = false;
     });
-  });
-  if (bTasks) { renderTasks(); renderFlow(false); }
+    resetBtn.addEventListener('click', () => {
+      cards.forEach((card) => {
+        card.classList.remove('is-square', 'is-agent', 'is-gate'); card.disabled = false;
+        $('.cp-who', card).textContent = 'хто?';
+        pile.append(card);
+      });
+      slots.forEach((s) => s.classList.remove('is-filled'));
+      cpNext = 0; cpDone = false; phase(0); pile.hidden = false;
+      msg.textContent = 'Почніть з картки «Нова заявка».';
+      auto.hidden = true; book.hidden = true; resetBtn.hidden = true;
+      markNext();
+    });
+    markNext();
+    window.addEventListener('resize', () => { const n = cards.find((c) => c.classList.contains('is-next')); if (n) pointAt(n); });
+    if (reduce && hand) hand.classList.add('is-gone');
+  }
 
-  /* ---------- calculator ---------- */
-  const PROC = [['Введення даних', 4, true], ['Звіти й зведення', 3, true], ['Заявки та клієнти', 3, false],
-    ['Документи й рахунки', 3, false], ['Типове листування', 4, true], ['Робота з кандидатами', 5, true]];
-  const cProc = $('#cProc');
-  const proc = cProc ? PROC.map(([n, h, on]) => {
-    const c = el('button', 'chip', `${n}, ${h} год`);
-    c.type = 'button'; c.dataset.h = h; c.setAttribute('aria-pressed', String(on));
-    c.addEventListener('click', () => { c.setAttribute('aria-pressed', String(c.getAttribute('aria-pressed') !== 'true')); calc(); });
-    return c;
-  }) : [];
-  if (cProc) cProc.replaceChildren(...proc);
-  const cPeople = $('#cPeople'), cRate = $('#cRate'), cShare = $('#cShare');
+  /* ---------- calculator: the visitor's own numbers ---------- */
+  const pairs = ['Hours', 'Rate', 'Share', 'Invest'].map((k) => [$(`#c${k}`), $(`#n${k}`)]);
   const last = {};
-  // The bars are measured against one scale that only changes in round steps, so they grow and shrink with the sliders.
   let axis = 0;
-  const STEPS = [1, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10];
-  const nice = (v) => { const p = 10 ** Math.floor(Math.log10(v)); return STEPS.find((k) => k * p >= v) * p; };
-  const drawChart = (monthBack) => {
-    const bars = $('#bars'); if (!bars) return;
-    const total = Math.max(1, monthBack * 12);
-    if (!axis || total > axis || total < axis / 4) axis = nice(total * 1.2);
-    $$('i', bars).forEach((b, i) => b.style.setProperty('--h', `${((monthBack * (i + 1)) / axis) * 100}%`));
-    $('.q', bars).style.setProperty('--q', `${((monthBack * 3) / axis) * 100}%`);
-    $('#chartScale').textContent = `шкала до ${zl(axis)}`;
-    bars.setAttribute('aria-label', `Накопичена економія: ${zl(monthBack * 3)} за 3 місяці, ${zl(total)} за 12 місяців`);
-  };
+  const NICE = [1, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10];
+  const nice = (v) => { const p = 10 ** Math.floor(Math.log10(v)); return NICE.find((k) => k * p >= v) * p; };
+  const months = (n) => (n % 10 === 1 && n % 100 !== 11 ? 'місяць' : [2, 3, 4].includes(n % 10) && ![12, 13, 14].includes(n % 100) ? 'місяці' : 'місяців');
   const calc = () => {
-    if (!cPeople) return;
-    const hours = proc.filter((c) => c.getAttribute('aria-pressed') === 'true').reduce((a, c) => a + Number(c.dataset.h), 0);
-    const p = Number(cPeople.value), r = Number(cRate.value), s = Number(cShare.value) / 100;
-    $('#oPeople').textContent = p; $('#oRate').textContent = `${r} zł`; $('#oShare').textContent = `${Math.round(s * 100)}%`;
-    const month = p * hours * 4.33 * r;
-    Object.assign(last, { hours, p, r, s, year: month * 12, back: month * s });
+    if (!pairs[0][0]) return;
+    const [h, r, s, inv] = pairs.map(([rg]) => Number(rg.value));
+    const share = s / 100;
+    const month = h * 4.33 * r, back = month * share, hoursBack = h * 4.33 * share;
+    const pay = back > 0 ? inv / back : Infinity, payM = Math.max(1, Math.ceil(pay));
+    Object.assign(last, { h, r, s, inv, year: month * 12, back, payM });
     countTo($('#rYear'), month * 12, zl);
-    countTo($('#rMonth'), month * s, zl);
-    $('#rWeek').textContent = `кожна людина віддає рутині ${hours} год із 40 щотижня, це ${Math.round((hours / 40) * 100)}% робочого часу`;
-    countTo($('#rPerson'), Math.round(hours * s * 2) / 2, (v) => `${half(v)} год`);
-    countTo($('#rHours'), Math.round(p * hours * 4.33 * s), (v) => `${nf.format(Math.round(v))} год`);
-    $('#rTeamL').textContent = `на місяць для всієї команди з ${p} ${people(p)}`;
-    const pay = $('#payText');
-    pay.replaceChildren('За 3 місяці ви заощадите ', el('b', '', zl(month * s * 3)), '. Впровадження, яке коштує менше, окупиться за квартал. За рік економія сягне ', el('b', '', zl(month * s * 12)), '. Чорна лінія на графіку показує суму за перші 3 місяці.');
-    drawChart(month * s);
+    countTo($('#rMonth'), back, zl);
+    countTo($('#rHours'), Math.round(hoursBack), (v) => `${nf.format(Math.round(v))} год`);
+    $('#rPay').textContent = payM > 36 ? 'понад 3 роки' : `${payM} міс.`;
+    // bars: cumulative savings on one scale; months until the budget is earned back stay light
+    const bars = $('#bars');
+    const total = Math.max(1, back * 12), top = Math.max(total, inv);
+    if (!axis || top > axis || top < axis / 4) axis = nice(top * 1.15);
+    $$('i', bars).forEach((b, i) => {
+      b.style.setProperty('--h', `${((back * (i + 1)) / axis) * 100}%`);
+      b.classList.toggle('is-pay', i + 1 <= payM);
+    });
+    $('.q', bars).style.setProperty('--q', `${Math.min(100, (inv / axis) * 100)}%`);
+    $('#qLabel').textContent = `бюджет ${zl(inv)}`;
+    $('#chartScale').textContent = `шкала до ${zl(axis)}`;
+    bars.setAttribute('aria-label', `Накопичена економія: ${zl(back * 12)} за 12 місяців, бюджет ${zl(inv)} окупається за ${payM} ${months(payM)}`);
+    const t = $('#payText');
+    if (payM <= 12) t.replaceChildren('Бюджет ', el('b', '', zl(inv)), ` окупиться за ${payM} ${months(payM)}. Далі автоматизація повертає `, el('b', '', zl(back)), ' щомісяця.');
+    else t.replaceChildren(`З такими цифрами бюджет окупиться за ${payM > 36 ? 'понад 3 роки' : `${payM} ${months(payM)}`}. На консультації подивимось, що автоматизувати першим, щоб скоротити цей строк.`);
   };
-  [cPeople, cRate, cShare].forEach((i) => i && i.addEventListener('input', calc));
+  pairs.forEach(([rg, num]) => {
+    if (!rg) return;
+    rg.addEventListener('input', () => { num.value = rg.value; calc(); });
+    num.addEventListener('input', () => {
+      const v = Number(num.value);
+      if (num.value === '' || Number.isNaN(v)) return;
+      rg.value = String(Math.min(Number(rg.max), Math.max(Number(rg.min), v)));
+      calc();
+    });
+    num.addEventListener('change', () => { num.value = rg.value; });
+  });
   calc();
 
   /* ---------- Calm Ops: accordion of tinted panels ---------- */
@@ -247,13 +215,9 @@
     if (!sheet || typeof sheet.showModal !== 'function') return false;
     opener = from;
     const kind = from && from.dataset.prefill;
-    if (kind === 'pains' && marked().length) fWhat.value = `Позначено на сайті: ${marked().map((s) => $('.slip__t', s).textContent.toLowerCase()).join('; ')}.`;
-    if (kind === 'builder' && bTasks) {
-      const S = SEGS[b.seg]; setPick(fWho, S.who); setPick(fPain, S.pain);
-      const chosen = S.steps.filter((_, i) => b.on.has(i)).map((s) => s.n + (s.gate ? ' (рішення за людиною)' : ''));
-      if (chosen.length) fWhat.value = `Схема з сайту: ${S.trigger[0]} → ${chosen.join(' → ')}.`;
-    }
-    if (kind === 'calc' && last.year != null) fWhat.value = `Мої цифри з калькулятора: ${last.p} ${people(last.p)}, ${last.hours} год рутини на тиждень, ${zl(last.year)} на рік.`;
+    if (kind === 'process') fWhat.value = 'Склав процес на сайті: заявка, CRM, знижка, рахунок, звіт. Хочу так само у себе.';
+    if (kind === 'data') fWhat.value = 'Хочу прибрати ручне перенесення даних з таблиць у CRM.';
+    if (kind === 'calc' && last.year != null) fWhat.value = `Мої цифри з калькулятора: ${last.h} год на тиждень, ${last.r} zł за годину, ${zl(last.year)} на рік, бюджет ${zl(last.inv)}.`;
     if (PREFILL[kind]) fWhat.value = PREFILL[kind];
     sheet.showModal();
     $('.sheet__in', sheet).scrollTop = 0;
@@ -402,11 +366,11 @@
   const mStage = $('#mStage');
   if (mStage) {
     const ROWS = [
-      { raw: 'petrenko ivan · 600123456 · 12/10', name: 'Іван Петренко', sub: '+48 600 123 456 · 12.10.2026', note: "Привожу ім'я, телефон і дату до одного формату." },
-      { raw: 'Іван Петренко · +48 600 123 456', dup: true, note: "Це той самий кандидат. Об'єдную з попереднім записом." },
+      { raw: 'petrenko ivan · 600123456 · 12/10', name: 'Іван Петренко', sub: '+48 600 123 456 · 12.10.2026', note: 'Виправляю формат імені, телефону й дати.' },
+      { raw: 'Іван Петренко · +48 600 123 456', dup: true, note: "Це дубль, об'єдную записи." },
       { raw: 'Anna Kowalska · 511022033 · 13/10', name: 'Anna Kowalska', sub: '+48 511 022 033 · 13.10.2026', note: 'Додаю код країни й повну дату.' },
-      { raw: 'Олена Ковальчук · відмова', name: 'Олена Ковальчук', sub: 'лист з відмовою надіслано', gate: true, note: 'Лист з відмовою готовий. Надіслати його може тільки рекрутер.', ok: 'Рекрутер погодив лист.' },
-      { raw: 'Marek Nowak · marek@firma.pl · 14.10', name: 'Marek Nowak', sub: 'marek@firma.pl · 14.10.2026', note: 'Новий кандидат, створюю картку.' },
+      { raw: 'Олена Ковальчук · відмова', name: 'Олена Ковальчук', sub: 'лист з відмовою надіслано', gate: true, note: 'Лист з відмовою чекає рекрутера.', ok: 'Рекрутер погодив.' },
+      { raw: 'Marek Nowak · marek@firma.pl · 14.10', name: 'Marek Nowak', sub: 'marek@firma.pl · 14.10.2026', note: 'Створюю картку.' },
     ];
     const xl = $('#mXl'), crm = $('#mCrm'), agent = $('#mAgent'), gate = $('#mGate'), note = $('#mNote'), stat = $('#mStat'), again = $('#mAgain'), count = $('#mCount');
     let timers = [], played = false;
@@ -419,7 +383,7 @@
     };
     const cards = () => crm.children.length;
     const addCard = (r) => { const li = el('li', r.gate ? 'is-gate' : '', r.name); li.append(el('small', '', r.sub)); crm.append(li); count.textContent = `${cards()} ${cards() === 1 ? 'запис' : cards() < 5 ? 'записи' : 'записів'}`; return li; };
-    const finish = () => { agent.classList.remove('is-busy'); note.textContent = `Готово: ${cards()} записи в CRM, 1 дубль об'єднано, 1 рішення ухвалила людина.`; again.hidden = false; };
+    const finish = () => { agent.classList.remove('is-busy'); note.textContent = `Готово: ${cards()} записи, 1 дубль, 1 рішення людини.`; again.hidden = false; };
     const play = (instant) => {
       reset();
       const rows = $$('li', xl);
@@ -462,7 +426,7 @@
     if (fade) fall.opacity = [0, 1];
     M.animate(n, fall, { duration: 0.7, ease, delay: delay + i * 0.07 });
   });
-  if (slips.length) M.inView('#slips', () => { land(slips); }, { amount: 0.3 });
+  M.inView('#cpPile', () => { land($$('#cpPile .cp-card')); }, { amount: 0.3 });
 
   // Opening a page puts its first sheets on the desk; nothing else fades or slides on scroll.
   const deal = (nodes) => nodes.forEach((n, i) => {
@@ -474,14 +438,11 @@
     M.animate($$('.msg, .tg__head', tgList), { y: [14, 0], scale: [0.98, 1] }, { duration: 0.4, ease, delay: M.stagger(0.25) });
   }, { amount: 0.4 });
   // Only loose sheets move after that: they land, and they square up when the visitor decides.
-  $$('.askew').filter((n) => !n.closest('#slips, #bTasks')).forEach((n) => {
+  $$('.askew').filter((n) => !n.closest('#cpPile, .cp-flow')).forEach((n) => {
     M.inView(n, () => { land([n]); }, { amount: 0.3 });
   });
-  $$('#bTasks').forEach((group) => {
-    M.inView(group, () => { land($$('.askew', group)); }, { amount: 0.25 });
-  });
   if (M.press) {
-    M.press('.slip, .tab, .task, .chip, .btn, .fab, .t-act, .rung__btn, .msg__btns button, .op__btn', (node) => {
+    M.press('.cp-card, .chip, .btn, .fab, .t-act, .rung__btn, .msg__btns button, .op__btn', (node) => {
       M.animate(node, { scale: 0.97 }, { duration: 0.12 });
       return () => M.animate(node, { scale: 1 }, { type: 'spring', stiffness: 520, damping: 30 });
     });

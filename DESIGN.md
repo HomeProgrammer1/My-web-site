@@ -273,3 +273,11 @@ Motion 12 (vanilla build) is vendored; everything is skipped under `prefers-redu
 - **Problem block.** A real spreadsheet fragment (`.xl`, `data-ui`) with cells highlighted in marker yellow the way people mark Excel by hand.
 - **Calculator bars.** HTML bars (`.bars i`) measured against one scale that changes only in round steps, so they grow and shrink with the sliders; a 3px ink line marks the 3-month sum.
 - **Excel → CRM demo.** `.merge` on the method page plays once when scrolled into view: rows leave the sheet, the AI agent normalises them, one rejection letter waits at the yellow Human Gate, cards fill the CRM; a replay button follows, and reduced motion shows the final state.
+
+## v3.2 additions (24.10.2026)
+- **Story.** The site now argues: the processes already exist in people's heads; Mykhailo finds them, draws them on one schema and automates them (Знаходжу, Візуалізую, Автоматизую). No archival photographs remain; the only photographs are his portrait crops.
+- **Process composer** (`.cp`, `data-ui`): five askew cards in a pile, the next one outlined in cobalt with an animated pointer hint (stops after the first correct click and under reduced motion); clicked cards move (FLIP) into five paper slots, cobalt 4px connectors grow between filled slots, owners appear; «Автоматизувати» turns four cards sky (agent) and one marker yellow (Human Gate). Phase words are marked with the highlighter.
+- **Calculator.** Four inputs, each a slider plus a number field: hours per week, hourly cost, share for agents, implementation budget. Bars show cumulative savings on one scale; bars up to the payback month are cornflower, later ones cobalt; a 3px ink line with a white label marks the budget.
+- **Method panels.** The open panel puts its text right under the name and a small picture of the deliverable on the right (process map, flow with a yellow gate, checklist, before/after bars).
+- **Cases.** Each case is a row: a coloured chart tile (`data-ui`) and a story tile with «Було, Зробили, Результат» under short cobalt bars (yellow for the result).
+- **Footer.** The block wordmark is gone.
