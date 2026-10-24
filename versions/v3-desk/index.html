@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Михайло Логаза · AI-автоматизації</title>
+<meta name="description" content="AI-автоматизації для HR-агенцій, малого бізнесу та ФОП. Михайло Логаза налаштовує AI-агентів на n8n, Make та Claude, а рішення про гроші й людей лишає людям. Консультація 30 хв, 190 zł.">
+<link rel="icon" href="data:,">
+<link rel="preload" href="fonts/geologica-cyrillic-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="styles.css">
+<script>try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('motion');setTimeout(function(){document.documentElement.classList.remove('motion')},2500)}}catch(e){}</script>
+</head>
+<body>
+<a class="skip" href="#main">До змісту</a>
+
+<header class="nav" aria-label="Головне меню">
+  <a class="brand" href="index.html"><b>Михайло Логаза</b><span>AI-автоматизації процесів</span></a>
+  <a class="nav__anchor" href="#komu">Що автоматизую</a>
+  <a class="nav__anchor" href="#kalkulyator">Калькулятор</a>
+  <a href="yak-pracyuyu.html">Як я працюю</a>
+  <a href="pro-mene.html">Про мене</a>
+  <a class="nav__act" href="#zapys" data-book>Записатися <span>190&nbsp;zł</span></a>
+</header>
+
+<main id="main">
+
+<!-- THE PROBLEM ON THE DESK -->
+<section class="board hero" id="top" aria-labelledby="h1">
+  <div class="tile t-band">
+    <h1 id="h1">Ваша команда досі робить це вручну?</h1>
+    <p>Я Михайло Логаза. Налаштовую AI-агентів, які забирають таку роботу, а рішення про гроші й людей лишаю вам.</p>
+  </div>
+  <figure class="tile tile--photo t-photo">
+    <img src="assets/head-office-typists-room-new-zealand-railways.jpg" width="1520" height="1159" alt="Машбюро залізниці Нової Зеландії, 1959 рік: жінки друкують на машинках і передають одна одній папери" fetchpriority="high">
+  </figure>
+  <div class="tile t-desk">
+    <p class="hint" id="slipsHint">Торкніться того, що у вас так.</p>
+    <ul class="slips" id="slips" aria-labelledby="slipsHint">
+      <li><button class="slip askew" type="button" aria-pressed="false" data-h="6" style="--r:-1.8deg;--dx:-4px"><span class="slip__t">Відгуки на вакансію розбираєте вручну</span><span class="slip__h">6 год</span></button></li>
+      <li><button class="slip askew" type="button" aria-pressed="false" data-h="4" style="--r:1.2deg;--dx:10px;--dy:2px"><span class="slip__t">Кандидати живуть у трьох таблицях і пошті</span><span class="slip__h">4 год</span></button></li>
+      <li><button class="slip askew" type="button" aria-pressed="false" data-h="4" style="--r:-.6deg;--dx:-2px;--dy:-1px"><span class="slip__t">Клієнт удруге питає, де звіт</span><span class="slip__h">4 год</span></button></li>
+      <li><button class="slip askew" type="button" aria-pressed="false" data-h="3" style="--r:2.1deg;--dx:6px;--dy:3px"><span class="slip__t">Рахунок виставляєте після кожного замовлення</span><span class="slip__h">3 год</span></button></li>
+      <li><button class="slip askew" type="button" aria-pressed="false" data-h="5" style="--r:-1.3deg;--dx:-8px"><span class="slip__t">Однакові відповіді клієнтам по 20 разів на день</span><span class="slip__h">5 год</span></button></li>
+      <li><button class="slip askew" type="button" aria-pressed="false" data-h="2" style="--r:.9deg;--dx:4px;--dy:2px"><span class="slip__t">Документи для бухгалтера збираєте в останній день</span><span class="slip__h">2 год</span></button></li>
+    </ul>
+  </div>
+  <div class="tile t-sum" aria-live="polite">
+    <p class="figure"><b id="sumH">0</b><small>год</small></p>
+    <p id="sumText">на тиждень можна віддати агентам. Поки нічого не позначено.</p>
+  </div>
+  <a class="tile t-act" href="#zapys" data-book data-prefill="pains"><b>Записатися на консультацію</b><span>30 хвилин, 190&nbsp;zł. Сума зараховується у впровадження.</span></a>
+  <a class="tile t-link" href="#kalkulyator">Порахувати свою рутину</a>
+</section>
+
+<!-- WHO I AM -->
+<section class="sec board about" id="hto" aria-labelledby="h-hto">
+  <h2 class="a-head" id="h-hto">Я Михайло Логаза</h2>
+  <p class="a-lead lead">З 2020 року впроваджую CRM і ERP у компаніях, з 2024 будую AI-агентів і автоматизації. Найчастіше бачу одне: система працює, а люди повертаються в Excel, бо їх ніхто не спитав.</p>
+  <figure class="a-photo">
+    <div class="tile tile--photo"><img src="img/me-hero.jpg" width="853" height="828" alt="Михайло Логаза в світло-блакитній сорочці, руки схрещені, усміхається" loading="lazy"></div>
+    <p class="a-fig"><b>90%</b><span>працівників користуються ERP на 10&nbsp;000+ людей, яку я впроваджував</span></p>
+  </figure>
+  <div class="a-side">
+    <blockquote class="tile tile--sky belief askew" style="--r:.6deg;--dx:4px">Я вірю, що в еру AI люди стають важливішими, ніж до цього.</blockquote>
+    <dl class="facts">
+      <div><dt>Де</dt><dd>Познань, працюю по Польщі та ЄС</dd></div>
+      <div><dt>Мови</dt><dd>польська, українська, англійська</dd></div>
+      <div><dt>AI-хакатон</dt><dd>2-ге місце серед 70+ команд</dd></div>
+      <div><dt>Агент для Jira</dt><dd>витрати на AI менші на 87%</dd></div>
+    </dl>
+    <a class="tile t-link" href="pro-mene.html">Моя історія і кейси</a>
+  </div>
+</section>
+
+<!-- YOUR KIND OF WORK + BUILDER -->
+<section class="sec board mosaic" id="komu" aria-labelledby="h-komu">
+  <div class="tile m-head">
+    <h2 id="h-komu">Схоже на вашу роботу?</h2>
+    <p>Оберіть свою команду. Потім позначте кроки, які віддали б агенту.</p>
+  </div>
+  <figure class="tile tile--photo m-photo"><img src="assets/head-office-typists-room-new-zealand-railways.jpg" width="1520" height="1159" alt="Друкарка 1959 року передруковує документ, поруч стос паперів" loading="lazy"></figure>
+  <div class="segs" role="radiogroup" aria-label="Тип команди" id="bWho">
+    <button class="seg seg--sky askew" type="button" role="radio" aria-checked="true" data-seg="hr" style="--r:-1deg;--dy:4px"><b class="hl">HR і рекрутинг</b><i class="seg__now">Зараз: кандидати в трьох таблицях і пошті</i><span>Одна база, синхронізована з поштою й ATS</span></button>
+    <button class="seg seg--cobalt askew" type="button" role="radio" aria-checked="false" data-seg="smb" style="--r:.9deg;--dx:4px;--dy:6px"><b class="hl">Малий бізнес</b><em>і середній, 5–200 людей</em><i class="seg__now">Зараз: заявки губляться в пошті</i><span>Кожна заявка в CRM, менеджер одразу знає</span></button>
+    <button class="seg seg--ink askew" type="button" role="radio" aria-checked="false" data-seg="jdg" style="--r:-1.4deg;--dx:-3px;--dy:8px"><b class="hl">ФОП або JDG</b><i class="seg__now">Зараз: рахунки вручну щомісяця</i><span>Рахунки й нагадування йдуть самі</span></button>
+  </div>
+  <div class="tile m-steps">
+    <h3 id="h-build">Зберіть свою першу автоматизацію</h3>
+    <p class="hint">Торкніться кроку, щоб віддати його агенту.</p>
+    <div class="tasks" id="bTasks" role="group" aria-labelledby="h-build"></div>
+  </div>
+  <div class="tile tile--ink m-flow on-dark">
+    <p class="hint">Так виглядатиме ваш флоу</p>
+    <ol class="flow" id="bNodes" aria-label="Схема автоматизації"></ol>
+  </div>
+  <div class="tile m-out" aria-live="polite">
+    <h3>Що зміниться</h3>
+    <p class="figure"><b id="bBack">0</b><small>год</small></p>
+    <p id="bOf">на тиждень зекономлено</p>
+    <div class="morning" id="bMsg"></div>
+    <a class="btn" href="#zapys" data-book data-prefill="builder">Обговорити цю схему</a>
+  </div>
+</section>
+
+<!-- CALCULATOR -->
+<section class="sec board calc" id="kalkulyator" aria-labelledby="h-calc">
+  <div class="tile c-head">
+    <h2 id="h-calc">Скільки коштує ручна робота</h2>
+    <p>Оберіть процеси й посуньте повзунки. Цифри орієнтовні, точні покаже аудит.</p>
+  </div>
+  <figure class="tile tile--photo c-photo"><img src="assets/baltimore-md-for-every-social-security-account.jpg" width="1524" height="1216" alt="Картотека Social Security Board у Балтиморі, 1937 рік: жінка вручну передруковує дані з карток" loading="lazy"></figure>
+  <div class="tile c-in">
+    <fieldset>
+      <legend class="legend">Що у вас робиться вручну<small>Години на тиждень на одну людину</small></legend>
+      <div class="chips" id="cProc"></div>
+    </fieldset>
+    <div class="range"><label for="cPeople">Скільки людей цим займаються <output id="oPeople" for="cPeople">5</output></label><input id="cPeople" type="range" min="1" max="100" step="1" value="5"></div>
+    <div class="range"><label for="cRate">Повна вартість години роботи <output id="oRate" for="cRate">80 zł</output></label><input id="cRate" type="range" min="40" max="250" step="5" value="80"></div>
+    <div class="range"><label for="cShare">Яку частку реально віддати агентам <output id="oShare" for="cShare">55%</output></label><input id="cShare" type="range" min="30" max="80" step="5" value="55"></div>
+    <p class="small muted">Формула: люди × години × 4,33 тижня × вартість години.</p>
+  </div>
+  <div class="tile tile--ink c-year on-dark" aria-live="polite">
+    <p class="figure"><b id="rYear">0 zł</b></p>
+    <p>на рік коштує вам ручна робота</p>
+    <p class="muted" id="rWeek">кожна людина віддає рутині 0 год із 40 щотижня</p>
+  </div>
+  <div class="tile tile--cobalt c-month"><p class="figure"><b id="rMonth">0 zł</b></p><p>щомісяця можна повернути</p></div>
+  <div class="tile tile--sky c-person askew" style="--r:-.5deg;--dy:3px"><p class="figure"><b id="rPerson">0</b><small>год</small></p><p>на тиждень повертається кожній людині</p></div>
+  <div class="tile tile--tone c-team"><p class="figure"><b id="rHours">0</b><small>год</small></p><p id="rTeamL">на місяць для всієї команди з 5 людей</p></div>
+  <div class="tile c-chart">
+    <h3>Накопичена економія за 12 місяців</h3>
+    <div class="chart" id="chart" role="img" aria-label="Накопичена економія"></div>
+    <p id="payText"></p>
+    <div class="cta-row"><a class="btn" href="#zapys" data-book data-prefill="calc">Обговорити мої цифри</a></div>
+  </div>
+</section>
+
+<!-- START WITH ONE CONVERSATION -->
+<section class="sec board ladder" id="zapys" aria-labelledby="h-start">
+  <h2 class="l-head" id="h-start">Почніть з однієї розмови</h2>
+  <ol class="rungs">
+    <li class="rung"><h3>Консультація</h3><p class="price">190&nbsp;zł</p><p>30 хвилин. Розбираємо ваш процес, і я чесно кажу, чи окупиться автоматизація. Сума зараховується у впровадження.</p><a class="rung__btn" href="#zapys" data-book>Записатися</a></li>
+    <li class="rung"><h3>Аудит процесів</h3><p class="price price--soft">Ціну називаю після консультації</p><p>Карта процесів, години по кожному, пріоритети й план.</p><a class="rung__btn" href="#zapys" data-book data-prefill="audit">Запитати про аудит</a></li>
+    <li class="rung"><h3>Пілот на одному процесі</h3><p class="price price--soft">Ціну етапу фіксуємо до початку робіт</p><p>Будую автоматизацію на ваших даних, навчаю команду й міряю повернені години.</p><a class="rung__btn" href="#zapys" data-book data-prefill="pilot">Обговорити пілот</a></li>
+    <li class="rung"><h3>Супровід</h3><p class="price price--soft">Формат обираємо разом</p><p>Стежу, щоб нічого не ламалося, і додаю нові сценарії, коли команда готова.</p><a class="rung__btn" href="#zapys" data-book data-prefill="care">Запитати про супровід</a></li>
+  </ol>
+</section>
+
+</main>
+
+<footer class="foot" aria-labelledby="f-name">
+  <p class="mark" role="img" aria-label="mlohaza"><span>m</span><span>l</span><span>o</span><span>h</span><span>a</span><span>z</span><span>a</span></p>
+  <div class="foot__cols">
+    <nav aria-label="Сторінки"><h2 id="f-name">Михайло Логаза</h2><a href="index.html">Головна</a><a href="yak-pracyuyu.html">Як я працюю</a><a href="pro-mene.html">Про мене і кейси</a><a href="#kalkulyator">Калькулятор</a></nav>
+    <div><h2>Контакт</h2><p>kontakt@mlohaza.com</p><p>Познань, Польща. Працюю дистанційно по Польщі та ЄС польською, українською та англійською.</p></div>
+    <div><h2>Фото</h2><p class="small">Архівні фото через Wikimedia Commons: «Head Office typists room, New Zealand Railways, 1959», Archives New Zealand, CC BY-SA 2.0; картотека Social Security Board, Балтимор, 1937, Harris &amp; Ewing, суспільне надбання.</p></div>
+  </div>
+  <div class="foot__last"><p>© 2026 Mykhailo Lohaza</p><a class="btn" href="#zapys" data-book>Записатися</a></div>
+</footer>
+
+<dialog class="sheet" id="sheet" aria-labelledby="h-book">
+  <div class="sheet__in">
+    <div class="sheet__head">
+      <img src="img/me-head.jpg" width="360" height="360" alt="Михайло Логаза">
+      <div><h2 id="h-book">Консультація 30&nbsp;хв</h2><p>190&nbsp;zł (≈&nbsp;45&nbsp;€), сума зараховується у впровадження</p></div>
+      <button class="sheet__x" type="button" id="sheetClose" aria-label="Закрити"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.4"/></svg></button>
+    </div>
+    <ol class="agenda">
+      <li>Розберемо ваш процес.</li>
+      <li>Покажу, де губляться години.</li>
+      <li>Чесно скажу, чи окупиться автоматизація.</li>
+      <li>Домовимось про наступний крок або скажу, що поки не варто.</li>
+    </ol>
+    <form class="form" id="bookForm" novalidate>
+      <fieldset><legend class="legend">Хто ви?</legend>
+        <div class="chips" role="radiogroup" id="fWho">
+          <button class="chip" type="button" role="radio" aria-checked="false" data-v="HR- або рекрутингова агенція">HR- або рекрутингова агенція</button>
+          <button class="chip" type="button" role="radio" aria-checked="false" data-v="Компанія 5–200 людей">Компанія 5–200 людей</button>
+          <button class="chip" type="button" role="radio" aria-checked="false" data-v="ФОП / JDG / самозайнятий">ФОП або JDG</button>
+          <button class="chip" type="button" role="radio" aria-checked="false" data-v="Інше">Інше</button>
+        </div>
+      </fieldset>
+      <fieldset><legend class="legend">Що болить найбільше?</legend>
+        <div class="chips" role="radiogroup" id="fPain">
+          <button class="chip" type="button" role="radio" aria-checked="false" data-v="Робота з кандидатами">Робота з кандидатами</button>
+          <button class="chip" type="button" role="radio" aria-checked="false" data-v="Заявки й клієнти">Заявки й клієнти</button>
+          <button class="chip" type="button" role="radio" aria-checked="false" data-v="Рахунки й документи">Рахунки й документи</button>
+          <button class="chip" type="button" role="radio" aria-checked="false" data-v="Звіти">Звіти</button>
+          <button class="chip" type="button" role="radio" aria-checked="false" data-v="Не знаю, з чого почати">Не знаю, з чого почати</button>
+        </div>
+      </fieldset>
+      <fieldset><legend class="legend">Коли зручно? Час варшавський</legend>
+        <div class="days" id="fDays" role="radiogroup" aria-label="День"></div>
+        <div class="times" id="fTimes" role="radiogroup" aria-label="Час" style="margin-top:8px"></div>
+      </fieldset>
+      <div class="two">
+        <div class="field"><label for="fEmail">Email*</label><input class="input" id="fEmail" type="email" autocomplete="email" inputmode="email" required placeholder="name@firma.pl"></div>
+        <div class="field"><label for="fName">Ім'я</label><input class="input" id="fName" type="text" autocomplete="name"></div>
+      </div>
+      <div class="field"><label for="fWhat">Що хочете автоматизувати?</label><textarea class="input" id="fWhat" rows="3"></textarea></div>
+      <p class="error" id="fError" role="alert" hidden></p>
+      <div><button class="btn" type="submit">Забронювати за 190&nbsp;zł</button><span class="btn-note">Підтвердження часу, посилання на оплату й Google Meet надішлю протягом робочого дня.</span></div>
+    </form>
+    <div class="confirm" id="confirm" hidden tabindex="-1">
+      <h3>Заявку зібрано</h3>
+      <p>Надішліть цей текст на <span class="addr">kontakt@mlohaza.com</span> або скопіюйте його. Я підтверджу час і надішлю посилання на оплату та Google Meet.</p>
+      <pre id="confirmText"></pre>
+      <div class="cta-row">
+        <button class="btn" type="button" id="copyBtn">Скопіювати заявку</button>
+        <a class="textlink" id="mailLink" href="mailto:kontakt@mlohaza.com">Відкрити в пошті</a>
+        <button class="textlink" type="button" id="editBtn">Змінити відповіді</button>
+      </div>
+      <p class="small muted" id="copyMsg" role="status"></p>
+    </div>
+  </div>
+</dialog>
+
+<script src="vendor/motion-12.23.12.js"></script>
+<script src="main.js"></script>
+</body>
+</html>

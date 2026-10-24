@@ -325,39 +325,37 @@
   if (!canMove) return;
   const ease = [0.16, 1, 0.3, 1];
   // Loose sheets fall a little further askew than where they rest; Motion's rotate adds to the CSS rotate.
-  const land = (nodes, delay = 0) => nodes.forEach((n, i) => {
+  const land = (nodes, delay = 0, fade = false) => nodes.forEach((n, i) => {
     const r = parseFloat(getComputedStyle(n).getPropertyValue('--r')) || 0;
-    M.animate(n, { opacity: [0, 1], y: [-26, 0], rotate: [r * 2.4 + (i % 2 ? 1.5 : -1.5), 0] }, { duration: 0.7, ease, delay: delay + i * 0.07 });
+    const fall = { y: [-26, 0], rotate: [r * 2.4 + (i % 2 ? 1.5 : -1.5), 0] };
+    if (fade) fall.opacity = [0, 1];
+    M.animate(n, fall, { duration: 0.7, ease, delay: delay + i * 0.07 });
   });
-  if (slips.length) { land(slips, 0.15); setTimeout(() => root.classList.remove('motion'), 1400); }
+  if (slips.length) { land(slips, 0.15, true); setTimeout(() => root.classList.remove('motion'), 1400); }
   else root.classList.remove('motion');
 
-  // Tiles arrive the way sheets are put on a desk: a little turned, then squared to the grid.
-  const squareUp = (parts) => parts.forEach((n, i) => {
-    M.animate(n, { opacity: [0.4, 1], y: [18, 0], rotate: [i % 2 ? 0.8 : -0.8, 0] }, { duration: 0.6, ease, delay: i * 0.06 });
+  // Opening a page puts its first sheets on the desk; nothing else fades or slides on scroll.
+  const deal = (nodes) => nodes.forEach((n, i) => {
+    M.animate(n, { y: [-18, 0], rotate: [i % 2 ? 0.8 : -0.8, 0] }, { duration: 0.6, ease, delay: 0.05 + i * 0.06 });
   });
-  const PARTS = ':scope > .tile, :scope > figure, :scope > .sec-head, :scope > h2, :scope > p, :scope > .ops, :scope > .a-side > *, :scope > .rail > *, :scope > .rungs > .rung, :scope > .f-col > *';
-  const fold = window.innerHeight;
-  $$('main .sec, main .page-band, main .motto-band, .actrow').forEach((sec) => {
-    const parts = $$(PARTS, sec).filter((n) => !n.classList.contains('askew'));
-    if (!parts.length) return;
-    if (sec.classList.contains('page-band')) { squareUp(parts); return; }
-    if (sec.getBoundingClientRect().top < fold) return;
-    parts.forEach((n) => { n.style.opacity = '0.4'; });
-    M.inView(sec, () => { squareUp(parts); }, { amount: 0.12 });
+  deal($$('.page-band > *, .me > .tile, .me > figure, .me .rail > .tile'));
+  // The Human Gate flow runs once, left to right, and stops at the gate.
+  const gFlow = $('.g-flow');
+  if (gFlow) M.inView(gFlow, () => {
+    const steps = $$(':scope > li', gFlow);
+    steps.forEach((li, i) => M.animate(li, li.classList.contains('is-gate') ? { scale: [0.94, 1.04, 1] } : { x: [-12, 0] }, { duration: 0.45, ease, delay: i * 0.12 }));
+  }, { amount: 0.5 });
+  // 8:00: the morning messages arrive one after another.
+  if (tgList) M.inView(tgList, () => {
+    M.animate($$('.msg, .tg__head', tgList), { y: [14, 0], scale: [0.98, 1] }, { duration: 0.4, ease, delay: M.stagger(0.25) });
+  }, { amount: 0.4 });
+  // Only loose sheets move after that: they land, and they square up when the visitor decides.
+  $$('.askew').filter((n) => !n.closest('#slips, #bWho, #bTasks, .g-ex')).forEach((n) => {
+    M.inView(n, () => { land([n]); }, { amount: 0.3 });
   });
-  const heroImg = $('.hero .t-photo img');
-  if (heroImg && M.scroll) M.scroll(M.animate(heroImg, { scale: [1, 1.08] }, { ease: 'linear' }), { target: $('.hero'), offset: ['start start', 'end start'] });
   $$('#bWho, #bTasks, .g-ex').forEach((group) => {
     M.inView(group, () => { land($$('.askew', group)); }, { amount: 0.25 });
   });
-  $$('.tile--photo img').forEach((img) => {
-    if (img.closest('.hero')) return;
-    M.inView(img, () => { M.animate(img, { scale: [1.07, 1] }, { duration: 1.1, ease }); }, { amount: 0.2 });
-  });
-  const blocks = $$('.mark span');
-  blocks.forEach((s) => { s.style.transformOrigin = '50% 100%'; });
-  if (blocks.length) M.inView('.mark', () => { M.animate(blocks, { scaleY: [0.2, 1] }, { duration: 0.8, ease, delay: M.stagger(0.06) }); }, { amount: 0.4 });
   if (M.press) {
     M.press('.slip, .seg, .task, .chip, .btn, .t-act, .t-link, .rung__btn, .msg__btns button, .op__btn', (node) => {
       M.animate(node, { scale: 0.97 }, { duration: 0.12 });
