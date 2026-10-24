@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Як я працюю · Михайло Логаза</title>
+<title>Метод Calm Ops · Михайло Логаза</title>
 <meta name="description" content="Calm Ops: слухаю команду, автоматизую на n8n, Make, Claude та AI-агентах, навчаю й міряю повернені години. Human Gate: рішення про гроші й людей ухвалює людина.">
 <link rel="icon" href="data:,">
 <link rel="preload" href="fonts/geologica-cyrillic-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -12,27 +12,34 @@
 <body>
 <a class="skip" href="#main">До змісту</a>
 
-<header class="nav" aria-label="Головне меню">
-  <a class="brand" href="index.html"><b>Михайло Логаза</b><span>AI-автоматизації процесів</span></a>
-  <a class="nav__anchor" href="index.html#komu">Що автоматизую</a>
-  <a class="nav__anchor" href="index.html#kalkulyator">Калькулятор</a>
-  <a href="yak-pracyuyu.html" aria-current="page">Як я працюю</a>
-  <a href="pro-mene.html">Про мене</a>
-  <a class="nav__act" href="#zapys" data-book>Записатися <span>190&nbsp;zł</span></a>
+<header class="nav" id="nav">
+  <div class="nav__in">
+    <a class="brand" href="index.html"><b>Михайло Логаза</b><span>AI-автоматизації за методом Calm Ops</span></a>
+    <button class="nav__menu" type="button" aria-expanded="false" aria-controls="navLinks">Меню</button>
+    <nav class="nav__links" id="navLinks" aria-label="Розділи">
+      <a href="index.html#komu">Що автоматизую</a>
+      <a href="index.html#kalkulyator">Калькулятор</a>
+      <a href="yak-pracyuyu.html" aria-current="page">Метод Calm Ops</a>
+      <a href="pro-mene.html">Про мене</a>
+      <a href="yak-pracyuyu.html#faq">FAQ</a>
+    </nav>
+    <a class="btn" href="#zapys" data-book>Записатися</a>
+  </div>
 </header>
+<a class="fab" href="#zapys" data-book>Записатися <span>30 хв, 190&nbsp;zł</span></a>
 
 <main id="main">
 
 <section class="board page-band has-ph" aria-labelledby="h1">
   <div class="tile t-band">
-    <h1 id="h1">Як я працюю</h1>
-    <p class="lead">Calm Ops: чотири кроки від розмови з командою до виміряного результату.</p>
+    <h1 id="h1">Метод Calm Ops</h1>
+    <p class="lead">Мій авторський підхід до AI-автоматизації: спершу слухаю людей, потім будую агентів, навчаю команду й міряю результат у повернених годинах.</p>
   </div>
   <figure class="tile tile--photo pb-ph"><img src="img/me-band.jpg" width="490" height="828" alt="Михайло Логаза, портрет" fetchpriority="high"></figure>
 </section>
 
 <section class="sec board" id="calm-ops" aria-labelledby="h-ops">
-  <div class="sec-head"><h2 id="h-ops">Чотири кроки</h2><p>Терміни фіксуємо після консультації, коли зрозуміло, які у вас процеси й системи. Натисніть на крок, щоб відкрити його.</p></div>
+  <div class="sec-head"><h2 id="h-ops">Чотири кроки методу</h2><p>Терміни фіксуємо після консультації, коли зрозуміло, які у вас процеси й системи. Натисніть на крок, щоб відкрити його.</p></div>
   <div class="ops" id="ops">
     <section class="op is-open" aria-labelledby="op1-b">
       <h3><button class="op__btn" id="op1-b" type="button" aria-expanded="true" aria-controls="op1"><span>Слухаю</span></button></h3>
@@ -53,28 +60,17 @@
   </div>
 </section>
 
-<section class="sec board gate" id="human-gate" aria-labelledby="h-gate">
-  <div class="tile g-head askew" style="--r:-.4deg;--dy:2px">
-    <h2 id="h-gate">Де агент зупиняється</h2>
-    <p>Human Gate я називаю точку у флоу, де агент чекає на людину. Агент готує, вирішуєте ви.</p>
+<section class="sec board merge" id="excel-crm" aria-labelledby="h-merge">
+  <div class="m-copy">
+    <h2 id="h-merge">Excel і CRM без ручного перенесення</h2>
+    <p>Так виглядає типовий перший пілот. Агент забирає рядки з таблиці, виправляє формати, об'єднує дублікати й записує все в CRM. Де йдеться про гроші чи людей, він зупиняється й чекає на вас. Цю точку я називаю Human Gate.</p>
+    <p class="hint">Демонстрація запускається сама, коли ви до неї догортаєте.</p>
   </div>
-  <ol class="tile tile--ink g-flow on-dark" aria-label="Приклад флоу з Human Gate">
-    <li>Рахунок від постачальника<small>приходить на пошту</small></li>
-    <li class="bar" aria-hidden="true"></li>
-    <li>Агент читає рахунок<small>сума, постачальник, термін оплати</small></li>
-    <li class="bar" aria-hidden="true"></li>
-    <li class="is-gate">Сума понад ліміт<small>рішення за вами, однією кнопкою в Telegram</small></li>
-    <li class="bar" aria-hidden="true"></li>
-    <li>Рахунок у бухгалтерії<small>або нагадування о 14:00</small></li>
-  </ol>
-  <figure class="tile tile--photo g-photo"><img src="assets/baltimore-md-for-every-social-security-account.jpg" width="1524" height="1216" alt="Картотека 1937 року: жінка вручну передруковує дані з карток" loading="lazy"></figure>
-  <div class="tile tile--tone g-wrap">
-    <h3>Де я зазвичай ставлю Human Gate</h3>
-    <ul class="g-ex">
-      <li class="askew" style="--r:-1.2deg;--dy:4px"><b class="hl is-on">Рахунок понад ліміт</b><span>Агент готує платіж, ви погоджуєте.</span></li>
-      <li class="askew" style="--r:.9deg;--dx:6px"><b class="hl is-on">Відмова кандидату</b><span>Агент пише чернетку, рекрутер надсилає.</span></li>
-      <li class="askew" style="--r:-.6deg;--dy:-2px"><b class="hl is-on">Договір перед підписом</b><span>Агент збирає документ, ви підписуєте.</span></li>
-    </ul>
+  <div class="m-stage" id="mStage" data-ui>
+    <div class="m-col m-xl"><p class="m-title">kandydaci.xlsx <span>вручну</span></p><ol class="m-list" id="mXl"></ol></div>
+    <div class="m-mid"><p class="m-agent" id="mAgent">AI-агент</p><p class="m-gate" id="mGate">Human Gate</p><p class="m-note" id="mNote" aria-live="polite">Чекаю на перший рядок.</p></div>
+    <div class="m-col m-crm"><p class="m-title">CRM <span id="mCount">0 записів</span></p><ol class="m-list" id="mCrm"></ol></div>
+    <div class="m-foot"><span id="mStat">Перенесено 0 з 5</span><button type="button" id="mAgain" hidden>Показати ще раз</button></div>
   </div>
 </section>
 
@@ -135,11 +131,11 @@
 <footer class="foot" aria-labelledby="f-name">
   <p class="mark" role="img" aria-label="mlohaza"><span>m</span><span>l</span><span>o</span><span>h</span><span>a</span><span>z</span><span>a</span></p>
   <div class="foot__cols">
-    <nav aria-label="Сторінки"><h2 id="f-name">Михайло Логаза</h2><a href="index.html">Головна</a><a href="yak-pracyuyu.html">Як я працюю</a><a href="pro-mene.html">Про мене і кейси</a><a href="index.html#kalkulyator">Калькулятор</a></nav>
+    <nav aria-label="Сторінки"><h2 id="f-name">Михайло Логаза</h2><a href="index.html">Головна</a><a href="yak-pracyuyu.html">Метод Calm Ops</a><a href="yak-pracyuyu.html#faq">FAQ</a><a href="pro-mene.html">Про мене і кейси</a><a href="index.html#kalkulyator">Калькулятор</a></nav>
     <div><h2>Контакт</h2><p>kontakt@mlohaza.com</p><p>Познань, Польща. Працюю дистанційно по Польщі та ЄС польською, українською та англійською.</p></div>
     <div><h2>Фото</h2><p class="small">Архівні фото через Wikimedia Commons: «Head Office typists room, New Zealand Railways, 1959», Archives New Zealand, CC BY-SA 2.0; картотека Social Security Board, Балтимор, 1937, Harris &amp; Ewing, суспільне надбання.</p></div>
   </div>
-  <div class="foot__last"><p>© 2026 Mykhailo Lohaza</p><a class="btn" href="#zapys" data-book>Записатися</a></div>
+  <div class="foot__last"><p>© 2026 Mykhailo Lohaza</p><p>AI-автоматизації за методом Calm Ops</p></div>
 </footer>
 
 <dialog class="sheet" id="sheet" aria-labelledby="h-book">

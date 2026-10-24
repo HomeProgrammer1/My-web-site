@@ -1,6 +1,6 @@
 # Сайт mlohaza.com · нотатки збірки
 
-Поточна версія: **v3** у `site/` (копія в `versions/v3-desk/`). Попередні: v1 у `versions/v1-planner/`, v2 у `versions/v2-glass/`; список версій із посиланнями в `versions/README.md`.
+Поточна версія: **v3.1** у `site/` (копія в `versions/v3-1-calm/`, фідбек у `docs/feedback-v3.md`). Попередня v3 у `versions/v3-desk/`. Попередні: v1 у `versions/v1-planner/`, v2 у `versions/v2-glass/`; список версій із посиланнями в `versions/README.md`.
 Відкрити локально: `python3 -m http.server -d site`. Мова: українська (мова ревю). PL і EN робимо після погодження текстів.
 
 ## v3: як зібрано

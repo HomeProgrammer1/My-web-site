@@ -24,7 +24,7 @@ colors:
 typography:
   display:
     fontFamily: "Geologica, Segoe UI, system-ui, -apple-system, sans-serif"
-    fontSize: "clamp(34px, 6.2vw, 104px)"
+    fontSize: "clamp(30px, 5vw, 80px)"
     fontWeight: 800
     lineHeight: 0.96
     letterSpacing: "-0.04em"
@@ -263,3 +263,13 @@ Motion 12 (vanilla build) is vendored; everything is skipped under `prefers-redu
 - **Don't** put any overlay on a photo other than the cobalt «90%» block on the portrait.
 - **Don't** add scroll fade-ins or a marquee; motion is limited to landing, dealing, the gate flow, the message sequence and press feedback.
 - **Don't** use robot or robot-replaces-human imagery.
+
+
+## v3.1 additions (24.10.2026)
+- **Calmer scale.** `--t1` is now clamp(30px, 5vw, 80px), `--t2` clamp(26px, 2.9vw, 44px), tile padding clamp(22px, 2.2vw, 36px), section gap clamp(96px, 10vw, 152px). Fewer tiles per section; text often sits on the paper ground instead of in a tile.
+- **Navigation.** A plain sticky bar (brand, five text links including FAQ, one yellow button) that hides while scrolling down and returns on scroll up; under 900px the links open from a «Меню» button as a floating panel.
+- **Floating booking button.** `.fab`, fixed bottom-right on every page, yellow with `--float-shadow` (it floats, so the shadow is allowed and marked for the linter).
+- **Hero canvas.** `#blueprint` draws a cobalt grid and an automation schema (Excel, AI-агент, CRM, Звіт, Telegram, a yellow Human Gate node) that a cursor spotlight reveals; it fades out under the copy, moves on its own when there is no pointer, pauses off-screen and draws one still frame under reduced motion.
+- **Problem block.** A real spreadsheet fragment (`.xl`, `data-ui`) with cells highlighted in marker yellow the way people mark Excel by hand.
+- **Calculator bars.** HTML bars (`.bars i`) measured against one scale that changes only in round steps, so they grow and shrink with the sliders; a 3px ink line marks the 3-month sum.
+- **Excel → CRM demo.** `.merge` on the method page plays once when scrolled into view: rows leave the sheet, the AI agent normalises them, one rejection letter waits at the yellow Human Gate, cards fill the CRM; a replay button follows, and reduced motion shows the final state.

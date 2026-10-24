@@ -12,14 +12,21 @@
 <body>
 <a class="skip" href="#main">До змісту</a>
 
-<header class="nav" aria-label="Головне меню">
-  <a class="brand" href="index.html"><b>Михайло Логаза</b><span>AI-автоматизації процесів</span></a>
-  <a class="nav__anchor" href="index.html#komu">Що автоматизую</a>
-  <a class="nav__anchor" href="index.html#kalkulyator">Калькулятор</a>
-  <a href="yak-pracyuyu.html">Як я працюю</a>
-  <a href="pro-mene.html" aria-current="page">Про мене</a>
-  <a class="nav__act" href="#zapys" data-book>Записатися <span>190&nbsp;zł</span></a>
+<header class="nav" id="nav">
+  <div class="nav__in">
+    <a class="brand" href="index.html"><b>Михайло Логаза</b><span>AI-автоматизації за методом Calm Ops</span></a>
+    <button class="nav__menu" type="button" aria-expanded="false" aria-controls="navLinks">Меню</button>
+    <nav class="nav__links" id="navLinks" aria-label="Розділи">
+      <a href="index.html#komu">Що автоматизую</a>
+      <a href="index.html#kalkulyator">Калькулятор</a>
+      <a href="yak-pracyuyu.html">Метод Calm Ops</a>
+      <a href="pro-mene.html" aria-current="page">Про мене</a>
+      <a href="yak-pracyuyu.html#faq">FAQ</a>
+    </nav>
+    <a class="btn" href="#zapys" data-book>Записатися</a>
+  </div>
 </header>
+<a class="fab" href="#zapys" data-book>Записатися <span>30 хв, 190&nbsp;zł</span></a>
 
 <main id="main">
 
@@ -37,7 +44,7 @@
     <p>П'ять років я впроваджую CRM і ERP, а з 2024 року ще й AI-інструменти, і бачу одну й ту саму картину: технологія працює, а люди її обходять і повертаються в Excel. Проблема рідко в інструменті. Найчастіше людей просто не спитали.</p>
     <p>На впровадженні ERP для 10&nbsp;000+ користувачів ми перенесли 600–800 тис. рядків HR- і фінансових даних без критичних втрат і закрили проєкт на 1,5–2 місяці раніше плану. Але вирішило інше: 9–10 сесій навчання і ключові люди в кожному відділі. Системою почали користуватися 90% працівників.</p>
     <p>Так само я працюю з AI. Як Product Owner запустив AI-агента для Jira: менеджери керують задачами звичайною мовою, у пілоті 10–15 людей. Гібридна архітектура зменшила витрати на AI на 87% і дала 0% галюцинацій на операціях запису. Будую автоматизації на n8n і Make, AI-агентів і RAG-асистентів, допомагаю командам налаштувати Claude.</p>
-    <p>Зараз допомагаю агенціям, компаніям і підприємцям автоматизувати рутину без звільнень: спершу слухаю команду, потім автоматизую те, що вона сама назвала рутиною, навчаю й міряю результат у повернених годинах.</p>
+    <p>Зараз допомагаю агенціям, компаніям і підприємцям автоматизувати рутину без звільнень за власним методом Calm Ops: спершу слухаю команду, потім автоматизую те, що вона сама назвала рутиною, навчаю й міряю результат у повернених годинах.</p>
   </div>
   <div class="rail">
     <div class="tile tile--sky"><b>З 2020 року</b><p>впроваджую CRM і ERP, з 2024 будую AI-агентів</p></div>
@@ -87,7 +94,7 @@
     <h3>Освіта</h3>
     <ul>
       <li>PMI-ACP</li>
-      <li>MSc Business Intelligence &amp; Big Data, навчання триває</li>
+      <li>MSc Business Intelligence &amp; Big Data</li>
       <li>MSc Management, UAM</li>
     </ul>
   </div>
@@ -108,11 +115,11 @@
 <footer class="foot" aria-labelledby="f-name">
   <p class="mark" role="img" aria-label="mlohaza"><span>m</span><span>l</span><span>o</span><span>h</span><span>a</span><span>z</span><span>a</span></p>
   <div class="foot__cols">
-    <nav aria-label="Сторінки"><h2 id="f-name">Михайло Логаза</h2><a href="index.html">Головна</a><a href="yak-pracyuyu.html">Як я працюю</a><a href="pro-mene.html">Про мене і кейси</a><a href="index.html#kalkulyator">Калькулятор</a></nav>
+    <nav aria-label="Сторінки"><h2 id="f-name">Михайло Логаза</h2><a href="index.html">Головна</a><a href="yak-pracyuyu.html">Метод Calm Ops</a><a href="yak-pracyuyu.html#faq">FAQ</a><a href="pro-mene.html">Про мене і кейси</a><a href="index.html#kalkulyator">Калькулятор</a></nav>
     <div><h2>Контакт</h2><p>kontakt@mlohaza.com</p><p>Познань, Польща. Працюю дистанційно по Польщі та ЄС польською, українською та англійською.</p></div>
     <div><h2>Фото</h2><p class="small">Архівні фото через Wikimedia Commons: «Head Office typists room, New Zealand Railways, 1959», Archives New Zealand, CC BY-SA 2.0; картотека Social Security Board, Балтимор, 1937, Harris &amp; Ewing, суспільне надбання.</p></div>
   </div>
-  <div class="foot__last"><p>© 2026 Mykhailo Lohaza</p><a class="btn" href="#zapys" data-book>Записатися</a></div>
+  <div class="foot__last"><p>© 2026 Mykhailo Lohaza</p><p>AI-автоматизації за методом Calm Ops</p></div>
 </footer>
 
 <dialog class="sheet" id="sheet" aria-labelledby="h-book">
