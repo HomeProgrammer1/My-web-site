@@ -1,0 +1,22 @@
+{
+  "base": "https://mlohaza.com",
+  "langs": [
+    { "code": "en", "dir": "", "html": "en", "hreflang": "en", "og": "en_GB", "label": "EN", "name": "English", "font": "geologica-latin-wght-normal.woff2" },
+    { "code": "pl", "dir": "pl/", "html": "pl", "hreflang": "pl", "og": "pl_PL", "label": "PL", "name": "Polski", "font": "geologica-latin-wght-normal.woff2" },
+    { "code": "ua", "dir": "ua/", "html": "uk", "hreflang": "uk", "og": "uk_UA", "label": "UA", "name": "Українська", "font": "geologica-cyrillic-wght-normal.woff2" }
+  ],
+  "default": "en",
+  "pages": {
+    "home":    { "en": "index.html",   "pl": "index.html",                "ua": "index.html" },
+    "method":  { "en": "calm-ops.html", "pl": "calm-ops.html",            "ua": "calm-ops.html" },
+    "about":   { "en": "about.html",   "pl": "o-mnie.html",               "ua": "pro-mene.html" },
+    "privacy": { "en": "privacy.html", "pl": "polityka-prywatnosci.html", "ua": "polityka-pryvatnosti.html" },
+    "terms":   { "en": "terms.html",   "pl": "regulamin.html",            "ua": "umovy.html" }
+  },
+  "anchors": {
+    "en": { "process": "process", "calc": "calculator", "book": "book", "faq": "faq" },
+    "pl": { "process": "proces", "calc": "kalkulator", "book": "zapis", "faq": "faq" },
+    "ua": { "process": "proces", "calc": "kalkulyator", "book": "zapys", "faq": "faq" }
+  },
+  "sitemap": { "home": "1.0", "method": "0.8", "about": "0.8", "privacy": "0.2", "terms": "0.2" }
+}

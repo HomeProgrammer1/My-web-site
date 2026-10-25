@@ -9,10 +9,13 @@
 
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
-  const nf = new Intl.NumberFormat('uk-UA', { maximumFractionDigits: 0 });
-  const nf1 = new Intl.NumberFormat('uk-UA', { maximumFractionDigits: 1 });
-  const zl = (n) => `${nf.format(Math.round(n))} zł`;
-  const half = (v) => nf1.format(Math.round(v * 2) / 2);
+  // Every visible string comes from lang/<code>.js (generated from src/i18n), so this file stays language-free.
+  const T = window.T;
+  const nf = new Intl.NumberFormat(T.locale, { maximumFractionDigits: 0 });
+  const fmt = (tpl, vars = {}) => tpl.replace(/\{(\w+)\}/g, (m, k) => (k in vars ? vars[k] : m));
+  const money = (n) => fmt(T.cur, { n: nf.format(Math.round(n)) });
+  const rules = new Intl.PluralRules(T.locale);
+  const plural = (key, n) => { const forms = T.plural[key]; return forms[rules.select(n)] || forms.other; };
   const el = (tag, cls, text) => {
     const n = document.createElement(tag);
     if (cls) n.className = cls;
@@ -26,17 +29,12 @@
     if (!canMove || from === to) { node.textContent = format(to); return; }
     M.animate(from, to, { duration: 0.45, ease: [0.16, 1, 0.3, 1], onUpdate: (v) => { node.textContent = format(v); } });
   };
-  const people = (n) => (n % 10 === 1 && n % 100 !== 11 ? 'людини' : 'людей');
 
   /* ---------- compose: find the process, draw it, automate it ---------- */
   const cp = $('#cp');
-  const STEPS = [
-    { n: 'Прийняти заявку', sys: 'Gmail', min: 10, agent: 'агент забирає дані з листа' },
-    { n: 'Завести клієнта в CRM', sys: 'HubSpot', min: 10, agent: 'агент створює картку клієнта' },
-    { n: 'Виставити рахунок', sys: 'Fakturownia', min: 15, gate: true, agent: 'рахунок понад ліміт чекає на вас', ok: 'затверджено, рахунок надіслано' },
-    { n: 'Оновити звіт', sys: 'Google Sheets', min: 3, agent: 'агент дописує рядок у звіт' },
-    { n: 'Повідомити команду', sys: 'Telegram', min: 2, agent: 'агент пише підсумок у чат' },
-  ];
+  const STEPS = [{ min: 10 }, { min: 10 }, { min: 15, gate: true }, { min: 3 }, { min: 2 }]
+    .map((x, i) => ({ ...x, ...T.cp.steps[i], sys: T.cp.sys[i] }));
+  const byHand = (i) => fmt(T.cp.min, { n: STEPS[i].min });
   let cpNext = 0, cpDone = false, cpRunning = false;
   if (cp) {
     const pile = $('#cpPile'), slots = $$('.cp-slot', cp), msg = $('#cpMsg'), hand = $('#cpHand'), token = $('#cpToken');
@@ -63,7 +61,7 @@
       const from = card.getBoundingClientRect();
       slot.append(card); slot.classList.add('is-filled');
       card.classList.add('is-square'); card.classList.remove('is-next');
-      setLine(card, STEPS[i].sys, `${STEPS[i].min} хв вручну`);
+      setLine(card, STEPS[i].sys, byHand(i));
       card.disabled = true;
       if (canMove) { const to = card.getBoundingClientRect(); M.animate(card, { x: [from.left - to.left, 0], y: [from.top - to.top, 0] }, { duration: 0.55, ease: [0.16, 1, 0.3, 1] }); }
     };
@@ -71,15 +69,15 @@
       if (cpDone || card.disabled) return;
       if (Number(card.dataset.i) !== cpNext) {
         card.classList.remove('is-wrong'); void card.offsetWidth; card.classList.add('is-wrong');
-        msg.textContent = `Спершу «${STEPS[cpNext].n}».`;
+        msg.textContent = fmt(T.cp.first, { n: STEPS[cpNext].n });
         return;
       }
       place(card);
       if (hand) hand.classList.add('is-gone');
       cpNext += 1;
-      if (cpNext < STEPS.length) { msg.textContent = `Далі: «${STEPS[cpNext].n}».`; markNext(); return; }
+      if (cpNext < STEPS.length) { msg.textContent = fmt(T.cp.next, { n: STEPS[cpNext].n }); markNext(); return; }
       cpDone = true; phase(1); pile.hidden = true;
-      msg.textContent = `Тепер видно весь шлях заявки: п'ять систем і ${total} хвилин ручної роботи на кожну.`;
+      msg.textContent = fmt(T.cp.drawn, { total });
       auto.hidden = false; resetBtn.hidden = false;
     }));
 
@@ -90,7 +88,7 @@
       cpRunning = true; phase(2);
       auto.hidden = true; again.hidden = true; book.hidden = true; resetBtn.hidden = true;
       const placed = slots.map((s) => $('.cp-card', s));
-      placed.forEach((card, i) => { card.classList.remove('is-agent', 'is-gate', 'is-run', 'is-ok'); setLine(card, STEPS[i].sys, 'чекає на заявку'); });
+      placed.forEach((card, i) => { card.classList.remove('is-agent', 'is-gate', 'is-run', 'is-ok'); setLine(card, STEPS[i].sys, T.cp.waiting); });
       slots.forEach((s) => s.classList.remove('is-live'));
       const moveTo = async (card) => {
         const r = rel(card);
@@ -99,7 +97,7 @@
         else { token.style.transform = `translate(${to.x}px, ${to.y}px)`; token.style.opacity = '1'; }
       };
       if (canMove) { const r0 = rel(placed[0]); M.animate(token, { x: r0.x - 40, y: r0.y - 20, opacity: 0 }, { duration: 0 }); }
-      msg.textContent = 'Нова заявка прийшла на пошту. Далі все роблять агенти.';
+      msg.textContent = T.cp.start;
       for (let i = 0; i < placed.length; i++) {
         const card = placed[i], s = STEPS[i];
         await moveTo(card);
@@ -107,7 +105,7 @@
         if (i > 0) slots[i].classList.add('is-live');
         if (s.gate) {
           card.classList.add('is-gate'); setLine(card, s.sys, s.agent);
-          msg.textContent = 'Рахунок понад ліміт. Агент зупинився й чекає на ваше рішення.';
+          msg.textContent = T.cp.gate;
           await wait(canMove ? 1600 : 0);
           card.classList.add('is-ok'); setLine(card, s.sys, s.ok);
         } else {
@@ -117,7 +115,7 @@
         card.classList.remove('is-run');
       }
       if (canMove) await M.animate(token, { opacity: 0, y: '-=12' }, { duration: 0.3 });
-      msg.textContent = `Заявка пройшла п'ять систем приблизно за хвилину замість ${total} хвилин вручну. Рахунок понад ліміт затвердила людина.`;
+      msg.textContent = fmt(T.cp.end, { total });
       again.hidden = false; book.hidden = false; resetBtn.hidden = false;
       cpRunning = false;
     };
@@ -127,12 +125,12 @@
       if (cpRunning) return;
       cards.forEach((card) => {
         card.classList.remove('is-square', 'is-agent', 'is-gate', 'is-run', 'is-ok'); card.disabled = false;
-        setLine(card, '', `${STEPS[Number(card.dataset.i)].min} хв вручну`);
+        setLine(card, '', byHand(Number(card.dataset.i)));
         pile.append(card);
       });
       slots.forEach((s) => s.classList.remove('is-filled', 'is-live'));
       cpNext = 0; cpDone = false; phase(0); pile.hidden = false;
-      msg.textContent = 'Почніть з картки «Прийняти заявку».';
+      msg.textContent = T.cp.reset;
       auto.hidden = true; book.hidden = true; again.hidden = true; resetBtn.hidden = true;
       markNext();
     });
@@ -147,7 +145,12 @@
   let axis = 0;
   const NICE = [1, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10];
   const nice = (v) => { const p = 10 ** Math.floor(Math.log10(v)); return NICE.find((k) => k * p >= v) * p; };
-  const months = (n) => (n % 10 === 1 && n % 100 !== 11 ? 'місяць' : [2, 3, 4].includes(n % 10) && ![12, 13, 14].includes(n % 100) ? 'місяці' : 'місяців');
+  // Puts the formatted values into a sentence; the money figures are set in bold.
+  const sentence = (node, tpl, vars, bold) => node.replaceChildren(...tpl.split(/(\{\w+\})/).filter(Boolean).map((part) => {
+    const k = part.slice(1, -1);
+    if (part[0] !== '{' || !(k in vars)) return document.createTextNode(part);
+    return bold.includes(k) ? el('b', '', vars[k]) : document.createTextNode(vars[k]);
+  }));
   const calc = () => {
     if (!pairs[0][0]) return;
     const [h, r, s, inv] = pairs.map(([rg]) => Number(rg.value));
@@ -155,10 +158,10 @@
     const month = h * 4.33 * r, back = month * share, hoursBack = h * 4.33 * share;
     const pay = back > 0 ? inv / back : Infinity, payM = Math.max(1, Math.ceil(pay));
     Object.assign(last, { h, r, s, inv, year: month * 12, back, payM });
-    countTo($('#rYear'), month * 12, zl);
-    countTo($('#rMonth'), back, zl);
-    countTo($('#rHours'), Math.round(hoursBack), (v) => `${nf.format(Math.round(v))} год`);
-    $('#rPay').textContent = payM > 36 ? 'понад 3 роки' : `${payM} міс.`;
+    countTo($('#rYear'), month * 12, money);
+    countTo($('#rMonth'), back, money);
+    countTo($('#rHours'), Math.round(hoursBack), (v) => fmt(T.hours, { n: nf.format(Math.round(v)) }));
+    $('#rPay').textContent = payM > 36 ? T.calc.payLong : fmt(T.calc.pay, { n: payM });
     // bars: cumulative savings on one scale; months until the budget is earned back stay light
     const bars = $('#bars');
     const total = Math.max(1, back * 12), top = Math.max(total, inv);
@@ -168,12 +171,11 @@
       b.classList.toggle('is-pay', i + 1 <= payM);
     });
     $('.q', bars).style.setProperty('--q', `${Math.min(100, (inv / axis) * 100)}%`);
-    $('#qLabel').textContent = `бюджет ${zl(inv)}`;
-    $('#chartScale').textContent = `шкала до ${zl(axis)}`;
-    bars.setAttribute('aria-label', `Накопичена економія: ${zl(back * 12)} за 12 місяців, бюджет ${zl(inv)} окупається за ${payM} ${months(payM)}`);
-    const t = $('#payText');
-    if (payM <= 12) t.replaceChildren('Бюджет ', el('b', '', zl(inv)), ` окупиться за ${payM} ${months(payM)}. Далі автоматизація повертає `, el('b', '', zl(back)), ' щомісяця.');
-    else t.replaceChildren(`З такими цифрами бюджет окупиться за ${payM > 36 ? 'понад 3 роки' : `${payM} ${months(payM)}`}. На консультації подивимось, що автоматизувати першим, щоб скоротити цей строк.`);
+    $('#qLabel').textContent = fmt(T.calc.budget, { v: money(inv) });
+    $('#chartScale').textContent = fmt(T.calc.scale, { v: money(axis) });
+    const when = payM > 36 ? T.calc.whenLong : fmt(T.calc.whenN, { n: payM, months: plural('months', payM) });
+    bars.setAttribute('aria-label', fmt(T.calc.aria, { total: money(back * 12), inv: money(inv), when }));
+    sentence($('#payText'), payM <= 12 ? T.calc.ok : T.calc.slow, { inv: money(inv), back: money(back), when }, ['inv', 'back']);
   };
   pairs.forEach(([rg, num]) => {
     if (!rg) return;
@@ -215,7 +217,7 @@
     tgList.scrollTo({ top: tgList.scrollHeight, behavior: canMove ? 'smooth' : 'auto' });
     if (canMove) { M.animate(mine, { opacity: [0, 1], y: [8, 0] }, { duration: 0.3 }); M.animate(reply, { opacity: [0, 1], y: [8, 0] }, { duration: 0.35, delay: 0.35 }); }
     const left = $$('.msg[data-q]', tgList).filter((x) => !x.dataset.done).length;
-    tgCount.textContent = left === 1 ? 'Залишилося одне рішення.' : 'Два рішення за дві хвилини. Решту зробили агенти.';
+    tgCount.textContent = left === 1 ? T.tg.one : T.tg.done;
   }));
 
   /* ---------- booking sheet ---------- */
@@ -224,7 +226,7 @@
   const fWho = $('#fWho'), fPain = $('#fPain'), fDays = $('#fDays'), fTimes = $('#fTimes'), fWhat = $('#fWhat');
   [fWho, fPain].forEach((g) => g && radio(g));
   if (fDays && fTimes) {
-    const wd = ['нд', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'];
+    const wd = T.book.wd;
     const d = new Date(); d.setHours(12, 0, 0, 0);
     const days = [];
     while (days.length < 8) { d.setDate(d.getDate() + 1); if (d.getDay() !== 0 && d.getDay() !== 6) days.push(new Date(d)); }
@@ -234,25 +236,18 @@
       c.dataset.v = `${wd[x.getDay()]} ${date}`; c.append(el('b', '', wd[x.getDay()]), document.createTextNode(date));
       return c;
     }));
-    fTimes.replaceChildren(...['9:00', '11:00', '14:00', '16:30'].map((t) => { const c = el('button', 'chip', t); c.type = 'button'; c.setAttribute('role', 'radio'); c.setAttribute('aria-checked', 'false'); c.dataset.v = t; return c; }));
+    fTimes.replaceChildren(...T.book.times.map((t) => { const c = el('button', 'chip', t); c.type = 'button'; c.setAttribute('role', 'radio'); c.setAttribute('aria-checked', 'false'); c.dataset.v = t; return c; }));
     radio(fDays); radio(fTimes);
   }
   const pick = (g) => { const c = g && $('.chip[aria-checked="true"]', g); return c ? c.dataset.v : ''; };
   const setPick = (g, v) => g && $$('.chip', g).forEach((x) => x.setAttribute('aria-checked', String(x.dataset.v === v)));
-  const PREFILL = {
-    audit: 'Хочу обговорити аудит процесів.',
-    pilot: 'Хочу обговорити пілот на одному процесі.',
-    care: 'Хочу обговорити супровід автоматизацій.',
-  };
   let opener = null;
   const openSheet = (from) => {
     if (!sheet || typeof sheet.showModal !== 'function') return false;
     opener = from;
     const kind = from && from.dataset.prefill;
-    if (kind === 'process') fWhat.value = 'Склав процес на сайті: заявка з пошти, CRM, рахунок, звіт, повідомлення команді. Хочу так само у себе.';
-    if (kind === 'data') fWhat.value = 'Хочу прибрати ручне перенесення даних з таблиць у CRM.';
-    if (kind === 'calc' && last.year != null) fWhat.value = `Мої цифри з калькулятора: ${last.h} год на тиждень, ${last.r} zł за годину, ${zl(last.year)} на рік, бюджет ${zl(last.inv)}.`;
-    if (PREFILL[kind]) fWhat.value = PREFILL[kind];
+    if (kind === 'calc' && last.year != null) fWhat.value = fmt(T.book.prefill.calc, { h: last.h, r: money(last.r), year: money(last.year), inv: money(last.inv) });
+    else if (kind && T.book.prefill[kind] && kind !== 'calc') fWhat.value = T.book.prefill[kind];
     sheet.showModal();
     $('.sheet__in', sheet).scrollTop = 0;
     if (canMove) {
@@ -273,28 +268,29 @@
     e.preventDefault();
     const email = $('#fEmail').value.trim();
     const err = $('#fError');
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { err.hidden = false; err.textContent = 'Вкажіть email у форматі name@firma.pl, щоб я міг підтвердити час.'; $('#fEmail').focus(); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { err.hidden = false; err.textContent = T.book.error; $('#fEmail').focus(); return; }
     err.hidden = true;
     const when = [pick(fDays), pick(fTimes)].filter(Boolean).join(', ');
+    const B = T.book;
     const lines = [
-      'Заявка на консультацію (30 хв, 190 zł)',
-      `Хто: ${pick(fWho) || 'не вказано'}`,
-      `Болить: ${pick(fPain) || 'не вказано'}`,
-      `Коли: ${when ? `${when} (Варшава)` : 'узгодимо в листі'}`,
+      B.title,
+      `${B.who}: ${pick(fWho) || B.none}`,
+      `${B.pain}: ${pick(fPain) || B.none}`,
+      `${B.when}: ${when ? fmt(B.whenTz, { when }) : B.whenNone}`,
       `Email: ${email}`,
-      $('#fName').value.trim() && `Ім'я: ${$('#fName').value.trim()}`,
-      fWhat.value.trim() && `Що автоматизувати: ${fWhat.value.trim()}`,
+      $('#fName').value.trim() && `${B.name}: ${$('#fName').value.trim()}`,
+      fWhat.value.trim() && `${B.what}: ${fWhat.value.trim()}`,
     ].filter(Boolean);
     const text = lines.join('\n');
     $('#confirmText').textContent = text;
-    $('#mailLink').href = `mailto:kontakt@mlohaza.com?subject=${encodeURIComponent('Консультація 30 хв')}&body=${encodeURIComponent(text)}`;
+    $('#mailLink').href = `mailto:kontakt@mlohaza.com?subject=${encodeURIComponent(T.book.subject)}&body=${encodeURIComponent(text)}`;
     form.hidden = true; confirmBox.hidden = false; $('.sheet__in', sheet).scrollTop = 0; confirmBox.focus({ preventScroll: true });
   });
   const copyBtn = $('#copyBtn');
   if (copyBtn) copyBtn.addEventListener('click', () => {
     const text = $('#confirmText').textContent, msg = $('#copyMsg');
-    const fallback = () => { const r = document.createRange(); r.selectNodeContents($('#confirmText')); const s = window.getSelection(); s.removeAllRanges(); s.addRange(r); msg.textContent = 'Текст виділено, скопіюйте його клавішами Ctrl+C або через меню.'; };
-    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(() => { msg.textContent = 'Скопійовано. Вставте в лист на kontakt@mlohaza.com.'; }, fallback);
+    const fallback = () => { const r = document.createRange(); r.selectNodeContents($('#confirmText')); const s = window.getSelection(); s.removeAllRanges(); s.addRange(r); msg.textContent = T.book.selected; };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(() => { msg.textContent = T.book.copied; }, fallback);
     else fallback();
   });
   const editBtn = $('#editBtn');
@@ -334,7 +330,7 @@
     const host = bp.parentElement, ctx = bp.getContext('2d');
     const tok = getComputedStyle(root);
     const C = { line: tok.getPropertyValue('--cobalt').trim(), gate: tok.getPropertyValue('--marker').trim(), ink: tok.getPropertyValue('--ink').trim() };
-    const LABELS = ['Excel', 'AI-агент', 'CRM', 'Пошта', 'Перевірка даних', 'Звіт', 'Telegram', 'Рахунок', 'Human Gate', 'Google Sheets', 'Календар', 'База кандидатів'];
+    const LABELS = T.canvas;
     let W = 1, H = 1, dpr = 1, off = null, spot = null, running = false, raf = 0, clear = null;
     const copy = $('.hero__copy', host);
     const mouse = { x: 0, y: 0, on: false, tm: 0 }, cur = { x: 0, y: 0, init: false };
@@ -407,13 +403,7 @@
   /* ---------- Excel and CRM become one: the demo plays itself ---------- */
   const mStage = $('#mStage');
   if (mStage) {
-    const ROWS = [
-      { raw: 'petrenko ivan · 600123456 · 12/10', name: 'Іван Петренко', sub: '+48 600 123 456 · 12.10.2026', note: 'Виправляю формат імені, телефону й дати.' },
-      { raw: 'Іван Петренко · +48 600 123 456', dup: true, note: "Це дубль, об'єдную записи." },
-      { raw: 'Anna Kowalska · 511022033 · 13/10', name: 'Anna Kowalska', sub: '+48 511 022 033 · 13.10.2026', note: 'Додаю код країни й повну дату.' },
-      { raw: 'Олена Ковальчук · відмова', name: 'Олена Ковальчук', sub: 'лист з відмовою надіслано', gate: true, note: 'Лист з відмовою чекає рекрутера.', ok: 'Рекрутер погодив.' },
-      { raw: 'Marek Nowak · marek@firma.pl · 14.10', name: 'Marek Nowak', sub: 'marek@firma.pl · 14.10.2026', note: 'Створюю картку.' },
-    ];
+    const ROWS = T.merge.rows, MG = T.merge;
     const xl = $('#mXl'), crm = $('#mCrm'), agent = $('#mAgent'), gate = $('#mGate'), note = $('#mNote'), stat = $('#mStat'), again = $('#mAgain'), count = $('#mCount');
     let timers = [], played = false;
     const later = (fn, ms) => { timers.push(setTimeout(fn, ms)); };
@@ -421,17 +411,17 @@
       timers.forEach(clearTimeout); timers = [];
       xl.replaceChildren(...ROWS.map((r) => el('li', '', r.raw)));
       crm.replaceChildren(); agent.classList.remove('is-busy'); gate.classList.remove('is-waiting');
-      note.textContent = 'Чекаю на перший рядок.'; stat.textContent = `Перенесено 0 з ${ROWS.length}`; count.textContent = '0 записів'; again.hidden = true;
+      note.textContent = MG.wait; stat.textContent = fmt(MG.moved, { i: 0, n: ROWS.length }); count.textContent = fmt(MG.count, { n: 0, records: plural('records', 0) }); again.hidden = true;
     };
     const cards = () => crm.children.length;
-    const addCard = (r) => { const li = el('li', r.gate ? 'is-gate' : '', r.name); li.append(el('small', '', r.sub)); crm.append(li); count.textContent = `${cards()} ${cards() === 1 ? 'запис' : cards() < 5 ? 'записи' : 'записів'}`; return li; };
-    const finish = () => { agent.classList.remove('is-busy'); note.textContent = `Готово: ${cards()} записи, 1 дубль, 1 рішення людини.`; again.hidden = false; };
+    const addCard = (r) => { const li = el('li', r.gate ? 'is-gate' : '', r.name); li.append(el('small', '', r.sub)); crm.append(li); count.textContent = fmt(MG.count, { n: cards(), records: plural('records', cards()) }); return li; };
+    const finish = () => { agent.classList.remove('is-busy'); note.textContent = fmt(MG.done, { n: cards(), records: plural('records', cards()) }); again.hidden = false; };
     const play = (instant) => {
       reset();
       const rows = $$('li', xl);
       if (instant) {
         ROWS.forEach((r, i) => { rows[i].classList.add('is-done'); if (!r.dup) addCard(r); });
-        stat.textContent = `Перенесено ${ROWS.length} з ${ROWS.length}`; finish(); return;
+        stat.textContent = fmt(MG.moved, { i: ROWS.length, n: ROWS.length }); finish(); return;
       }
       let t = 300;
       ROWS.forEach((r, i) => {
@@ -445,8 +435,8 @@
         }
         later(() => {
           rows[i].classList.remove('is-now'); rows[i].classList.add('is-done');
-          if (r.dup) { const first = crm.firstElementChild; if (first) first.lastChild.textContent += ' · 2 джерела'; } else addCard(r);
-          stat.textContent = `Перенесено ${i + 1} з ${ROWS.length}`;
+          if (r.dup) { const first = crm.firstElementChild; if (first) first.lastChild.textContent += MG.sources; } else addCard(r);
+          stat.textContent = fmt(MG.moved, { i: i + 1, n: ROWS.length });
         }, t);
         t += 500;
       });

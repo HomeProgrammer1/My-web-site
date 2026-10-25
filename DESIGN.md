@@ -288,3 +288,12 @@ Motion 12 (vanilla build) is vendored; everything is skipped under `prefers-redu
 - **LinkedIn card** (`.li-card`): a cobalt tile linking to the profile; its three topic slips lie askew and square up on hover or focus.
 - **Legal pages** (`.doc`): one white column on the board, a yellow draft note, headings at `--t3`, text capped at 60ch.
 - **Page top.** Without a hash every page scrolls itself to the top on load, so a link never lands mid-page.
+
+## v3.4 additions (25.10.2026)
+- **Three languages.** EN at the root, PL in `/pl/`, UA in `/ua/`, built from `src/` (`python3 src/build.py`); one `styles.css` and one language-free `main.js` serve all of them, strings come from `lang/<code>.js`. Layout and tokens are unchanged across languages.
+- **Language switch** (`.langs`): three 40px text links EN · PL · UA in the nav after FAQ and once more in the footer row; the current language sits on a `--tone` chip, the others are `--muted` until hover. In the phone menu they become a row of 52×46px targets.
+- **Nav widths.** The brand tagline hides under 1280px, links never wrap, and the links fold into «Меню» under 1060px (it was 900px), so the longest language still fits on one line.
+- **Hero motto.** The headline is the motto, set as two `.ln` spans that break after the comma; `--fit` (11.2em, 12.4em for Ukrainian) caps the size, so the motto never takes a third line on a phone. Non-breaking spaces keep the Ukrainian dashes off line starts.
+- **Method bars.** On the three dark panels (ink, cobalt-deep, cobalt) the «before» bar is sky; the «after» bar stays marker yellow.
+- **Experience tiles** are all square now; «Від 2024» no longer lies askew.
+- **Legal measure** is 36em instead of 60ch, because Latin text packs many more letters into a `ch` than Cyrillic.

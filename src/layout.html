@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="{{lang:html}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{title}}</title>
+<meta name="description" content="{{description}}">
+{{seo}}
+<link rel="icon" href="data:,">
+<link rel="preload" href="{{root}}fonts/{{lang:font}}" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="{{root}}styles.css">
+</head>
+<body>
+<a class="skip" href="#main">{{t:skip}}</a>
+
+<header class="nav" id="nav">
+  <div class="nav__in">
+    <a class="brand" href="{{href:home}}"><b>{{t:name}}</b><span>{{t:tagline}}</span></a>
+    <button class="nav__menu" type="button" aria-expanded="false" aria-controls="navLinks">{{t:menu}}</button>
+    <nav class="nav__links" id="navLinks" aria-label="{{t:nav.label}}">
+      <a href="{{href:home#process}}">{{t:nav.process}}</a>
+      <a href="{{href:home#calc}}">{{t:nav.calc}}</a>
+      <a href="{{href:method}}"{{current:method}}>{{t:nav.method}}</a>
+      <a href="{{href:about}}"{{current:about}}>{{t:nav.about}}</a>
+      <a href="{{href:method#faq}}">FAQ</a>
+      {{langs:langs}}
+    </nav>
+    <a class="btn" href="#{{anchor:book}}" data-book>{{t:book}}</a>
+  </div>
+</header>
+<a class="fab" href="#{{anchor:book}}" data-book>{{t:book}} <span>{{t:fab}}</span></a>
+
+<main id="main">
+
+{{content}}
+
+</main>
+
+<footer class="foot" aria-labelledby="f-name">
+  <div class="foot__cols">
+    <nav aria-label="{{t:foot.pages}}"><h2 id="f-name">{{t:name}}</h2><a href="{{href:home}}">{{t:foot.home}}</a><a href="{{href:method}}">{{t:nav.method}}</a><a href="{{href:method#faq}}">FAQ</a><a href="{{href:about}}">{{t:foot.about}}</a><a href="{{href:home#calc}}">{{t:nav.calc}}</a></nav>
+    <div><h2>{{t:foot.contact}}</h2><p>kontakt@mlohaza.com</p><p class="socials"><a href="https://linkedin.com/in/mykhailo-lohaza" target="_blank" rel="noopener">LinkedIn</a><a href="https://instagram.com/mlohaza" target="_blank" rel="noopener">Instagram</a><a href="https://t.me/mlohaza" target="_blank" rel="noopener">Telegram</a></p><p>{{t:foot.where}}</p></div>
+    <div><h2>{{t:nav.method}}</h2><p>{{t:foot.calm}}</p></div>
+  </div>
+  <div class="foot__last"><p>© 2026 Mykhailo Lohaza</p>{{langs:langs langs--foot}}<p class="legal"><a href="{{href:privacy}}"{{current:privacy}}>{{t:foot.privacy}}</a><a href="{{href:terms}}"{{current:terms}}>{{t:foot.terms}}</a></p></div>
+</footer>
+
+<dialog class="sheet" id="sheet" aria-labelledby="h-book">
+  <div class="sheet__in">
+    <div class="sheet__head">
+      <img src="{{root}}img/me-head.jpg" width="360" height="360" alt="{{t:name}}">
+      <div><h2 id="h-book">{{t:sheet.title}}</h2><p>{{t:sheet.price}}</p></div>
+      <button class="sheet__x" type="button" id="sheetClose" aria-label="{{t:sheet.close}}"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.4"/></svg></button>
+    </div>
+    <ol class="agenda">
+      <li>{{t:sheet.agenda1}}</li>
+      <li>{{t:sheet.agenda2}}</li>
+      <li>{{t:sheet.agenda3}}</li>
+      <li>{{t:sheet.agenda4}}</li>
+    </ol>
+    <form class="form" id="bookForm" novalidate>
+      <fieldset><legend class="legend">{{t:sheet.who}}</legend>
+        <div class="chips" role="radiogroup" id="fWho">
+          <button class="chip" type="button" role="radio" aria-checked="false" data-v="{{t:sheet.who1}}">{{t:sheet.who1}}</button>
+          <button class="chip" type="button" role="radio" aria-checked="false" data-v="{{t:sheet.who2}}">{{t:sheet.who2}}</button>
+          <button class="chip" type="button" role="radio" aria-checked="false" data-v="{{t:sheet.who3}}">{{t:sheet.who3}}</button>
+          <button class="chip" type="button" role="radio" aria-checked="false" data-v="{{t:sheet.who4}}">{{t:sheet.who4}}</button>
+        </div>
+      </fieldset>
+      <fieldset><legend class="legend">{{t:sheet.pain}}</legend>
+        <div class="chips" role="radiogroup" id="fPain">
+          <button class="chip" type="button" role="radio" aria-checked="false" data-v="{{t:sheet.pain1}}">{{t:sheet.pain1}}</button>
+          <button class="chip" type="button" role="radio" aria-checked="false" data-v="{{t:sheet.pain2}}">{{t:sheet.pain2}}</button>
+          <button class="chip" type="button" role="radio" aria-checked="false" data-v="{{t:sheet.pain3}}">{{t:sheet.pain3}}</button>
+          <button class="chip" type="button" role="radio" aria-checked="false" data-v="{{t:sheet.pain4}}">{{t:sheet.pain4}}</button>
+          <button class="chip" type="button" role="radio" aria-checked="false" data-v="{{t:sheet.pain5}}">{{t:sheet.pain5}}</button>
+        </div>
+      </fieldset>
+      <fieldset><legend class="legend">{{t:sheet.when}}</legend>
+        <div class="days" id="fDays" role="radiogroup" aria-label="{{t:sheet.day}}"></div>
+        <div class="times" id="fTimes" role="radiogroup" aria-label="{{t:sheet.time}}" style="margin-top:8px"></div>
+      </fieldset>
+      <div class="two">
+        <div class="field"><label for="fEmail">Email*</label><input class="input" id="fEmail" type="email" autocomplete="email" inputmode="email" required placeholder="{{t:sheet.emailHint}}"></div>
+        <div class="field"><label for="fName">{{t:sheet.name}}</label><input class="input" id="fName" type="text" autocomplete="name"></div>
+      </div>
+      <div class="field"><label for="fWhat">{{t:sheet.what}}</label><textarea class="input" id="fWhat" rows="3"></textarea></div>
+      <p class="error" id="fError" role="alert" hidden></p>
+      <div><button class="btn" type="submit">{{t:sheet.submit}}</button><span class="btn-note">{{t:sheet.note}}</span></div>
+    </form>
+    <div class="confirm" id="confirm" hidden tabindex="-1">
+      <h3>{{t:sheet.doneTitle}}</h3>
+      <p>{{t:sheet.doneText}}</p>
+      <pre id="confirmText"></pre>
+      <div class="cta-row">
+        <button class="btn" type="button" id="copyBtn">{{t:sheet.copy}}</button>
+        <a class="textlink" id="mailLink" href="mailto:kontakt@mlohaza.com">{{t:sheet.mail}}</a>
+        <button class="textlink" type="button" id="editBtn">{{t:sheet.edit}}</button>
+      </div>
+      <p class="small muted" id="copyMsg" role="status"></p>
+    </div>
+  </div>
+</dialog>
+
+<script src="{{root}}lang/{{lang:code}}.js"></script>
+<script src="{{root}}vendor/motion-12.23.12.js"></script>
+<script src="{{root}}main.js"></script>
+</body>
+</html>

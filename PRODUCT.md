@@ -10,7 +10,7 @@ web
 
 ## Stack
 
-delegated: static HTML/CSS/JS with no build step (same as the owner's other site, NetConnect), Motion (motion.dev, vanilla build) vendored for animation. Deploy target not chosen yet.
+delegated: static HTML/CSS/JS, built per language by a dependency-free Python script (`src/build.py` → `site/`), Motion (motion.dev, vanilla build) vendored for animation. Deploy target not chosen yet.
 
 ## Users
 
@@ -39,15 +39,16 @@ AI process automation without losing people or trust. Agents take the routine; e
 
 - Only one price on the site: the consultation. Audit and implementation prices are named after the call (FAQ anchor "from about 2 000 zł" is still awaiting owner confirmation).
 - Never use the words "скорочення", "FTE", "гарантую"; no robot-replaces-human imagery.
-- Languages: PL default, `/ua/`, `/en/`. Review copy is Ukrainian.
+- Languages, always in this order: EN at the root (x-default), PL in `/pl/`, UA in `/ua/`. Separate static pages with hreflang and canonical (see `docs/i18n.md`). Review copy is Ukrainian.
 - Booking is planned on Cal.com with Stripe; leads go to Telegram. Not wired yet.
 - Contact email `kontakt@mlohaza.com` awaits confirmation.
+- Business: sole proprietorship MYKHAILO LOHAZA (CEIDG), NIP 7831865114, REGON 523263157, PKD 70.20.Z; details are on the privacy and terms pages.
 
 ## Brand Commitments
 
 - Name: Mykhailo Lohaza / Михайло Логаза, domain mlohaza.com.
 - Voice: «Прямо про інструменти, дбайливо з людьми.» Short sentences, concrete numbers, no hype, no AI scare stories.
-- Line: «Рутину — агентам, рішення — людям.»
+- Line (also the hero headline): EN «Manual work to agents, decisions to people.», PL «Rutyna dla agentów, decyzje dla ludzi.», UA «Ручну роботу — агентам, рішення — людям.» (see `docs/content/i18n-decisions.md`).
 - His face leads the site: he is the guide through his own story.
 
 ## Evidence on Hand

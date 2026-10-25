@@ -1,0 +1,155 @@
+---
+title: Mykhailo Lohaza · automatyzacje AI procesów operacyjnych
+description: Automatyzacje AI dla agencji i małych firm metodą Calm Ops. Zapytaniami, CRM, fakturami i raportami zajmują się agenci, a decyzje o pieniądzach i ludziach zostają po Twojej stronie. Konsultacja 30 min, 190 zł.
+---
+<!-- HERO: the process that already lives in people's heads, drawn under the page -->
+<section class="board hero" id="top" aria-labelledby="h1">
+  <div class="hero__stage">
+    <canvas id="blueprint" aria-hidden="true"></canvas>
+    <div class="hero__copy">
+      <h1 id="h1"><span class="ln">Rutyna dla agentów,</span> <span class="ln">decyzje dla ludzi.</span></h1>
+      <p class="hero__sub">Automatyzacje AI dla agencji i małych firm metodą Calm Ops. Zapytaniami, kandydatami, fakturami i raportami zajmują się agenci, a Twój zespół ma więcej czasu dla klientów.</p>
+      <div class="hero__acts">
+        <a class="btn btn--big" href="#zapis" data-book>Umów konsultację</a>
+        <a class="textlink" href="#proces">Ułóż swój proces</a>
+      </div>
+      <p class="hero__note">30 minut, 190&nbsp;zł. Kwota wlicza się w koszt wdrożenia.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COMPOSE: find the process, draw it, automate it -->
+<section class="sec board compose" id="proces" aria-labelledby="h-proces">
+  <div class="sec-head"><h2 id="h-proces">Jedno zapytanie, pięć ręcznych kroków</h2><p>Zapytanie kopiuje się z maila do CRM, potem do faktury, raportu i na czat. Ułóż ten proces z kart i zobacz, jak przeprowadzają go agenci.</p></div>
+  <div class="tile cp" id="cp" data-ui>
+    <ol class="cp-phases" id="cpPhases" aria-label="Etapy metody">
+      <li class="is-on"><span class="hl is-on">Znajduję</span></li>
+      <li><span class="hl">Wizualizuję</span></li>
+      <li><span class="hl">Automatyzuję</span></li>
+    </ol>
+    <div class="cp-pile" id="cpPile">
+      <button class="cp-card askew" type="button" data-i="2" style="--r:-2deg;--dy:6px"><b>Wystawić fakturę</b><span class="cp-sys"></span><span class="cp-who">15 min ręcznie</span></button>
+      <button class="cp-card askew" type="button" data-i="0" style="--r:1.4deg;--dy:-4px"><b>Przyjąć zapytanie</b><span class="cp-sys"></span><span class="cp-who">10 min ręcznie</span></button>
+      <button class="cp-card askew" type="button" data-i="4" style="--r:-1deg;--dy:10px"><b>Powiadomić zespół</b><span class="cp-sys"></span><span class="cp-who">2 min ręcznie</span></button>
+      <button class="cp-card askew" type="button" data-i="1" style="--r:2.2deg"><b>Dodać klienta do CRM</b><span class="cp-sys"></span><span class="cp-who">10 min ręcznie</span></button>
+      <button class="cp-card askew" type="button" data-i="3" style="--r:-1.6deg;--dy:-6px"><b>Zaktualizować raport</b><span class="cp-sys"></span><span class="cp-who">3 min ręcznie</span></button>
+    </div>
+    <ol class="cp-flow" id="cpFlow" aria-label="Twój proces po kolei">
+      <li class="cp-slot"></li><li class="cp-slot"></li><li class="cp-slot"></li><li class="cp-slot"></li><li class="cp-slot"></li>
+    </ol>
+    <div class="cp-foot">
+      <p class="cp-msg" id="cpMsg" aria-live="polite">Zacznij od karty „Przyjąć zapytanie”.</p>
+      <div class="cta-row">
+        <button class="btn" type="button" id="cpAuto" hidden>Automatyzuj</button>
+        <a class="btn" id="cpBook" href="#zapis" data-book data-prefill="process" hidden>Chcę tak u siebie</a>
+        <button class="btn btn--ink" type="button" id="cpAgain" hidden>Puść kolejne zapytanie</button>
+        <button class="textlink" type="button" id="cpReset" hidden>Zacznij od nowa</button>
+      </div>
+    </div>
+    <span class="cp-token" id="cpToken" aria-hidden="true">Zapytanie</span>
+    <span class="cp-hand" id="cpHand" aria-hidden="true"><svg viewBox="0 0 24 24" width="30" height="30"><path d="M5 2.5l13.5 11.2-6.1.6 3.6 6.9-2.6 1.3-3.6-6.9L5 19.6z" fill="currentColor" stroke="#FFFFFF" stroke-width="1.4" stroke-linejoin="round"/></svg></span>
+  </div>
+</section>
+
+<!-- HELLO -->
+<section class="sec board hello" id="czesc" aria-labelledby="h-hello">
+  <figure class="h-photo">
+    <div class="tile tile--photo"><img src="{{root}}img/me-hero.jpg" width="853" height="828" alt="Mykhailo Lohaza w jasnoniebieskiej koszuli, z założonymi rękami, uśmiecha się" loading="lazy"></div>
+    <figcaption class="h-card"><b>Mykhailo Lohaza</b><span>Poznań, pracuję z zespołami w Polsce i UE</span></figcaption>
+  </figure>
+  <div class="h-text">
+    <h2 id="h-hello">Cześć, jestem Mykhailo</h2>
+    <blockquote class="h-quote">„Wierzę, że w erze AI ludzie stają się ważniejsi niż kiedykolwiek.”</blockquote>
+    <p>Dlatego automatyzuję rutynę, a ludzi zostawiam tam, gdzie są najmocniejsi: w decyzjach, relacjach i pracy z klientami. Od ponad 5 lat wdrażam CRM i ERP, a od 2024 roku buduję agentów AI i automatyzacje na n8n, Make i Claude. Pomagam zespołom skonfigurować Claude pod ich pracę: projekty, integracje i podejście second brain.</p>
+    <div class="stats">
+      <p><b>90%</b><span>pracowników zaczęło korzystać z ERP dla 10&nbsp;000+ osób, który wdrażałem</span></p>
+      <p><b>−87%</b><span>kosztów AI w agencie do Jiry, którego uruchomiłem jako Product Owner</span></p>
+      <p><b>2.</b><span>miejsce wśród 70+ zespołów na międzynarodowym hackathonie AI</span></p>
+    </div>
+    <div class="cta-row"><a class="btn" href="#zapis" data-book>Umów konsultację</a><a class="textlink" href="{{href:method}}">Moja metoda Calm Ops</a><a class="textlink" href="https://linkedin.com/in/mykhailo-lohaza" target="_blank" rel="noopener">Jestem na LinkedIn</a></div>
+  </div>
+</section>
+
+<!-- THE DATA: what a table looks like when people carry it by hand -->
+<section class="sec board data" id="dane" aria-labelledby="h-dani">
+  <div class="tile d-sheet" data-ui>
+    <div class="xl">
+      <p class="xl__bar">kandydaci_FINAL_v3 (2).xlsx <span>przykład arkusza prowadzonego ręcznie</span></p>
+      <table>
+        <thead><tr><th class="rn"></th><th>Kandydat</th><th>Telefon</th><th>Data</th><th>Status</th><th>Źródło</th></tr></thead>
+        <tbody>
+          <tr><td class="rn">2</td><td>Ivan Petrenko</td><td>+48 600 123 456</td><td>12.10.2026</td><td>rozmowa</td><td>Pracuj.pl</td></tr>
+          <tr><td class="rn">3</td><td class="mk">petrenko ivan</td><td>600123456</td><td class="mk">2026-10-12</td><td>OK??</td><td>mail</td></tr>
+          <tr><td class="rn">4</td><td>Anna Kowalska</td><td>+48 511 022 033</td><td class="mk">13/10</td><td>oddzwonić!!!</td><td>OLX</td></tr>
+          <tr><td class="rn">5</td><td>Marek Nowak</td><td class="mk"></td><td>14.10</td><td></td><td>mail</td></tr>
+          <tr><td class="rn">6</td><td>Olena Kowalczuk</td><td>+48 733 000 128</td><td>14.10.2026</td><td>odmowa</td><td>polecenie</td></tr>
+          <tr><td class="rn">7</td><td class="mk">Anna Kowalska</td><td>511022033</td><td>15.10.2026</td><td>rozmowa</td><td>Pracuj.pl</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="d-copy">
+    <h2 id="h-dani">Tak wyglądają Twoje dane?</h2>
+    <p>Trzy wersje jednego pliku, duplikaty i daty w różnych formatach. Potem ktoś ręcznie przenosi to wszystko do CRM i składa z tego raport.</p>
+    <ul class="d-list">
+      <li>Agent znajduje i scala duplikaty.</li>
+      <li>Ujednolica format dat i telefonów.</li>
+      <li>Przenosi wszystko do CRM i składa raport bez kopiowania.</li>
+    </ul>
+    <a class="textlink" href="#zapis" data-book data-prefill="data">Porozmawiajmy o moim arkuszu</a>
+  </div>
+</section>
+
+<!-- CALCULATOR: the visitor fills in their own numbers -->
+<section class="sec board calc" id="kalkulator" aria-labelledby="h-calc">
+  <div class="c-head"><h2 id="h-calc">Policz, ile kosztuje Cię rutyna</h2><p>Wpisz swoje godziny, koszt godziny i budżet. Wykres pokaże, kiedy automatyzacja się zwróci.</p></div>
+  <div class="tile c-in">
+    <div class="range">
+      <label for="cHours">Godziny ręcznej pracy tygodniowo</label><small class="range__note">Łącznie dla całego zespołu.</small>
+      <div class="range__row"><input id="cHours" type="range" min="2" max="200" step="1" value="20"><span class="num"><input id="nHours" type="number" min="2" max="200" step="1" value="20" inputmode="numeric" aria-label="Godziny ręcznej pracy tygodniowo"><span>godz.</span></span></div>
+    </div>
+    <div class="range">
+      <label for="cRate">Koszt godziny pracy</label>
+      <div class="range__row"><input id="cRate" type="range" min="40" max="250" step="5" value="80"><span class="num"><input id="nRate" type="number" min="40" max="250" step="5" value="80" inputmode="numeric" aria-label="Koszt godziny pracy"><span>zł</span></span></div>
+    </div>
+    <div class="range">
+      <label for="cShare">Część, którą oddamy agentom</label>
+      <div class="range__row"><input id="cShare" type="range" min="20" max="80" step="5" value="50"><span class="num"><input id="nShare" type="number" min="20" max="80" step="5" value="50" inputmode="numeric" aria-label="Część, którą oddamy agentom"><span>%</span></span></div>
+    </div>
+    <div class="range">
+      <label for="cInvest">Budżet na wdrożenie</label><small class="range__note">Twój szacunek. Dokładną cenę podam po konsultacji.</small>
+      <div class="range__row"><input id="cInvest" type="range" min="2000" max="60000" step="500" value="9000"><span class="num"><input id="nInvest" type="number" min="2000" max="60000" step="500" value="9000" inputmode="numeric" aria-label="Budżet na wdrożenie"><span>zł</span></span></div>
+    </div>
+    <p class="small muted">Wzór: godziny × 4,33 tygodnia × koszt godziny.</p>
+  </div>
+  <div class="tile c-out" data-ui>
+    <div class="c-year" aria-live="polite">
+      <p class="figure"><b id="rYear">0 zł</b></p>
+      <p>rocznie kosztuje Cię ręczna praca</p>
+    </div>
+    <div class="minis">
+      <p><b id="rMonth">0 zł</b><small>może wracać co miesiąc</small></p>
+      <p><b id="rHours">0 godz.</b><small>miesięcznie wraca do zespołu</small></p>
+      <p><b id="rPay">0 mies.</b><small>do zwrotu Twojego budżetu</small></p>
+    </div>
+    <div>
+      <p class="chart-top">Skumulowane oszczędności w ciągu 12 miesięcy <span id="chartScale"></span></p>
+      <div class="bars" id="bars" role="img" aria-label="Skumulowane oszczędności w ciągu 12 miesięcy"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><span class="q"><span id="qLabel">budżet</span></span></div>
+      <div class="bars-x" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span></div>
+      <p class="chart-key"><span><i class="k k--pay"></i>miesiące, w których budżet się zwraca</span><span><i class="k k--net"></i>czysta oszczędność</span></p>
+    </div>
+    <p class="small" id="payText"></p>
+    <div class="cta-row"><a class="btn" href="#zapis" data-book data-prefill="calc">Omówmy moje liczby</a></div>
+  </div>
+</section>
+
+<!-- START WITH ONE CONVERSATION -->
+<section class="sec board ladder" id="zapis" aria-labelledby="h-start">
+  <h2 class="l-head" id="h-start">Zacznij od jednej rozmowy</h2>
+  <ol class="rungs">
+    <li class="rung"><h3>Konsultacja</h3><p class="price">190&nbsp;zł</p><p>30 minut. Omawiamy Twój proces, a ja uczciwie mówię, czy automatyzacja się opłaci. Kwota wlicza się w koszt wdrożenia.</p><a class="rung__btn" href="#zapis" data-book>Umów się</a></li>
+    <li class="rung"><h3>Audyt procesów</h3><p class="price price--soft">Cenę podaję po konsultacji</p><p>Mapa procesów, godziny dla każdego z nich, priorytety i plan.</p><a class="rung__btn" href="#zapis" data-book data-prefill="audit">Zapytaj o audyt</a></li>
+    <li class="rung"><h3>Pilotaż na jednym procesie</h3><p class="price price--soft">Cenę etapu ustalamy przed startem prac</p><p>Buduję automatyzację na Twoich danych, szkolę zespół i mierzę odzyskane godziny.</p><a class="rung__btn" href="#zapis" data-book data-prefill="pilot">Porozmawiajmy o pilotażu</a></li>
+    <li class="rung"><h3>Opieka</h3><p class="price price--soft">Format wybieramy razem</p><p>Pilnuję, żeby nic się nie psuło, i dodaję nowe scenariusze, kiedy zespół jest gotowy.</p><a class="rung__btn" href="#zapis" data-book data-prefill="care">Zapytaj o opiekę</a></li>
+  </ol>
+</section>
