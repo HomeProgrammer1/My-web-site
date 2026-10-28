@@ -104,3 +104,19 @@
 - Три мовні версії: EN у корені, PL у `/pl/`, UA у `/ua/`. Перемикач EN · PL · UA у шапці й футері веде на ту саму сторінку іншою мовою. Англійська версія показує ціни в євро (€45).
 - SEO: `lang`, `canonical`, `hreflang` (en, pl, uk, x-default), Open Graph, розмітка Person, `sitemap.xml`, `robots.txt`.
 - Редагування: тексти в `src/pages/<мова>/`, спільні рядки в `src/i18n/`, збірка `python3 src/build.py` (див. `src/README.md`, `docs/i18n.md`).
+
+## Фідбек на v3.4 → v3.5 (28.10.2026)
+- Польська версія перекладена «топорно», дослівно з української. Потрібно, щоб звучало так, як справді говорять поляки, з окремим tone of voice для поляків, українців і англомовних.
+- Англійську теж перевірити на дослівність.
+- Девіз «Rutyna dla agentów, decyzje dla ludzi» лишити.
+
+## Що зроблено у v3.5
+- `docs/content/tone-of-voice.md`: правила для EN, PL і UA (звертання, регістр, слова зі світу клієнта, чого уникати, формат чисел).
+- Польська переписана наново: розмовна ділова польська на «Ty».
+  - Слова, яких очікує польський власник фірми: przeklejanie, kopiuj-wklej, roboczogodzina, zwrot inwestycji, odliczam od ceny wdrożenia, do CRM-a, czas polski.
+  - Кроки методу іменниками: Rozmowy, Mapa procesów, Porządki, Automatyzacja, Szkolenie, Raport. Дієслова «Słucham, Wizualizuję» польською звучали штучно.
+  - Заголовки: «Jedno zapytanie, pięć razy kopiuj-wklej», «Twój Excel też tak wygląda?», «Ile kosztuje Cię ręczna robota?», «Nie wiesz, od czego zacząć?».
+- Англійська переписана простою британською англійською.
+  - Замість кальок (Take the request, What decided it was, Where to start in your team) природні звороти: lead, copy-paste, quote, sign off, hours saved.
+  - Заголовки: «One lead, five rounds of copy-paste», «Does your spreadsheet look like this?», «What is manual work costing you?», «Not sure where to start?».
+- Українська версія без змін.

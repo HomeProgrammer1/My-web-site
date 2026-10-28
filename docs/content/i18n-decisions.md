@@ -5,13 +5,17 @@
 | | Девіз (заголовок) | Підзаголовок |
 |---|---|---|
 | EN | Manual work to agents, decisions to people. | AI automation for agencies and small businesses, built on the Calm Ops method. Agents handle leads, candidates, invoices and reports, so your team has more time for clients. |
-| PL | Rutyna dla agentów, decyzje dla ludzi. | Automatyzacje AI dla agencji i małych firm metodą Calm Ops. Zapytaniami, kandydatami, fakturami i raportami zajmują się agenci, a Twój zespół ma więcej czasu dla klientów. |
+| PL | Rutyna dla agentów, decyzje dla ludzi. | Automatyzuję pracę agencji i małych firm z pomocą AI, autorską metodą Calm Ops. Zapytania, kandydatów, faktury i raporty przejmują agenci, a Twój zespół wreszcie ma czas dla klientów. |
 | UA | Ручну роботу — агентам, рішення — людям. | AI-автоматизації для агенцій і малого бізнесу за методом Calm Ops. Заявки, кандидати, рахунки й звіти ведуть агенти, а в команди лишається більше часу на клієнтів. |
 
 - **EN:** формулювання Михайла, з комою.
 - **PL:** обрав Михайло. «Rutyna» польською звучить нейтрально.
 - **UA:** «Ручну роботу» замість «Рутину» на прохання Михайла. Тире граматичне; перед ним нерозривний пробіл, щоб тире не переносилось на новий рядок.
 - На екрані девіз завжди ламається після коми: два рядки на будь-якій ширині (`.hero h1 .ln` і `--fit` у `styles.css`).
+
+## Тексти мовних версій
+
+Від v3.5 польська й англійська версії написані наново як окремі тексти для своєї аудиторії, а не переклад з української. Правила для кожної мови в `docs/content/tone-of-voice.md`. Девізи вище лишаються без змін.
 
 ## Ціни за мовою
 

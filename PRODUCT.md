@@ -47,7 +47,7 @@ AI process automation without losing people or trust. Agents take the routine; e
 ## Brand Commitments
 
 - Name: Mykhailo Lohaza / Михайло Логаза, domain mlohaza.com.
-- Voice: «Прямо про інструменти, дбайливо з людьми.» Short sentences, concrete numbers, no hype, no AI scare stories.
+- Voice: «Прямо про інструменти, дбайливо з людьми.» Short sentences, concrete numbers, no hype, no AI scare stories. Each language is written natively for its own audience, never translated word for word: see `docs/content/tone-of-voice.md`.
 - Line (also the hero headline): EN «Manual work to agents, decisions to people.», PL «Rutyna dla agentów, decyzje dla ludzi.», UA «Ручну роботу — агентам, рішення — людям.» (see `docs/content/i18n-decisions.md`).
 - His face leads the site: he is the guide through his own story.
 

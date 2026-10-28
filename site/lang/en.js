@@ -16,7 +16,7 @@ window.T = {
  "cp": {
   "steps": [
    {
-    "n": "Take the request",
+    "n": "Copy the lead from email",
     "agent": "the agent pulls the details from the email"
    },
    {
@@ -25,7 +25,7 @@ window.T = {
    },
    {
     "n": "Send the invoice",
-    "agent": "an invoice over the limit waits for you",
+    "agent": "over the limit, waiting for you",
     "ok": "approved, invoice sent"
    },
    {
@@ -45,35 +45,35 @@ window.T = {
    "Telegram"
   ],
   "min": "{n} min by hand",
-  "first": "First, “{n}”.",
+  "first": "Start with “{n}”.",
   "next": "Next: “{n}”.",
-  "drawn": "Now you can see the whole path of a request: five systems and {total} minutes of manual work for each one.",
-  "waiting": "waiting for a request",
-  "start": "A new request has arrived by email. From here, the agents do the work.",
-  "gate": "The invoice is over the limit. The agent has stopped and is waiting for your decision.",
-  "end": "The request went through five systems in about a minute instead of {total} minutes by hand. A person approved the invoice over the limit.",
-  "reset": "Start with the “Take the request” card."
+  "drawn": "That's the journey every lead takes: five systems and {total} minutes of manual work.",
+  "waiting": "waiting for a lead",
+  "start": "A new lead just landed in the inbox. The agents take it from here.",
+  "gate": "The invoice is over the limit, so the agent has paused and is waiting for your decision.",
+  "end": "The lead went through five systems in about a minute instead of {total} minutes by hand. A person approved the invoice over the limit.",
+  "reset": "Start with “Copy the lead from email”."
  },
  "calc": {
   "pay": "{n} mo.",
   "payLong": "3+ years",
   "budget": "budget {v}",
-  "scale": "scale up to {v}",
+  "scale": "scale to {v}",
   "whenN": "in {n} {months}",
   "whenLong": "in more than 3 years",
-  "aria": "Cumulative savings: {total} over 12 months, the {inv} budget pays off {when}",
-  "ok": "Your budget of {inv} pays off {when}. After that, automation brings back {back} every month.",
-  "slow": "With these numbers the budget pays off {when}. In the consultation we'll work out what to automate first to shorten that."
+  "aria": "Cumulative savings: {total} over 12 months; the {inv} budget pays for itself {when}",
+  "ok": "Your {inv} budget pays for itself {when}. After that, automation saves you {back} a month.",
+  "slow": "With these numbers, the budget pays for itself {when}. In the consultation we'll work out what to automate first to bring that down."
  },
  "tg": {
-  "one": "One decision left.",
-  "done": "Two decisions in two minutes. The agents did the rest."
+  "one": "One decision to go.",
+  "done": "Two decisions in two minutes. The agents handled the rest."
  },
  "canvas": [
   "Excel",
   "AI agent",
   "CRM",
-  "Email",
+  "Inbox",
   "Data check",
   "Report",
   "Telegram",
@@ -81,7 +81,7 @@ window.T = {
   "Human Gate",
   "Google Sheets",
   "Calendar",
-  "Candidate base"
+  "Candidate pool"
  ],
  "merge": {
   "rows": [
@@ -94,7 +94,7 @@ window.T = {
    {
     "raw": "Ivan Petrenko · +48 600 123 456",
     "dup": true,
-    "note": "This is a duplicate, merging the records."
+    "note": "Duplicate found, merging the records."
    },
    {
     "raw": "Anna Kowalska · 511022033 · 13/10",
@@ -107,7 +107,7 @@ window.T = {
     "name": "Olena Kovalchuk",
     "sub": "rejection email sent",
     "gate": true,
-    "note": "The rejection email waits for the recruiter.",
+    "note": "The rejection email is waiting for the recruiter.",
     "ok": "The recruiter approved it."
    },
    {
@@ -118,7 +118,7 @@ window.T = {
    }
   ],
   "wait": "Waiting for the first row.",
-  "moved": "Moved {i} of {n}",
+  "moved": "{i} of {n} moved",
   "count": "{n} {records}",
   "done": "Done: {n} {records}, 1 duplicate, 1 human decision.",
   "sources": " · 2 sources"
@@ -140,21 +140,21 @@ window.T = {
    "16:30"
   ],
   "prefill": {
-   "process": "I put the process together on your site: request from email, CRM, invoice, report, team message. I'd like the same at my company.",
-   "data": "I want to stop moving data from spreadsheets into the CRM by hand.",
-   "calc": "My calculator numbers: {h} h a week, {r} an hour, {year} a year, budget {inv}.",
-   "audit": "I'd like to talk about a process audit.",
-   "pilot": "I'd like to talk about a pilot on one process.",
-   "care": "I'd like to talk about ongoing support for automations."
+   "process": "I built the process on your site: lead from email, CRM, invoice, report, team message. I'd like the same for my team.",
+   "data": "I'd like to stop copying data from spreadsheets into our CRM by hand.",
+   "calc": "My calculator numbers: {h} h a week at {r} an hour, {year} a year, budget {inv}.",
+   "audit": "I'm interested in a process audit.",
+   "pilot": "I'm interested in a pilot on one process.",
+   "care": "I'm interested in ongoing support for our automations."
   },
-  "error": "Enter your email as name@company.com so I can confirm the time.",
+  "error": "Please enter an email like name@company.com so I can confirm the time.",
   "subject": "Consultation, 30 min",
   "title": "Consultation request (30 min, €45)",
   "who": "Who",
-  "pain": "Pain point",
+  "pain": "Biggest time sink",
   "when": "When",
   "whenTz": "{when} (Warsaw time)",
-  "whenNone": "we'll agree by email",
+  "whenNone": "to agree by email",
   "name": "Name",
   "what": "To automate",
   "none": "not given",

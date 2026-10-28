@@ -5,10 +5,10 @@ window.T = {
  "hours": "{n} godz.",
  "plural": {
   "months": {
-   "one": "miesiąca",
-   "few": "miesięcy",
-   "many": "miesięcy",
-   "other": "miesiąca"
+   "one": "miesiącu",
+   "few": "miesiącach",
+   "many": "miesiącach",
+   "other": "miesiącach"
   },
   "records": {
    "one": "rekord",
@@ -20,25 +20,25 @@ window.T = {
  "cp": {
   "steps": [
    {
-    "n": "Przyjąć zapytanie",
-    "agent": "agent pobiera dane z maila"
+    "n": "Przepisać zapytanie z maila",
+    "agent": "agent wyciąga dane z maila"
    },
    {
-    "n": "Dodać klienta do CRM",
-    "agent": "agent tworzy kartę klienta"
+    "n": "Dodać klienta do CRM-a",
+    "agent": "agent zakłada kartę klienta"
    },
    {
     "n": "Wystawić fakturę",
-    "agent": "faktura powyżej limitu czeka na Ciebie",
-    "ok": "zatwierdzone, faktura wysłana"
+    "agent": "faktura ponad limit czeka na Ciebie",
+    "ok": "zatwierdzone, faktura poszła"
    },
    {
-    "n": "Zaktualizować raport",
+    "n": "Uzupełnić raport",
     "agent": "agent dopisuje wiersz do raportu"
    },
    {
-    "n": "Powiadomić zespół",
-    "agent": "agent wysyła podsumowanie na czat"
+    "n": "Dać znać zespołowi",
+    "agent": "agent wrzuca podsumowanie na czat"
    }
   ],
   "sys": [
@@ -50,27 +50,27 @@ window.T = {
   ],
   "min": "{n} min ręcznie",
   "first": "Najpierw „{n}”.",
-  "next": "Dalej: „{n}”.",
-  "drawn": "Teraz widać całą drogę zapytania: pięć systemów i {total} minut ręcznej pracy przy każdym.",
+  "next": "Teraz: „{n}”.",
+  "drawn": "Tak wygląda droga każdego zapytania: pięć systemów i {total} minut ręcznej roboty.",
   "waiting": "czeka na zapytanie",
-  "start": "Nowe zapytanie przyszło na maila. Dalej wszystko robią agenci.",
-  "gate": "Faktura powyżej limitu. Agent zatrzymał się i czeka na Twoją decyzję.",
-  "end": "Zapytanie przeszło przez pięć systemów w około minutę zamiast {total} minut ręcznie. Fakturę powyżej limitu zatwierdził człowiek.",
-  "reset": "Zacznij od karty „Przyjąć zapytanie”."
+  "start": "Na maila wpadło nowe zapytanie. Dalej działają agenci.",
+  "gate": "Faktura przekracza limit. Agent wstrzymał proces i czeka na Twoją decyzję.",
+  "end": "Zapytanie przeszło przez pięć systemów mniej więcej w minutę zamiast {total} minut ręcznie. Fakturę ponad limit zatwierdził człowiek.",
+  "reset": "Zacznij od karty „Przepisać zapytanie z maila”."
  },
  "calc": {
   "pay": "{n} mies.",
   "payLong": "ponad 3 lata",
   "budget": "budżet {v}",
   "scale": "skala do {v}",
-  "whenN": "w ciągu {n} {months}",
+  "whenN": "po {n} {months}",
   "whenLong": "dopiero po ponad 3 latach",
-  "aria": "Skumulowane oszczędności: {total} w ciągu 12 miesięcy, budżet {inv} zwraca się {when}",
-  "ok": "Budżet {inv} zwróci się {when}. Potem automatyzacja oddaje {back} co miesiąc.",
-  "slow": "Przy takich liczbach budżet zwróci się {when}. Na konsultacji sprawdzimy, co zautomatyzować najpierw, żeby skrócić ten czas."
+  "aria": "Oszczędności narastająco: {total} przez 12 miesięcy, budżet {inv} zwraca się {when}",
+  "ok": "Budżet {inv} zwróci się {when}. Od tego momentu automatyzacja oszczędza {back} miesięcznie.",
+  "slow": "Przy takich liczbach budżet zwróci się {when}. Na konsultacji sprawdzimy, od czego zacząć, żeby ten czas skrócić."
  },
  "tg": {
-  "one": "Została jedna decyzja.",
+  "one": "Została jeszcze jedna decyzja.",
   "done": "Dwie decyzje w dwie minuty. Resztę zrobili agenci."
  },
  "canvas": [
@@ -93,36 +93,36 @@ window.T = {
     "raw": "petrenko ivan · 600123456 · 12/10",
     "name": "Ivan Petrenko",
     "sub": "+48 600 123 456 · 12.10.2026",
-    "note": "Poprawiam format imienia, telefonu i daty."
+    "note": "Poprawiam zapis imienia, telefonu i daty."
    },
    {
     "raw": "Ivan Petrenko · +48 600 123 456",
     "dup": true,
-    "note": "To duplikat, scalam rekordy."
+    "note": "To duplikat, łączę rekordy."
    },
    {
     "raw": "Anna Kowalska · 511022033 · 13/10",
     "name": "Anna Kowalska",
     "sub": "+48 511 022 033 · 13.10.2026",
-    "note": "Dodaję kod kraju i pełną datę."
+    "note": "Dodaję prefiks +48 i pełną datę."
    },
    {
     "raw": "Olena Kowalczuk · odmowa",
     "name": "Olena Kowalczuk",
     "sub": "mail z odmową wysłany",
     "gate": true,
-    "note": "Mail z odmową czeka na rekrutera.",
-    "ok": "Rekruter zatwierdził."
+    "note": "Mail z odmową czeka na akceptację rekrutera.",
+    "ok": "Rekruter zaakceptował."
    },
    {
     "raw": "Marek Nowak · marek@firma.pl · 14.10",
     "name": "Marek Nowak",
     "sub": "marek@firma.pl · 14.10.2026",
-    "note": "Tworzę kartę."
+    "note": "Zakładam kartę."
    }
   ],
   "wait": "Czekam na pierwszy wiersz.",
-  "moved": "Przeniesiono {i} z {n}",
+  "moved": "Przeniesione: {i} z {n}",
   "count": "{n} {records}",
   "done": "Gotowe: {n} {records}, 1 duplikat, 1 decyzja człowieka.",
   "sources": " · 2 źródła"
@@ -144,25 +144,25 @@ window.T = {
    "16:30"
   ],
   "prefill": {
-   "process": "Mój proces ze strony: zapytanie z maila, CRM, faktura, raport, wiadomość do zespołu. Chcę tak samo u siebie.",
-   "data": "Chcę skończyć z ręcznym przenoszeniem danych z arkuszy do CRM.",
-   "calc": "Moje liczby z kalkulatora: {h} godz. tygodniowo, {r} za godzinę, {year} rocznie, budżet {inv}.",
-   "audit": "Chcę porozmawiać o audycie procesów.",
-   "pilot": "Chcę porozmawiać o pilotażu na jednym procesie.",
-   "care": "Chcę porozmawiać o opiece nad automatyzacjami."
+   "process": "Proces z Twojej strony: zapytanie z maila, CRM, faktura, raport, wiadomość do zespołu. Chcę mieć to samo u siebie.",
+   "data": "Chcę przestać ręcznie przenosić dane z Excela do CRM-a.",
+   "calc": "Moje wyliczenia z kalkulatora: {h} godz. tygodniowo, roboczogodzina {r}, rocznie {year}, budżet {inv}.",
+   "audit": "Interesuje mnie audyt procesów.",
+   "pilot": "Interesuje mnie pilotaż na jednym procesie.",
+   "care": "Interesuje mnie opieka nad automatyzacjami po wdrożeniu."
   },
-  "error": "Podaj email w formacie imie@firma.pl, żebym mógł potwierdzić termin.",
+  "error": "Wpisz adres email w formacie imie@firma.pl, żebym mógł potwierdzić termin.",
   "subject": "Konsultacja 30 min",
   "title": "Zgłoszenie na konsultację (30 min, 190 zł)",
   "who": "Kto",
-  "pain": "Co boli",
-  "when": "Kiedy",
-  "whenTz": "{when} (czas warszawski)",
-  "whenNone": "ustalimy mailowo",
+  "pain": "Najwięcej czasu zabiera",
+  "when": "Termin",
+  "whenTz": "{when} (czas polski)",
+  "whenNone": "do ustalenia mailowo",
   "name": "Imię",
   "what": "Do automatyzacji",
   "none": "nie podano",
-  "copied": "Skopiowano. Wklej do maila na kontakt@mlohaza.com.",
+  "copied": "Skopiowane. Wklej to do maila na kontakt@mlohaza.com.",
   "selected": "Tekst zaznaczony. Skopiuj go skrótem Ctrl+C albo z menu."
  }
 };
