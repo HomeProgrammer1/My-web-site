@@ -154,34 +154,34 @@
     "merge": {
       "rows": [
         {
-          "raw": "petrenko ivan · 600123456 · 12/10",
-          "name": "Ivan Petrenko",
+          "raw": "wisniewska katarzyna · 600123456 · 12/10",
+          "name": "Katarzyna Wiśniewska",
           "sub": "+48 600 123 456 · 12.10.2026",
           "note": "Poprawiam zapis imienia, telefonu i daty."
         },
         {
-          "raw": "Ivan Petrenko · +48 600 123 456",
+          "raw": "Katarzyna Wiśniewska · +48 600 123 456",
           "dup": true,
           "note": "To duplikat, łączę rekordy."
         },
         {
-          "raw": "Anna Kowalska · 511022033 · 13/10",
-          "name": "Anna Kowalska",
+          "raw": "Tomasz Zieliński · 511022033 · 13/10",
+          "name": "Tomasz Zieliński",
           "sub": "+48 511 022 033 · 13.10.2026",
           "note": "Dodaję prefiks +48 i pełną datę."
         },
         {
-          "raw": "Olena Kowalczuk · odmowa",
-          "name": "Olena Kowalczuk",
+          "raw": "Magdalena Lewandowska · odmowa",
+          "name": "Magdalena Lewandowska",
           "sub": "mail z odmową wysłany",
           "gate": true,
           "note": "Mail z odmową czeka na akceptację rekrutera.",
           "ok": "Rekruter zaakceptował."
         },
         {
-          "raw": "Marek Nowak · marek@firma.pl · 14.10",
-          "name": "Marek Nowak",
-          "sub": "marek@firma.pl · 14.10.2026",
+          "raw": "Piotr Kamiński · piotr@firma.pl · 14.10",
+          "name": "Piotr Kamiński",
+          "sub": "piotr@firma.pl · 14.10.2026",
           "note": "Zakładam kartę."
         }
       ],

@@ -1,6 +1,6 @@
 # Сайт mlohaza.com · нотатки збірки
 
-Поточна версія: **v3.8** у `site/` (копія в `versions/v3-8-plain/`, фідбек у `docs/feedback-v3.md`). Попередні: v3.7 у `versions/v3-7-review/`, v3.6 у `versions/v3-6-whatsapp/`, v3.5 у `versions/v3-5-native/`, v3.4 у `versions/v3-4-i18n/`, v3.3 у `versions/v3-3-ops/`, v3.2 у `versions/v3-2-process/`, v3.1 у `versions/v3-1-calm/`, v3 у `versions/v3-desk/`. Попередні: v1 у `versions/v1-planner/`, v2 у `versions/v2-glass/`; список версій із посиланнями в `versions/README.md`.
+Поточна версія: **v3.9** у `site/` (копія в `versions/v3-9-local-data/`, фідбек у `docs/feedback-v3.md`). Попередні: v3.8 у `versions/v3-8-plain/`, v3.7 у `versions/v3-7-review/`, v3.6 у `versions/v3-6-whatsapp/`, v3.5 у `versions/v3-5-native/`, v3.4 у `versions/v3-4-i18n/`, v3.3 у `versions/v3-3-ops/`, v3.2 у `versions/v3-2-process/`, v3.1 у `versions/v3-1-calm/`, v3 у `versions/v3-desk/`. Попередні: v1 у `versions/v1-planner/`, v2 у `versions/v2-glass/`; список версій із посиланнями в `versions/README.md`.
 Відкрити локально: `python3 -m http.server -d site`. Мови: EN (корінь), PL (`/pl/`), UA (`/ua/`).
 
 **Сторінки в `site/` збираються, руками їх не правимо:** тексти в `src/pages/<мова>/`, спільні рядки в `src/i18n/`, потім `python3 src/build.py`. Інструкція в `src/README.md`, обґрунтування й SEO-чекліст у `docs/i18n.md`.

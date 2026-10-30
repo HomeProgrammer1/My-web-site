@@ -150,34 +150,34 @@
     "merge": {
       "rows": [
         {
-          "raw": "petrenko ivan · 600123456 · 12/10",
-          "name": "Ivan Petrenko",
-          "sub": "+48 600 123 456 · 12.10.2026",
+          "raw": "carter emily · 07700900123 · 12/10",
+          "name": "Emily Carter",
+          "sub": "+44 7700 900123 · 12 Oct 2026",
           "note": "Fixing the name, phone and date format."
         },
         {
-          "raw": "Ivan Petrenko · +48 600 123 456",
+          "raw": "Emily Carter · +44 7700 900123",
           "dup": true,
           "note": "Duplicate found, merging the records."
         },
         {
-          "raw": "Anna Kowalska · 511022033 · 13/10",
-          "name": "Anna Kowalska",
-          "sub": "+48 511 022 033 · 13.10.2026",
+          "raw": "Lukas Becker · 015123456789 · 13/10",
+          "name": "Lukas Becker",
+          "sub": "+49 151 2345 6789 · 13 Oct 2026",
           "note": "Adding the country code and the full date."
         },
         {
-          "raw": "Olena Kovalchuk · rejected",
-          "name": "Olena Kovalchuk",
+          "raw": "Sofia Rossi · rejected",
+          "name": "Sofia Rossi",
           "sub": "rejection email sent",
           "gate": true,
           "note": "The rejection email is waiting for the recruiter.",
           "ok": "The recruiter approved it."
         },
         {
-          "raw": "Marek Nowak · marek@firma.pl · 14.10",
-          "name": "Marek Nowak",
-          "sub": "marek@firma.pl · 14.10.2026",
+          "raw": "Daniel Kim · daniel@company.com · 14.10",
+          "name": "Daniel Kim",
+          "sub": "daniel@company.com · 14 Oct 2026",
           "note": "Creating the record."
         }
       ],
