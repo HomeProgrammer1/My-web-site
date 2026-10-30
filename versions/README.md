@@ -26,6 +26,8 @@
 
 | v3.9 · «Свої дані для кожного ринку» | `versions/v3-9-local-data/` | За фідбеком 30.10: таблиця кандидатів і демо «Excel → CRM» з людьми, телефонами й джерелами свого ринку: польські й +48, українські й +380 з Work.ua, міжнародні з +44/+49/+39 і LinkedIn. | https://claude.ai/artifact/SxVQYUMfS6pQP3M474bxyY |
 
-| v3.10 · «Кейси в меню» | `versions/v3-10-cases/` (копія; поточна в `site/`, джерела в `src/`) | За фідбеком 30.10: у меню «Кейси / Realizacje / Case studies» замість FAQ, п'ятий кейс про хакатон з п'єдесталом, підпис «100%» на першій смужці кейсу Jira. Варіанти анімацій кейсів у `docs/content/case-animations.md`. | https://claude.ai/artifact/DSSDSzhRxQWD6eeFq3KMqo |
+| v3.10 · «Кейси в меню» | `versions/v3-10-cases/` | За фідбеком 30.10: у меню «Кейси / Realizacje / Case studies» замість FAQ, п'ятий кейс про хакатон з п'єдесталом, підпис «100%» на першій смужці кейсу Jira. Варіанти анімацій кейсів у `docs/content/case-animations.md`. | https://claude.ai/artifact/DSSDSzhRxQWD6eeFq3KMqo |
+
+| v3.11 · «Кейси в русі» | `versions/v3-11-anim/` (копія; поточна в `site/`, джерела в `src/`) | За фідбеком 30.10: анімації п'яти кейсів (Було → Зробили → Результат) з лічильниками й підсвіткою колонок тексту. Грає тільки той кейс, що на екрані. Хакатон поки з тимчасовою анімацією п'єдесталу, чекаємо деталі проєкту. Відкат: v3.10. | https://claude.ai/artifact/3d5JNjgebrGg5SW8dFnCt9 |
 
 Відкрити локально: `python3 -m http.server -d versions/v1-planner` і перейти на http://localhost:8000.

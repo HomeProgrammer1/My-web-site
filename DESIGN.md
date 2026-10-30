@@ -309,3 +309,12 @@ Motion 12 (vanilla build) is vendored; everything is skipped under `prefers-redu
 ## v3.10 additions (30.10.2026)
 - **Nav** links to the case studies (about page anchor) instead of FAQ; FAQ stays in the footer.
 - **Hackathon case** on a cornflower tile with a three-block podium (`.cpodium`): 2nd place on the left in marker yellow, 1st in the middle, 3rd on the right, white blocks with ink numbers.
+
+## v3.11 additions (30.10.2026)
+- **Case animations.** Each case picture replays three beats (before, what we did, result) in a loop of about 8–10 s while it is the most visible case picture; only one plays at a time, and it resets to the still picture when it leaves the screen. The text column for the current beat gets a wider marker-yellow bar (`.cr-steps div.is-beat`).
+  - Jira: requests in plain language sorted into a Code or AI lane, the cost bars grow, 13% turns into −87%.
+  - ERP: the «before» bar crawls while a small clock spins, the «after» bar snaps, nine of ten people pictograms light up.
+  - CRM: five sheets ride into the CRM block (1/5 … 5/5), it turns marker yellow.
+  - Stories: the brief pulses, 30 tiles fill in a wave with four tones.
+  - Hackathon: 70 dots, then the podium rises and 2nd turns yellow.
+- Motion only animates transform, opacity and counters; reduced motion keeps the still pictures.

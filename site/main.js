@@ -473,6 +473,170 @@
   $$('.askew').filter((n) => !n.closest('#cpPile, .cp-flow')).forEach((n) => {
     M.inView(n, () => { land([n]); }, { amount: 0.3 });
   });
+  // Case studies: the picture next to each case replays "before, what we did, result" while it is on screen,
+  // and the matching text column lights up. One case plays at a time; reduced motion keeps the still picture.
+  const caseRows = $$('.case-row[data-anim]');
+  if (caseRows.length) {
+    const pics = new Map(caseRows.map((row) => [row, $('.cr-pic', row).innerHTML]));
+    const MSGS = (T.cases && T.cases.msgs) || [];
+    const pct = (v) => `${Math.round(v)}%`;
+    const whole = (v) => String(Math.round(v));
+    const beat = (row, k) => $$('.cr-steps > div', row).forEach((d, i) => d.classList.toggle('is-beat', i === k));
+    const restore = (row) => { $('.cr-pic', row).innerHTML = pics.get(row); beat(row, -1); };
+    let run = null;
+    const make = (row) => {
+      const r = { row, alive: true, timers: [], anims: [] };
+      r.wait = (ms) => new Promise((res) => { r.timers.push(setTimeout(() => { if (r.alive) res(); }, ms)); });
+      r.go = (el, kf, opt) => { const a = M.animate(el, kf, { ease, ...opt }); r.anims.push(a); return a; };
+      r.count = (node, from, to, fmt, duration) => r.go(from, to, { duration, onUpdate: (v) => { node.textContent = fmt(v); } });
+      return r;
+    };
+    const SCENES = {
+      async jira(row, r) {
+        const bars = $$('.cbars i', row), vals = $$('.cbars b', row), msg = $('.crx-msg', row);
+        const finals = vals.map((v) => v.textContent);
+        bars.forEach((b) => { b.style.transform = 'scaleX(0)'; });
+        vals.forEach((v) => { v.textContent = '0%'; });
+        msg.style.opacity = '0';
+        beat(row, 0);
+        r.go(bars[0], { scaleX: [0, 1] }, { duration: 1.4 });
+        r.count(vals[0], 0, 100, pct, 1.4);
+        await r.wait(2000);
+        beat(row, 1);
+        for (const m of MSGS) {
+          const lane = $(`[data-lane="${m.to}"]`, row);
+          msg.textContent = m.t;
+          r.go(msg, { opacity: [0, 1], x: [-14, 0] }, { duration: 0.35 });
+          await r.wait(800);
+          lane.classList.add('is-hit');
+          r.go(msg, { opacity: [1, 0], x: [0, 18] }, { duration: 0.3, delay: 0.25 });
+          await r.wait(750);
+          lane.classList.remove('is-hit');
+        }
+        beat(row, 2);
+        r.go(bars[1], { scaleX: [0, 1] }, { duration: 0.9 });
+        r.count(vals[1], 0, 13, pct, 0.9);
+        await r.wait(1100);
+        vals[1].textContent = finals[1];
+        r.go(vals[1], { scale: [1.3, 1] }, { duration: 0.4 });
+        await r.wait(2600);
+      },
+      async erp(row, r) {
+        const bars = $$('.cbars i', row), vals = $$('.cbars b', row), hand = $('.crx-clock i', row), n = $('.crx-n', row), people = $$('.crx-people i', row);
+        bars.forEach((b) => { b.style.transform = 'scaleX(0)'; });
+        vals.forEach((v) => { v.style.opacity = '0'; });
+        people.forEach((p) => p.classList.remove('is-on'));
+        n.textContent = '0%';
+        beat(row, 0);
+        r.go(bars[0], { scaleX: [0, 1] }, { duration: 2.4, ease: 'linear' });
+        r.go(hand, { rotate: [0, 1440] }, { duration: 2.4, ease: 'linear' });
+        await r.wait(2400);
+        r.go(vals[0], { opacity: [0, 1] }, { duration: 0.3 });
+        await r.wait(700);
+        beat(row, 1);
+        r.go(bars[1], { scaleX: [0, 1] }, { duration: 0.25 });
+        r.go(hand, { rotate: [1440, 1470] }, { duration: 0.25 });
+        r.go(vals[1], { opacity: [0, 1] }, { duration: 0.3, delay: 0.2 });
+        await r.wait(1400);
+        beat(row, 2);
+        people.slice(0, 9).forEach((p, i) => r.timers.push(setTimeout(() => p.classList.add('is-on'), i * 130)));
+        r.count(n, 0, 90, pct, 1.2);
+        await r.wait(3000);
+      },
+      async crm(row, r) {
+        const sheets = $$('.cmerge span', row), box = $('.cmerge b', row), n = $('.crx-n', row), note = $('.crx-note', row);
+        n.textContent = `0/${sheets.length}`;
+        note.style.opacity = '0';
+        beat(row, 0);
+        r.go(sheets, { opacity: [0, 1], y: [-10, 0] }, { duration: 0.4, delay: M.stagger(0.12) });
+        await r.wait(1500);
+        beat(row, 1);
+        const b = box.getBoundingClientRect();
+        for (let i = sheets.length - 1, done = 1; i >= 0; i--, done++) {
+          const s = sheets[i].getBoundingClientRect();
+          r.go(sheets[i], { x: [0, b.left + b.width / 2 - (s.left + s.width / 2)], opacity: [1, 0], scale: [1, 0.5] }, { duration: 0.5 });
+          await r.wait(420);
+          n.textContent = `${done}/${sheets.length}`;
+        }
+        beat(row, 2);
+        box.classList.add('is-hit');
+        r.go(note, { opacity: [0, 1], y: [6, 0] }, { duration: 0.4 });
+        await r.wait(2800);
+      },
+      async stories(row, r) {
+        const brief = $('.cgrid b', row), tiles = $$('.cgrid i', row), n = $('.crx-n', row);
+        tiles.forEach((t) => { t.style.opacity = '0.15'; });
+        n.textContent = '0';
+        beat(row, 0);
+        await r.wait(1000);
+        beat(row, 1);
+        r.go(brief, { scale: [1, 1.15, 1] }, { duration: 0.6 });
+        await r.wait(700);
+        r.go(brief, { scale: [1, 1.15, 1] }, { duration: 0.6 });
+        await r.wait(900);
+        beat(row, 2);
+        tiles.forEach((t, i) => t.classList.add(`c${i % 4}`));
+        r.go(tiles, { opacity: [0.15, 1] }, { duration: 0.3, delay: M.stagger(0.045) });
+        r.count(n, 0, tiles.length, whole, tiles.length * 0.045 + 0.3);
+        await r.wait(3400);
+      },
+      async podium(row, r) {
+        const blocks = $$('.cpodium > i', row), layer = $('.crx-dots', row), dots = $$('.crx-dots i', row), n = $('.crx-n', row), big = $('.cr-big', row);
+        blocks.forEach((b) => { b.style.transform = 'scaleY(0)'; });
+        blocks[0].classList.remove('is-hi');
+        layer.style.opacity = '1';
+        dots.forEach((d) => { d.style.opacity = '0'; });
+        big.style.opacity = '0';
+        n.textContent = '0';
+        beat(row, 0);
+        r.go(dots, { opacity: [0, 1], scale: [0.4, 1] }, { duration: 0.25, delay: M.stagger(0.015) });
+        r.count(n, 0, 70, whole, 1.3);
+        await r.wait(1900);
+        beat(row, 1);
+        r.go(dots, { opacity: [1, 0], scale: [1, 0.3] }, { duration: 0.3, delay: M.stagger(0.006) });
+        r.go([blocks[1], blocks[0], blocks[2]], { scaleY: [0, 1] }, { duration: 0.55, delay: M.stagger(0.18, { startDelay: 0.3 }) });
+        await r.wait(1700);
+        beat(row, 2);
+        blocks[0].classList.add('is-hi');
+        r.go(big, { opacity: [0, 1], scale: [1.4, 1] }, { duration: 0.45 });
+        await r.wait(2800);
+      },
+    };
+    const stop = () => {
+      if (!run) return;
+      run.alive = false;
+      run.timers.forEach(clearTimeout);
+      run.anims.forEach((a) => { if (a && a.stop) a.stop(); });
+      restore(run.row);
+      run = null;
+    };
+    const start = async (row) => {
+      if (run && run.row === row) return;
+      stop();
+      const r = make(row);
+      run = r;
+      while (r.alive) {
+        restore(row);
+        await SCENES[row.dataset.anim](row, r);
+        beat(row, -1);
+        await r.wait(500);
+      }
+    };
+    // play the case whose picture is most in view; nothing plays when no picture is half visible
+    const seen = new Map();
+    const pick = () => {
+      let best = null, top = 0.5;
+      seen.forEach((ratio, row) => { if (ratio >= top) { best = row; top = ratio; } });
+      if (best) start(best); else stop();
+    };
+    const io = new IntersectionObserver((es) => {
+      es.forEach((e) => seen.set(e.target.closest('.case-row'), e.intersectionRatio));
+      pick();
+    }, { threshold: [0, 0.25, 0.5, 0.75, 1] });
+    caseRows.forEach((row) => io.observe($('.cr-pic', row)));
+    document.addEventListener('visibilitychange', () => { if (document.hidden) stop(); else pick(); });
+  }
+
   if (M.press) {
     M.press('.cp-card, .chip, .btn, .fab, .t-act, .rung__btn, .msg__btns button, .op__btn', (node) => {
       M.animate(node, { scale: 0.97 }, { duration: 0.12 });

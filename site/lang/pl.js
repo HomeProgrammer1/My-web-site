@@ -164,5 +164,21 @@ window.T = {
   "none": "nie podano",
   "copied": "Skopiowane. Wklej to do maila na kontakt@mlohaza.com.",
   "selected": "Tekst zaznaczony. Skopiuj go skrótem Ctrl+C albo z menu."
+ },
+ "cases": {
+  "msgs": [
+   {
+    "t": "Utwórz zadanie: raport na piątek",
+    "to": "code"
+   },
+   {
+    "t": "Jakie są ryzyka w tym sprincie?",
+    "to": "ai"
+   },
+   {
+    "t": "Przesuń termin na poniedziałek",
+    "to": "code"
+   }
+  ]
  }
 };

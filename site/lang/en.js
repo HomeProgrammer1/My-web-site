@@ -160,5 +160,21 @@ window.T = {
   "none": "not given",
   "copied": "Copied. Paste it into an email to kontakt@mlohaza.com.",
   "selected": "Text selected. Copy it with Ctrl+C or from the menu."
+ },
+ "cases": {
+  "msgs": [
+   {
+    "t": "Create a task: update the report by Friday",
+    "to": "code"
+   },
+   {
+    "t": "What are the risks in this sprint?",
+    "to": "ai"
+   },
+   {
+    "t": "Move the deadline to Monday",
+    "to": "code"
+   }
+  ]
  }
 };
