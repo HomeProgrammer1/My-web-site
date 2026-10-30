@@ -297,3 +297,7 @@ Motion 12 (vanilla build) is vendored; everything is skipped under `prefers-redu
 - **Method bars.** On the three dark panels (ink, cobalt-deep, cobalt) the «before» bar is sky; the «after» bar stays marker yellow.
 - **Experience tiles** are all square now; «Від 2024» no longer lies askew.
 - **Legal measure** is 36em instead of 60ch, because Latin text packs many more letters into a `ch` than Cyrillic.
+
+## v3.7 additions (30.10.2026)
+- **Stats** in «Hi, I'm Mykhailo» are four (adds 2.5 years in pharma) and sit as a 2×2 grid at desktop and tablet, one column on phones.
+- **Rules** are plain paragraphs; the bold lead-in on each rule is gone, so `.rules li b` was removed.

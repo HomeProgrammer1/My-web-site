@@ -18,6 +18,8 @@
 
 | v3.5 · «Рідною мовою» | `versions/v3-5-native/` | За фідбеком 28.10: польська й англійська версії написані наново під свою аудиторію замість дослівного перекладу з української, правила tone of voice для EN, PL і UA в `docs/content/tone-of-voice.md`. Дизайн і українська версія без змін. | https://claude.ai/artifact/RDcM52U6DZ23iDjAv1ynjW |
 
-| v3.6 · «WhatsApp і фарма» | `versions/v3-6-whatsapp/` (копія; поточна в `site/`, джерела в `src/`) | За фідбеком 30.10: 2,5 року у фармі на головній і в досвіді, WhatsApp замість Telegram в англійській і польській версіях, ревю текстів за ознаками згенерованого тексту в `docs/content/ai-patterns-review.md`. | https://claude.ai/artifact/Hq4tqXUmHPJbnQocetE65W |
+| v3.6 · «WhatsApp і фарма» | `versions/v3-6-whatsapp/` | За фідбеком 30.10: 2,5 року у фармі на головній і в досвіді, WhatsApp замість Telegram в англійській і польській версіях, ревю текстів за ознаками згенерованого тексту в `docs/content/ai-patterns-review.md`. | https://claude.ai/artifact/Hq4tqXUmHPJbnQocetE65W |
+
+| v3.7 · «Після ревю» | `versions/v3-7-review/` (копія; поточна в `site/`, джерела в `src/`) | За фідбеком 30.10: усі правки з ревю ознак згенерованого тексту трьома мовами. Менше двокрапок із переліками, менше трійок (4 цифри в «Привіт» разом із 2,5 року у фармі), правила без жирних заголовків, один термін на мову, «зараховується у впровадження» тричі замість шести. У FAQ додано «налаштовую операційні процеси». | https://claude.ai/artifact/787rz3mSdwgRBgKXKnoDB6 |
 
 Відкрити локально: `python3 -m http.server -d versions/v1-planner` і перейти на http://localhost:8000.
