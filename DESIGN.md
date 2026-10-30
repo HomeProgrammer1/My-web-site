@@ -305,3 +305,7 @@ Motion 12 (vanilla build) is vendored; everything is skipped under `prefers-redu
 ## v3.8 additions (30.10.2026)
 - **Brand tagline** never wraps and hides under 1400px, so the longer Ukrainian nav item («Як це працює») still fits on one line.
 - **Method step names** are descriptive nouns or short actions in every language; they run vertically on closed panels and fit up to about 20 characters.
+
+## v3.10 additions (30.10.2026)
+- **Nav** links to the case studies (about page anchor) instead of FAQ; FAQ stays in the footer.
+- **Hackathon case** on a cornflower tile with a three-block podium (`.cpodium`): 2nd place on the left in marker yellow, 1st in the middle, 3rd on the right, white blocks with ink numbers.

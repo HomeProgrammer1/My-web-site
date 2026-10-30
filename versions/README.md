@@ -24,6 +24,8 @@
 
 | v3.8 · «Простою мовою» | `versions/v3-8-plain/` | За фідбеком 30.10: українська версія в доларах, з Вчасно замість Fakturownia, коротким тире в девізі й «ФОП» у формі (PL «JDG», EN «Sole trader»). Зрозумілі назви кроків методу трьома мовами, «5+ років» на головній, фарма на «Про мене», жаргон замінено простими словами. | https://claude.ai/artifact/WLPpa1xvJwovoyd2jKJPS6 |
 
-| v3.9 · «Свої дані для кожного ринку» | `versions/v3-9-local-data/` (копія; поточна в `site/`, джерела в `src/`) | За фідбеком 30.10: таблиця кандидатів і демо «Excel → CRM» з людьми, телефонами й джерелами свого ринку: польські й +48, українські й +380 з Work.ua, міжнародні з +44/+49/+39 і LinkedIn. | https://claude.ai/artifact/SxVQYUMfS6pQP3M474bxyY |
+| v3.9 · «Свої дані для кожного ринку» | `versions/v3-9-local-data/` | За фідбеком 30.10: таблиця кандидатів і демо «Excel → CRM» з людьми, телефонами й джерелами свого ринку: польські й +48, українські й +380 з Work.ua, міжнародні з +44/+49/+39 і LinkedIn. | https://claude.ai/artifact/SxVQYUMfS6pQP3M474bxyY |
+
+| v3.10 · «Кейси в меню» | `versions/v3-10-cases/` (копія; поточна в `site/`, джерела в `src/`) | За фідбеком 30.10: у меню «Кейси / Realizacje / Case studies» замість FAQ, п'ятий кейс про хакатон з п'єдесталом, підпис «100%» на першій смужці кейсу Jira. Варіанти анімацій кейсів у `docs/content/case-animations.md`. | https://claude.ai/artifact/DSSDSzhRxQWD6eeFq3KMqo |
 
 Відкрити локально: `python3 -m http.server -d versions/v1-planner` і перейти на http://localhost:8000.
