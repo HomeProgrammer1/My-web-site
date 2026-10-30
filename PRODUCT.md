@@ -59,6 +59,7 @@ AI process automation without losing people or trust. Agents take the routine; e
 - HR agency CRM: five departments off Excel in one month.
 - Content factory: one brief → 30 Instagram Stories, $0 API cost.
 - AI hackathon: 2nd of 70+ teams.
+- 2.5 years of experience in the pharmaceutical industry (shown on the home page and in the experience tiles).
 - Testimonials: none real yet. Three placeholders exist and must be labelled «Приклад відгуку».
 - Must not fabricate: client names, logos, reviews, press, guarantees.
 

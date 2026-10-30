@@ -42,7 +42,7 @@ window.T = {
    "HubSpot",
    "Xero",
    "Google Sheets",
-   "Telegram"
+   "WhatsApp"
   ],
   "min": "{n} min by hand",
   "first": "Start with “{n}”.",
@@ -76,7 +76,7 @@ window.T = {
   "Inbox",
   "Data check",
   "Report",
-  "Telegram",
+  "WhatsApp",
   "Invoice",
   "Human Gate",
   "Google Sheets",

@@ -6,7 +6,13 @@
   "langLabel": "Site language",
   "book": "Book a call",
   "fab": "30 min, €45",
-  "nav": { "label": "Sections", "process": "How it works", "calc": "Calculator", "method": "Calm Ops method", "about": "About" },
+  "nav": {
+    "label": "Sections",
+    "process": "How it works",
+    "calc": "Calculator",
+    "method": "Calm Ops method",
+    "about": "About"
+  },
   "foot": {
     "pages": "Pages",
     "home": "Home",
@@ -15,9 +21,15 @@
     "where": "Poznań, Poland. I work remotely with teams across Poland and the EU, in English, Polish and Ukrainian.",
     "calm": "I find the processes that only exist in people's heads, map them in one place and automate them with AI. Decisions about money and people stay with you.",
     "privacy": "Privacy policy",
-    "terms": "Terms of service"
+    "terms": "Terms of service",
+    "chat": "<a href=\"https://wa.me/48733498951\" target=\"_blank\" rel=\"noopener\">WhatsApp</a>"
   },
-  "schema": { "jobTitle": "AI automation for business operations" },
+  "schema": {
+    "jobTitle": "AI automation for business operations",
+    "sameAs": [
+      "https://linkedin.com/in/mykhailo-lohaza"
+    ]
+  },
   "sheet": {
     "title": "Consultation, 30&nbsp;min",
     "price": "€45 (≈&nbsp;190&nbsp;zł), taken off the implementation price",
@@ -56,18 +68,46 @@
     "cur": "€{n}",
     "hours": "{n} h",
     "plural": {
-      "months": { "one": "month", "other": "months" },
-      "records": { "one": "record", "other": "records" }
+      "months": {
+        "one": "month",
+        "other": "months"
+      },
+      "records": {
+        "one": "record",
+        "other": "records"
+      }
     },
     "cp": {
       "steps": [
-        { "n": "Copy the lead from email", "agent": "the agent pulls the details from the email" },
-        { "n": "Add the client to the CRM", "agent": "the agent creates the client record" },
-        { "n": "Send the invoice", "agent": "over the limit, waiting for you", "ok": "approved, invoice sent" },
-        { "n": "Update the report", "agent": "the agent adds a row to the report" },
-        { "n": "Tell the team", "agent": "the agent posts a summary in the chat" }
+        {
+          "n": "Copy the lead from email",
+          "agent": "the agent pulls the details from the email"
+        },
+        {
+          "n": "Add the client to the CRM",
+          "agent": "the agent creates the client record"
+        },
+        {
+          "n": "Send the invoice",
+          "agent": "over the limit, waiting for you",
+          "ok": "approved, invoice sent"
+        },
+        {
+          "n": "Update the report",
+          "agent": "the agent adds a row to the report"
+        },
+        {
+          "n": "Tell the team",
+          "agent": "the agent posts a summary in the chat"
+        }
       ],
-      "sys": ["Gmail", "HubSpot", "Xero", "Google Sheets", "Telegram"],
+      "sys": [
+        "Gmail",
+        "HubSpot",
+        "Xero",
+        "Google Sheets",
+        "WhatsApp"
+      ],
       "min": "{n} min by hand",
       "first": "Start with “{n}”.",
       "next": "Next: “{n}”.",
@@ -89,15 +129,57 @@
       "ok": "Your {inv} budget pays for itself {when}. After that, automation saves you {back} a month.",
       "slow": "With these numbers, the budget pays for itself {when}. In the consultation we'll work out what to automate first to bring that down."
     },
-    "tg": { "one": "One decision to go.", "done": "Two decisions in two minutes. The agents handled the rest." },
-    "canvas": ["Excel", "AI agent", "CRM", "Inbox", "Data check", "Report", "Telegram", "Invoice", "Human Gate", "Google Sheets", "Calendar", "Candidate pool"],
+    "tg": {
+      "one": "One decision to go.",
+      "done": "Two decisions in two minutes. The agents handled the rest."
+    },
+    "canvas": [
+      "Excel",
+      "AI agent",
+      "CRM",
+      "Inbox",
+      "Data check",
+      "Report",
+      "WhatsApp",
+      "Invoice",
+      "Human Gate",
+      "Google Sheets",
+      "Calendar",
+      "Candidate pool"
+    ],
     "merge": {
       "rows": [
-        { "raw": "petrenko ivan · 600123456 · 12/10", "name": "Ivan Petrenko", "sub": "+48 600 123 456 · 12.10.2026", "note": "Fixing the name, phone and date format." },
-        { "raw": "Ivan Petrenko · +48 600 123 456", "dup": true, "note": "Duplicate found, merging the records." },
-        { "raw": "Anna Kowalska · 511022033 · 13/10", "name": "Anna Kowalska", "sub": "+48 511 022 033 · 13.10.2026", "note": "Adding the country code and the full date." },
-        { "raw": "Olena Kovalchuk · rejected", "name": "Olena Kovalchuk", "sub": "rejection email sent", "gate": true, "note": "The rejection email is waiting for the recruiter.", "ok": "The recruiter approved it." },
-        { "raw": "Marek Nowak · marek@firma.pl · 14.10", "name": "Marek Nowak", "sub": "marek@firma.pl · 14.10.2026", "note": "Creating the record." }
+        {
+          "raw": "petrenko ivan · 600123456 · 12/10",
+          "name": "Ivan Petrenko",
+          "sub": "+48 600 123 456 · 12.10.2026",
+          "note": "Fixing the name, phone and date format."
+        },
+        {
+          "raw": "Ivan Petrenko · +48 600 123 456",
+          "dup": true,
+          "note": "Duplicate found, merging the records."
+        },
+        {
+          "raw": "Anna Kowalska · 511022033 · 13/10",
+          "name": "Anna Kowalska",
+          "sub": "+48 511 022 033 · 13.10.2026",
+          "note": "Adding the country code and the full date."
+        },
+        {
+          "raw": "Olena Kovalchuk · rejected",
+          "name": "Olena Kovalchuk",
+          "sub": "rejection email sent",
+          "gate": true,
+          "note": "The rejection email is waiting for the recruiter.",
+          "ok": "The recruiter approved it."
+        },
+        {
+          "raw": "Marek Nowak · marek@firma.pl · 14.10",
+          "name": "Marek Nowak",
+          "sub": "marek@firma.pl · 14.10.2026",
+          "note": "Creating the record."
+        }
       ],
       "wait": "Waiting for the first row.",
       "moved": "{i} of {n} moved",
@@ -106,8 +188,21 @@
       "sources": " · 2 sources"
     },
     "book": {
-      "wd": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-      "times": ["9:00", "11:00", "14:00", "16:30"],
+      "wd": [
+        "Sun",
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri",
+        "Sat"
+      ],
+      "times": [
+        "9:00",
+        "11:00",
+        "14:00",
+        "16:30"
+      ],
       "prefill": {
         "process": "I built the process on your site: lead from email, CRM, invoice, report, team message. I'd like the same for my team.",
         "data": "I'd like to stop copying data from spreadsheets into our CRM by hand.",

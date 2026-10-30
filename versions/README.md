@@ -16,6 +16,8 @@
 
 | v3.4 · «Три мови» | `versions/v3-4-i18n/` | За фідбеком 25.10: девіз на першому екрані (EN «Manual work to agents, decisions to people.», PL «Rutyna dla agentów, decyzje dla ludzi.», UA «Ручну роботу — агентам, рішення — людям.»), англійська в корені, польська в `/pl/`, українська в `/ua/` з hreflang, canonical і sitemap, перемикач EN · PL · UA, дані JDG у політиці приватності й умовах, видима смужка «До» в «Налагоджую», рівна плитка «Від 2024». | https://claude.ai/artifact/GfV4rLykY6b2BzHvEgHEn7 |
 
-| v3.5 · «Рідною мовою» | `versions/v3-5-native/` (копія; поточна в `site/`, джерела в `src/`) | За фідбеком 28.10: польська й англійська версії написані наново під свою аудиторію замість дослівного перекладу з української, правила tone of voice для EN, PL і UA в `docs/content/tone-of-voice.md`. Дизайн і українська версія без змін. | https://claude.ai/artifact/RDcM52U6DZ23iDjAv1ynjW |
+| v3.5 · «Рідною мовою» | `versions/v3-5-native/` | За фідбеком 28.10: польська й англійська версії написані наново під свою аудиторію замість дослівного перекладу з української, правила tone of voice для EN, PL і UA в `docs/content/tone-of-voice.md`. Дизайн і українська версія без змін. | https://claude.ai/artifact/RDcM52U6DZ23iDjAv1ynjW |
+
+| v3.6 · «WhatsApp і фарма» | `versions/v3-6-whatsapp/` (копія; поточна в `site/`, джерела в `src/`) | За фідбеком 30.10: 2,5 року у фармі на головній і в досвіді, WhatsApp замість Telegram в англійській і польській версіях, ревю текстів за ознаками згенерованого тексту в `docs/content/ai-patterns-review.md`. | https://claude.ai/artifact/Hq4tqXUmHPJbnQocetE65W |
 
 Відкрити локально: `python3 -m http.server -d versions/v1-planner` і перейти на http://localhost:8000.

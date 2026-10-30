@@ -98,7 +98,7 @@ def seo(page, lang, meta):
             'jobTitle': t['schema']['jobTitle'], 'description': meta['description'],
             'address': {'@type': 'PostalAddress', 'addressLocality': 'Poznań', 'addressCountry': 'PL'},
             'knowsLanguage': ['pl', 'uk', 'en'],
-            'sameAs': ['https://linkedin.com/in/mykhailo-lohaza', 'https://t.me/mlohaza'],
+            'sameAs': t['schema']['sameAs'],
         }
         tags.append('<script type="application/ld+json">' + json.dumps(person, ensure_ascii=False) + '</script>')
     return '\n'.join(tags)

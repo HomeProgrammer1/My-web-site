@@ -6,7 +6,13 @@
   "langLabel": "Język strony",
   "book": "Umów rozmowę",
   "fab": "30 min, 190&nbsp;zł",
-  "nav": { "label": "Sekcje", "process": "Jak to działa", "calc": "Kalkulator", "method": "Metoda Calm Ops", "about": "O mnie" },
+  "nav": {
+    "label": "Sekcje",
+    "process": "Jak to działa",
+    "calc": "Kalkulator",
+    "method": "Metoda Calm Ops",
+    "about": "O mnie"
+  },
   "foot": {
     "pages": "Strony",
     "home": "Strona główna",
@@ -15,9 +21,15 @@
     "where": "Poznań. Pracuję zdalnie z firmami z całej Polski i UE, po polsku, ukraińsku i angielsku.",
     "calm": "Wyłapuję procesy, które istnieją tylko w głowach ludzi, rozrysowuję je na jednej mapie i automatyzuję z pomocą AI. Decyzje o pieniądzach i ludziach zostają przy Tobie.",
     "privacy": "Polityka prywatności",
-    "terms": "Regulamin"
+    "terms": "Regulamin",
+    "chat": "<a href=\"https://wa.me/48733498951\" target=\"_blank\" rel=\"noopener\">WhatsApp</a>"
   },
-  "schema": { "jobTitle": "Automatyzacja procesów w firmach z pomocą AI" },
+  "schema": {
+    "jobTitle": "Automatyzacja procesów w firmach z pomocą AI",
+    "sameAs": [
+      "https://linkedin.com/in/mykhailo-lohaza"
+    ]
+  },
   "sheet": {
     "title": "Konsultacja 30&nbsp;min",
     "price": "190&nbsp;zł, odliczam od ceny wdrożenia",
@@ -56,18 +68,50 @@
     "cur": "{n} zł",
     "hours": "{n} godz.",
     "plural": {
-      "months": { "one": "miesiącu", "few": "miesiącach", "many": "miesiącach", "other": "miesiącach" },
-      "records": { "one": "rekord", "few": "rekordy", "many": "rekordów", "other": "rekordu" }
+      "months": {
+        "one": "miesiącu",
+        "few": "miesiącach",
+        "many": "miesiącach",
+        "other": "miesiącach"
+      },
+      "records": {
+        "one": "rekord",
+        "few": "rekordy",
+        "many": "rekordów",
+        "other": "rekordu"
+      }
     },
     "cp": {
       "steps": [
-        { "n": "Przepisać zapytanie z maila", "agent": "agent wyciąga dane z maila" },
-        { "n": "Dodać klienta do CRM-a", "agent": "agent zakłada kartę klienta" },
-        { "n": "Wystawić fakturę", "agent": "faktura ponad limit czeka na Ciebie", "ok": "zatwierdzone, faktura poszła" },
-        { "n": "Uzupełnić raport", "agent": "agent dopisuje wiersz do raportu" },
-        { "n": "Dać znać zespołowi", "agent": "agent wrzuca podsumowanie na czat" }
+        {
+          "n": "Przepisać zapytanie z maila",
+          "agent": "agent wyciąga dane z maila"
+        },
+        {
+          "n": "Dodać klienta do CRM-a",
+          "agent": "agent zakłada kartę klienta"
+        },
+        {
+          "n": "Wystawić fakturę",
+          "agent": "faktura ponad limit czeka na Ciebie",
+          "ok": "zatwierdzone, faktura poszła"
+        },
+        {
+          "n": "Uzupełnić raport",
+          "agent": "agent dopisuje wiersz do raportu"
+        },
+        {
+          "n": "Dać znać zespołowi",
+          "agent": "agent wrzuca podsumowanie na czat"
+        }
       ],
-      "sys": ["Gmail", "HubSpot", "Fakturownia", "Google Sheets", "Telegram"],
+      "sys": [
+        "Gmail",
+        "HubSpot",
+        "Fakturownia",
+        "Google Sheets",
+        "WhatsApp"
+      ],
       "min": "{n} min ręcznie",
       "first": "Najpierw „{n}”.",
       "next": "Teraz: „{n}”.",
@@ -89,15 +133,57 @@
       "ok": "Budżet {inv} zwróci się {when}. Od tego momentu automatyzacja oszczędza {back} miesięcznie.",
       "slow": "Przy takich liczbach budżet zwróci się {when}. Na konsultacji sprawdzimy, od czego zacząć, żeby ten czas skrócić."
     },
-    "tg": { "one": "Została jeszcze jedna decyzja.", "done": "Dwie decyzje w dwie minuty. Resztę zrobili agenci." },
-    "canvas": ["Excel", "Agent AI", "CRM", "Poczta", "Weryfikacja danych", "Raport", "Telegram", "Faktura", "Human Gate", "Google Sheets", "Kalendarz", "Baza kandydatów"],
+    "tg": {
+      "one": "Została jeszcze jedna decyzja.",
+      "done": "Dwie decyzje w dwie minuty. Resztę zrobili agenci."
+    },
+    "canvas": [
+      "Excel",
+      "Agent AI",
+      "CRM",
+      "Poczta",
+      "Weryfikacja danych",
+      "Raport",
+      "WhatsApp",
+      "Faktura",
+      "Human Gate",
+      "Google Sheets",
+      "Kalendarz",
+      "Baza kandydatów"
+    ],
     "merge": {
       "rows": [
-        { "raw": "petrenko ivan · 600123456 · 12/10", "name": "Ivan Petrenko", "sub": "+48 600 123 456 · 12.10.2026", "note": "Poprawiam zapis imienia, telefonu i daty." },
-        { "raw": "Ivan Petrenko · +48 600 123 456", "dup": true, "note": "To duplikat, łączę rekordy." },
-        { "raw": "Anna Kowalska · 511022033 · 13/10", "name": "Anna Kowalska", "sub": "+48 511 022 033 · 13.10.2026", "note": "Dodaję prefiks +48 i pełną datę." },
-        { "raw": "Olena Kowalczuk · odmowa", "name": "Olena Kowalczuk", "sub": "mail z odmową wysłany", "gate": true, "note": "Mail z odmową czeka na akceptację rekrutera.", "ok": "Rekruter zaakceptował." },
-        { "raw": "Marek Nowak · marek@firma.pl · 14.10", "name": "Marek Nowak", "sub": "marek@firma.pl · 14.10.2026", "note": "Zakładam kartę." }
+        {
+          "raw": "petrenko ivan · 600123456 · 12/10",
+          "name": "Ivan Petrenko",
+          "sub": "+48 600 123 456 · 12.10.2026",
+          "note": "Poprawiam zapis imienia, telefonu i daty."
+        },
+        {
+          "raw": "Ivan Petrenko · +48 600 123 456",
+          "dup": true,
+          "note": "To duplikat, łączę rekordy."
+        },
+        {
+          "raw": "Anna Kowalska · 511022033 · 13/10",
+          "name": "Anna Kowalska",
+          "sub": "+48 511 022 033 · 13.10.2026",
+          "note": "Dodaję prefiks +48 i pełną datę."
+        },
+        {
+          "raw": "Olena Kowalczuk · odmowa",
+          "name": "Olena Kowalczuk",
+          "sub": "mail z odmową wysłany",
+          "gate": true,
+          "note": "Mail z odmową czeka na akceptację rekrutera.",
+          "ok": "Rekruter zaakceptował."
+        },
+        {
+          "raw": "Marek Nowak · marek@firma.pl · 14.10",
+          "name": "Marek Nowak",
+          "sub": "marek@firma.pl · 14.10.2026",
+          "note": "Zakładam kartę."
+        }
       ],
       "wait": "Czekam na pierwszy wiersz.",
       "moved": "Przeniesione: {i} z {n}",
@@ -106,8 +192,21 @@
       "sources": " · 2 źródła"
     },
     "book": {
-      "wd": ["nd", "pn", "wt", "śr", "czw", "pt", "sob"],
-      "times": ["9:00", "11:00", "14:00", "16:30"],
+      "wd": [
+        "nd",
+        "pn",
+        "wt",
+        "śr",
+        "czw",
+        "pt",
+        "sob"
+      ],
+      "times": [
+        "9:00",
+        "11:00",
+        "14:00",
+        "16:30"
+      ],
       "prefill": {
         "process": "Proces z Twojej strony: zapytanie z maila, CRM, faktura, raport, wiadomość do zespołu. Chcę mieć to samo u siebie.",
         "data": "Chcę przestać ręcznie przenosić dane z Excela do CRM-a.",

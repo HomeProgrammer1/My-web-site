@@ -46,7 +46,7 @@ window.T = {
    "HubSpot",
    "Fakturownia",
    "Google Sheets",
-   "Telegram"
+   "WhatsApp"
   ],
   "min": "{n} min ręcznie",
   "first": "Najpierw „{n}”.",
@@ -80,7 +80,7 @@ window.T = {
   "Poczta",
   "Weryfikacja danych",
   "Raport",
-  "Telegram",
+  "WhatsApp",
   "Faktura",
   "Human Gate",
   "Google Sheets",

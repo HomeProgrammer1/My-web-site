@@ -120,3 +120,17 @@
   - Замість кальок (Take the request, What decided it was, Where to start in your team) природні звороти: lead, copy-paste, quote, sign off, hours saved.
   - Заголовки: «One lead, five rounds of copy-paste», «Does your spreadsheet look like this?», «What is manual work costing you?», «Not sure where to start?».
 - Українська версія без змін.
+
+## Фідбек на v3.5 → v3.6 (30.10.2026)
+- Додати досвід: 2,5 року у фармі.
+- В англійській і польській версіях Telegram замінити на WhatsApp скрізь.
+- Перевірити тексти за статтею «Признаки сгенерированности текста» (ru.wikipedia) і дати ревю без правок тексту.
+
+## Що зроблено у v3.6
+- 2,5 року у фармацевтичній галузі: окреме речення в «Привіт, я Михайло» на головній і доповнення до плитки «Від 2024» у досвіді, трьома мовами.
+- EN і PL:
+  - WhatsApp (+48 733 498 951) замість Telegram у футері, демо процесу, кресленні на першому екрані, прикладі ранкового повідомлення й політиці приватності;
+  - Telegram прибрано з розмітки schema.org;
+  - у кейсі з контент-фабрикою написано «chatbot», бо бот справді був у Telegram.
+- UA без змін, Telegram лишився.
+- Ревю текстів за статтею: `docs/content/ai-patterns-review.md`. Тексти за ним не змінювались.
