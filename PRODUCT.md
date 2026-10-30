@@ -22,7 +22,7 @@ Low to medium technical literacy. They read on phone and laptop. IT companies ar
 
 ## Product Purpose
 
-mlohaza.com is the personal site of Mykhailo Lohaza (Михайло Логаза), who automates routine work with n8n, Make, AI agents and RAG assistants. The site exists to turn a visitor into a booked paid consultation: 30 minutes, 190 zł (≈45 €, EN €45), credited toward implementation. Success is a booked consultation or a captured email from the calculator.
+mlohaza.com is the personal site of Mykhailo Lohaza (Михайло Логаза), who automates routine work with n8n, Make, AI agents and RAG assistants. The site exists to turn a visitor into a booked paid consultation: 30 minutes, credited toward implementation. Price per language: PL 190 zł, EN €45, UA $49. Success is a booked consultation or a captured email from the calculator.
 
 ## Positioning
 

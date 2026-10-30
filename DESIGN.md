@@ -301,3 +301,7 @@ Motion 12 (vanilla build) is vendored; everything is skipped under `prefers-redu
 ## v3.7 additions (30.10.2026)
 - **Stats** in «Hi, I'm Mykhailo» are four (adds 2.5 years in pharma) and sit as a 2×2 grid at desktop and tablet, one column on phones.
 - **Rules** are plain paragraphs; the bold lead-in on each rule is gone, so `.rules li b` was removed.
+
+## v3.8 additions (30.10.2026)
+- **Brand tagline** never wraps and hides under 1400px, so the longer Ukrainian nav item («Як це працює») still fits on one line.
+- **Method step names** are descriptive nouns or short actions in every language; they run vertically on closed panels and fit up to about 20 characters.
