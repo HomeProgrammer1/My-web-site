@@ -343,6 +343,8 @@
       o.globalAlpha = 0.3;
       for (let x = 0; x < W; x += 40) { o.beginPath(); o.moveTo(x + 0.5, 0); o.lineTo(x + 0.5, H); o.stroke(); }
       for (let y = 0; y < H; y += 40) { o.beginPath(); o.moveTo(0, y + 0.5); o.lineTo(W, y + 0.5); o.stroke(); }
+      // on a phone the words fill the stage, so the process boxes would sit on top of them: keep only the grid
+      if (W < 700) return;
       const nw = 136, nh = 36;
       const cols = Math.max(3, Math.floor(W / 230)), rows = Math.max(3, Math.floor(H / 140)), cw = W / cols, rh = H / rows;
       const nodes = [];

@@ -318,3 +318,11 @@ Motion 12 (vanilla build) is vendored; everything is skipped under `prefers-redu
   - Stories: the brief pulses, 30 tiles fill in a wave with four tones.
   - Hackathon: 70 dots, then the podium rises and 2nd turns yellow.
 - Motion only animates transform, opacity and counters; reduced motion keeps the still pictures.
+
+## v3.12 additions (31.10.2026)
+- **Hero on phones.** Below 700 px the blueprint keeps only the grid; the process boxes and connectors are skipped, so nothing sits on the motto.
+- **Method band photo on phones.** `width:min(60%,240px)`, `aspect-ratio:4/5`, left-aligned, `object-position:50% 20%`.
+- **Sample sheet on phones (≤760 px).** No horizontal scroll. Status and source columns are hidden; columns size to their content (`table-layout:auto`), phone and date never wrap, text 12 px, cell padding 7px 8px. ≤374 px: the sheet runs edge to edge (`margin-inline:calc(var(--m) * -1)`). ≤359 px: row numbers are hidden.
+- **Phone mockup (method page).** The tile track is `minmax(0,1fr)` and reply buttons wrap, so the mockup fits a 320 px screen.
+- **Phone spacing.** 28 px above the copy under the sheet; footer rows have a 32 px row gap.
+
