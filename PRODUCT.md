@@ -54,7 +54,7 @@ AI process automation without losing people or trust. Agents take the routine; e
 ## Evidence on Hand
 
 - Portrait photo: `site/img/me.jpg` (from NetConnect `img/me.jpg`). The only real photo of him; more shots are needed.
-- ERP rollout for 10 000+ users: 600–800k rows of HR and finance data moved without critical loss, 9–10 training sessions, 90% adoption, closed 1.5–2 months early, board report from 4–5 h to 5–10 min.
+- ERP rollout at a 300-person company: 600–800k rows of HR and finance data moved without critical loss, 9–10 training sessions, 90% adoption, closed 1.5–2 months early, board report from 4–5 h to 5–10 min.
 - Jira AI agent as Product Owner: −87% AI cost, 0% hallucinations on write operations, pilot of 10–15 people.
 - HR agency CRM: five departments off Excel in one month.
 - Content factory: one brief → 30 Instagram Stories, $0 API cost.

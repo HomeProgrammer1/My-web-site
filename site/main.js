@@ -297,25 +297,18 @@
   if (editBtn) editBtn.addEventListener('click', () => { confirmBox.hidden = true; form.hidden = false; $('#fEmail').focus(); });
 
 
-  /* ---------- a new page opens at its top unless a section was asked for ---------- */
-  if (!window.location.hash) {
-    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-    window.scrollTo({ top: 0, behavior: 'instant' });
-    const first = $('.skip') || document.body;
-    try { first.scrollIntoView({ block: 'start', behavior: 'instant' }); } catch (e) { first.scrollIntoView(true); }
-  }
-
   /* ---------- the bar steps aside while you read and comes back when you scroll up ---------- */
   const nav = $('#nav');
+  let holdNav = false; // true while a jump is landing, so the bar stays put and the section starts right under it
   if (nav) {
     const menu = $('.nav__menu', nav);
     const setOpen = (open) => { nav.classList.toggle('is-open', open); menu.setAttribute('aria-expanded', String(open)); };
     menu.addEventListener('click', () => setOpen(!nav.classList.contains('is-open')));
-    $$('.nav__links a', nav).forEach((a) => a.addEventListener('click', () => setOpen(false)));
+    $$('.nav__links a, .brand', nav).forEach((a) => a.addEventListener('click', () => setOpen(false)));
     let lastY = window.scrollY;
     window.addEventListener('scroll', () => {
       const y = window.scrollY;
-      if (!nav.classList.contains('is-open')) {
+      if (!nav.classList.contains('is-open') && !holdNav) {
         if (y > lastY + 6 && y > 140) nav.classList.add('is-hidden');
         else if (y < lastY - 6 || y <= 140) nav.classList.remove('is-hidden');
       }
@@ -324,6 +317,60 @@
     nav.addEventListener('focusin', () => nav.classList.remove('is-hidden'));
   }
 
+  /* ---------- every jump lands on the first line of its section, every new page on its top ---------- */
+  // Links to the page you are on never reload it (a reload brings back the old scroll position on phones):
+  // they glide to the section, or to the top for the brand and the current page. After the glide the spot is
+  // checked again, because pictures, fonts and animations can still move the section while we travel.
+  const navH = () => (nav ? nav.getBoundingClientRect().height : 0);
+  const bare = (path) => path.replace(/index\.html$/, '');
+  let landing = 0, userMoved = false;
+  const jump = (target, smooth) => {
+    const want = () => (target ? Math.max(0, Math.round(target.getBoundingClientRect().top + window.scrollY - navH())) : 0);
+    const id = ++landing;
+    holdNav = true;
+    if (nav) nav.classList.remove('is-hidden');
+    window.scrollTo({ top: want(), behavior: smooth && !reduce ? 'smooth' : 'instant' });
+    let last = -1, still = 0, tries = 0;
+    const check = () => {
+      if (id !== landing) return;
+      const y = window.scrollY;
+      still = Math.abs(y - last) < 1 ? still + 1 : 0;
+      last = y;
+      if (still >= 3 || ++tries > 40) {
+        const w = want();
+        if (Math.abs(w - y) > 2) window.scrollTo({ top: w, behavior: 'instant' });
+        setTimeout(() => { if (id === landing) holdNav = false; }, 150);
+        return;
+      }
+      setTimeout(check, 100);
+    };
+    setTimeout(check, 120);
+    if (target) { if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1'); target.focus({ preventScroll: true }); }
+  };
+  const targetOf = (hash) => { const id = decodeURIComponent((hash || '').slice(1)); return id ? document.getElementById(id) : null; };
+  document.addEventListener('click', (e) => {
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    const a = e.target.closest('a[href]');
+    if (!a || a.target === '_blank' || a.hasAttribute('data-book') || a.hasAttribute('download')) return;
+    const u = new URL(a.getAttribute('href'), window.location.href);
+    if (u.origin !== window.location.origin || bare(u.pathname) !== bare(window.location.pathname)) return; // another page opens at its top, see below
+    const target = targetOf(u.hash);
+    if (u.hash && !target) return;
+    e.preventDefault();
+    const next = u.hash || window.location.pathname + window.location.search;
+    if (next !== window.location.hash) { try { history.pushState(null, '', next); } catch (err) { /* sandboxed frames may refuse */ } }
+    jump(target, true);
+  });
+  window.addEventListener('popstate', () => jump(targetOf(window.location.hash), false));
+  // a new page: straight to the asked section or to the very top, then once more when pictures and fonts are in,
+  // unless the visitor has already started scrolling
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach((t) => window.addEventListener(t, () => { userMoved = true; }, { passive: true, once: true }));
+  const arrive = () => { if (!userMoved) jump(targetOf(window.location.hash), false); };
+  arrive();
+  if (document.readyState === 'complete') setTimeout(arrive, 0); else window.addEventListener('load', arrive, { once: true });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(arrive);
+
   /* ---------- hero: the process that is already there, revealed by the cursor ---------- */
   const bp = $('#blueprint');
   if (bp && bp.getContext) {
@@ -331,7 +378,8 @@
     const tok = getComputedStyle(root);
     const C = { line: tok.getPropertyValue('--cobalt').trim(), gate: tok.getPropertyValue('--marker').trim(), ink: tok.getPropertyValue('--ink').trim() };
     const LABELS = T.canvas;
-    let W = 1, H = 1, dpr = 1, off = null, spot = null, running = false, raf = 0, clear = null;
+    let W = 1, H = 1, dpr = 1, off = null, spot = null, running = false, raf = 0, clear = null, band = null, chain = [];
+    const phoneMq = window.matchMedia('(max-width:760px)'), phone = () => phoneMq.matches;
     const copy = $('.hero__copy', host);
     const mouse = { x: 0, y: 0, on: false, tm: 0 }, cur = { x: 0, y: 0, init: false };
     const t0 = performance.now();
@@ -343,8 +391,36 @@
       o.globalAlpha = 0.3;
       for (let x = 0; x < W; x += 40) { o.beginPath(); o.moveTo(x + 0.5, 0); o.lineTo(x + 0.5, H); o.stroke(); }
       for (let y = 0; y < H; y += 40) { o.beginPath(); o.moveTo(0, y + 0.5); o.lineTo(W, y + 0.5); o.stroke(); }
-      // on a phone the words fill the stage, so the process boxes would sit on top of them: keep only the grid
-      if (W < 700) return;
+      chain = [];
+      // on a phone the words fill the stage, so the process gets its own strip under the words:
+      // six steps in two rows, one after another, never on top of the text or of each other
+      if (phone()) {
+        if (!band) return;
+        const LB = [3, 1, 2, 8, 7, 5].map((i) => LABELS[i]);
+        const cols = W >= 340 ? 3 : 2, rows = Math.ceil(LB.length / cols), side = 16, gx = 22;
+        const bw = Math.min(124, (W - side * 2 - gx * (cols - 1)) / cols), bh = 32;
+        const gy = Math.max(26, (band.h - rows * bh) / (rows + 1));
+        const left = (W - (bw * cols + gx * (cols - 1))) / 2;
+        LB.forEach((label, i) => {
+          const r = Math.floor(i / cols), k = i % cols, c = r % 2 ? cols - 1 - k : k; // the second row runs back, like a snake
+          chain.push({ x: left + c * (bw + gx), y: band.y + gy + r * (bh + gy), w: bw, h: bh, label });
+        });
+        o.globalAlpha = 0.9; o.lineWidth = 1.5;
+        chain.forEach((n, i) => {
+          const m = chain[i + 1]; if (!m) return;
+          o.beginPath();
+          if (Math.abs(m.y - n.y) < 1) { const fwd = m.x > n.x; o.moveTo(fwd ? n.x + n.w : n.x, n.y + n.h / 2); o.lineTo(fwd ? m.x : m.x + m.w, m.y + m.h / 2); }
+          else { const ex = n.x > W / 2 ? n.x + n.w : n.x, ox = n.x > W / 2 ? 14 : -14; o.moveTo(ex, n.y + n.h / 2); o.bezierCurveTo(ex + ox, n.y + n.h / 2, ex + ox, m.y + m.h / 2, ex, m.y + m.h / 2); }
+          o.stroke();
+        });
+        o.font = '600 12px Geologica, "Segoe UI", system-ui, sans-serif'; o.textBaseline = 'middle';
+        chain.forEach((n) => {
+          if (n.label === 'Human Gate') { o.globalAlpha = 0.95; o.fillStyle = C.gate; o.fillRect(n.x, n.y, n.w, n.h); o.fillStyle = C.ink; o.fillText(n.label, n.x + 10, n.y + n.h / 2 + 1, n.w - 16); o.fillStyle = C.line; return; }
+          o.globalAlpha = 0.95; o.fillStyle = tok.getPropertyValue('--sheet').trim() || '#fff'; o.fillRect(n.x, n.y, n.w, n.h); o.fillStyle = C.line;
+          o.globalAlpha = 0.9; o.strokeRect(n.x + 0.5, n.y + 0.5, n.w, n.h); o.globalAlpha = 0.9; o.fillText(n.label, n.x + 10, n.y + n.h / 2 + 1, n.w - 16);
+        });
+        return;
+      }
       const nw = 136, nh = 36;
       const cols = Math.max(3, Math.floor(W / 230)), rows = Math.max(3, Math.floor(H / 140)), cw = W / cols, rh = H / rows;
       const nodes = [];
@@ -363,19 +439,28 @@
     };
     const frame = (now) => {
       const t = (now - t0) / 1000;
-      const tg = mouse.on ? mouse : { x: W * (0.5 + 0.36 * Math.sin(t * 0.38)), y: H * (0.5 + 0.32 * Math.sin(t * 0.61 + 1)) };
+      let tg = mouse.on ? mouse : { x: W * (0.5 + 0.36 * Math.sin(t * 0.38)), y: H * (0.5 + 0.32 * Math.sin(t * 0.61 + 1)) };
+      if (!mouse.on && chain.length) {
+        // on a phone the light walks the process step by step: it rests on a step, then moves to the next one
+        const step = 1.5, i = Math.floor(t / step) % chain.length, f = (t / step) % 1, a = chain[i], b = chain[(i + 1) % chain.length];
+        const m = f < 0.6 ? 0 : (1 - Math.cos(((f - 0.6) / 0.4) * Math.PI)) / 2, back = i === chain.length - 1;
+        const ax = a.x + a.w / 2, ay = a.y + a.h / 2, bx = b.x + b.w / 2, by = b.y + b.h / 2;
+        tg = back ? (f < 0.6 ? { x: ax, y: ay } : { x: bx, y: by }) : { x: ax + (bx - ax) * m, y: ay + (by - ay) * m };
+      }
       if (!cur.init) { cur.x = tg.x; cur.y = tg.y; cur.init = true; }
       cur.x += (tg.x - cur.x) * 0.12; cur.y += (tg.y - cur.y) * 0.12;
       ctx.clearRect(0, 0, W, H);
-      ctx.globalAlpha = 0.09; ctx.drawImage(off, 0, 0, W, H); ctx.globalAlpha = 1;
+      ctx.globalAlpha = chain.length ? 0.22 : 0.09; ctx.drawImage(off, 0, 0, W, H); ctx.globalAlpha = 1;
       const s = spot.getContext('2d'); s.setTransform(1, 0, 0, 1, 0, 0);
       s.globalCompositeOperation = 'source-over'; s.clearRect(0, 0, spot.width, spot.height); s.drawImage(off, 0, 0);
-      const k = spot.width / W, R = 240 * k, g = s.createRadialGradient(cur.x * k, cur.y * k, 0, cur.x * k, cur.y * k, R);
+      const k = spot.width / W, R = (chain.length ? 120 : 240) * k, g = s.createRadialGradient(cur.x * k, cur.y * k, 0, cur.x * k, cur.y * k, R);
       g.addColorStop(0, 'rgba(0,0,0,1)'); g.addColorStop(0.55, 'rgba(0,0,0,.6)'); g.addColorStop(1, 'rgba(0,0,0,0)');
       s.globalCompositeOperation = 'destination-in'; s.fillStyle = g; s.fillRect(0, 0, spot.width, spot.height); s.globalCompositeOperation = 'source-over';
       ctx.globalAlpha = 0.75; ctx.drawImage(spot, 0, 0, W, H); ctx.globalAlpha = 1;
       // keep the words readable: the drawing fades out under the headline and the buttons
-      if (clear) {
+      if (clear && clear.box) {
+        ctx.save(); ctx.globalCompositeOperation = 'destination-out'; ctx.fillStyle = 'rgba(0,0,0,.85)'; ctx.fillRect(clear.x, clear.y, clear.w, clear.h); ctx.restore();
+      } else if (clear) {
         ctx.save(); ctx.globalCompositeOperation = 'destination-out';
         ctx.translate(clear.x, clear.y); ctx.scale(clear.rx / clear.ry, 1);
         const f = ctx.createRadialGradient(0, 0, 0, 0, 0, clear.ry);
@@ -390,12 +475,19 @@
       const r = host.getBoundingClientRect(); dpr = Math.min(2, window.devicePixelRatio || 1);
       W = Math.max(1, r.width); H = Math.max(1, r.height);
       bp.width = Math.round(W * dpr); bp.height = Math.round(H * dpr); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      band = null;
+      if (copy) {
+        const c = copy.getBoundingClientRect();
+        if (phone()) { const top = c.bottom - r.top + 20; band = { y: top, h: Math.max(0, H - top - 12) }; clear = { box: true, x: c.left - r.left - 8, y: c.top - r.top - 8, w: c.width + 16, h: c.height + 16 }; }
+        else clear = { x: c.left - r.left + c.width / 2, y: c.top - r.top + c.height / 2, rx: c.width * 0.62, ry: c.height * 0.72 };
+      }
       build();
-      if (copy) { const c = copy.getBoundingClientRect(); clear = { x: c.left - r.left + c.width / 2, y: c.top - r.top + c.height / 2, rx: c.width * 0.62, ry: c.height * 0.72 }; }
-      if (!running) { cur.init = false; mouse.on = true; mouse.x = W * 0.8; mouse.y = H * 0.32; frame(performance.now()); mouse.on = false; }
+      if (!running) { const n = chain[1]; cur.init = false; mouse.on = true; mouse.x = n ? n.x + n.w / 2 : W * 0.8; mouse.y = n ? n.y + n.h / 2 : H * 0.32; frame(performance.now()); mouse.on = false; }
     };
+    const point = (e) => { const r = bp.getBoundingClientRect(); mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top; mouse.on = true; clearTimeout(mouse.tm); mouse.tm = setTimeout(() => { mouse.on = false; }, 2200); };
+    host.addEventListener('pointerdown', point, { passive: true }); // a tap on a phone moves the light there
     host.addEventListener('pointermove', (e) => { const r = bp.getBoundingClientRect(); mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top; mouse.on = true; clearTimeout(mouse.tm); mouse.tm = setTimeout(() => { mouse.on = false; }, 2200); }, { passive: true });
-    host.addEventListener('pointerleave', () => { mouse.on = false; });
+    host.addEventListener('pointerleave', (e) => { if (e.pointerType !== 'touch') mouse.on = false; }); // a finger leaves right after the tap: keep the light where it landed
     if ('ResizeObserver' in window) new ResizeObserver(resize).observe(host); else window.addEventListener('resize', resize);
     if ('IntersectionObserver' in window) new IntersectionObserver((es) => { if (es[0].isIntersecting) start(); else stop(); }).observe(host); else start();
     resize();
@@ -475,15 +567,15 @@
   $$('.askew').filter((n) => !n.closest('#cpPile, .cp-flow')).forEach((n) => {
     M.inView(n, () => { land([n]); }, { amount: 0.3 });
   });
-  // Case studies: the picture next to each case replays "before, what we did, result" while it is on screen,
-  // and the matching text column lights up. One case plays at a time; reduced motion keeps the still picture.
+  // Case studies: the picture next to each case replays "before, what we did, result" while it is on screen.
+  // Only the picture moves; the text stays still. One case plays at a time; reduced motion keeps the still picture.
   const caseRows = $$('.case-row[data-anim]');
   if (caseRows.length) {
     const pics = new Map(caseRows.map((row) => [row, $('.cr-pic', row).innerHTML]));
     const MSGS = (T.cases && T.cases.msgs) || [];
     const pct = (v) => `${Math.round(v)}%`;
     const whole = (v) => String(Math.round(v));
-    const beat = (row, k) => $$('.cr-steps > div', row).forEach((d, i) => d.classList.toggle('is-beat', i === k));
+    const beat = (row, k) => { row.classList.toggle('is-playing', k >= 0); row.dataset.beat = String(k); };
     const restore = (row) => { $('.cr-pic', row).innerHTML = pics.get(row); beat(row, -1); };
     let run = null;
     const make = (row) => {
@@ -582,24 +674,32 @@
         r.count(n, 0, tiles.length, whole, tiles.length * 0.045 + 0.3);
         await r.wait(3400);
       },
-      async podium(row, r) {
-        const blocks = $$('.cpodium > i', row), layer = $('.crx-dots', row), dots = $$('.crx-dots i', row), n = $('.crx-n', row), big = $('.cr-big', row);
-        blocks.forEach((b) => { b.style.transform = 'scaleY(0)'; });
-        blocks[0].classList.remove('is-hi');
-        layer.style.opacity = '1';
-        dots.forEach((d) => { d.style.opacity = '0'; });
-        big.style.opacity = '0';
+      async larp(row, r) {
+        const chips = $$('.cflow span', row), links = $$('.cflow i', row), cards = $$('.cscenes i', row), n = $('.crx-n', row), old = $('.crx-old', row), fresh = $('.crx-new', row), big = $('.cr-big', row);
+        links.forEach((l) => { l.style.transform = 'scaleX(0)'; });
+        cards.forEach((c) => { c.style.opacity = '0'; });
+        old.classList.add('is-plain');
+        fresh.style.opacity = '0';
         n.textContent = '0';
+        big.style.opacity = '0';
         beat(row, 0);
-        r.go(dots, { opacity: [0, 1], scale: [0.4, 1] }, { duration: 0.25, delay: M.stagger(0.015) });
-        r.count(n, 0, 70, whole, 1.3);
-        await r.wait(1900);
+        // before: a trainer writes the scenes by hand, one slow card at a time
+        r.go(cards.slice(0, 2), { opacity: [0, 1], y: [8, 0] }, { duration: 0.5, delay: M.stagger(0.9) });
+        await r.wait(2300);
         beat(row, 1);
-        r.go(dots, { opacity: [1, 0], scale: [1, 0.3] }, { duration: 0.3, delay: M.stagger(0.006) });
-        r.go([blocks[1], blocks[0], blocks[2]], { scaleY: [0, 1] }, { duration: 0.55, delay: M.stagger(0.18, { startDelay: 0.3 }) });
-        await r.wait(1700);
+        r.go(cards.slice(0, 2), { opacity: [1, 0] }, { duration: 0.3 });
+        for (let i = 0; i < chips.length; i++) {
+          chips[i].classList.add('is-hit');
+          r.go(chips[i], { scale: [1, 1.08, 1] }, { duration: 0.4 });
+          await r.wait(520);
+          if (links[i]) { r.go(links[i], { scaleX: [0, 1] }, { duration: 0.35 }); await r.wait(380); }
+        }
         beat(row, 2);
-        blocks[0].classList.add('is-hi');
+        old.classList.remove('is-plain');
+        r.go(fresh, { opacity: [0, 1] }, { duration: 0.3 });
+        r.go(cards, { opacity: [0, 1], y: [10, 0] }, { duration: 0.3, delay: M.stagger(0.08) });
+        r.count(n, 0, 90, whole, 0.9);
+        await r.wait(1000);
         r.go(big, { opacity: [0, 1], scale: [1.4, 1] }, { duration: 0.45 });
         await r.wait(2800);
       },

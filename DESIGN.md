@@ -326,3 +326,9 @@ Motion 12 (vanilla build) is vendored; everything is skipped under `prefers-redu
 - **Phone mockup (method page).** The tile track is `minmax(0,1fr)` and reply buttons wrap, so the mockup fits a 320 px screen.
 - **Phone spacing.** 28 px above the copy under the sheet; footer rows have a 32 px row gap.
 
+## v3.13 additions (31.10.2026)
+- **Case motion stays in the picture.** The text column no longer lights up; a playing case only gets `.case-row.is-playing`.
+- **Hackathon picture (`data-anim="larp"`).** Caption `5–10 h → 90 s` (`.crx-old`, `.crx-new`), a three-chip flow (`.cflow`: survey, profiler, writer) and six scene cards (`.cscenes`). Beats: two cards appear slowly by hand; the chips light up in turn and the links draw; all six cards deal out, the old time is struck through, 90 s counts up and «2nd» pops in.
+- **Jumps.** Same-page links are handled in script: no reload, a smooth glide to the section or the top, the section edge lands right under the bar (`nav` height), the bar stays visible while landing, and the spot is re-checked once the scroll settles. New pages land at the top (or the asked section) and again after `load` and fonts, unless the visitor already moved.
+- **Phone hero.** Below 761 px the blueprint draws a process strip under the words: six steps (Inbox, AI agent, CRM, Human Gate, Invoice, Report) in a snake of 3×2 (2×3 below 372 px). The light walks the chain, 1.5 s per step; a tap moves it. The words keep a cleared box behind them.
+
